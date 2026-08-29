@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deutsch B1 — Karteikarten</title>
+<link rel="stylesheet" href="/static/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>🇩🇪</text></svg>">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">Karteikarten <span>· Deutsch B1</span></div>
+    <div class="spacer"></div>
+    <nav class="tabs" id="tabs">
+      <button data-view="review" class="active">Lernen</button>
+      <button data-view="browse">Karten</button>
+      <button data-view="stats">Statistik</button>
+    </nav>
+  </header>
+
+  <div class="cmdbar">
+    <span class="prompt">›</span>
+    <input id="cmd" autocomplete="off" spellcheck="false"
+           placeholder="add katze   ·   add verb: laufen   ·   satz katze   ·   set target 2026-09-18   ·   help">
+  </div>
+  <div class="hintline">Enter führt aus. <code>help</code> zeigt alle Befehle. Beim Lernen: <code>Leertaste</code> aufdecken, <code>1–4</code> bewerten, <code>e</code> bearbeiten. <code>/</code> springt hierher zurück.</div>
+
+  <div id="toasts"></div>
+
+  <div class="statusrow" id="status"></div>
+
+  <main id="view"></main>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="panel" id="panel"></div>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

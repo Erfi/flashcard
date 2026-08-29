@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+data/deck.yaml.bak
+.pytest_cache/

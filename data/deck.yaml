@@ -1,0 +1,2126 @@
+# German B1 flashcards — edit this file by hand whenever you like.
+# The running app reloads it automatically when the file changes.
+version: 1
+settings:
+  target_date: '2026-09-18'
+  reviews_before_target: 3.0
+  learning_steps_minutes:
+  - 10
+  - 60
+  - 240
+  relearning_steps_minutes:
+  - 10
+  - 90
+  graduating_interval_days: 1.0
+  easy_interval_days: 2.0
+  starting_ease: 2.5
+  min_ease: 1.3
+  hard_multiplier: 1.2
+  easy_bonus: 1.3
+  lapse_multiplier: 0.5
+  max_interval_days: 180.0
+  min_interval_days: 0.25
+  daily_new_limit: 40
+  fuzz: true
+stats:
+  introduced:
+    '2026-08-29': 3
+cards:
+- id: erfahrung
+  type: noun
+  lemma: Erfahrung
+  article: die
+  plural: die Erfahrungen
+  definition: Wissen, das man bekommt, weil man etwas selbst erlebt hat.
+  example: Die Erfahrung, die er in der Ausbildung gesammelt hatte, half ihm sehr.
+  tags:
+  - arbeit
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T17:28:09+00:00'
+  srs:
+    state: learning
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: '2026-08-29T17:38:09+00:00'
+    reps: 2
+    lapses: 0
+    last_review: '2026-08-29T17:28:09+00:00'
+    last_grade: 0
+- id: entscheidung
+  type: noun
+  lemma: Entscheidung
+  article: die
+  plural: die Entscheidungen
+  definition: Das Ergebnis, wenn man sich zwischen mehreren Möglichkeiten festlegt.
+  example: Diese Entscheidung war für mich nicht leicht.
+  tags:
+  - alltag
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T17:05:18+00:00'
+  srs:
+    state: learning
+    step: 1
+    ease: 2.5
+    interval_days: 0.0
+    due: '2026-08-29T18:05:18+00:00'
+    reps: 1
+    lapses: 0
+    last_review: '2026-08-29T17:05:18+00:00'
+    last_grade: 2
+- id: moeglichkeit
+  type: noun
+  lemma: Möglichkeit
+  article: die
+  plural: die Möglichkeiten
+  definition: Eine Sache, die man tun kann; eine Gelegenheit.
+  example: Du hast die Möglichkeit, den Termin zu verschieben.
+  tags:
+  - alltag
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T17:36:37+00:00'
+  srs:
+    state: learning
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: '2026-08-29T17:51:37+00:00'
+    reps: 1
+    lapses: 0
+    last_review: '2026-08-29T17:36:37+00:00'
+    last_grade: 1
+- id: bewerbung
+  type: noun
+  lemma: Bewerbung
+  article: die
+  plural: die Bewerbungen
+  definition: Die Unterlagen, mit denen man um eine Stelle bittet.
+  example: Meine Bewerbung habe ich gestern abgeschickt.
+  tags:
+  - arbeit
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: rechnung
+  type: noun
+  lemma: Rechnung
+  article: die
+  plural: die Rechnungen
+  definition: Ein Papier, auf dem steht, wie viel man bezahlen muss.
+  example: Die Rechnung, über die ich mich beschwert habe, war fehlerhaft.
+  tags:
+  - geld
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T17:37:06+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: versicherung
+  type: noun
+  lemma: Versicherung
+  article: die
+  plural: die Versicherungen
+  definition: Eine Firma, die bei einem Schaden das Geld bezahlt.
+  example: Die Versicherung hat den Schaden am Auto bezahlt.
+  tags:
+  - amt
+  - geld
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: wohnung
+  type: noun
+  lemma: Wohnung
+  article: die
+  plural: die Wohnungen
+  definition: Mehrere Räume in einem Haus, in denen jemand wohnt.
+  example: Unsere Wohnung liegt im dritten Stock ohne Aufzug.
+  tags:
+  - wohnen
+  level: A2
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: umgebung
+  type: noun
+  lemma: Umgebung
+  article: die
+  plural: die Umgebungen
+  definition: Das Gebiet, das um einen Ort herum liegt.
+  example: In der Umgebung der Stadt gibt es schöne Wanderwege.
+  tags:
+  - wohnen
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: aufgabe
+  type: noun
+  lemma: Aufgabe
+  article: die
+  plural: die Aufgaben
+  definition: Etwas, das jemand machen oder lösen soll.
+  example: Diese Aufgabe erledige ich noch heute.
+  tags:
+  - arbeit
+  level: A2
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: meinung
+  type: noun
+  lemma: Meinung
+  article: die
+  plural: die Meinungen
+  definition: Das, was jemand über eine Sache denkt.
+  example: Meiner Meinung nach ist der Vorschlag zu teuer.
+  tags:
+  - diskussion
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: umwelt
+  type: noun
+  lemma: Umwelt
+  article: die
+  plural: ''
+  definition: Die Natur mit Luft, Wasser und Boden, in der wir leben.
+  example: Mit dem Fahrrad schützt du die Umwelt.
+  tags:
+  - umwelt
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: gesundheit
+  type: noun
+  lemma: Gesundheit
+  article: die
+  plural: ''
+  definition: Der Zustand, wenn der Körper gut funktioniert.
+  example: Für meine Gesundheit gehe ich jeden Tag spazieren.
+  tags:
+  - koerper
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: behoerde
+  type: noun
+  lemma: Behörde
+  article: die
+  plural: die Behörden
+  definition: Eine Stelle vom Staat, die Anträge und Papiere bearbeitet.
+  example: Bei der Behörde muss ich einen Antrag stellen.
+  tags:
+  - amt
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: ausbildung
+  type: noun
+  lemma: Ausbildung
+  article: die
+  plural: die Ausbildungen
+  definition: Die Zeit, in der man einen Beruf systematisch lernt.
+  example: Nach der Ausbildung hat sie sofort eine Stelle gefunden.
+  tags:
+  - arbeit
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: verspaetung
+  type: noun
+  lemma: Verspätung
+  article: die
+  plural: die Verspätungen
+  definition: Die Zeit, die jemand oder etwas zu spät kommt.
+  example: Der Zug hatte zwanzig Minuten Verspätung.
+  tags:
+  - reisen
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: unterstuetzung
+  type: noun
+  lemma: Unterstützung
+  article: die
+  plural: die Unterstützungen
+  definition: Hilfe, die man von anderen bekommt.
+  example: Ohne die Unterstützung meiner Familie hätte ich das nicht geschafft.
+  tags:
+  - alltag
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: zusammenhang
+  type: noun
+  lemma: Zusammenhang
+  article: der
+  plural: die Zusammenhänge
+  definition: Die Verbindung zwischen zwei Dingen oder Ereignissen.
+  example: Zwischen Stress und Schlafproblemen gibt es einen Zusammenhang.
+  tags:
+  - diskussion
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: vorschlag
+  type: noun
+  lemma: Vorschlag
+  article: der
+  plural: die Vorschläge
+  definition: Eine Idee, die man anderen zur Entscheidung anbietet.
+  example: Dein Vorschlag gefällt mir besser als meiner.
+  tags:
+  - diskussion
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: termin
+  type: noun
+  lemma: Termin
+  article: der
+  plural: die Termine
+  definition: Ein fester Zeitpunkt für eine Verabredung.
+  example: Ich habe morgen einen Termin bei der Behörde.
+  tags:
+  - alltag
+  - amt
+  level: A2
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: vertrag
+  type: noun
+  lemma: Vertrag
+  article: der
+  plural: die Verträge
+  definition: Eine schriftliche Vereinbarung, die beide Seiten unterschreiben.
+  example: Vor der Unterschrift solltest du den Vertrag genau lesen.
+  tags:
+  - amt
+  - arbeit
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: ausdruck
+  type: noun
+  lemma: Ausdruck
+  article: der
+  plural: die Ausdrücke
+  definition: Ein Wort oder eine Wendung, die man benutzt.
+  example: Diesen Ausdruck habe ich noch nie gehört.
+  tags:
+  - sprache
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: vorteil
+  type: noun
+  lemma: Vorteil
+  article: der
+  plural: die Vorteile
+  definition: Eine gute Seite einer Sache.
+  example: Der große Vorteil dieser Wohnung ist die ruhige Umgebung.
+  tags:
+  - diskussion
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: nachteil
+  type: noun
+  lemma: Nachteil
+  article: der
+  plural: die Nachteile
+  definition: Eine schlechte Seite einer Sache.
+  example: Der Nachteil ist, dass die Miete sehr hoch ist.
+  tags:
+  - diskussion
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: antrag
+  type: noun
+  lemma: Antrag
+  article: der
+  plural: die Anträge
+  definition: Eine schriftliche Bitte an eine Behörde.
+  example: Den Antrag auf Kindergeld habe ich online gestellt.
+  tags:
+  - amt
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: eindruck
+  type: noun
+  lemma: Eindruck
+  article: der
+  plural: die Eindrücke
+  definition: Das Bild oder Gefühl, das jemand oder etwas bei uns hinterlässt.
+  example: Der neue Kollege hat einen guten Eindruck gemacht.
+  tags:
+  - diskussion
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: zettel
+  type: noun
+  lemma: Zettel
+  article: der
+  plural: die Zettel
+  definition: Ein kleines Stück Papier für kurze Notizen.
+  example: Auf dem Zettel steht der Termin beim Arzt.
+  tags:
+  - alltag
+  level: A2
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: verhaeltnis
+  type: noun
+  lemma: Verhältnis
+  article: das
+  plural: die Verhältnisse
+  definition: Die Beziehung zwischen Personen oder Dingen.
+  example: Zu meinen Nachbarn habe ich ein gutes Verhältnis.
+  tags:
+  - menschen
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: gespraech
+  type: noun
+  lemma: Gespräch
+  article: das
+  plural: die Gespräche
+  definition: Wenn zwei oder mehr Menschen miteinander sprechen.
+  example: Das Gespräch mit dem Chef war überraschend angenehm.
+  tags:
+  - arbeit
+  level: A2
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: ergebnis
+  type: noun
+  lemma: Ergebnis
+  article: das
+  plural: die Ergebnisse
+  definition: Das, was am Ende einer Arbeit oder Prüfung herauskommt.
+  example: Das Ergebnis der Prüfung kommt in zwei Wochen.
+  tags:
+  - schule
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: angebot
+  type: noun
+  lemma: Angebot
+  article: das
+  plural: die Angebote
+  definition: Etwas, das jemand anbietet, oft zu einem guten Preis.
+  example: Dieses Angebot gilt nur bis Ende der Woche.
+  tags:
+  - geld
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: verstaendnis
+  type: noun
+  lemma: Verständnis
+  article: das
+  plural: ''
+  definition: Wenn man die Lage eines anderen nachfühlen und akzeptieren kann.
+  example: Ich habe Verständnis für deine Entscheidung.
+  tags:
+  - menschen
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: ziel
+  type: noun
+  lemma: Ziel
+  article: das
+  plural: die Ziele
+  definition: Das, was jemand erreichen will.
+  example: Mein Ziel ist es, die B1-Prüfung zu bestehen.
+  tags:
+  - alltag
+  level: A2
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: erledigen
+  type: verb
+  lemma: erledigen
+  praesens_3sg: erledigt
+  praeteritum: erledigte
+  perfekt: hat erledigt
+  aux: haben
+  separable: false
+  definition: Eine Aufgabe fertig machen.
+  example: Diese Aufgabe erledige ich noch vor dem Termin.
+  tags:
+  - arbeit
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: beantragen
+  type: verb
+  lemma: beantragen
+  praesens_3sg: beantragt
+  praeteritum: beantragte
+  perfekt: hat beantragt
+  aux: haben
+  separable: false
+  definition: Bei einer Behörde schriftlich um etwas bitten.
+  example: Wir haben bei der Behörde eine neue Karte beantragt.
+  tags:
+  - amt
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: sich-bewerben
+  type: verb
+  lemma: sich bewerben
+  praesens_3sg: bewirbt sich
+  praeteritum: bewarb sich
+  perfekt: hat sich beworben
+  aux: haben
+  separable: false
+  rection: sich bewerben um + Akk. / bei + Dat.
+  definition: Um eine Stelle bitten und dafür Unterlagen schicken.
+  example: Sie bewirbt sich bei einer Firma in Hamburg.
+  tags:
+  - arbeit
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: teilnehmen
+  type: verb
+  lemma: teilnehmen
+  praesens_3sg: nimmt teil
+  praeteritum: nahm teil
+  perfekt: hat teilgenommen
+  aux: haben
+  separable: true
+  rection: teilnehmen an + Dat.
+  definition: Bei einer Veranstaltung dabei sein und mitmachen.
+  example: An dem Kurs nehmen zwölf Personen teil.
+  tags:
+  - schule
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: empfehlen
+  type: verb
+  lemma: empfehlen
+  praesens_3sg: empfiehlt
+  praeteritum: empfahl
+  perfekt: hat empfohlen
+  aux: haben
+  separable: false
+  definition: Jemandem sagen, dass etwas gut ist und passt.
+  example: Der Arzt hat mir mehr Bewegung empfohlen.
+  tags:
+  - alltag
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: verschieben
+  type: verb
+  lemma: verschieben
+  praesens_3sg: verschiebt
+  praeteritum: verschob
+  perfekt: hat verschoben
+  aux: haben
+  separable: false
+  definition: Etwas auf einen späteren Zeitpunkt legen.
+  example: Können wir den Termin auf Freitag verschieben?
+  tags:
+  - alltag
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: entscheiden
+  type: verb
+  lemma: entscheiden
+  praesens_3sg: entscheidet
+  praeteritum: entschied
+  perfekt: hat entschieden
+  aux: haben
+  separable: false
+  rection: sich entscheiden für + Akk.
+  definition: Nach dem Überlegen eine von mehreren Möglichkeiten wählen.
+  example: Wir haben uns für die kleinere Wohnung entschieden.
+  tags:
+  - alltag
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: entstehen
+  type: verb
+  lemma: entstehen
+  praesens_3sg: entsteht
+  praeteritum: entstand
+  perfekt: ist entstanden
+  aux: sein
+  separable: false
+  definition: Neu anfangen zu existieren.
+  example: In der Umgebung entstehen viele neue Wohnungen.
+  tags:
+  - wohnen
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: gelingen
+  type: verb
+  lemma: gelingen
+  praesens_3sg: gelingt
+  praeteritum: gelang
+  perfekt: ist gelungen
+  aux: sein
+  separable: false
+  rection: gelingen + Dat.
+  definition: Gut klappen; ein gutes Ergebnis haben.
+  example: Der Kuchen ist mir dieses Mal wirklich gelungen.
+  tags:
+  - alltag
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: beschreiben
+  type: verb
+  lemma: beschreiben
+  praesens_3sg: beschreibt
+  praeteritum: beschrieb
+  perfekt: hat beschrieben
+  aux: haben
+  separable: false
+  definition: Mit Worten genau sagen, wie etwas ist.
+  example: Beschreiben Sie bitte kurz Ihre Erfahrung im Beruf.
+  tags:
+  - sprache
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: sich-erinnern
+  type: verb
+  lemma: sich erinnern
+  praesens_3sg: erinnert sich
+  praeteritum: erinnerte sich
+  perfekt: hat sich erinnert
+  aux: haben
+  separable: false
+  rection: sich erinnern an + Akk.
+  definition: Etwas aus der Vergangenheit wieder im Kopf haben.
+  example: Ich erinnere mich gut an dieses Gespräch.
+  tags:
+  - menschen
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: sich-kuemmern
+  type: verb
+  lemma: sich kümmern
+  praesens_3sg: kümmert sich
+  praeteritum: kümmerte sich
+  perfekt: hat sich gekümmert
+  aux: haben
+  separable: false
+  rection: sich kümmern um + Akk.
+  definition: Für jemanden oder etwas sorgen.
+  example: Am Wochenende kümmere ich mich um die Rechnungen.
+  tags:
+  - alltag
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: bestehen
+  type: verb
+  lemma: bestehen
+  praesens_3sg: besteht
+  praeteritum: bestand
+  perfekt: hat bestanden
+  aux: haben
+  separable: false
+  rection: bestehen aus + Dat. / auf + Dat.
+  definition: Eine Prüfung schaffen; oder aus Teilen zusammengesetzt sein.
+  example: Sie hat die Prüfung mit einem guten Ergebnis bestanden.
+  tags:
+  - schule
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: verzichten
+  type: verb
+  lemma: verzichten
+  praesens_3sg: verzichtet
+  praeteritum: verzichtete
+  perfekt: hat verzichtet
+  aux: haben
+  separable: false
+  rection: verzichten auf + Akk.
+  definition: Etwas absichtlich nicht nehmen oder nicht tun.
+  example: Für die Umwelt verzichte ich oft auf das Auto.
+  tags:
+  - umwelt
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: erreichen
+  type: verb
+  lemma: erreichen
+  praesens_3sg: erreicht
+  praeteritum: erreichte
+  perfekt: hat erreicht
+  aux: haben
+  separable: false
+  definition: An ein Ziel kommen oder jemanden am Telefon bekommen.
+  example: Unter dieser Nummer erreichen Sie mich bis achtzehn Uhr.
+  tags:
+  - alltag
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: auffallen
+  type: verb
+  lemma: auffallen
+  praesens_3sg: fällt auf
+  praeteritum: fiel auf
+  perfekt: ist aufgefallen
+  aux: sein
+  separable: true
+  rection: auffallen + Dat.
+  definition: So sein, dass andere es sofort bemerken.
+  example: Mir ist aufgefallen, dass die Rechnung zweimal kam.
+  tags:
+  - alltag
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: vorschlagen
+  type: verb
+  lemma: vorschlagen
+  praesens_3sg: schlägt vor
+  praeteritum: schlug vor
+  perfekt: hat vorgeschlagen
+  aux: haben
+  separable: true
+  definition: Eine Idee nennen, über die andere entscheiden sollen.
+  example: Ich schlage vor, dass wir das Gespräch verschieben.
+  tags:
+  - diskussion
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: sich-beschweren
+  type: verb
+  lemma: sich beschweren
+  praesens_3sg: beschwert sich
+  praeteritum: beschwerte sich
+  perfekt: hat sich beschwert
+  aux: haben
+  separable: false
+  rection: sich beschweren über + Akk. / bei + Dat.
+  definition: Deutlich sagen, dass man mit etwas nicht zufrieden ist.
+  example: Er hat sich bei der Firma über die Verspätung beschwert.
+  tags:
+  - diskussion
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: ablehnen
+  type: verb
+  lemma: ablehnen
+  praesens_3sg: lehnt ab
+  praeteritum: lehnte ab
+  perfekt: hat abgelehnt
+  aux: haben
+  separable: true
+  definition: Nein zu einem Vorschlag oder Antrag sagen.
+  example: Die Behörde hat meinen Antrag leider abgelehnt.
+  tags:
+  - amt
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: zunehmen
+  type: verb
+  lemma: zunehmen
+  praesens_3sg: nimmt zu
+  praeteritum: nahm zu
+  perfekt: hat zugenommen
+  aux: haben
+  separable: true
+  definition: Mehr oder größer werden.
+  example: Der Verkehr in der Stadt hat stark zugenommen.
+  tags:
+  - umwelt
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: ueberweisen
+  type: verb
+  lemma: überweisen
+  praesens_3sg: überweist
+  praeteritum: überwies
+  perfekt: hat überwiesen
+  aux: haben
+  separable: false
+  definition: Geld von einem Konto auf ein anderes schicken.
+  example: Die Rechnung habe ich gestern überwiesen.
+  tags:
+  - geld
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: kuendigen
+  type: verb
+  lemma: kündigen
+  praesens_3sg: kündigt
+  praeteritum: kündigte
+  perfekt: hat gekündigt
+  aux: haben
+  separable: false
+  definition: Einen Vertrag oder eine Stelle offiziell beenden.
+  example: Sie hat den Vertrag zum Ende des Monats gekündigt.
+  tags:
+  - arbeit
+  - amt
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: sich-gewoehnen
+  type: verb
+  lemma: sich gewöhnen
+  praesens_3sg: gewöhnt sich
+  praeteritum: gewöhnte sich
+  perfekt: hat sich gewöhnt
+  aux: haben
+  separable: false
+  rection: sich gewöhnen an + Akk.
+  definition: Mit der Zeit etwas normal finden.
+  example: An das Wetter hier habe ich mich schnell gewöhnt.
+  tags:
+  - alltag
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: verlangen
+  type: verb
+  lemma: verlangen
+  praesens_3sg: verlangt
+  praeteritum: verlangte
+  perfekt: hat verlangt
+  aux: haben
+  separable: false
+  definition: Etwas fordern, weil man ein Recht darauf zu haben glaubt.
+  example: Die Firma verlangt für die Reparatur zu viel Geld.
+  tags:
+  - geld
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: zuverlaessig
+  type: adjective
+  lemma: zuverlässig
+  definition: So, dass man sich auf die Person oder Sache verlassen kann.
+  example: Mein Kollege ist ruhig und sehr zuverlässig.
+  tags:
+  - menschen
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: anstrengend
+  type: adjective
+  lemma: anstrengend
+  definition: So, dass es viel Kraft oder Energie kostet.
+  example: Der Tag im Büro war heute besonders anstrengend.
+  tags:
+  - arbeit
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: guenstig
+  type: adjective
+  lemma: günstig
+  definition: Nicht teuer; oder gut passend.
+  example: Wir haben eine günstige Wohnung in der Umgebung gefunden.
+  tags:
+  - geld
+  - wohnen
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: dringend
+  type: adjective
+  lemma: dringend
+  definition: So, dass es sofort gemacht werden muss.
+  example: Ich muss dich dringend wegen des Vertrags sprechen.
+  tags:
+  - alltag
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: selbststaendig
+  type: adjective
+  lemma: selbstständig
+  definition: Ohne Hilfe von anderen; oder mit eigener Firma arbeitend.
+  example: Seit zwei Jahren arbeitet sie selbstständig von zu Hause.
+  tags:
+  - arbeit
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: erfolgreich
+  type: adjective
+  lemma: erfolgreich
+  definition: So, dass man sein Ziel erreicht.
+  example: Seine Bewerbung war erfolgreich, er fängt im Mai an.
+  tags:
+  - arbeit
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: verantwortlich
+  type: adjective
+  lemma: verantwortlich
+  rection: verantwortlich für + Akk.
+  definition: So, dass man für eine Sache sorgen und sie erklären muss.
+  example: Wer ist hier für die Rechnungen verantwortlich?
+  tags:
+  - arbeit
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: deutlich
+  type: adjective
+  lemma: deutlich
+  definition: Gut zu erkennen oder gut zu verstehen.
+  example: Bitte sprechen Sie etwas lauter und deutlicher.
+  tags:
+  - sprache
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: aehnlich
+  type: adjective
+  lemma: ähnlich
+  rection: ähnlich + Dat.
+  definition: Fast gleich, aber nicht ganz.
+  example: Dein Vorschlag ist meinem sehr ähnlich.
+  tags:
+  - diskussion
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: neugierig
+  type: adjective
+  lemma: neugierig
+  rection: neugierig auf + Akk.
+  definition: So, dass man unbedingt etwas Neues wissen will.
+  example: Ich bin neugierig auf das Ergebnis der Prüfung.
+  tags:
+  - menschen
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: bescheid-sagen
+  type: phrase
+  lemma: Bescheid sagen
+  definition: Jemandem eine Information geben, die er braucht.
+  example: Sag mir bitte rechtzeitig Bescheid, wenn der Termin nicht klappt.
+  tags:
+  - alltag
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: eine-entscheidung-treffen
+  type: phrase
+  lemma: eine Entscheidung treffen
+  definition: Sich nach dem Überlegen für etwas festlegen.
+  example: Bis Freitag müssen wir eine Entscheidung treffen.
+  tags:
+  - diskussion
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: ruecksicht-nehmen
+  type: phrase
+  lemma: Rücksicht nehmen
+  rection: Rücksicht nehmen auf + Akk.
+  definition: Bei seinem Verhalten an die anderen denken.
+  example: Im Zug sollte man Rücksicht auf andere Reisende nehmen.
+  tags:
+  - menschen
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: es-kommt-darauf-an
+  type: phrase
+  lemma: es kommt darauf an
+  definition: Die Antwort hängt von der Situation ab.
+  example: Ob ich mitkomme, kommt darauf an, wie lange das Gespräch dauert.
+  tags:
+  - diskussion
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: wert-legen-auf
+  type: phrase
+  lemma: Wert legen auf
+  rection: Wert legen auf + Akk.
+  definition: Eine Sache besonders wichtig finden.
+  example: Meine Chefin legt großen Wert auf Pünktlichkeit.
+  tags:
+  - arbeit
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: konjunktiv-ii-gegenwart
+  type: grammar
+  lemma: Konjunktiv II (Gegenwart)
+  definition: 'würde + Infinitiv für Irreales und Wünsche; bei sein, haben, Modalverben die eigene Form:
+    wäre, hätte, könnte, müsste.'
+  example: Wenn ich mehr Zeit hätte, würde ich einen Sprachkurs machen.
+  tags:
+  - grammatik
+  - modus
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: konjunktiv-ii-der-hoeflichkeit
+  type: grammar
+  lemma: Konjunktiv II der Höflichkeit
+  definition: Bitten klingen höflicher mit könnte, würde, wäre, hätte statt Präsens.
+  example: Könnten Sie mir bitte sagen, wo ich den Antrag stellen muss?
+  tags:
+  - grammatik
+  - modus
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: passiv-praesens-und-praeteritum
+  type: grammar
+  lemma: Passiv Präsens und Präteritum
+  definition: 'werden + Partizip II; wichtig ist die Handlung, nicht wer sie macht. Präteritum: wurde
+    + Partizip II.'
+  example: Der Antrag wird von der Behörde geprüft.
+  tags:
+  - grammatik
+  - passiv
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: passiv-mit-modalverb
+  type: grammar
+  lemma: Passiv mit Modalverb
+  definition: Modalverb + Partizip II + werden am Satzende.
+  example: Die Rechnung muss bis Freitag überwiesen werden.
+  tags:
+  - grammatik
+  - passiv
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: relativsaetze-mit-praeposition
+  type: grammar
+  lemma: Relativsätze mit Präposition
+  definition: Die Präposition steht vor dem Relativpronomen und bestimmt den Kasus.
+  example: Das ist die Kollegin, mit der ich das Projekt mache.
+  tags:
+  - grammatik
+  - satzbau
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: nebensaetze-mit-weil
+  type: grammar
+  lemma: Nebensätze mit weil
+  definition: Nach diesen Konjunktionen steht das konjugierte Verb am Satzende.
+  example: Ich nehme das Angebot, obwohl die Wohnung klein ist.
+  tags:
+  - grammatik
+  - satzbau
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: damit-oder-um-zu
+  type: grammar
+  lemma: damit oder um zu
+  definition: 'Gleiches Subjekt: um ... zu + Infinitiv. Verschiedene Subjekte: damit.'
+  example: Ich rufe früh an, damit die Behörde den Termin noch findet.
+  tags:
+  - grammatik
+  - satzbau
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: wechselpraepositionen
+  type: grammar
+  lemma: Wechselpräpositionen
+  definition: 'in, an, auf, über, unter, vor, hinter, neben, zwischen: Wohin? mit Akkusativ, Wo? mit Dativ.'
+  example: Ich lege den Zettel auf den Tisch; er liegt jetzt auf dem Tisch.
+  tags:
+  - grammatik
+  - kasus
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: verben-mit-praeposition-und-da-woerter
+  type: grammar
+  lemma: Verben mit Präposition und da-Wörter
+  definition: 'Sachen: worauf/darauf statt auf wen. Personen: auf wen / auf ihn.'
+  example: Worauf wartest du? Auf das Ergebnis. Ich warte schon lange darauf.
+  tags:
+  - grammatik
+  - kasus
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: adjektivdeklination
+  type: grammar
+  lemma: Adjektivdeklination
+  definition: 'Nach dem bestimmten Artikel endet das Adjektiv auf -e oder -en, nach ein/kein zeigt es
+    das Geschlecht: ein guter Vorschlag.'
+  example: Der neue Vertrag und ein guter Vorschlag helfen uns beiden.
+  tags:
+  - grammatik
+  - kasus
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: n-deklination
+  type: grammar
+  lemma: n-Deklination
+  definition: 'Manche maskulinen Nomen bekommen außer im Nominativ Singular ein -n: der Kollege, den Kollegen.'
+  example: Ich habe den Kollegen nach seiner Meinung gefragt.
+  tags:
+  - grammatik
+  - kasus
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: genitiv-mit-wegen
+  type: grammar
+  lemma: Genitiv mit wegen
+  definition: 'Diese Präpositionen stehen mit dem Genitiv: wegen des Termins, während der Arbeit.'
+  example: Wegen der Verspätung des Zuges kam ich zu spät.
+  tags:
+  - grammatik
+  - kasus
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: plusquamperfekt-und-nachdem
+  type: grammar
+  lemma: Plusquamperfekt und nachdem
+  definition: hatte oder war + Partizip II für das, was noch früher passiert ist; typisch nach nachdem.
+  example: Nachdem ich den Antrag abgeschickt hatte, wartete ich vier Wochen.
+  tags:
+  - grammatik
+  - zeiten
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: indirekte-fragen-mit-ob
+  type: grammar
+  lemma: Indirekte Fragen mit ob
+  definition: Ja/Nein-Fragen werden mit ob eingeleitet, W-Fragen mit dem Fragewort; Verb am Ende.
+  example: Er hat gefragt, ob wir den Termin verschieben können.
+  tags:
+  - grammatik
+  - satzbau
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: zweiteilige-konnektoren
+  type: grammar
+  lemma: Zweiteilige Konnektoren
+  definition: entweder ... oder, nicht nur ... sondern auch, weder ... noch, sowohl ... als auch.
+  example: Die Wohnung ist nicht nur günstig, sondern auch ruhig.
+  tags:
+  - grammatik
+  - satzbau
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: futur-i
+  type: grammar
+  lemma: Futur I
+  definition: werden + Infinitiv für Absichten und Vermutungen über die Zukunft.
+  example: Ich werde mich nächste Woche um die Versicherung kümmern.
+  tags:
+  - grammatik
+  - zeiten
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: komparativ-und-superlativ
+  type: grammar
+  lemma: Komparativ und Superlativ
+  definition: '-er im Vergleich mit als, am -sten als Superlativ; oft mit Umlaut: groß, größer, am größten.'
+  example: Dieses Angebot ist günstiger als das andere und am schnellsten verfügbar.
+  tags:
+  - grammatik
+  - adjektive
+  level: B1
+  source: seed
+  created: '2026-08-29T16:31:14+00:00'
+  modified: '2026-08-29T16:31:14+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
+- id: winkel
+  type: noun
+  lemma: Winkel
+  article: der
+  plural: die Winkel
+  definition: Raum zwischen zwei Linien, die sich treffen.
+  example: Der Winkel, in dem die Straße abbiegt, ist sehr eng.
+  tags:
+  - Mathematik
+  - Geometrie
+  - Raum
+  level: B1
+  source: claude
+  created: '2026-08-29T17:37:40+00:00'
+  modified: '2026-08-29T17:38:02+00:00'
+  srs:
+    state: new
+    step: 0
+    ease: 2.5
+    interval_days: 0.0
+    due: null
+    reps: 0
+    lapses: 0
+    last_review: null
+    last_grade: null
