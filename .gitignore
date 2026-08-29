@@ -2,5 +2,6 @@
 __pycache__/
 *.pyc
 .env
+data/deck.yaml
 data/deck.yaml.bak
 .pytest_cache/
