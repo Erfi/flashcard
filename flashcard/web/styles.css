@@ -98,6 +98,10 @@ header.top { display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
   display: flex; flex-direction: column; justify-content: center; gap: 14px;
 }
 .flashcard.front { align-items: center; text-align: center; border-left-color: var(--border); }
+.flashcard.front.reverse { align-items: stretch; text-align: left; gap: 18px; }
+.prompt-def { font-size: 21px; line-height: 1.45; font-weight: 500; letter-spacing: -.01em; }
+.flashcard.front.reverse .example { border-left-color: var(--muted); font-size: 16.5px; }
+.flashcard.front.reverse .keyhint { text-align: center; }
 .kicker { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 .headword { font-size: 34px; font-weight: 620; letter-spacing: -.02em; line-height: 1.15; }
 .headword .art { color: var(--c, var(--other)); }

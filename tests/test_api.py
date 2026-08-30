@@ -125,3 +125,68 @@ def test_editing_examples_by_hand_is_kept(client):
     patched = client.patch(f"/api/cards/{created['id']}",
                            json={"examples": ["Neu eins.", "Neu zwei."]}).json()["card"]
     assert patched["examples"] == ["Neu eins.", "Neu zwei."]
+
+
+def _mature(client, card_id):
+    """Push a card to a review interval so its production direction unlocks."""
+    for grade in (3, 3):          # easy twice: graduates, then a real interval
+        client.post("/api/answer", json={"id": card_id, "grade": grade})
+    return client.get("/api/cards").json()["cards"]
+
+
+def test_queue_items_carry_a_direction(client):
+    client.post("/api/command", json={"text": "add katze"})
+    item = client.get("/api/queue").json()["cards"][0]
+    assert item["direction"] == "forward"
+    assert item["supports_reverse"] is True
+
+
+def test_production_direction_appears_once_recognition_matures(client):
+    card = client.post("/api/command", json={"text": "add katze"}).json()["card"]
+    assert all(i["direction"] == "forward" for i in client.get("/api/queue").json()["cards"])
+    _mature(client, card["id"])
+    directions = [i["direction"] for i in client.get("/api/queue").json()["cards"]]
+    assert "reverse" in directions
+
+
+def test_reverse_item_hides_the_word_in_the_example(client):
+    card = client.post("/api/command", json={"text": "add katze"}).json()["card"]
+    _mature(client, card["id"])
+    reverse = next(i for i in client.get("/api/queue").json()["cards"]
+                   if i["direction"] == "reverse")
+    assert "Katze" not in reverse["example_masked"]
+    assert "____" in reverse["example_masked"]
+    assert reverse["definition"]                     # the prompt is the definition
+
+
+def test_grading_the_reverse_direction_leaves_the_forward_card_alone(client):
+    card = client.post("/api/command", json={"text": "add katze"}).json()["card"]
+    _mature(client, card["id"])
+    before = client.get("/api/cards").json()["cards"][0]["srs"]
+    after = client.post("/api/answer",
+                        json={"id": card["id"], "grade": 0, "direction": "reverse"}).json()["card"]
+    assert after["srs"] == before
+    assert after["srs_reverse"]["reps"] == 1
+
+
+def test_reverse_can_be_switched_off(client):
+    card = client.post("/api/command", json={"text": "add katze"}).json()["card"]
+    _mature(client, card["id"])
+    client.post("/api/command", json={"text": "set reverse off"})
+    assert all(i["direction"] == "forward" for i in client.get("/api/queue").json()["cards"])
+
+
+def test_reset_clears_both_directions(client):
+    card = client.post("/api/command", json={"text": "add katze"}).json()["card"]
+    _mature(client, card["id"])
+    client.post("/api/answer", json={"id": card["id"], "grade": 2, "direction": "reverse"})
+    reset = client.post(f"/api/cards/{card['id']}/reset").json()["card"]
+    assert reset["srs"]["state"] == "new" and reset["srs_reverse"]["state"] == "new"
+
+
+def test_state_reports_the_production_backlog(client):
+    card = client.post("/api/command", json={"text": "add katze"}).json()["card"]
+    _mature(client, card["id"])
+    state = client.get("/api/state").json()
+    assert state["counts"]["reverse"] == 1
+    assert state["projection"]["reverse_open"] == 1

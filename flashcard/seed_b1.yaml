@@ -598,7 +598,7 @@ cards:
      example: "Gute Englischkenntnisse gehören zu den wichtigsten Anforderungen.", tags: [bewerbung]}
   - {type: noun, article: die, lemma: "Anmeldung", plural: "die Anmeldungen", level: B1, source: seed,
      definition: "Wenn man der Stadt offiziell mitteilt, wo man jetzt wohnt.",
-     example: "Beim Bürgeramt dauerte alles nur zwanzig Minuten.", tags: [amt, wohnen]}
+     example: "Die Anmeldung beim Bürgeramt dauerte nur zwanzig Minuten.", tags: [amt, wohnen]}
   - {type: noun, article: die, lemma: "Aufgabe", plural: "die Aufgaben", level: A2, source: seed,
      definition: "Etwas, das jemand machen oder lösen soll.",
      example: "Diese Aufgabe erledige ich noch heute.", tags: [arbeit]}
@@ -672,7 +672,7 @@ cards:
      example: "Aus Höflichkeit begrüßte er zuerst die ältere Nachbarin.", tags: [umgang, charakter]}
   - {type: noun, article: die, lemma: "Kaution", plural: "die Kautionen", level: B1, source: seed,
      definition: "Geld, das man beim Einzug hinterlegt und später meistens zurückbekommt.",
-     example: "Nach dem Auszug bekam er das Geld vollständig zurück.", tags: [wohnen, geld]}
+     example: "Nach dem Auszug bekam er die Kaution vollständig zurück.", tags: [wohnen, geld]}
   - {type: noun, article: die, lemma: "Krankenkasse", plural: "die Krankenkassen", level: B1, source: seed,
      definition: "Eine Firma, die einen Teil der Kosten für Ärzte und Medikamente zahlt.",
      example: "Meine Krankenkasse bezahlt die neue Brille leider nicht.", tags: [gesundheit, geld]}
@@ -718,7 +718,7 @@ cards:
      example: "Diese Sendung läuft immer sonntags um acht.", tags: [medien, fernsehen]}
   - {type: noun, article: die, lemma: "Stelle", plural: "die Stellen", level: B1, source: seed,
      definition: "Ein bezahlter Arbeitsplatz in einer Firma oder bei einem Amt.",
-     example: "In der Zeitung stand ein interessantes Angebot für Techniker.", tags: [arbeit, beruf]}
+     example: "In der Zeitung stand eine interessante Stelle für Techniker.", tags: [arbeit, beruf]}
   - {type: noun, article: die, lemma: "Stimmung", plural: "die Stimmungen", level: B1, source: seed,
      definition: "Das Gefühl, das in einer Gruppe oder bei einer Person gerade herrscht.",
      example: "Auf dem Fest war die Stimmung von Anfang an gut.", tags: [gefuehle, feier]}
@@ -817,7 +817,7 @@ cards:
      example: "Aus Mitleid half sie dem verletzten Vogel.", tags: [gefuehle, umgang]}
   - {type: noun, article: das, lemma: "Praktikum", plural: "die Praktika", level: B1, source: seed,
      definition: "Eine kurze Zeit in einem Betrieb, um den Alltag dort kennenzulernen.",
-     example: "Im Sommer arbeitet mein Sohn bei einer Zeitung mit.", tags: [ausbildung, beruf]}
+     example: "Im Sommer macht mein Sohn ein Praktikum bei einer Zeitung.", tags: [ausbildung, beruf]}
   - {type: noun, article: das, lemma: "Rezept", plural: "die Rezepte", level: B1, source: seed,
      definition: "Ein Papier vom Arzt, mit dem man ein Medikament bekommt.",
      example: "Ohne Rezept darf die Apothekerin mir die Tabletten nicht geben.", tags: [arzt, apotheke]}
@@ -833,7 +833,7 @@ cards:
   - {type: noun, article: das, lemma: "Vorstellungsgespräch", plural: "die Vorstellungsgespräche",
      level: B1, source: seed,
      definition: "Ein Treffen, bei dem eine Firma einen Kandidaten persönlich kennenlernen möchte.",
-     example: "Morgen habe ich meinen ersten Termin bei einer Bank.", tags: [bewerbung]}
+     example: "Morgen habe ich mein erstes Vorstellungsgespräch bei einer Bank.", tags: [bewerbung]}
   - {type: noun, article: das, lemma: "Zeugnis", plural: "die Zeugnisse", level: B1, source: seed,
      definition: "Ein Papier, das Leistungen in Schule oder Betrieb schriftlich bestätigt.",
      example: "Dem Bewerbungsschreiben liegen zwei Zeugnisse bei.", tags: [bewerbung, schule]}
@@ -1112,7 +1112,7 @@ cards:
   - {type: verb, lemma: "verdienen", praesens_3sg: "verdient", praeteritum: "verdiente",
      perfekt: "hat verdient", aux: haben, separable: false, level: B1, source: seed,
      definition: "Für die eigene Arbeit regelmäßig Geld bekommen.",
-     example: "In diesem Beruf bekommt man am Anfang wenig.", tags: [geld, arbeit]}
+     example: "In diesem Beruf verdient man am Anfang wenig.", tags: [geld, arbeit]}
   - {type: verb, lemma: "vergleichen", praesens_3sg: "vergleicht", praeteritum: "verglich",
      perfekt: "hat verglichen", aux: haben, separable: false, rection: "vergleichen mit + Dat.", level: B1,
      source: seed, definition: "Zwei Dinge ansehen und Unterschiede oder Ähnlichkeiten suchen.",
@@ -1214,7 +1214,7 @@ cards:
      example: "Im Unterricht hört sie immer aufmerksam zu.", tags: [menschen, lernen]}
   - {type: adjective, lemma: "befristet", level: B1, source: seed,
      definition: "Nur für eine bestimmte Zeit gültig, mit festem Enddatum.",
-     example: "Der Vertrag gilt zunächst nur für ein Jahr.", tags: [arbeit, zeit]}
+     example: "Der Vertrag ist zunächst auf ein Jahr befristet.", tags: [arbeit, zeit]}
   - {type: adjective, lemma: "berufstätig", level: B1, source: seed,
      definition: "So, dass eine Person regelmäßig gegen Bezahlung arbeitet.",
      example: "Beide Eltern sind seit Jahren voll berufstätig.", tags: [arbeit]}

@@ -27,6 +27,9 @@ HELP = [
     ("set target 2026-09-18", "Zieldatum setzen (steuert die Intervall-Obergrenze)"),
     ("set new 40", "neue Karten pro Tag"),
     ("set reviews 3", "gewünschte Wiederholungen pro Karte bis zum Zieldatum"),
+    ("set reverse on|off", "Produktionsrichtung (Bedeutung → Wort) an- oder abschalten"),
+    ("set unlock 3", "ab welchem Intervall in Tagen die Produktionsrichtung startet"),
+    ("set shuffle on|off", "gleich dringende Karten zufällig mischen"),
     ("export", "Deck als YAML herunterladen"),
     ("help", "diese Liste"),
 ]
@@ -124,6 +127,28 @@ def _parse_set(rest: str) -> Dict:
         except ValueError:
             return {"action": "error", "message": "Zahl erwartet, z. B. `set reviews 3`"}
         return {"action": "settings", "values": {"reviews_before_target": max(1.0, number)}}
+
+    if key in ("reverse", "produktion", "rueckwaerts"):
+        if value.lower() in ("on", "an", "ein", "true", "ja", "1"):
+            return {"action": "settings", "values": {"reverse_enabled": True}}
+        if value.lower() in ("off", "aus", "false", "nein", "0"):
+            return {"action": "settings", "values": {"reverse_enabled": False}}
+        return {"action": "error", "message": "`set reverse on` oder `set reverse off`"}
+
+    if key in ("shuffle", "mischen", "zufall"):
+        if value.lower() in ("on", "an", "ein", "true", "ja", "1"):
+            return {"action": "settings", "values": {"shuffle": True}}
+        if value.lower() in ("off", "aus", "false", "nein", "0"):
+            return {"action": "settings", "values": {"shuffle": False}}
+        return {"action": "error", "message": "`set shuffle on` oder `set shuffle off`"}
+
+    if key in ("unlock", "freischalten", "reverse_unlock_interval_days"):
+        try:
+            number = float(value)
+        except ValueError:
+            return {"action": "error", "message": "Zahl erwartet, z. B. `set unlock 3`"}
+        return {"action": "settings",
+                "values": {"reverse_unlock_interval_days": max(0.0, number)}}
 
     if key in ("max", "max_interval", "max_interval_days"):
         try:

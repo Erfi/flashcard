@@ -127,11 +127,12 @@ def test_max_interval_still_applies_without_a_deadline():
 
 def test_queue_order_learning_then_review_then_new():
     learning = make(id="l", srs=SRS(state="learning", due=NOW - dt.timedelta(minutes=5)))
-    review = make(id="r", srs=SRS(state="review", due=NOW - dt.timedelta(days=1), interval_days=3))
+    review = make(id="r", srs=SRS(state="review", due=NOW - dt.timedelta(days=1), interval_days=1))
     new = make(id="n")
     future = make(id="f", srs=SRS(state="review", due=NOW + dt.timedelta(days=2), interval_days=2))
-    queue = build_queue([future, new, review, learning], DEFAULT_SETTINGS, NOW)
-    assert [c.id for c in queue] == ["l", "r", "n"]
+    queue = build_queue([future, new, review, learning],
+                        {**DEFAULT_SETTINGS, "reverse_enabled": False}, NOW)
+    assert [c.id for c, _ in queue] == ["l", "r", "n"]
 
 
 def test_daily_new_limit_is_respected():

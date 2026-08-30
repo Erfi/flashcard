@@ -83,12 +83,56 @@ its old sentence) and the error appears as a message in the app.
 | `set target 2026-09-18` | Target date — drives the interval cap |
 | `set new 40` | New cards introduced per day (`0` = unlimited) |
 | `set reviews 3` | How many more reviews each card should get before the target date |
+| `set reverse off` | Turn the production direction (meaning → word) on or off |
+| `set unlock 3` | Interval in days at which production unlocks for a word |
+| `set shuffle off` | Study equally urgent cards in a fixed order instead of shuffled |
 | `export` | Download the deck as YAML |
 | `help` | The whole list, in the app |
 
 Keyboard while reviewing: `Leertaste` reveals, `1`–`4` grade
 (Nochmal / Schwer / Gut / Leicht), `e` edits the current card, `/` jumps back
-to the command bar.
+to the command bar. The card header says which direction you are being asked
+(*Produktion* for meaning → word).
+
+## Two directions
+
+Every vocabulary card is studied both ways, and each direction keeps its own
+scheduling state — ease, interval, lapses — because recognising a word and
+producing it are different skills that mature at different speeds.
+
+* **Erkennen (recognition).** Front: the word. Back: article, plural or verb
+  forms, definition, example. This is the direction you already know.
+* **Produktion (production).** Front: the German definition plus the example
+  sentence with the word blanked out. You have to come up with the word — and
+  for a noun, its article, which is why the article disappears along with the
+  noun: *Die Katze schläft auf dem Sofa* → *\_\_\_\_ schläft auf dem Sofa.*
+
+The blanking handles inflected forms, so *läuft*, *lief* and *gelaufen* all
+vanish for **laufen**, a separable verb loses its prefix at the end of the
+clause, and a reflexive *sich* stays visible as a hint. Grammar cards have no
+word to produce, so they stay one-directional.
+
+**Production unlocks, it isn't switched on all at once.** A word's production
+card only enters the queue once its recognition card reaches a real review
+interval (3 days by default, `set unlock`). Producing a word you cannot yet
+recognise is mostly frustration, and unlocking gradually means the workload
+grows with your progress instead of doubling on day one. Once production has
+started for a word it keeps running on its own schedule, even if the
+recognition card later lapses.
+
+In the queue, an unlocked production card outranks a word you have never seen:
+revisiting known material beats piling on new vocabulary, and without that rule
+a large backlog of new words would starve the production direction completely.
+
+## Order of the queue
+
+Learning cards first (their intervals are minutes long), then due reviews, most
+overdue first, then new material. Within each of those groups the order is
+**shuffled** — cards that are equally urgent come in random order rather than
+alphabetically or by creation date, so you don't learn a word by its position
+between two neighbours. Reviews are shuffled inside each whole day of lateness,
+so a badly overdue card still comes before a mildly overdue one. `set shuffle
+off` restores the fixed order.
 
 ## How the scheduling works
 
@@ -159,12 +203,19 @@ cards:
     tags: [tier]
     level: B1
     source: claude
-    srs:
+    srs:            # recognition: word -> meaning
       state: review
       ease: 2.5
       interval_days: 3.0
       due: '2026-09-01T07:00:00+00:00'
       reps: 4
+      lapses: 0
+    srs_reverse:    # production: meaning -> word, written once it has started
+      state: learning
+      ease: 2.5
+      interval_days: 0.0
+      due: '2026-08-30T09:10:00+00:00'
+      reps: 1
       lapses: 0
 ```
 
@@ -201,12 +252,13 @@ flashcard/
   store.py       deck.yaml load/save, atomic writes, import/export
   scheduler.py   deadline-aware SM-2, queue building, projections
   generator.py   Anthropic API calls, JSON extraction, normalisation
+  cloze.py       blanks the word out of the example for the production direction
   commands.py    the command-bar grammar
   server.py      FastAPI endpoints
   web/           the browser UI (no build step, no dependencies)
   seed_a2.yaml   the A2 deck (300 cards)
   seed_b1.yaml   the B1 deck (300 cards)
-tests/           83 tests: scheduler maths, storage, commands, API, generator
+tests/           125 tests: scheduler maths, storage, commands, API, generator
 ```
 
 ```bash

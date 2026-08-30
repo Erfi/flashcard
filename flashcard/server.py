@@ -13,9 +13,9 @@ from fastapi.responses import FileResponse, JSONResponse, PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
-from . import commands
+from . import cloze, commands
 from .generator import ClaudeGenerator, GeneratorError, guess_type
-from .models import Card, utcnow
+from .models import FORWARD, REVERSE, Card, utcnow
 from .scheduler import Scheduler, build_queue, humanise, projection
 from .store import DeckError, Store
 
@@ -30,6 +30,7 @@ class CommandIn(BaseModel):
 class AnswerIn(BaseModel):
     id: str
     grade: int
+    direction: str = FORWARD
 
 
 class ImportIn(BaseModel):
@@ -71,11 +72,14 @@ def create_app(deck_path: os.PathLike | str) -> FastAPI:
         s = fresh()
         now = utcnow()
         queue = build_queue(s.cards, s.settings, now, s.introduced_today(now))
-        counts = {"due": 0, "learning": 0, "new": 0}
-        for card in queue:
-            if card.srs.state == "new":
+        counts = {"due": 0, "learning": 0, "new": 0, "reverse": 0}
+        for card, direction in queue:
+            srs = card.srs_for(direction)
+            if direction == REVERSE:
+                counts["reverse"] += 1
+            if srs.state == "new":
                 counts["new"] += 1
-            elif card.srs.state in ("learning", "relearning"):
+            elif srs.state in ("learning", "relearning"):
                 counts["learning"] += 1
             else:
                 counts["due"] += 1
@@ -107,6 +111,19 @@ def create_app(deck_path: os.PathLike | str) -> FastAPI:
             cards.sort(key=lambda c: (c.srs.due or utcnow()))
         return {"cards": [c.to_api() for c in cards], "total": len(s.cards)}
 
+    def item_payload(card: Card, direction: str, scheduler: Scheduler,
+                     now: dt.datetime) -> Dict:
+        """One queue entry: the card, which way round it is asked, and its buttons."""
+        data = card.to_api()
+        data["direction"] = direction
+        data["preview"] = scheduler.preview(card, now, direction)
+        data["srs_active"] = card.srs_for(direction).to_dict()
+        if direction == REVERSE:
+            # the sentence must not contain the word you are asked to produce
+            data["example_masked"] = cloze.mask(card)
+            data["examples_masked"] = cloze.mask_all(card, card.examples)
+        return data
+
     @app.get("/api/queue")
     def get_queue(limit: int = 50) -> Dict:
         s = fresh()
@@ -114,9 +131,8 @@ def create_app(deck_path: os.PathLike | str) -> FastAPI:
         queue = build_queue(s.cards, s.settings, now, s.introduced_today(now))[:limit]
         scheduler = sched()
         return {
-            "cards": [
-                {**c.to_api(), "preview": scheduler.preview(c, now)} for c in queue
-            ],
+            "cards": [item_payload(card, direction, scheduler, now)
+                      for card, direction in queue],
             "remaining": len(queue),
         }
 
@@ -127,8 +143,9 @@ def create_app(deck_path: os.PathLike | str) -> FastAPI:
             card = s.by_id(payload.id)
             if not card:
                 raise HTTPException(404, f"Karte {payload.id!r} nicht gefunden")
-            was_new = card.srs.state == "new"
-            sched().answer(card, payload.grade)
+            direction = REVERSE if payload.direction == REVERSE else FORWARD
+            was_new = card.srs_for(direction).state == "new"
+            sched().answer(card, payload.grade, direction=direction)
             if was_new:
                 s.note_introduced()
             s.save()
@@ -165,14 +182,17 @@ def create_app(deck_path: os.PathLike | str) -> FastAPI:
             return {"ok": True}
 
     @app.post("/api/cards/{card_id}/reset")
-    def reset_card(card_id: str) -> Dict:
+    def reset_card(card_id: str, direction: str = "both") -> Dict:
         with LOCK:
             s = fresh()
             card = s.by_id(card_id)
             if not card:
                 raise HTTPException(404, "Karte nicht gefunden")
             from .models import SRS
-            card.srs = SRS()
+            if direction in ("both", FORWARD):
+                card.srs = SRS()
+            if direction in ("both", REVERSE):
+                card.srs_reverse = SRS()
             s.save()
             return {"card": card.to_api()}
 

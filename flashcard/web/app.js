@@ -76,6 +76,9 @@ function renderStatus() {
   const pills = [
     ["fällig", c.due], ["im Lernen", c.learning], ["neu", c.new],
   ].map(([label, n]) => el("span", { class: "pill" }, el("b", {}, String(n)), " " + label));
+  if (c.reverse) {
+    pills.push(el("span", { class: "pill" }, el("b", {}, String(c.reverse)), " Produktion"));
+  }
 
   const p = st.projection;
   if (p.days_left !== null && p.days_left !== undefined) {
@@ -94,14 +97,39 @@ function renderStatus() {
 }
 
 /* ---------------------------------------------------------------- review */
+const ASK = {
+  noun: "Artikel? Plural?",
+  verb: "Präteritum? Perfekt?",
+  grammar: "Regel? Beispielsatz?",
+};
+const ASK_REVERSE = {
+  noun: "Welches Wort — mit Artikel?",
+  verb: "Welches Verb?",
+  adjective: "Welches Adjektiv?",
+  adverb: "Welches Wort?",
+  phrase: "Welche Wendung?",
+};
+
 function cardFront(card) {
+  if (card.direction === "reverse") return cardFrontReverse(card);
   const isGrammar = card.type === "grammar";
   return el("div", { class: "flashcard front", style: isGrammar ? colorVar(card.color_key) : "" },
     el("div", { class: "kicker" }, TYPE_LABEL[card.type] || card.type),
     el("div", { class: "headword" }, card.lemma),
-    card.type === "noun" ? el("div", { class: "keyhint" }, "Artikel? Plural?") : null,
-    card.type === "verb" ? el("div", { class: "keyhint" }, "Präteritum? Perfekt?") : null,
-    isGrammar ? el("div", { class: "keyhint" }, "Regel? Beispielsatz?") : null,
+    ASK[card.type] ? el("div", { class: "keyhint" }, ASK[card.type]) : null,
+  );
+}
+
+/* Production: you get the meaning and a sentence with a gap, and have to come
+   up with the word itself. The card stays neutral in colour — for a noun the
+   article is part of the answer. */
+function cardFrontReverse(card) {
+  const sentence = card.example_masked || (card.examples_masked || [])[0] || "";
+  return el("div", { class: "flashcard front reverse" },
+    el("div", { class: "kicker" }, "Produktion · " + (TYPE_LABEL[card.type] || card.type)),
+    el("div", { class: "prompt-def" }, card.definition || "—"),
+    sentence ? el("div", { class: "example" }, sentence) : null,
+    el("div", { class: "keyhint" }, ASK_REVERSE[card.type] || "Welches Wort?"),
   );
 }
 
@@ -117,7 +145,8 @@ function cardBack(card) {
   if (card.rection) forms.push(["Rektion", card.rection]);
 
   return el("div", { class: "flashcard", style: colorVar(card.color_key) },
-    el("div", { class: "kicker" }, TYPE_LABEL[card.type] || card.type),
+    el("div", { class: "kicker" },
+      (card.direction === "reverse" ? "Produktion · " : "") + (TYPE_LABEL[card.type] || card.type)),
     el("div", { class: "headword" },
       card.article ? el("span", { class: "art" }, card.article + " ") : null, card.lemma),
     forms.length ? el("div", { class: "formrow" },
@@ -180,11 +209,14 @@ async function answer(grade) {
   const card = S.queue[S.index];
   if (!card || !S.revealed) return;
   try {
-    const res = await api("/api/answer", { method: "POST", body: { id: card.id, grade } });
+    const res = await api("/api/answer", {
+      method: "POST",
+      body: { id: card.id, grade, direction: card.direction || "forward" },
+    });
     S.state = res.state;
     // A card graded "again" or still in learning comes back this session:
     // drop it here and refetch the queue so ordering stays honest.
-    S.queue.splice(S.index, 1);
+    S.queue.splice(S.index, 1);   // this pair is done for now
     S.revealed = false;
     if (S.index >= S.queue.length) S.index = 0;
     renderStatus();
@@ -263,7 +295,8 @@ function renderBrowse() {
         el("span", {}, TYPE_LABEL[card.type] || card.type),
         el("span", {}, "·"),
         el("span", {}, dueLabel(card)),
-        card.srs.reps ? el("span", {}, `${card.srs.reps}×`) : null)));
+        card.srs.reps ? el("span", {}, `${card.srs.reps}×`) : null,
+        card.srs_reverse && card.srs_reverse.reps ? el("span", { title: "Produktion läuft" }, "⇄") : null)));
   });
   view.append(grid);
 }
@@ -342,8 +375,13 @@ function renderEditor() {
         oninput: (e) => { S.editing.tags = e.target.value.split(",").map((t) => t.trim()).filter(Boolean); },
       })),
     el("div", { class: "srsbox" },
-      `Status: ${card.srs.state} · Intervall: ${card.srs.interval_days} T. · Ease: ${card.srs.ease} · `,
-      `Wiederholungen: ${card.srs.reps} · Fehler: ${card.srs.lapses} · ${dueLabel(card)}`),
+      el("div", {}, `Erkennen — Status: ${card.srs.state} · Intervall: ${card.srs.interval_days} T. · `
+        + `Ease: ${card.srs.ease} · ${card.srs.reps}× · Fehler: ${card.srs.lapses}`),
+      card.supports_reverse
+        ? el("div", {}, `Produktion — Status: ${card.srs_reverse.state} · `
+            + `Intervall: ${card.srs_reverse.interval_days} T. · ${card.srs_reverse.reps}×`
+            + (card.srs_reverse.reps || card.srs.interval_days >= 3 ? "" : " (noch gesperrt)"))
+        : el("div", {}, "Nur eine Richtung — Grammatikkarten werden nicht produziert.")),
     el("div", { class: "panelactions" },
       el("button", { class: "primary", onclick: saveEditor }, "Speichern"),
       el("button", { id: "regen", onclick: () => regenerate(card.id, true) },
@@ -446,10 +484,19 @@ function renderStats() {
       row("Wiederholungen bis dahin", String(settings.reviews_before_target), "set reviews 3"),
       row("Intervall-Obergrenze jetzt", `${p.interval_cap_days} Tage`, ""),
       row("Neue Karten pro Tag", String(settings.daily_new_limit || "unbegrenzt"), "set new 40"),
+      row("Reihenfolge", settings.shuffle === false ? "fest" : "gemischt", "set shuffle on"),
+      row("Produktion (Bedeutung → Wort)",
+          settings.reverse_enabled === false ? "aus" : "an", "set reverse off"),
+      row("Produktion startet ab", `${settings.reverse_unlock_interval_days} Tagen Intervall`,
+          "set unlock 3"),
+      row("Produktionskarten", `${p.reverse_open} von ${p.reverse_possible} freigeschaltet, `
+          + `${p.reverse_started} begonnen`, ""),
       p.new_per_day_needed ? row("Nötig, um alles anzufangen", `${p.new_per_day_needed} neue Karten/Tag`, "") : null),
     el("div", { class: "note" },
       "Die Obergrenze ergibt sich aus (Tage bis zum Ziel ÷ gewünschte Wiederholungen). "
-      + "Dadurch wird keine Karte über das Zieldatum hinaus geschoben.")));
+      + "Dadurch wird keine Karte über das Zieldatum hinaus geschoben. "
+      + "Jede Vokabel wird in zwei Richtungen geplant; die Produktionsrichtung kommt erst dazu, "
+      + "wenn du das Wort sicher wiedererkennst.")));
 
   view.append(el("div", { class: "section" }, el("h4", {}, "Deck-Datei"),
     el("div", { class: "note" }, st.deck_path),

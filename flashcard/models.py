@@ -34,6 +34,13 @@ GRADE_NAMES = {AGAIN: "again", HARD: "hard", GOOD: "good", EASY: "easy"}
 
 NEW, LEARNING, REVIEW, RELEARNING = "new", "learning", "review", "relearning"
 
+# A card is studied in two directions. FORWARD is recognition (word -> meaning),
+# REVERSE is production (meaning -> word). Each direction keeps its own SRS
+# state, because recognising a word and producing it are different skills that
+# mature at different speeds.
+FORWARD, REVERSE = "forward", "reverse"
+DIRECTIONS = (FORWARD, REVERSE)
+
 
 def utcnow() -> dt.datetime:
     return dt.datetime.now(dt.timezone.utc).replace(microsecond=0)
@@ -154,6 +161,7 @@ class Card:
     created: Optional[dt.datetime] = None
     modified: Optional[dt.datetime] = None
     srs: SRS = field(default_factory=SRS)
+    srs_reverse: SRS = field(default_factory=SRS)
 
     # ---------------------------------------------------------------- display
 
@@ -169,6 +177,14 @@ class Card:
         if self.type == NOUN and self.article:
             return f"{self.article} {self.lemma}"
         return self.lemma
+
+    @property
+    def supports_reverse(self) -> bool:
+        """Grammar cards have no 'word' to produce, so they stay one-directional."""
+        return self.type != GRAMMAR and bool(self.definition or self.example)
+
+    def srs_for(self, direction: str = FORWARD) -> SRS:
+        return self.srs_reverse if direction == REVERSE else self.srs
 
     def matches(self, needle: str) -> bool:
         needle = needle.lower().strip()
@@ -208,6 +224,10 @@ class Card:
         out["created"] = fmt_ts(self.created)
         out["modified"] = fmt_ts(self.modified)
         out["srs"] = self.srs.to_dict()
+        # only written once the reverse direction has actually been used, so
+        # decks that never study production stay half the size
+        if self.srs_reverse.reps or self.srs_reverse.state != NEW or self.srs_reverse.due:
+            out["srs_reverse"] = self.srs_reverse.to_dict()
         return out
 
     @classmethod
@@ -244,12 +264,15 @@ class Card:
             created=parse_ts(raw.get("created")) or utcnow(),
             modified=parse_ts(raw.get("modified")) or utcnow(),
             srs=SRS.from_dict(raw.get("srs")),
+            srs_reverse=SRS.from_dict(raw.get("srs_reverse")),
         )
 
     def to_api(self) -> Dict[str, Any]:
         """Dict for the browser: everything above plus derived display bits."""
         data = asdict(self)
         data["srs"] = self.srs.to_dict()
+        data["srs_reverse"] = self.srs_reverse.to_dict()
+        data["supports_reverse"] = self.supports_reverse
         data["created"] = fmt_ts(self.created)
         data["modified"] = fmt_ts(self.modified)
         data["color_key"] = self.color_key
