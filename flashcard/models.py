@@ -119,6 +119,15 @@ class SRS:
         )
 
 
+def _string_list(value: Any) -> List[str]:
+    """Accept a list, or a single string with one sentence per line."""
+    if not value:
+        return []
+    if isinstance(value, str):
+        return [line.strip() for line in value.splitlines() if line.strip()]
+    return [str(item).strip() for item in value if str(item).strip()]
+
+
 @dataclass
 class Card:
     id: str
@@ -136,7 +145,8 @@ class Card:
     rection: str = ""            # e.g. "warten auf + Akk."
     # everything
     definition: str = ""         # short German definition / grammar rule
-    example: str = ""            # example sentence
+    example: str = ""            # example sentence (vocabulary cards)
+    examples: List[str] = field(default_factory=list)  # several sentences (grammar cards)
     notes: str = ""              # free-form, never touched by the generator
     tags: List[str] = field(default_factory=list)
     level: str = "B1"
@@ -163,8 +173,8 @@ class Card:
     def matches(self, needle: str) -> bool:
         needle = needle.lower().strip()
         haystack = " ".join(
-            [self.lemma, self.definition, self.example, self.plural,
-             self.praeteritum, self.perfekt, " ".join(self.tags)]
+            [self.lemma, self.definition, self.example, " ".join(self.examples),
+             self.plural, self.praeteritum, self.perfekt, " ".join(self.tags)]
         ).lower()
         return needle in haystack
 
@@ -184,7 +194,12 @@ class Card:
         if self.rection:
             out["rection"] = self.rection
         out["definition"] = self.definition
-        out["example"] = self.example
+        if self.example:
+            out["example"] = self.example
+        if self.examples:
+            out["examples"] = list(self.examples)
+        if not self.example and not self.examples:
+            out["example"] = ""
         if self.notes:
             out["notes"] = self.notes
         out["tags"] = list(self.tags)
@@ -221,6 +236,7 @@ class Card:
             rection=str(raw.get("rection") or "").strip(),
             definition=str(raw.get("definition") or "").strip(),
             example=str(raw.get("example") or "").strip(),
+            examples=_string_list(raw.get("examples")),
             notes=str(raw.get("notes") or "").strip(),
             tags=[str(t) for t in tags],
             level=str(raw.get("level") or "B1"),

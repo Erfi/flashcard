@@ -1,304 +1,1387 @@
-# B1-Auffrischungsdeck — Wortschatz und Grammatik für den Wiedereinstieg.
-# Import: python -m flashcard seed
+# B1-Deck — Wortschatz und Grammatik für Alltag, Beruf und Ämter (Niveau B1).
+# Frei editierbar: Artikel, Plural, Formen und Sätze kannst du jederzeit ändern.
+# Import: python -m flashcard seed --level b1
 cards:
-  # ------------------------------------------------------------ Nomen: die
-  - {type: noun, article: die, lemma: Erfahrung, plural: die Erfahrungen, level: B1, source: seed,
-     definition: "Wissen, das man bekommt, weil man etwas selbst erlebt hat.",
-     example: "Im Praktikum habe ich viel Erfahrung gesammelt.", tags: [arbeit]}
-  - {type: noun, article: die, lemma: Entscheidung, plural: die Entscheidungen, level: B1, source: seed,
-     definition: "Das Ergebnis, wenn man sich zwischen mehreren Möglichkeiten festlegt.",
-     example: "Diese Entscheidung war für mich nicht leicht.", tags: [alltag]}
-  - {type: noun, article: die, lemma: Möglichkeit, plural: die Möglichkeiten, level: B1, source: seed,
-     definition: "Eine Sache, die man tun kann; eine Gelegenheit.",
-     example: "Du hast die Möglichkeit, den Termin zu verschieben.", tags: [alltag]}
-  - {type: noun, article: die, lemma: Bewerbung, plural: die Bewerbungen, level: B1, source: seed,
-     definition: "Die Unterlagen, mit denen man um eine Stelle bittet.",
-     example: "Meine Bewerbung habe ich gestern abgeschickt.", tags: [arbeit]}
-  - {type: noun, article: die, lemma: Rechnung, plural: die Rechnungen, level: B1, source: seed,
-     definition: "Ein Papier, auf dem steht, wie viel man bezahlen muss.",
-     example: "Die Rechnung müssen Sie innerhalb von zwei Wochen überweisen.", tags: [geld]}
-  - {type: noun, article: die, lemma: Versicherung, plural: die Versicherungen, level: B1, source: seed,
-     definition: "Eine Firma, die bei einem Schaden das Geld bezahlt.",
-     example: "Die Versicherung hat den Schaden am Auto bezahlt.", tags: [amt, geld]}
-  - {type: noun, article: die, lemma: Wohnung, plural: die Wohnungen, level: A2, source: seed,
-     definition: "Mehrere Räume in einem Haus, in denen jemand wohnt.",
-     example: "Unsere Wohnung liegt im dritten Stock ohne Aufzug.", tags: [wohnen]}
-  - {type: noun, article: die, lemma: Umgebung, plural: die Umgebungen, level: B1, source: seed,
-     definition: "Das Gebiet, das um einen Ort herum liegt.",
-     example: "In der Umgebung der Stadt gibt es schöne Wanderwege.", tags: [wohnen]}
-  - {type: noun, article: die, lemma: Aufgabe, plural: die Aufgaben, level: A2, source: seed,
-     definition: "Etwas, das jemand machen oder lösen soll.",
-     example: "Diese Aufgabe erledige ich noch heute.", tags: [arbeit]}
-  - {type: noun, article: die, lemma: Meinung, plural: die Meinungen, level: B1, source: seed,
-     definition: "Das, was jemand über eine Sache denkt.",
-     example: "Meiner Meinung nach ist der Vorschlag zu teuer.", tags: [diskussion]}
-  - {type: noun, article: die, lemma: Umwelt, plural: "", level: B1, source: seed,
-     definition: "Die Natur mit Luft, Wasser und Boden, in der wir leben.",
-     example: "Mit dem Fahrrad schützt du die Umwelt.", tags: [umwelt]}
-  - {type: noun, article: die, lemma: Gesundheit, plural: "", level: B1, source: seed,
-     definition: "Der Zustand, wenn der Körper gut funktioniert.",
-     example: "Für meine Gesundheit gehe ich jeden Tag spazieren.", tags: [koerper]}
-  - {type: noun, article: die, lemma: Behörde, plural: die Behörden, level: B1, source: seed,
-     definition: "Eine Stelle vom Staat, die Anträge und Papiere bearbeitet.",
-     example: "Bei der Behörde muss ich einen Antrag stellen.", tags: [amt]}
-  - {type: noun, article: die, lemma: Ausbildung, plural: die Ausbildungen, level: B1, source: seed,
-     definition: "Die Zeit, in der man einen Beruf systematisch lernt.",
-     example: "Nach der Ausbildung hat sie sofort eine Stelle gefunden.", tags: [arbeit]}
-  - {type: noun, article: die, lemma: Verspätung, plural: die Verspätungen, level: B1, source: seed,
-     definition: "Die Zeit, die jemand oder etwas zu spät kommt.",
-     example: "Der Zug hatte zwanzig Minuten Verspätung.", tags: [reisen]}
-  - {type: noun, article: die, lemma: Unterstützung, plural: die Unterstützungen, level: B1, source: seed,
-     definition: "Hilfe, die man von anderen bekommt.",
-     example: "Ohne die Unterstützung meiner Familie hätte ich das nicht geschafft.", tags: [alltag]}
-  # ------------------------------------------------------------ Nomen: der
-  - {type: noun, article: der, lemma: Zusammenhang, plural: die Zusammenhänge, level: B1, source: seed,
-     definition: "Die Verbindung zwischen zwei Dingen oder Ereignissen.",
-     example: "Zwischen Stress und Schlafproblemen gibt es einen Zusammenhang.", tags: [diskussion]}
-  - {type: noun, article: der, lemma: Vorschlag, plural: die Vorschläge, level: B1, source: seed,
-     definition: "Eine Idee, die man anderen zur Entscheidung anbietet.",
-     example: "Dein Vorschlag gefällt mir besser als meiner.", tags: [diskussion]}
-  - {type: noun, article: der, lemma: Termin, plural: die Termine, level: A2, source: seed,
-     definition: "Ein fester Zeitpunkt für eine Verabredung.",
-     example: "Ich habe morgen einen Termin bei der Behörde.", tags: [alltag, amt]}
-  - {type: noun, article: der, lemma: Vertrag, plural: die Verträge, level: B1, source: seed,
-     definition: "Eine schriftliche Vereinbarung, die beide Seiten unterschreiben.",
-     example: "Vor der Unterschrift solltest du den Vertrag genau lesen.", tags: [amt, arbeit]}
-  - {type: noun, article: der, lemma: Ausdruck, plural: die Ausdrücke, level: B1, source: seed,
-     definition: "Ein Wort oder eine Wendung, die man benutzt.",
-     example: "Diesen Ausdruck habe ich noch nie gehört.", tags: [sprache]}
-  - {type: noun, article: der, lemma: Vorteil, plural: die Vorteile, level: B1, source: seed,
-     definition: "Eine gute Seite einer Sache.",
-     example: "Der große Vorteil dieser Wohnung ist die ruhige Umgebung.", tags: [diskussion]}
-  - {type: noun, article: der, lemma: Nachteil, plural: die Nachteile, level: B1, source: seed,
-     definition: "Eine schlechte Seite einer Sache.",
-     example: "Der Nachteil ist, dass die Miete sehr hoch ist.", tags: [diskussion]}
-  - {type: noun, article: der, lemma: Antrag, plural: die Anträge, level: B1, source: seed,
+
+  # ---------------------------------------------------------------- Grammatik
+  - type: grammar
+    lemma: "Adjektive ohne Artikel"
+    level: B1
+    source: seed
+    tags: [grammatik, adjektive]
+    definition: >-
+      Steht kein Artikel vor dem Adjektiv, muss das Adjektiv selbst den Kasus zeigen und bekommt
+      fast überall die Endung des bestimmten Artikels, also -er, -e, -es, -en, -em. Das kommt
+      typisch bei Stoffnamen, im Plural ohne Artikel und nach Mengenangaben vor.
+    examples:
+      - "Frischer Kaffee steht schon auf dem Tisch."
+      - "Bei schlechtem Wetter bleiben wir lieber zu Hause."
+      - "Sie sucht günstige Wohnungen in ruhiger Lage."
+  - type: grammar
+    lemma: "Art und Weise mit indem"
+    level: B1
+    source: seed
+    tags: [grammatik, satzbau]
+    definition: >-
+      indem antwortet auf die Frage wie oder wodurch und nennt das Mittel, mit dem man ein Ziel
+      erreicht. Das Subjekt ist meistens in beiden Sätzen gleich, das Verb steht am Ende. Nicht
+      verwechseln mit während, das nur die Zeit angibt.
+    examples:
+      - "Man spart Strom, indem man das Licht ausschaltet."
+      - "Sie verbesserte ihr Deutsch, indem sie jeden Tag laut las."
+      - "Wir lösten das Problem, indem wir direkt mit dem Vermieter sprachen."
+  - type: grammar
+    lemma: "brauchen mit zu"
+    level: B1
+    source: seed
+    tags: [grammatik, verben]
+    definition: >-
+      brauchen ersetzt müssen in verneinten Sätzen und steht dann mit zu plus Infinitiv. Es
+      erscheint fast nur mit nicht, nur, kaum oder erst. Positiv ohne Verneinung sagt man müssen.
+      In der gesprochenen Sprache fällt das zu oft weg, in der Prüfung schreibt man es besser.
+    examples:
+      - "Du brauchst heute nicht zu kommen."
+      - "Sie brauchen das Formular nur zu unterschreiben."
+      - "Wir brauchen den Antrag erst nächste Woche abzugeben."
+  - type: grammar
+    lemma: "Folge mit so dass"
+    level: B1
+    source: seed
+    tags: [grammatik, satzbau]
+    definition: >-
+      sodass nennt die Folge einer Handlung; das Verb steht am Ende des Nebensatzes. Getrennt
+      geschrieben wird so ... dass, wenn so zu einem Adjektiv gehört und dieses betont. Eine
+      ähnliche Bedeutung hat deshalb, das aber im Hauptsatz steht.
+    examples:
+      - "Der Zug hatte Verspätung, sodass wir das Konzert verpassten."
+      - "Es war so kalt, dass die Kinder drinnen blieben."
+      - "Sie sprach so leise, dass niemand sie verstehen konnte."
+  - type: grammar
+    lemma: "Futur I und Vermutung"
+    level: B1
+    source: seed
+    tags: [grammatik, zeiten]
+    definition: >-
+      werden plus Infinitiv steht für Absichten, Versprechen und Vorhersagen. Sehr häufig drückt
+      es aber eine Vermutung über die Gegenwart aus, meist zusammen mit wohl, sicher oder
+      wahrscheinlich. Für einfache Zukunftspläne genügt im Alltag das Präsens mit Zeitangabe.
+    examples:
+      - "Ich werde mich morgen um die Versicherung kümmern."
+      - "Sie wird wohl im Stau stehen."
+      - "In den nächsten Jahren werden die Mieten weiter steigen."
+  - type: grammar
+    lemma: "Genitiv"
+    level: B1
+    source: seed
+    tags: [grammatik, kasus]
+    definition: >-
+      Der Genitiv zeigt Besitz und Zugehörigkeit und steht hinter dem Nomen, das er näher
+      bestimmt. Maskuline und neutrale Nomen bekommen -s oder -es, feminine bleiben unverändert.
+      Mit Genitiv stehen die Präpositionen wegen, während, trotz, statt und aufgrund. Im Gespräch
+      ersetzt man den Genitiv oft durch von plus Dativ.
+    examples:
+      - "Das Auto meines Bruders steht in der Garage."
+      - "Während der Besprechung klingelte ständig ein Telefon."
+      - "Die Farbe der Wände gefällt mir nicht."
+  - type: grammar
+    lemma: "Indirekte Fragen"
+    level: B1
+    source: seed
+    tags: [grammatik, satzbau]
+    definition: >-
+      Eine Frage im Nebensatz wird bei Ja-Nein-Fragen mit ob eingeleitet, bei W-Fragen mit dem
+      Fragewort. Das Verb steht am Ende. Solche Sätze folgen auf Verben wie fragen, wissen wollen,
+      sich erkundigen und machen eine direkte Frage höflicher.
+    examples:
+      - "Er hat gefragt, ob wir den Termin verschieben können."
+      - "Wissen Sie, wann der nächste Bus abfährt?"
+      - "Ich weiß nicht, warum die Rechnung noch nicht da ist."
+  - type: grammar
+    lemma: "Infinitiv mit zu"
+    level: B1
+    source: seed
+    tags: [grammatik, satzbau]
+    definition: >-
+      Nach vielen Verben und Ausdrücken steht ein Infinitiv mit zu am Satzende, zum Beispiel nach
+      versuchen, vergessen, anfangen, hoffen, Lust haben, es ist wichtig. Bei trennbaren Verben
+      steht zu in der Mitte (abzugeben). Ohne zu stehen die Modalverben sowie sehen, hören,
+      lassen, gehen und bleiben.
+    examples:
+      - "Wir haben versucht, den Termin zu verschieben."
+      - "Es ist wichtig, die Unterlagen rechtzeitig abzugeben."
+      - "Sie hat vergessen, die Rechnung zu bezahlen."
+  - type: grammar
+    lemma: "je desto"
+    level: B1
+    source: seed
+    tags: [grammatik, adjektive]
+    definition: >-
+      je plus Komparativ leitet einen Nebensatz mit Verb am Ende ein, desto oder umso plus
+      Komparativ folgt im Hauptsatz mit dem Verb direkt danach. Die beiden Größen verändern sich
+      zusammen. Die Reihenfolge je-Satz zuerst ist fest.
+    examples:
+      - "Je früher wir losfahren, desto weniger Verkehr haben wir."
+      - "Je öfter man spricht, umso sicherer wird man."
+      - "Je länger das Gespräch dauerte, desto müder wurden alle."
+  - type: grammar
+    lemma: "Kausale Verbindungen"
+    level: B1
+    source: seed
+    tags: [grammatik, satzbau]
+    definition: >-
+      weil und da leiten einen Nebensatz mit Verb am Ende ein; da steht meist vorn und nennt einen
+      schon bekannten Grund. denn verbindet zwei Hauptsätze ohne Umstellung. deshalb und deswegen
+      nennen die Folge und ziehen das Verb direkt hinter sich. wegen ist eine Präposition mit
+      Genitiv.
+    examples:
+      - "Da der Zug ausfiel, mussten wir ein Taxi nehmen."
+      - "Wegen des Umzugs habe ich diese Woche wenig Zeit."
+      - "Die Miete stieg stark, deshalb suchen sie etwas Kleineres."
+  - type: grammar
+    lemma: "Konditionale Verbindungen"
+    level: B1
+    source: seed
+    tags: [grammatik, satzbau]
+    definition: >-
+      wenn und falls nennen eine Bedingung; falls betont, dass die Sache unsicher ist. Der wenn-
+      Satz kann auch ohne Konjunktion gebildet werden, dann beginnt er mit dem Verb. sonst und
+      andernfalls stehen im Hauptsatz und nennen die Folge, wenn die Bedingung nicht erfüllt wird.
+    examples:
+      - "Falls es morgen regnet, verschieben wir den Ausflug."
+      - "Sollten Sie Fragen haben, rufen Sie uns bitte an."
+      - "Wir müssen jetzt gehen, sonst verpassen wir den Anschluss."
+  - type: grammar
+    lemma: "Konjunktiv II der Gegenwart"
+    level: B1
+    source: seed
+    tags: [grammatik, modus]
+    definition: >-
+      Der Konjunktiv II spricht über Irreales, Wünsche und Ratschläge. Die normale Form ist würde
+      + Infinitiv. Eine eigene Form haben sein (wäre), haben (hätte), werden (würde), die
+      Modalverben (könnte, müsste, dürfte, sollte, wollte) und einige starke Verben (käme, ginge,
+      wüsste). Im irrealen Bedingungssatz steht der Konjunktiv in beiden Teilen.
+    examples:
+      - "Wenn ich mehr Zeit hätte, würde ich einen Sprachkurs machen."
+      - "An deiner Stelle würde ich mit dem Vermieter sprechen."
+      - "Es wäre schön, wenn du am Samstag mitkommen könntest."
+  - type: grammar
+    lemma: "Konjunktiv II der Vergangenheit"
+    level: B1
+    source: seed
+    tags: [grammatik, modus]
+    definition: >-
+      Für Irreales in der Vergangenheit gibt es nur eine Form, egal ob Perfekt oder Präteritum
+      gemeint ist. Sie besteht aus hätte oder wäre plus Partizip II. würde wird hier nie benutzt.
+      Mit einem Modalverb steht am Ende ein doppelter Infinitiv. Typisch für Vorwürfe und
+      verpasste Gelegenheiten.
+    examples:
+      - "Wenn ich früher losgefahren wäre, hätte ich den Zug erreicht."
+      - "Du hättest mir ruhig Bescheid sagen können."
+      - "Beinahe hätten wir den Termin vergessen."
+  - type: grammar
+    lemma: "Konzessive Verbindungen"
+    level: B1
+    source: seed
+    tags: [grammatik, satzbau]
+    definition: >-
+      Sie sagen, dass etwas trotz eines Gegengrunds passiert. obwohl leitet einen Nebensatz ein,
+      das Verb steht am Ende. trotzdem und dennoch stehen im Hauptsatz auf Position 1, danach
+      folgt sofort das Verb. trotz ist eine Präposition mit Genitiv und steht vor einem Nomen.
+    examples:
+      - "Obwohl die Wohnung klein ist, nehmen wir sie."
+      - "Das Wetter war schlecht, trotzdem sind wir gewandert."
+      - "Trotz des starken Regens kamen alle pünktlich."
+  - type: grammar
+    lemma: "lassen"
+    level: B1
+    source: seed
+    tags: [grammatik, verben]
+    definition: >-
+      lassen hat drei Bedeutungen. Es heißt veranlassen (etwas machen lassen), erlauben und
+      zulassen sowie mit sich die Möglichkeit (das lässt sich reparieren). Der zweite Infinitiv
+      steht ohne zu am Satzende. Im Perfekt steht statt des Partizips ein doppelter Infinitiv,
+      also hat machen lassen.
+    examples:
+      - "Wir lassen die Waschmaschine morgen reparieren."
+      - "Meine Eltern lassen die Kinder länger fernsehen."
+      - "Das Problem lässt sich in zehn Minuten lösen."
+  - type: grammar
+    lemma: "man und andere Passiv-Ersatzformen"
+    level: B1
+    source: seed
+    tags: [grammatik, passiv]
+    definition: >-
+      Statt des Passivs benutzt man im Gespräch oft man plus Aktiv. Weitere Ersatzformen sind sich
+      lassen plus Infinitiv (kann gemacht werden), sein plus zu plus Infinitiv (muss oder kann
+      gemacht werden) und Adjektive auf -bar. Sie klingen leichter als das volle Passiv.
+    examples:
+      - "In dieser Stadt kann man gut ohne Auto leben."
+      - "Das Problem lässt sich schnell lösen."
+      - "Die Formulare sind bis Montag abzugeben."
+  - type: grammar
+    lemma: "Modalverben als Vermutung"
+    level: B1
+    source: seed
+    tags: [grammatik, modus]
+    definition: >-
+      Modalverben können auch sagen, wie sicher eine Aussage ist. muss bedeutet fast sicher,
+      dürfte und müsste ziemlich wahrscheinlich, könnte möglich, kann nicht ausgeschlossen. Mit
+      einer Vergangenheit steht dahinter Partizip II plus haben oder sein.
+    examples:
+      - "Das Paket müsste morgen ankommen."
+      - "Sie kann das Formular nicht bekommen haben."
+      - "Bei diesem Verkehr dürfte er sich verspäten."
+  - type: grammar
+    lemma: "n-Deklination"
+    level: B1
+    source: seed
+    tags: [grammatik, kasus]
+    definition: >-
+      Eine Gruppe maskuliner Nomen bekommt in allen Fällen außer dem Nominativ Singular ein -n
+      oder -en. Dazu gehören Personen auf -e (Kollege, Kunde, Junge), Nomen auf -ent, -ant, -ist,
+      -oge sowie Herr, Mensch, Nachbar, Bauer. Der häufigste Fehler ist die fehlende Endung im
+      Akkusativ und Dativ.
+    examples:
+      - "Ich habe den Kollegen nach seiner Meinung gefragt."
+      - "Mit dem Kunden wurde ein neuer Termin vereinbart."
+      - "Der Praktikant hilft dem Studenten bei der Arbeit."
+  - type: grammar
+    lemma: "Nomen-Verb-Verbindungen"
+    level: B1
+    source: seed
+    tags: [grammatik, wortschatz]
+    definition: >-
+      Viele feste Wendungen bestehen aus einem Nomen und einem blassen Verb, zum Beispiel eine
+      Entscheidung treffen, einen Antrag stellen, in Kontakt bleiben, zur Verfügung stehen,
+      Rücksicht nehmen. Sie klingen im Amt und im Beruf natürlicher als das einfache Verb; Artikel
+      und Präposition muss man mitlernen.
+    examples:
+      - "Bis Freitag müssen wir eine Entscheidung treffen."
+      - "Beim Amt kann man den Antrag auch online stellen."
+      - "Für Rückfragen stehe ich Ihnen gern zur Verfügung."
+  - type: grammar
+    lemma: "Objekte im Dativ und Akkusativ"
+    level: B1
+    source: seed
+    tags: [grammatik, kasus]
+    definition: >-
+      Verben wie geben, schicken, erklären, zeigen, empfehlen haben zwei Objekte. Die Person steht
+      im Dativ, die Sache im Akkusativ. Ist die Sache ein Pronomen, rückt sie nach vorn, also gib
+      es mir. Manche Verben verlangen dagegen nur den Dativ, zum Beispiel helfen, gefallen und
+      gehören.
+    examples:
+      - "Der Vermieter hat uns den Vertrag erklärt."
+      - "Kannst du mir das Formular schicken?"
+      - "Zeig es ihm bitte morgen im Büro."
+  - type: grammar
+    lemma: "ohne zu und statt zu"
+    level: B1
+    source: seed
+    tags: [grammatik, satzbau]
+    definition: >-
+      ohne plus zu plus Infinitiv sagt, dass etwas Erwartetes nicht passiert; statt oder anstatt
+      plus zu plus Infinitiv nennt eine Alternative, die man nicht gewählt hat. Beide brauchen
+      dasselbe Subjekt wie der Hauptsatz. Sonst benutzt man ohne dass oder anstatt dass mit Verb
+      am Ende.
+    examples:
+      - "Er ging aus dem Zimmer, ohne ein Wort zu sagen."
+      - "Statt zu telefonieren, hat sie eine lange Mail geschrieben."
+      - "Wir sind losgefahren, ohne die Karte mitzunehmen."
+  - type: grammar
+    lemma: "Partizip als Adjektiv"
+    level: B1
+    source: seed
+    tags: [grammatik, adjektive]
+    definition: >-
+      Beide Partizipien können wie Adjektive vor einem Nomen stehen und bekommen dann normale
+      Adjektivendungen. Das Partizip I (Infinitiv plus d) ist aktiv und gleichzeitig, etwa
+      spielende Kinder. Das Partizip II ist passiv oder abgeschlossen, etwa die reparierte
+      Waschmaschine.
+    examples:
+      - "Die spielenden Kinder machten viel Lärm."
+      - "Das reparierte Fahrrad steht wieder im Keller."
+      - "Wir suchen einen gut bezahlten Nebenjob."
+  - type: grammar
+    lemma: "Passiv mit Modalverb"
+    level: B1
+    source: seed
+    tags: [grammatik, passiv]
+    definition: >-
+      Modalverben lassen sich mit dem Passiv verbinden. Das Modalverb wird konjugiert, am Satzende
+      stehen Partizip II und der Infinitiv werden. In der Vergangenheit benutzt man dafür meistens
+      das Präteritum des Modalverbs, weil das Perfekt sehr schwerfällig klingt.
+    examples:
+      - "Die Rechnung muss bis Freitag überwiesen werden."
+      - "Das Formular kann auch online ausgefüllt werden."
+      - "Der Termin musste leider verschoben werden."
+  - type: grammar
+    lemma: "Passiv Perfekt"
+    level: B1
+    source: seed
+    tags: [grammatik, passiv]
+    definition: >-
+      Im Perfekt Passiv steht sein plus Partizip II plus worden am Ende, nicht geworden. Man
+      benutzt es, wenn das Ergebnis einer abgeschlossenen Handlung wichtig ist. Der häufigste
+      Fehler ist die Verwechslung mit dem Zustandspassiv, das kein worden hat.
+    examples:
+      - "Die Rechnung ist schon letzte Woche bezahlt worden."
+      - "Unser Vertrag ist leider noch nicht unterschrieben worden."
+      - "Wann ist das Paket abgeschickt worden?"
+  - type: grammar
+    lemma: "Passiv Präsens und Präteritum"
+    level: B1
+    source: seed
+    tags: [grammatik, passiv]
+    definition: >-
+      Das Passiv rückt die Handlung in den Mittelpunkt; wer sie tut, ist unwichtig oder unbekannt.
+      Gebildet wird es mit werden plus Partizip II am Satzende, im Präteritum mit wurde. Das
+      Akkusativobjekt des Aktivsatzes wird zum Subjekt. Wer handelt, steht bei Personen mit von +
+      Dativ, bei Ursachen mit durch + Akkusativ.
+    examples:
+      - "Der Antrag wird von der Behörde sorgfältig geprüft."
+      - "Die alte Schule wurde vor zwei Jahren renoviert."
+      - "In diesem Betrieb werden jedes Jahr zwanzig Leute ausgebildet."
+  - type: grammar
+    lemma: "Plusquamperfekt und nachdem"
+    level: B1
+    source: seed
+    tags: [grammatik, zeiten]
+    definition: >-
+      Das Plusquamperfekt zeigt, dass etwas noch vor einem anderen Ereignis in der Vergangenheit
+      passiert ist. Gebildet wird es mit hatte oder war plus Partizip II. Typisch ist der Satz mit
+      nachdem, in dem die Zeiten um eine Stufe versetzt sind, zum Beispiel Plusquamperfekt im
+      Nebensatz und Präteritum oder Perfekt im Hauptsatz.
+    examples:
+      - "Nachdem ich den Antrag abgeschickt hatte, wartete ich vier Wochen."
+      - "Sie war schon eingeschlafen, als das Telefon klingelte."
+      - "Wir hatten die Karten gekauft, bevor der Film ausverkauft war."
+  - type: grammar
+    lemma: "Relativpronomen im Genitiv"
+    level: B1
+    source: seed
+    tags: [grammatik, satzbau]
+    definition: >-
+      dessen (maskulin und neutrum) und deren (feminin und Plural) drücken einen Besitz aus. Das
+      folgende Nomen steht ohne Artikel direkt dahinter. Die Form richtet sich nach dem Bezugswort
+      vorn, nicht nach dem Nomen danach, was die häufigste Fehlerquelle ist.
+    examples:
+      - "Das ist der Kollege, dessen Auto vor dem Haus steht."
+      - "Die Nachbarin, deren Kinder hier spielen, ist sehr nett."
+      - "Wir sprachen mit Leuten, deren Wohnungen zu teuer geworden sind."
+  - type: grammar
+    lemma: "Relativsätze"
+    level: B1
+    source: seed
+    tags: [grammatik, satzbau]
+    definition: >-
+      Der Relativsatz beschreibt ein Nomen genauer; das Verb steht am Ende. Das Relativpronomen
+      hat das Genus und den Numerus des Bezugsworts, aber den Kasus, den das Verb im Relativsatz
+      verlangt. Die Formen sind wie der bestimmte Artikel, außer im Dativ Plural (denen) und im
+      Genitiv (dessen, deren).
+    examples:
+      - "Das ist der Kollege, der neben mir sitzt."
+      - "Die Wohnung, die wir gemietet haben, liegt sehr ruhig."
+      - "Der Nachbar, dem ich geholfen habe, hat sich bedankt."
+  - type: grammar
+    lemma: "Relativsätze mit Präposition"
+    level: B1
+    source: seed
+    tags: [grammatik, satzbau]
+    definition: >-
+      Verlangt das Verb im Relativsatz eine Präposition, steht sie vor dem Relativpronomen und
+      bestimmt dessen Kasus. Bei Sachen kann man auch wo- plus Präposition benutzen (worauf,
+      womit), bei Personen nie. Für Orte ist wo möglich und oft eleganter als in dem.
+    examples:
+      - "Das ist die Kollegin, mit der ich das Projekt mache."
+      - "Der Termin, auf den wir gewartet haben, wurde abgesagt."
+      - "Die Stadt, in der sie aufgewachsen ist, liegt im Süden."
+  - type: grammar
+    lemma: "Temporale Nebensätze"
+    level: B1
+    source: seed
+    tags: [grammatik, satzbau]
+    definition: >-
+      als für ein einmaliges Ereignis in der Vergangenheit, wenn für Wiederholung und Zukunft,
+      während für Gleichzeitigkeit, bevor für das Spätere im Hauptsatz, nachdem für das Frühere,
+      seit oder seitdem für den Anfangspunkt, bis für das Ende. In allen steht das Verb am
+      Satzende.
+    examples:
+      - "Als ich in Berlin ankam, regnete es stark."
+      - "Bevor du gehst, mach bitte das Fenster zu."
+      - "Seitdem sie den neuen Job hat, ist sie viel entspannter."
+  - type: grammar
+    lemma: "um zu und damit"
+    level: B1
+    source: seed
+    tags: [grammatik, satzbau]
+    definition: >-
+      Beide nennen den Zweck einer Handlung. Ist das Subjekt in beiden Teilen dasselbe, benutzt
+      man um plus zu plus Infinitiv. Sind die Subjekte verschieden, muss damit stehen; im damit-
+      Satz steht das Verb am Ende. Nach um zu darf kein eigenes Subjekt folgen.
+    examples:
+      - "Sie lernt jeden Tag, um die Prüfung zu bestehen."
+      - "Ich rufe früh an, damit die Behörde noch einen Termin hat."
+      - "Um pünktlich zu sein, nehmen wir den früheren Zug."
+  - type: grammar
+    lemma: "Verben mit Präposition und da-Wörter"
+    level: B1
+    source: seed
+    tags: [grammatik, kasus]
+    definition: >-
+      Viele Verben haben eine feste Präposition, die den Kasus bestimmt, etwa warten auf plus
+      Akkusativ oder teilnehmen an plus Dativ. Geht es um eine Sache, fragt man mit wo plus
+      Präposition und antwortet mit da plus Präposition. Bei Personen bleiben Präposition und
+      Fragewort getrennt. Vor einem Vokal steht ein r, also worauf und darauf.
+    examples:
+      - "Worauf wartest du noch?"
+      - "Auf das Ergebnis warten wir schon lange, alle sprechen davon."
+      - "Über wen habt ihr euch beschwert?"
+  - type: grammar
+    lemma: "Wortstellung im Mittelfeld"
+    level: B1
+    source: seed
+    tags: [grammatik, satzbau]
+    definition: >-
+      Zwischen Verb und Satzende gilt eine Reihenfolge. Angaben kommen meist als temporal, kausal,
+      modal, lokal. Pronomen stehen vor Nomen, und beim Dativ und Akkusativ gilt Nomen nach Nomen
+      erst Dativ, bei zwei Pronomen erst Akkusativ. Bekanntes steht vorn, Neues hinten.
+    examples:
+      - "Sie hat mir gestern die Unterlagen geschickt."
+      - "Wegen des Regens fahren wir heute mit dem Bus zur Arbeit."
+      - "Ich gebe es dir morgen zurück."
+  - type: grammar
+    lemma: "Zustandspassiv"
+    level: B1
+    source: seed
+    tags: [grammatik, passiv]
+    definition: >-
+      Das Zustandspassiv besteht aus sein plus Partizip II und beschreibt das Ergebnis einer
+      Handlung, nicht die Handlung selbst. Der Unterschied ist deutlich bei Türen und Läden. Die
+      Tür wird geschlossen beschreibt den Vorgang, die Tür ist geschlossen den Zustand danach.
+    examples:
+      - "Die Geschäfte sind am Sonntag geschlossen."
+      - "Der Tisch ist für sechs Personen gedeckt."
+      - "Alle Formulare sind bereits ausgefüllt."
+  - type: grammar
+    lemma: "Zweiteilige Konnektoren"
+    level: B1
+    source: seed
+    tags: [grammatik, satzbau]
+    definition: >-
+      entweder ... oder nennt eine Alternative, nicht nur ... sondern auch eine Steigerung, weder
+      ... noch eine doppelte Verneinung ohne weiteres nicht, sowohl ... als auch eine Verbindung,
+      zwar ... aber eine Einschränkung. Beide Teile müssen zur gleichen Wortart passen. Nach
+      sondern steht immer eine vorherige Verneinung.
+    examples:
+      - "Die Wohnung ist nicht nur günstig, sondern auch ruhig."
+      - "Entweder rufst du an oder du schreibst eine Mail."
+      - "Er spricht weder Französisch noch Spanisch."
+
+  # ---------------------------------------------------------------- Nomen
+  - {type: noun, article: der, lemma: "Antrag", plural: "die Anträge", level: B1, source: seed,
      definition: "Eine schriftliche Bitte an eine Behörde.",
      example: "Den Antrag auf Kindergeld habe ich online gestellt.", tags: [amt]}
-  - {type: noun, article: der, lemma: Eindruck, plural: die Eindrücke, level: B1, source: seed,
+  - {type: noun, article: der, lemma: "Arbeitgeber", plural: "die Arbeitgeber", level: B1, source: seed,
+     definition: "Eine Firma oder Person, die andere Menschen beschäftigt und bezahlt.",
+     example: "Mein Arbeitgeber zahlt einen Teil der Fahrkarte.", tags: [arbeit]}
+  - {type: noun, article: der, lemma: "Arbeitsplatz", plural: "die Arbeitsplätze", level: B1, source: seed,
+     definition: "Der Ort im Betrieb, an dem eine Person täglich tätig ist.",
+     example: "Mein Arbeitsplatz liegt direkt am Fenster.", tags: [arbeit, buero]}
+  - {type: noun, article: der, lemma: "Ausdruck", plural: "die Ausdrücke", level: B1, source: seed,
+     definition: "Ein Wort oder eine Wendung, die man benutzt.",
+     example: "Diesen Ausdruck habe ich noch nie gehört.", tags: [sprache]}
+  - {type: noun, article: der, lemma: "Ausweis", plural: "die Ausweise", level: B1, source: seed,
+     definition: "Eine amtliche Karte mit Foto, die zeigt, wer man ist.",
+     example: "Ohne gültigen Ausweis kannst du kein Konto eröffnen.", tags: [amt, papiere]}
+  - {type: noun, article: der, lemma: "Beruf", plural: "die Berufe", level: B1, source: seed,
+     definition: "Die Tätigkeit, die man gelernt hat und für Geld ausübt.",
+     example: "Welchen Beruf möchtest du später einmal ausüben?", tags: [arbeit]}
+  - {type: noun, article: der, lemma: "Bildschirm", plural: "die Bildschirme", level: B1, source: seed,
+     definition: "Fläche am Computer oder Handy, auf der man alles sieht.",
+     example: "Mein Bildschirm ist für diese Arbeit einfach zu klein.", tags: [technik, computer]}
+  - {type: noun, article: der, lemma: "Eindruck", plural: "die Eindrücke", level: B1, source: seed,
      definition: "Das Bild oder Gefühl, das jemand oder etwas bei uns hinterlässt.",
      example: "Der neue Kollege hat einen guten Eindruck gemacht.", tags: [diskussion]}
-  - {type: noun, article: der, lemma: Zettel, plural: die Zettel, level: A2, source: seed,
+  - {type: noun, article: der, lemma: "Einwohner", plural: "die Einwohner", level: B1, source: seed,
+     definition: "Person, die in einer bestimmten Stadt oder Region wohnt.",
+     example: "Unser Dorf hat nur noch zwölfhundert Einwohner.", tags: [stadt, land]}
+  - {type: noun, article: der, lemma: "Feierabend", plural: "die Feierabende", level: B1, source: seed,
+     definition: "Die freie Zeit nach dem Ende des Arbeitstages.",
+     example: "Nach dem Feierabend treffe ich mich oft mit Freunden.", tags: [freizeit, arbeitszeit]}
+  - {type: noun, article: der, lemma: "Fortschritt", plural: "die Fortschritte", level: B1, source: seed,
+     definition: "Eine Entwicklung nach vorn, die etwas deutlich besser macht.",
+     example: "Der technische Fortschritt macht unseren Alltag oft leichter.",
+     tags: [technik, gesellschaft]}
+  - {type: noun, article: der, lemma: "Husten", plural: "", level: B1, source: seed,
+     definition: "Ein lautes Geräusch aus dem Hals, oft bei einer Erkältung.",
+     example: "Mein Husten wird langsam besser, danke der Nachfrage.", tags: [krankheit, koerper]}
+  - {type: noun, article: der, lemma: "Klimawandel", plural: "", level: B1, source: seed,
+     definition: "Die langsame Erwärmung der Erde durch Abgase und andere Ursachen.",
+     example: "Über den Klimawandel wird in den Medien viel diskutiert.", tags: [umwelt, klima]}
+  - {type: noun, article: der, lemma: "Kollege", plural: "die Kollegen", level: B1, source: seed,
+     definition: "Ein Mann, mit dem man in derselben Firma zusammenarbeitet.",
+     example: "Ein neuer Kollege beginnt nächste Woche in unserem Team.", tags: [arbeit, team]}
+  - {type: noun, article: der, lemma: "Kredit", plural: "die Kredite", level: B1, source: seed,
+     definition: "Geld, das die Bank leiht und das man zurückzahlen muss.",
+     example: "Für das Auto nahm sie einen kleinen Kredit auf.", tags: [bank, geld]}
+  - {type: noun, article: der, lemma: "Lebenslauf", plural: "die Lebensläufe", level: B1, source: seed,
+     definition: "Ein Dokument mit allen Stationen der Schule, Ausbildung und Arbeit einer Person.",
+     example: "Bitte schicken Sie uns Ihren Lebenslauf als PDF.", tags: [bewerbung, arbeit]}
+  - {type: noun, article: der, lemma: "Lärm", plural: "", level: B1, source: seed,
+     definition: "Sehr lauter Klang, der stört und sogar krank machen kann.",
+     example: "Der Lärm von der Baustelle weckt mich jeden Morgen.", tags: [stadt, umwelt]}
+  - {type: noun, article: der, lemma: "Mieter", plural: "die Mieter", level: B1, source: seed,
+     definition: "Mann, der in einer fremden Wohnung lebt und dafür monatlich zahlt.",
+     example: "Im dritten Stock wohnt seit Januar ein neuer Mieter.", tags: [wohnen, vertrag]}
+  - {type: noun, article: der, lemma: "Müll", plural: "", level: B1, source: seed,
+     definition: "Reste und Sachen, die man nicht mehr braucht und wegwirft.",
+     example: "Den Müll bringe ich jeden Abend nach unten.", tags: [umwelt, haushalt]}
+  - {type: noun, article: der, lemma: "Nachteil", plural: "die Nachteile", level: B1, source: seed,
+     definition: "Eine schlechte Seite einer Sache.",
+     example: "Der Nachteil ist, dass die Miete sehr hoch ist.", tags: [diskussion]}
+  - {type: noun, article: der, lemma: "Schlaf", plural: "", level: B1, source: seed,
+     definition: "Der Zustand nachts im Bett, wenn die Augen zu sind und man ruht.",
+     example: "Zu wenig Schlaf macht mich am nächsten Tag nervös.", tags: [schlaf, gesundheit]}
+  - {type: noun, article: der, lemma: "Schmerz", plural: "die Schmerzen", level: B1, source: seed,
+     definition: "Ein unangenehmes Gefühl im Körper, wenn etwas verletzt oder krank ist.",
+     example: "Seit gestern habe ich starke Schmerzen im Rücken.", tags: [koerper, gesundheit]}
+  - {type: noun, article: der, lemma: "Streit", plural: "", level: B1, source: seed,
+     definition: "Heftige Auseinandersetzung, bei der zwei Seiten verschiedener Meinung sind.",
+     example: "Nach dem Streit haben sich beide wieder entschuldigt.", tags: [konflikt, familie]}
+  - {type: noun, article: der, lemma: "Stress", plural: "", level: B1, source: seed,
+     definition: "Ein starker Druck durch zu viel Arbeit oder zu wenig Zeit.",
+     example: "Im Büro habe ich zurzeit besonders viel Stress.", tags: [alltag, gesundheit]}
+  - {type: noun, article: der, lemma: "Strom", plural: "", level: B1, source: seed,
+     definition: "Energie aus der Steckdose für Licht, Kühlschrank und Waschmaschine.",
+     example: "Strom ist in diesem Jahr deutlich teurer geworden.", tags: [energie, wohnen]}
+  - {type: noun, article: der, lemma: "Termin", plural: "die Termine", level: A2, source: seed,
+     definition: "Ein fester Zeitpunkt für eine Verabredung.",
+     example: "Ich habe morgen einen Termin bei der Behörde.", tags: [alltag, amt]}
+  - {type: noun, article: der, lemma: "Umzug", plural: "die Umzüge", level: B1, source: seed,
+     definition: "Der Wechsel in eine andere Wohnung mit allen Möbeln und Kisten.",
+     example: "Vor dem Umzug haben wir viele alte Sachen weggeworfen.", tags: [wohnen]}
+  - {type: noun, article: der, lemma: "Verkehr", plural: "", level: B1, source: seed,
+     definition: "Alle Autos, Busse und Bahnen, die auf den Straßen unterwegs sind.",
+     example: "Morgens ist der Verkehr in der Innenstadt schrecklich.", tags: [stadt, mobilitaet]}
+  - {type: noun, article: der, lemma: "Vermieter", plural: "die Vermieter", level: B1, source: seed,
+     definition: "Mann, dem eine Wohnung gehört und der sie anderen gegen Geld überlässt.",
+     example: "Unser Vermieter hat die Heizung endlich reparieren lassen.", tags: [wohnen, vertrag]}
+  - {type: noun, article: der, lemma: "Vertrag", plural: "die Verträge", level: B1, source: seed,
+     definition: "Eine schriftliche Vereinbarung, die beide Seiten unterschreiben.",
+     example: "Vor der Unterschrift solltest du den Vertrag genau lesen.", tags: [amt, arbeit]}
+  - {type: noun, article: der, lemma: "Vorschlag", plural: "die Vorschläge", level: B1, source: seed,
+     definition: "Eine Idee, die man anderen zur Entscheidung anbietet.",
+     example: "Dein Vorschlag gefällt mir besser als meiner.", tags: [diskussion]}
+  - {type: noun, article: der, lemma: "Vorteil", plural: "die Vorteile", level: B1, source: seed,
+     definition: "Eine gute Seite einer Sache.",
+     example: "Der große Vorteil dieser Wohnung ist die ruhige Umgebung.", tags: [diskussion]}
+  - {type: noun, article: der, lemma: "Vorwurf", plural: "die Vorwürfe", rection: "Vorwurf gegen + Akk.",
+     level: B1, source: seed, definition: "Kritik, mit der man jemandem eine Schuld gibt.",
+     example: "Sein Vorwurf hat mich ziemlich verletzt.", tags: [konflikt]}
+  - {type: noun, article: der, lemma: "Wunsch", plural: "die Wünsche", level: B1, source: seed,
+     definition: "Etwas, das man sich für die Zukunft sehr erhofft.",
+     example: "Mein größter Wunsch ist eine Reise nach Japan.", tags: [plaene, gefuehle]}
+  - {type: noun, article: der, lemma: "Zettel", plural: "die Zettel", level: A2, source: seed,
      definition: "Ein kleines Stück Papier für kurze Notizen.",
      example: "Auf dem Zettel steht der Termin beim Arzt.", tags: [alltag]}
-  # ------------------------------------------------------------ Nomen: das
-  - {type: noun, article: das, lemma: Verhältnis, plural: die Verhältnisse, level: B1, source: seed,
-     definition: "Die Beziehung zwischen Personen oder Dingen.",
-     example: "Zu meinen Nachbarn habe ich ein gutes Verhältnis.", tags: [menschen]}
-  - {type: noun, article: das, lemma: Gespräch, plural: die Gespräche, level: A2, source: seed,
-     definition: "Wenn zwei oder mehr Menschen miteinander sprechen.",
-     example: "Das Gespräch mit dem Chef war überraschend angenehm.", tags: [arbeit]}
-  - {type: noun, article: das, lemma: Ergebnis, plural: die Ergebnisse, level: B1, source: seed,
-     definition: "Das, was am Ende einer Arbeit oder Prüfung herauskommt.",
-     example: "Das Ergebnis der Prüfung kommt in zwei Wochen.", tags: [schule]}
-  - {type: noun, article: das, lemma: Angebot, plural: die Angebote, level: B1, source: seed,
+  - {type: noun, article: der, lemma: "Zusammenhang", plural: "die Zusammenhänge", level: B1, source: seed,
+     definition: "Die Verbindung zwischen zwei Dingen oder Ereignissen.",
+     example: "Zwischen Stress und Schlafproblemen gibt es einen Zusammenhang.", tags: [diskussion]}
+  - {type: noun, article: der, lemma: "Zuschuss", plural: "die Zuschüsse", level: B1, source: seed,
+     definition: "Zusätzliches Geld vom Staat, das man nicht zurückzahlen muss.",
+     example: "Studenten bekommen manchmal einen Zuschuss zur hohen Miete.", tags: [amt, geld]}
+  - {type: noun, article: die, lemma: "Abteilung", plural: "die Abteilungen", level: B1, source: seed,
+     definition: "Ein Teil einer großen Firma mit eigenen Aufgaben und eigener Leitung.",
+     example: "Unsere Abteilung sitzt jetzt im zweiten Stock.", tags: [firma]}
+  - {type: noun, article: die, lemma: "Anforderung", plural: "die Anforderungen", level: B1, source: seed,
+     definition: "Etwas, das eine Firma von einem Bewerber unbedingt erwartet.",
+     example: "Gute Englischkenntnisse gehören zu den wichtigsten Anforderungen.", tags: [bewerbung]}
+  - {type: noun, article: die, lemma: "Anmeldung", plural: "die Anmeldungen", level: B1, source: seed,
+     definition: "Wenn man der Stadt offiziell mitteilt, wo man jetzt wohnt.",
+     example: "Beim Bürgeramt dauerte alles nur zwanzig Minuten.", tags: [amt, wohnen]}
+  - {type: noun, article: die, lemma: "Aufgabe", plural: "die Aufgaben", level: A2, source: seed,
+     definition: "Etwas, das jemand machen oder lösen soll.",
+     example: "Diese Aufgabe erledige ich noch heute.", tags: [arbeit]}
+  - {type: noun, article: die, lemma: "Ausbildung", plural: "die Ausbildungen", level: B1, source: seed,
+     definition: "Die Zeit, in der man einen Beruf systematisch lernt.",
+     example: "Nach der Ausbildung hat sie sofort eine Stelle gefunden.", tags: [arbeit]}
+  - {type: noun, article: die, lemma: "Behandlung", plural: "die Behandlungen", level: B1, source: seed,
+     definition: "Alles, was ein Arzt tut, damit ein Patient wieder gesund wird.",
+     example: "Die Behandlung beim Zahnarzt dauerte nur zwanzig Minuten.", tags: [gesundheit, arzt]}
+  - {type: noun, article: die, lemma: "Behörde", plural: "die Behörden", level: B1, source: seed,
+     definition: "Eine Stelle vom Staat, die Anträge und Papiere bearbeitet.",
+     example: "Bei der Behörde muss ich einen Antrag stellen.", tags: [amt]}
+  - {type: noun, article: die, lemma: "Besprechung", plural: "die Besprechungen", level: B1, source: seed,
+     definition: "Ein Treffen im Betrieb, bei dem man über die Arbeit spricht.",
+     example: "Die Besprechung dauerte fast zwei Stunden.", tags: [arbeit, team]}
+  - {type: noun, article: die, lemma: "Bewegung", plural: "die Bewegungen", level: B1, source: seed,
+     definition: "Sport oder Aktivität, bei der man den Körper benutzt.",
+     example: "Ältere Menschen brauchen täglich frische Luft und Bewegung.", tags: [sport, gesundheit]}
+  - {type: noun, article: die, lemma: "Bewerbung", plural: "die Bewerbungen", level: B1, source: seed,
+     definition: "Die Unterlagen, mit denen man um eine Stelle bittet.",
+     example: "Meine Bewerbung habe ich gestern abgeschickt.", tags: [arbeit]}
+  - {type: noun, article: die, lemma: "Eifersucht", plural: "", rection: "Eifersucht auf + Akk.",
+     level: B1, source: seed,
+     definition: "Angst, dass ein geliebter Mensch jemand anderen wichtiger findet.",
+     example: "Seine Eifersucht machte das Zusammenleben ziemlich schwierig.", tags: [gefuehle, beziehung]}
+  - {type: noun, article: die, lemma: "Entscheidung", plural: "die Entscheidungen", level: B1,
+     source: seed, definition: "Das Ergebnis, wenn man sich zwischen mehreren Möglichkeiten festlegt.",
+     example: "Diese Entscheidung war für mich nicht leicht.", tags: [alltag]}
+  - {type: noun, article: die, lemma: "Enttäuschung", plural: "die Enttäuschungen", level: B1,
+     source: seed, definition: "Trauriges Gefühl, wenn etwas anders läuft als erhofft.",
+     example: "Die Absage war für ihn eine große Enttäuschung.", tags: [gefuehle]}
+  - {type: noun, article: die, lemma: "Erfahrung", plural: "die Erfahrungen", level: B1, source: seed,
+     definition: "Wissen, das man bekommt, weil man etwas selbst erlebt hat.",
+     example: "Im Praktikum habe ich viel Erfahrung gesammelt.", tags: [arbeit]}
+  - {type: noun, article: die, lemma: "Erfindung", plural: "die Erfindungen", level: B1, source: seed,
+     definition: "Etwas Neues, das jemand zum ersten Mal entwickelt hat.",
+     example: "Das Rad gilt als wichtigste Erfindung der Menschheit.", tags: [technik, forschung]}
+  - {type: noun, article: die, lemma: "Erkältung", plural: "die Erkältungen", level: B1, source: seed,
+     definition: "Eine leichte Krankheit mit Schnupfen, Halsweh und Husten.",
+     example: "Nach dem kalten Wochenende bekam ich eine Erkältung.", tags: [krankheit, gesundheit]}
+  - {type: noun, article: die, lemma: "Ernährung", plural: "", level: B1, source: seed,
+     definition: "Die Art, wie und was ein Mensch jeden Tag isst.",
+     example: "Mit gesunder Ernährung fühle ich mich viel fitter.", tags: [essen, gesundheit]}
+  - {type: noun, article: die, lemma: "Feier", plural: "die Feiern", level: B1, source: seed,
+     definition: "Ein Fest zu einem besonderen Anlass mit Gästen.",
+     example: "Zur Feier meines Geburtstags kommen alle Nachbarn.", tags: [feier, freunde]}
+  - {type: noun, article: die, lemma: "Freundschaft", plural: "die Freundschaften", level: B1,
+     source: seed, definition: "Enge Verbindung zwischen Menschen, die sich mögen und oft treffen.",
+     example: "Unsere Freundschaft hält schon seit der Schulzeit.", tags: [freunde, beziehung]}
+  - {type: noun, article: die, lemma: "Frist", plural: "die Fristen", level: B1, source: seed,
+     definition: "Ein Zeitraum, in dem etwas fertig sein oder ankommen muss.",
+     example: "Die Frist für die Anmeldung endet am Freitag.", tags: [zeit, arbeit]}
+  - {type: noun, article: die, lemma: "Gebühr", plural: "die Gebühren", level: B1, source: seed,
+     definition: "Ein fester Betrag, den man einer Bank oder einem Amt zahlt.",
+     example: "Bei Überweisungen ins Ausland fällt eine Gebühr an.", tags: [geld, bank]}
+  - {type: noun, article: die, lemma: "Geduld", plural: "", level: B1, source: seed,
+     definition: "Die Fähigkeit, ruhig zu warten und nicht ärgerlich zu werden.",
+     example: "Für dieses Spiel braucht man wirklich viel Geduld.", tags: [charakter]}
+  - {type: noun, article: die, lemma: "Gesellschaft", plural: "die Gesellschaften", level: B1,
+     source: seed, definition: "Alle Menschen, die zusammen in einem Land leben.",
+     example: "In unserer Gesellschaft wird viel über Gleichheit gestritten.", tags: [politik, soziales]}
+  - {type: noun, article: die, lemma: "Gesundheit", plural: "", level: B1, source: seed,
+     definition: "Der Zustand, wenn der Körper gut funktioniert.",
+     example: "Für meine Gesundheit gehe ich jeden Tag spazieren.", tags: [koerper]}
+  - {type: noun, article: die, lemma: "Gewohnheit", plural: "die Gewohnheiten", level: B1, source: seed,
+     definition: "Etwas, das jemand immer wieder auf die gleiche Weise tut.",
+     example: "Rauchen ist eine schlechte Gewohnheit, die viele ändern möchten.",
+     tags: [alltag, gesundheit]}
+  - {type: noun, article: die, lemma: "Höflichkeit", plural: "", level: B1, source: seed,
+     definition: "Freundliches Verhalten, das andere Menschen mit Respekt behandelt.",
+     example: "Aus Höflichkeit begrüßte er zuerst die ältere Nachbarin.", tags: [umgang, charakter]}
+  - {type: noun, article: die, lemma: "Kaution", plural: "die Kautionen", level: B1, source: seed,
+     definition: "Geld, das man beim Einzug hinterlegt und später meistens zurückbekommt.",
+     example: "Nach dem Auszug bekam er das Geld vollständig zurück.", tags: [wohnen, geld]}
+  - {type: noun, article: die, lemma: "Krankenkasse", plural: "die Krankenkassen", level: B1, source: seed,
+     definition: "Eine Firma, die einen Teil der Kosten für Ärzte und Medikamente zahlt.",
+     example: "Meine Krankenkasse bezahlt die neue Brille leider nicht.", tags: [gesundheit, geld]}
+  - {type: noun, article: die, lemma: "Krankmeldung", plural: "die Krankmeldungen", level: B1,
+     source: seed, definition: "Eine kurze Nachricht an den Chef, dass man nicht arbeiten kann.",
+     example: "Die Krankmeldung schicke ich dem Betrieb noch heute.", tags: [arbeit, krankheit]}
+  - {type: noun, article: die, lemma: "Kündigung", plural: "die Kündigungen", level: B1, source: seed,
+     definition: "Die schriftliche Mitteilung, dass ein Arbeitsverhältnis bald endet.",
+     example: "Nach der Kündigung suchte sie sofort etwas Neues.", tags: [arbeit]}
+  - {type: noun, article: die, lemma: "Luft", plural: "", level: B1, source: seed,
+     definition: "Das Gemisch aus Gasen, das wir jeden Tag atmen.",
+     example: "Auf dem Land ist die Luft deutlich sauberer.", tags: [umwelt, natur]}
+  - {type: noun, article: die, lemma: "Meinung", plural: "die Meinungen", level: B1, source: seed,
+     definition: "Das, was jemand über eine Sache denkt.",
+     example: "Meiner Meinung nach ist der Vorschlag zu teuer.", tags: [diskussion]}
+  - {type: noun, article: die, lemma: "Miete", plural: "die Mieten", level: B1, source: seed,
+     definition: "Das Geld, das man jeden Monat für seine Wohnung zahlt.",
+     example: "Die Miete wird immer am Monatsanfang abgebucht.", tags: [wohnen, geld]}
+  - {type: noun, article: die, lemma: "Möglichkeit", plural: "die Möglichkeiten", level: B1, source: seed,
+     definition: "Eine Sache, die man tun kann; eine Gelegenheit.",
+     example: "Du hast die Möglichkeit, den Termin zu verschieben.", tags: [alltag]}
+  - {type: noun, article: die, lemma: "Nachricht", plural: "die Nachrichten", level: B1, source: seed,
+     definition: "Kurze Information, die man jemandem schickt oder im Radio hört.",
+     example: "Abends schauen wir die Nachrichten im Fernsehen.", tags: [medien, kommunikation]}
+  - {type: noun, article: die, lemma: "Präsentation", plural: "die Präsentationen", level: B1,
+     source: seed, definition: "Ein Vortrag mit Folien vor einer Gruppe von Zuhörern.",
+     example: "Vor der Präsentation war er ziemlich nervös.", tags: [arbeit, vortrag]}
+  - {type: noun, article: die, lemma: "Quittung", plural: "die Quittungen", level: B1, source: seed,
+     definition: "Ein kleines Papier, das beweist, dass man bezahlt hat.",
+     example: "Heben Sie die Quittung bitte sorgfältig auf.", tags: [geld, papiere]}
+  - {type: noun, article: die, lemma: "Rechnung", plural: "die Rechnungen", level: B1, source: seed,
+     definition: "Ein Papier, auf dem steht, wie viel man bezahlen muss.",
+     example: "Die Rechnung müssen Sie innerhalb von zwei Wochen überweisen.", tags: [geld]}
+  - {type: noun, article: die, lemma: "Rücksicht", plural: "", rection: "Rücksicht auf + Akk.", level: B1,
+     source: seed, definition: "Verhalten, bei dem man die Bedürfnisse anderer Menschen beachtet.",
+     example: "Bitte nimm Rücksicht auf deine kleine Schwester.", tags: [umgang, familie]}
+  - {type: noun, article: die, lemma: "Sehnsucht", plural: "die Sehnsüchte",
+     rection: "Sehnsucht nach + Dat.", level: B1, source: seed,
+     definition: "Starkes Verlangen nach etwas oder jemandem, das gerade fehlt.",
+     example: "Im Ausland hatte sie große Sehnsucht nach ihrer Familie.", tags: [gefuehle, familie]}
+  - {type: noun, article: die, lemma: "Sendung", plural: "die Sendungen", level: B1, source: seed,
+     definition: "Ein Programm im Radio oder Fernsehen mit festem Beginn.",
+     example: "Diese Sendung läuft immer sonntags um acht.", tags: [medien, fernsehen]}
+  - {type: noun, article: die, lemma: "Stelle", plural: "die Stellen", level: B1, source: seed,
+     definition: "Ein bezahlter Arbeitsplatz in einer Firma oder bei einem Amt.",
+     example: "In der Zeitung stand ein interessantes Angebot für Techniker.", tags: [arbeit, beruf]}
+  - {type: noun, article: die, lemma: "Stimmung", plural: "die Stimmungen", level: B1, source: seed,
+     definition: "Das Gefühl, das in einer Gruppe oder bei einer Person gerade herrscht.",
+     example: "Auf dem Fest war die Stimmung von Anfang an gut.", tags: [gefuehle, feier]}
+  - {type: noun, article: die, lemma: "Umgebung", plural: "die Umgebungen", level: B1, source: seed,
+     definition: "Das Gebiet, das um einen Ort herum liegt.",
+     example: "In der Umgebung der Stadt gibt es schöne Wanderwege.", tags: [wohnen]}
+  - {type: noun, article: die, lemma: "Umwelt", plural: "", level: B1, source: seed,
+     definition: "Die Natur mit Luft, Wasser und Boden, in der wir leben.",
+     example: "Mit dem Fahrrad schützt du die Umwelt.", tags: [umwelt]}
+  - {type: noun, article: die, lemma: "Unterschrift", plural: "die Unterschriften", level: B1,
+     source: seed, definition: "Der eigene Name, mit der Hand unter ein Papier geschrieben.",
+     example: "Unten auf Seite drei fehlt noch Ihre Unterschrift.", tags: [papiere, vertrag]}
+  - {type: noun, article: die, lemma: "Unterstützung", plural: "die Unterstützungen", level: B1,
+     source: seed, definition: "Hilfe, die man von anderen bekommt.",
+     example: "Ohne die Unterstützung meiner Familie hätte ich das nicht geschafft.", tags: [alltag]}
+  - {type: noun, article: die, lemma: "Untersuchung", plural: "die Untersuchungen", level: B1,
+     source: seed, definition: "Wenn ein Arzt genau prüft, wie es dem Körper geht.",
+     example: "Vor der Operation ist noch eine kurze Untersuchung nötig.", tags: [arzt, gesundheit]}
+  - {type: noun, article: die, lemma: "Verbindung", plural: "die Verbindungen", level: B1, source: seed,
+     definition: "Kontakt zwischen zwei Punkten, etwa im Internet oder mit Zügen.",
+     example: "Im Zug war die Verbindung ins Internet sehr schlecht.", tags: [technik, internet]}
+  - {type: noun, article: die, lemma: "Verpackung", plural: "die Verpackungen", level: B1, source: seed,
+     definition: "Papier oder Plastik, worin eine Ware im Laden steckt.",
+     example: "Diese Verpackung besteht leider komplett aus Plastik.", tags: [umwelt, einkauf]}
+  - {type: noun, article: die, lemma: "Versicherung", plural: "die Versicherungen", level: B1,
+     source: seed, definition: "Eine Firma, die bei einem Schaden das Geld bezahlt.",
+     example: "Die Versicherung hat den Schaden am Auto bezahlt.", tags: [amt, geld]}
+  - {type: noun, article: die, lemma: "Verspätung", plural: "die Verspätungen", level: B1, source: seed,
+     definition: "Die Zeit, die jemand oder etwas zu spät kommt.",
+     example: "Der Zug hatte zwanzig Minuten Verspätung.", tags: [reisen]}
+  - {type: noun, article: die, lemma: "Versöhnung", plural: "die Versöhnungen", level: B1, source: seed,
+     definition: "Der Moment, in dem zwei Streitende wieder Frieden schließen.",
+     example: "Nach langen Wochen kam es endlich zur Versöhnung.", tags: [konflikt, beziehung]}
+  - {type: noun, article: die, lemma: "Weiterbildung", plural: "die Weiterbildungen", level: B1,
+     source: seed, definition: "Ein Kurs, in dem Berufstätige neue Kenntnisse für ihren Job lernen.",
+     example: "Nächsten Monat besuche ich eine Weiterbildung zum Thema Datenschutz.", tags: [lernen, beruf]}
+  - {type: noun, article: die, lemma: "Werbung", plural: "", level: B1, source: seed,
+     definition: "Texte und Bilder, mit denen Firmen ihre Produkte verkaufen wollen.",
+     example: "Im Internet nervt mich die viele Werbung.", tags: [medien, wirtschaft]}
+  - {type: noun, article: die, lemma: "Wirkung", plural: "die Wirkungen", level: B1, source: seed,
+     definition: "Das, was ein Mittel oder eine Handlung im Körper verändert.",
+     example: "Die Tropfen zeigen erst nach einer Stunde ihre Wirkung.", tags: [apotheke, gesundheit]}
+  - {type: noun, article: die, lemma: "Wohnung", plural: "die Wohnungen", level: A2, source: seed,
+     definition: "Mehrere Räume in einem Haus, wo eine Familie oder eine Person lebt.",
+     example: "Unsere Wohnung liegt im dritten Stock ohne Aufzug.", tags: [wohnen]}
+  - {type: noun, article: die, lemma: "Zeitung", plural: "die Zeitungen", level: B1, source: seed,
+     definition: "Gedrucktes Blatt mit aktuellen Berichten, das meistens täglich erscheint.",
+     example: "Am Wochenende lese ich die Zeitung im Café.", tags: [medien, lesen]}
+  - {type: noun, article: die, lemma: "Zusammenarbeit", plural: "", level: B1, source: seed,
+     definition: "Das gemeinsame Tun mehrerer Personen an derselben Sache.",
+     example: "Die Zusammenarbeit mit der neuen Abteilung läuft sehr gut.", tags: [team, firma]}
+  - {type: noun, article: die, lemma: "Überstunde", plural: "die Überstunden", level: B1, source: seed,
+     definition: "Zusätzliche Arbeitszeit nach dem normalen Ende des Arbeitstages.",
+     example: "Letzte Woche habe ich zehn Überstunden gemacht.", tags: [arbeitszeit]}
+  - {type: noun, article: das, lemma: "Amt", plural: "die Ämter", level: B1, source: seed,
+     definition: "Eine öffentliche Stelle, die Papiere prüft und Bescheinigungen ausstellt.",
+     example: "Am Montag muss ich zum Amt und Unterlagen abgeben.", tags: [amt, papiere]}
+  - {type: noun, article: das, lemma: "Angebot", plural: "die Angebote", level: B1, source: seed,
      definition: "Etwas, das jemand anbietet, oft zu einem guten Preis.",
      example: "Dieses Angebot gilt nur bis Ende der Woche.", tags: [geld]}
-  - {type: noun, article: das, lemma: Verständnis, plural: "", level: B1, source: seed,
+  - {type: noun, article: das, lemma: "Bargeld", plural: "", level: B1, source: seed,
+     definition: "Münzen und Scheine, die man wirklich in der Hand hält.",
+     example: "In kleinen Kneipen zahlt man oft noch mit Bargeld.", tags: [geld, bank]}
+  - {type: noun, article: das, lemma: "Einkommen", plural: "die Einkommen", level: B1, source: seed,
+     definition: "Das Geld, das jemand regelmäßig durch Arbeit oder Rente bekommt.",
+     example: "Ihr Einkommen reicht in dieser teuren Stadt kaum aus.", tags: [geld, arbeit]}
+  - {type: noun, article: das, lemma: "Ergebnis", plural: "die Ergebnisse", level: B1, source: seed,
+     definition: "Das, was am Ende einer Arbeit oder Prüfung herauskommt.",
+     example: "Das Ergebnis der Prüfung kommt in zwei Wochen.", tags: [schule]}
+  - {type: noun, article: das, lemma: "Fieber", plural: "", level: B1, source: seed,
+     definition: "Eine zu hohe Körpertemperatur bei einer Krankheit.",
+     example: "Das Kind hat seit gestern Abend hohes Fieber.", tags: [krankheit, koerper]}
+  - {type: noun, article: das, lemma: "Formular", plural: "die Formulare", level: B1, source: seed,
+     definition: "Ein Blatt mit Fragen, das man bei einer Behörde ausfüllen muss.",
+     example: "Füllen Sie dieses Formular bitte vollständig und leserlich aus.", tags: [amt, papiere]}
+  - {type: noun, article: das, lemma: "Gehalt", plural: "die Gehälter", level: B1, source: seed,
+     definition: "Das Geld, das Angestellte jeden Monat für ihre Arbeit bekommen.",
+     example: "Über das Gehalt sprechen wir ganz am Schluss.", tags: [geld, arbeit]}
+  - {type: noun, article: das, lemma: "Gerät", plural: "die Geräte", level: B1, source: seed,
+     definition: "Technischer Gegenstand, der eine bestimmte Arbeit für uns übernimmt.",
+     example: "Dieses Gerät braucht zum Glück sehr wenig Energie.", tags: [technik, haushalt]}
+  - {type: noun, article: das, lemma: "Gespräch", plural: "die Gespräche", level: A2, source: seed,
+     definition: "Wenn zwei oder mehr Menschen miteinander sprechen.",
+     example: "Das Gespräch mit dem Chef war überraschend angenehm.", tags: [arbeit]}
+  - {type: noun, article: das, lemma: "Konto", plural: "die Konten", level: B1, source: seed,
+     definition: "Der Platz bei einer Bank, auf dem das eigene Geld liegt.",
+     example: "Auf meinem Konto ist leider fast nichts mehr.", tags: [bank, geld]}
+  - {type: noun, article: das, lemma: "Krankenhaus", plural: "die Krankenhäuser", level: B1, source: seed,
+     definition: "Ein großes Gebäude, in dem Patienten übernachten und behandelt werden.",
+     example: "Meine Tante liegt seit Montag im Krankenhaus.", tags: [krankheit, arzt]}
+  - {type: noun, article: das, lemma: "Medikament", plural: "die Medikamente", level: B1, source: seed,
+     definition: "Ein Mittel gegen eine Krankheit, zum Beispiel eine Tablette.",
+     example: "Dieses Medikament nimmst du bitte nach dem Essen ein.", tags: [apotheke, gesundheit]}
+  - {type: noun, article: das, lemma: "Mitleid", plural: "", rection: "Mitleid mit + Dat.", level: B1,
+     source: seed, definition: "Trauriges Gefühl, wenn ein anderer Mensch Schmerzen oder Sorgen hat.",
+     example: "Aus Mitleid half sie dem verletzten Vogel.", tags: [gefuehle, umgang]}
+  - {type: noun, article: das, lemma: "Praktikum", plural: "die Praktika", level: B1, source: seed,
+     definition: "Eine kurze Zeit in einem Betrieb, um den Alltag dort kennenzulernen.",
+     example: "Im Sommer arbeitet mein Sohn bei einer Zeitung mit.", tags: [ausbildung, beruf]}
+  - {type: noun, article: das, lemma: "Rezept", plural: "die Rezepte", level: B1, source: seed,
+     definition: "Ein Papier vom Arzt, mit dem man ein Medikament bekommt.",
+     example: "Ohne Rezept darf die Apothekerin mir die Tabletten nicht geben.", tags: [arzt, apotheke]}
+  - {type: noun, article: das, lemma: "Verhältnis", plural: "die Verhältnisse", level: B1, source: seed,
+     definition: "Die Beziehung zwischen Personen oder Dingen.",
+     example: "Zu meinen Nachbarn habe ich ein gutes Verhältnis.", tags: [menschen]}
+  - {type: noun, article: das, lemma: "Verständnis", plural: "", level: B1, source: seed,
      definition: "Wenn man die Lage eines anderen nachfühlen und akzeptieren kann.",
      example: "Ich habe Verständnis für deine Entscheidung.", tags: [menschen]}
-  - {type: noun, article: das, lemma: Ziel, plural: die Ziele, level: A2, source: seed,
+  - {type: noun, article: das, lemma: "Vertrauen", plural: "", rection: "Vertrauen zu + Dat.", level: B1,
+     source: seed, definition: "Das feste Gefühl, dass man sich auf jemanden verlassen kann.",
+     example: "Ohne Vertrauen funktioniert keine gute Beziehung.", tags: [beziehung, gefuehle]}
+  - {type: noun, article: das, lemma: "Vorstellungsgespräch", plural: "die Vorstellungsgespräche",
+     level: B1, source: seed,
+     definition: "Ein Treffen, bei dem eine Firma einen Kandidaten persönlich kennenlernen möchte.",
+     example: "Morgen habe ich meinen ersten Termin bei einer Bank.", tags: [bewerbung]}
+  - {type: noun, article: das, lemma: "Zeugnis", plural: "die Zeugnisse", level: B1, source: seed,
+     definition: "Ein Papier, das Leistungen in Schule oder Betrieb schriftlich bestätigt.",
+     example: "Dem Bewerbungsschreiben liegen zwei Zeugnisse bei.", tags: [bewerbung, schule]}
+  - {type: noun, article: das, lemma: "Ziel", plural: "die Ziele", level: A2, source: seed,
      definition: "Das, was jemand erreichen will.",
      example: "Mein Ziel ist es, die B1-Prüfung zu bestehen.", tags: [alltag]}
-  # ------------------------------------------------------------------ Verben
-  - {type: verb, lemma: erledigen, praesens_3sg: erledigt, praeteritum: erledigte, perfekt: hat erledigt,
-     aux: haben, separable: false, level: B1, source: seed,
-     definition: "Eine Aufgabe fertig machen.",
-     example: "Diese Aufgabe erledige ich noch vor dem Termin.", tags: [arbeit]}
-  - {type: verb, lemma: beantragen, praesens_3sg: beantragt, praeteritum: beantragte, perfekt: hat beantragt,
-     aux: haben, separable: false, level: B1, source: seed,
-     definition: "Bei einer Behörde schriftlich um etwas bitten.",
-     example: "Wir haben bei der Behörde eine neue Karte beantragt.", tags: [amt]}
-  - {type: verb, lemma: sich bewerben, praesens_3sg: bewirbt sich, praeteritum: bewarb sich,
-     perfekt: hat sich beworben, aux: haben, separable: false, rection: "sich bewerben um + Akk. / bei + Dat.",
-     level: B1, source: seed,
-     definition: "Um eine Stelle bitten und dafür Unterlagen schicken.",
-     example: "Sie bewirbt sich bei einer Firma in Hamburg.", tags: [arbeit]}
-  - {type: verb, lemma: teilnehmen, praesens_3sg: nimmt teil, praeteritum: nahm teil,
-     perfekt: hat teilgenommen, aux: haben, separable: true, rection: "teilnehmen an + Dat.",
-     level: B1, source: seed,
-     definition: "Bei einer Veranstaltung dabei sein und mitmachen.",
-     example: "An dem Kurs nehmen zwölf Personen teil.", tags: [schule]}
-  - {type: verb, lemma: empfehlen, praesens_3sg: empfiehlt, praeteritum: empfahl, perfekt: hat empfohlen,
-     aux: haben, separable: false, level: B1, source: seed,
-     definition: "Jemandem sagen, dass etwas gut ist und passt.",
-     example: "Der Arzt hat mir mehr Bewegung empfohlen.", tags: [alltag]}
-  - {type: verb, lemma: verschieben, praesens_3sg: verschiebt, praeteritum: verschob, perfekt: hat verschoben,
-     aux: haben, separable: false, level: B1, source: seed,
-     definition: "Etwas auf einen späteren Zeitpunkt legen.",
-     example: "Können wir den Termin auf Freitag verschieben?", tags: [alltag]}
-  - {type: verb, lemma: entscheiden, praesens_3sg: entscheidet, praeteritum: entschied, perfekt: hat entschieden,
-     aux: haben, separable: false, rection: "sich entscheiden für + Akk.", level: B1, source: seed,
-     definition: "Nach dem Überlegen eine von mehreren Möglichkeiten wählen.",
-     example: "Wir haben uns für die kleinere Wohnung entschieden.", tags: [alltag]}
-  - {type: verb, lemma: entstehen, praesens_3sg: entsteht, praeteritum: entstand, perfekt: ist entstanden,
-     aux: sein, separable: false, level: B1, source: seed,
-     definition: "Neu anfangen zu existieren.",
-     example: "In der Umgebung entstehen viele neue Wohnungen.", tags: [wohnen]}
-  - {type: verb, lemma: gelingen, praesens_3sg: gelingt, praeteritum: gelang, perfekt: ist gelungen,
-     aux: sein, separable: false, rection: "gelingen + Dat.", level: B1, source: seed,
-     definition: "Gut klappen; ein gutes Ergebnis haben.",
-     example: "Der Kuchen ist mir dieses Mal wirklich gelungen.", tags: [alltag]}
-  - {type: verb, lemma: beschreiben, praesens_3sg: beschreibt, praeteritum: beschrieb, perfekt: hat beschrieben,
-     aux: haben, separable: false, level: B1, source: seed,
-     definition: "Mit Worten genau sagen, wie etwas ist.",
-     example: "Beschreiben Sie bitte kurz Ihre Erfahrung im Beruf.", tags: [sprache]}
-  - {type: verb, lemma: sich erinnern, praesens_3sg: erinnert sich, praeteritum: erinnerte sich,
-     perfekt: hat sich erinnert, aux: haben, separable: false, rection: "sich erinnern an + Akk.",
-     level: B1, source: seed,
-     definition: "Etwas aus der Vergangenheit wieder im Kopf haben.",
-     example: "Ich erinnere mich gut an dieses Gespräch.", tags: [menschen]}
-  - {type: verb, lemma: sich kümmern, praesens_3sg: kümmert sich, praeteritum: kümmerte sich,
-     perfekt: hat sich gekümmert, aux: haben, separable: false, rection: "sich kümmern um + Akk.",
-     level: B1, source: seed,
-     definition: "Für jemanden oder etwas sorgen.",
-     example: "Am Wochenende kümmere ich mich um die Rechnungen.", tags: [alltag]}
-  - {type: verb, lemma: bestehen, praesens_3sg: besteht, praeteritum: bestand, perfekt: hat bestanden,
-     aux: haben, separable: false, rection: "bestehen aus + Dat. / auf + Dat.", level: B1, source: seed,
-     definition: "Eine Prüfung schaffen; oder aus Teilen zusammengesetzt sein.",
-     example: "Sie hat die Prüfung mit einem guten Ergebnis bestanden.", tags: [schule]}
-  - {type: verb, lemma: verzichten, praesens_3sg: verzichtet, praeteritum: verzichtete, perfekt: hat verzichtet,
-     aux: haben, separable: false, rection: "verzichten auf + Akk.", level: B1, source: seed,
-     definition: "Etwas absichtlich nicht nehmen oder nicht tun.",
-     example: "Für die Umwelt verzichte ich oft auf das Auto.", tags: [umwelt]}
-  - {type: verb, lemma: erreichen, praesens_3sg: erreicht, praeteritum: erreichte, perfekt: hat erreicht,
-     aux: haben, separable: false, level: B1, source: seed,
-     definition: "An ein Ziel kommen oder jemanden am Telefon bekommen.",
-     example: "Unter dieser Nummer erreichen Sie mich bis achtzehn Uhr.", tags: [alltag]}
-  - {type: verb, lemma: auffallen, praesens_3sg: fällt auf, praeteritum: fiel auf, perfekt: ist aufgefallen,
-     aux: sein, separable: true, rection: "auffallen + Dat.", level: B1, source: seed,
-     definition: "So sein, dass andere es sofort bemerken.",
-     example: "Mir ist aufgefallen, dass die Rechnung zweimal kam.", tags: [alltag]}
-  - {type: verb, lemma: vorschlagen, praesens_3sg: schlägt vor, praeteritum: schlug vor,
-     perfekt: hat vorgeschlagen, aux: haben, separable: true, level: B1, source: seed,
-     definition: "Eine Idee nennen, über die andere entscheiden sollen.",
-     example: "Ich schlage vor, dass wir das Gespräch verschieben.", tags: [diskussion]}
-  - {type: verb, lemma: sich beschweren, praesens_3sg: beschwert sich, praeteritum: beschwerte sich,
-     perfekt: hat sich beschwert, aux: haben, separable: false, rection: "sich beschweren über + Akk. / bei + Dat.",
-     level: B1, source: seed,
-     definition: "Deutlich sagen, dass man mit etwas nicht zufrieden ist.",
-     example: "Er hat sich bei der Firma über die Verspätung beschwert.", tags: [diskussion]}
-  - {type: verb, lemma: ablehnen, praesens_3sg: lehnt ab, praeteritum: lehnte ab, perfekt: hat abgelehnt,
-     aux: haben, separable: true, level: B1, source: seed,
+
+  # ---------------------------------------------------------------- Verben
+  - {type: verb, lemma: "ablehnen", praesens_3sg: "lehnt ab", praeteritum: "lehnte ab",
+     perfekt: "hat abgelehnt", aux: haben, separable: true, level: B1, source: seed,
      definition: "Nein zu einem Vorschlag oder Antrag sagen.",
      example: "Die Behörde hat meinen Antrag leider abgelehnt.", tags: [amt]}
-  - {type: verb, lemma: zunehmen, praesens_3sg: nimmt zu, praeteritum: nahm zu, perfekt: hat zugenommen,
-     aux: haben, separable: true, level: B1, source: seed,
-     definition: "Mehr oder größer werden.",
-     example: "Der Verkehr in der Stadt hat stark zugenommen.", tags: [umwelt]}
-  - {type: verb, lemma: überweisen, praesens_3sg: überweist, praeteritum: überwies, perfekt: hat überwiesen,
+  - {type: verb, lemma: "achten", praesens_3sg: "achtet", praeteritum: "achtete", perfekt: "hat geachtet",
+     aux: haben, separable: false, rection: "achten auf + Akk.", level: B1, source: seed,
+     definition: "Aufmerksam sein und eine bestimmte Sache im Blick behalten.",
+     example: "Beim Einkaufen achtet sie auf regionale Produkte.", tags: [aufmerksamkeit, konsum]}
+  - {type: verb, lemma: "auffallen", praesens_3sg: "fällt auf", praeteritum: "fiel auf",
+     perfekt: "ist aufgefallen", aux: sein, separable: true, rection: "auffallen + Dat.", level: B1,
+     source: seed, definition: "So sein, dass andere es sofort bemerken.",
+     example: "Mir ist aufgefallen, dass die Rechnung zweimal kam.", tags: [alltag]}
+  - {type: verb, lemma: "aufgeben", praesens_3sg: "gibt auf", praeteritum: "gab auf",
+     perfekt: "hat aufgegeben", aux: haben, separable: true, level: B1, source: seed,
+     definition: "Etwas nicht weiter versuchen, weil es zu schwer wird.",
+     example: "Nach drei Versuchen gab sie das Rauchen auf.", tags: [gesundheit, misserfolg]}
+  - {type: verb, lemma: "aufsteigen", praesens_3sg: "steigt auf", praeteritum: "stieg auf",
+     perfekt: "ist aufgestiegen", aux: sein, separable: true, level: B1, source: seed,
+     definition: "Im Betrieb eine höhere Position mit mehr Verantwortung bekommen.",
+     example: "Nach fünf Jahren stieg er zum Abteilungsleiter auf.", tags: [beruf, karriere]}
+  - {type: verb, lemma: "beantragen", praesens_3sg: "beantragt", praeteritum: "beantragte",
+     perfekt: "hat beantragt", aux: haben, separable: false, level: B1, source: seed,
+     definition: "Bei einer Behörde schriftlich um etwas bitten.",
+     example: "Wir haben bei der Behörde eine neue Karte beantragt.", tags: [amt]}
+  - {type: verb, lemma: "beeinflussen", praesens_3sg: "beeinflusst", praeteritum: "beeinflusste",
+     perfekt: "hat beeinflusst", aux: haben, separable: false, level: B1, source: seed,
+     definition: "Eine Wirkung auf jemanden haben und sein Verhalten so ändern.",
+     example: "Werbung beeinflusst unsere Kaufentscheidungen mehr als gedacht.", tags: [medien, konsum]}
+  - {type: verb, lemma: "behaupten", praesens_3sg: "behauptet", praeteritum: "behauptete",
+     perfekt: "hat behauptet", aux: haben, separable: false, level: B1, source: seed,
+     definition: "Etwas als sicher sagen, ohne einen Beweis dafür zu zeigen.",
+     example: "Der Politiker behauptet, die neuen Zahlen seien falsch.", tags: [meinung, diskussion]}
+  - {type: verb, lemma: "bemerken", praesens_3sg: "bemerkt", praeteritum: "bemerkte",
+     perfekt: "hat bemerkt", aux: haben, separable: false, level: B1, source: seed,
+     definition: "Etwas plötzlich sehen oder verstehen, was vorher unklar war.",
+     example: "Erst später bemerkte ich den Fehler im Text.", tags: [wahrnehmung, alltag]}
+  - {type: verb, lemma: "beobachten", praesens_3sg: "beobachtet", praeteritum: "beobachtete",
+     perfekt: "hat beobachtet", aux: haben, separable: false, level: B1, source: seed,
+     definition: "Längere Zeit genau ansehen, was jemand oder etwas tut.",
+     example: "Vom Balkon aus beobachtet er gern die Vögel.", tags: [wahrnehmung, natur]}
+  - {type: verb, lemma: "beschreiben", praesens_3sg: "beschreibt", praeteritum: "beschrieb",
+     perfekt: "hat beschrieben", aux: haben, separable: false, level: B1, source: seed,
+     definition: "Mit Worten genau sagen, wie etwas ist.",
+     example: "Beschreiben Sie bitte kurz Ihre Erfahrung im Beruf.", tags: [sprache]}
+  - {type: verb, lemma: "bestehen", praesens_3sg: "besteht", praeteritum: "bestand",
+     perfekt: "hat bestanden", aux: haben, separable: false, rection: "bestehen aus + Dat. / auf + Dat.",
+     level: B1, source: seed, definition: "Eine Prüfung schaffen; oder aus Teilen zusammengesetzt sein.",
+     example: "Sie hat die Prüfung mit einem guten Ergebnis bestanden.", tags: [schule]}
+  - {type: verb, lemma: "betonen", praesens_3sg: "betont", praeteritum: "betonte", perfekt: "hat betont",
      aux: haben, separable: false, level: B1, source: seed,
-     definition: "Geld von einem Konto auf ein anderes schicken.",
-     example: "Die Rechnung habe ich gestern überwiesen.", tags: [geld]}
-  - {type: verb, lemma: kündigen, praesens_3sg: kündigt, praeteritum: kündigte, perfekt: hat gekündigt,
-     aux: haben, separable: false, level: B1, source: seed,
+     definition: "Beim Sprechen deutlich machen, dass etwas besonders wichtig ist.",
+     example: "Die Ärztin betonte, wie wichtig genug Schlaf ist.", tags: [diskussion, gesundheit]}
+  - {type: verb, lemma: "bezweifeln", praesens_3sg: "bezweifelt", praeteritum: "bezweifelte",
+     perfekt: "hat bezweifelt", aux: haben, separable: false, level: B1, source: seed,
+     definition: "Nicht sicher sein, ob eine Aussage wirklich stimmt.",
+     example: "Ich bezweifle, dass dieser Plan wirklich funktioniert.", tags: [meinung, diskussion]}
+  - {type: verb, lemma: "einladen", praesens_3sg: "lädt ein", praeteritum: "lud ein",
+     perfekt: "hat eingeladen", aux: haben, separable: true, rection: "einladen zu + Dat.", level: B1,
+     source: seed, definition: "Jemanden bitten, als Gast zu einem Fest zu kommen.",
+     example: "Zum Grillfest laden wir auch die neuen Nachbarn ein.", tags: [feier, freunde]}
+  - {type: verb, lemma: "einnehmen", praesens_3sg: "nimmt ein", praeteritum: "nahm ein",
+     perfekt: "hat eingenommen", aux: haben, separable: true, level: B1, source: seed,
+     definition: "Eine Tablette oder Tropfen in den Mund nehmen und schlucken.",
+     example: "Diese Tropfen nehme ich dreimal täglich ein.", tags: [apotheke, gesundheit]}
+  - {type: verb, lemma: "einstellen", praesens_3sg: "stellt ein", praeteritum: "stellte ein",
+     perfekt: "hat eingestellt", aux: haben, separable: true, level: B1, source: seed,
+     definition: "Jemandem eine Stelle geben und ihn in der Firma beschäftigen.",
+     example: "Die Firma stellt im Herbst drei neue Techniker ein.", tags: [arbeit, personal]}
+  - {type: verb, lemma: "empfehlen", praesens_3sg: "empfiehlt", praeteritum: "empfahl",
+     perfekt: "hat empfohlen", aux: haben, separable: false, level: B1, source: seed,
+     definition: "Jemandem sagen, dass etwas gut ist und passt.",
+     example: "Der Arzt hat mir mehr Bewegung empfohlen.", tags: [alltag]}
+  - {type: verb, lemma: "entscheiden", praesens_3sg: "entscheidet", praeteritum: "entschied",
+     perfekt: "hat entschieden", aux: haben, separable: false, rection: "sich entscheiden für + Akk.",
+     level: B1, source: seed, definition: "Nach dem Überlegen eine von mehreren Möglichkeiten wählen.",
+     example: "Wir haben uns für die kleinere Wohnung entschieden.", tags: [alltag]}
+  - {type: verb, lemma: "entstehen", praesens_3sg: "entsteht", praeteritum: "entstand",
+     perfekt: "ist entstanden", aux: sein, separable: false, level: B1, source: seed,
+     definition: "Neu anfangen zu existieren.", example: "In der Umgebung entstehen viele neue Wohnungen.",
+     tags: [wohnen]}
+  - {type: verb, lemma: "erlauben", praesens_3sg: "erlaubt", praeteritum: "erlaubte",
+     perfekt: "hat erlaubt", aux: haben, separable: false, rection: "erlauben + Dat.", level: B1,
+     source: seed, definition: "Jemandem sagen, dass er etwas tun darf.",
+     example: "Meine Eltern erlaubten mir das Konzert am Freitag.", tags: [familie, regeln]}
+  - {type: verb, lemma: "erledigen", praesens_3sg: "erledigt", praeteritum: "erledigte",
+     perfekt: "hat erledigt", aux: haben, separable: false, level: B1, source: seed,
+     definition: "Eine Aufgabe fertig machen.", example: "Diese Aufgabe erledige ich noch vor dem Termin.",
+     tags: [arbeit]}
+  - {type: verb, lemma: "erreichen", praesens_3sg: "erreicht", praeteritum: "erreichte",
+     perfekt: "hat erreicht", aux: haben, separable: false, level: B1, source: seed,
+     definition: "An ein Ziel kommen oder jemanden am Telefon bekommen.",
+     example: "Unter dieser Nummer erreichen Sie mich bis achtzehn Uhr.", tags: [alltag]}
+  - {type: verb, lemma: "ersetzen", praesens_3sg: "ersetzt", praeteritum: "ersetzte",
+     perfekt: "hat ersetzt", aux: haben, separable: false, rection: "ersetzen durch + Akk.", level: B1,
+     source: seed, definition: "Eine Sache wegnehmen und eine andere an ihre Stelle bringen.",
+     example: "Die Firma ersetzt alte Lampen durch sparsame Modelle.", tags: [technik, umwelt]}
+  - {type: verb, lemma: "erwähnen", praesens_3sg: "erwähnt", praeteritum: "erwähnte",
+     perfekt: "hat erwähnt", aux: haben, separable: false, level: B1, source: seed,
+     definition: "Kurz von etwas sprechen, ohne Details zu nennen.",
+     example: "Er erwähnte sein neues Projekt nur ganz kurz.", tags: [kommunikation, arbeit]}
+  - {type: verb, lemma: "festlegen", praesens_3sg: "legt fest", praeteritum: "legte fest",
+     perfekt: "hat festgelegt", aux: haben, separable: true, rection: "sich festlegen auf + Akk.",
+     level: B1, source: seed,
+     definition: "Etwas verbindlich bestimmen, sodass es später nicht mehr wechselt.",
+     example: "Der Chef legte den Termin für Montag fest.", tags: [planung, arbeit]}
+  - {type: verb, lemma: "gelingen", praesens_3sg: "gelingt", praeteritum: "gelang",
+     perfekt: "ist gelungen", aux: sein, separable: false, rection: "gelingen + Dat.", level: B1,
+     source: seed, definition: "Gut klappen; ein gutes Ergebnis haben.",
+     example: "Der Kuchen ist mir dieses Mal wirklich gelungen.", tags: [alltag]}
+  - {type: verb, lemma: "herunterladen", praesens_3sg: "lädt herunter", praeteritum: "lud herunter",
+     perfekt: "hat heruntergeladen", aux: haben, separable: true, level: B1, source: seed,
+     definition: "Daten aus dem Internet auf das eigene Handy holen.",
+     example: "Die App habe ich gestern kostenlos heruntergeladen.", tags: [technik, internet]}
+  - {type: verb, lemma: "hinweisen", praesens_3sg: "weist hin", praeteritum: "wies hin",
+     perfekt: "hat hingewiesen", aux: haben, separable: true, rection: "hinweisen auf + Akk.", level: B1,
+     source: seed, definition: "Jemanden aufmerksam machen, damit er etwas Wichtiges beachtet.",
+     example: "Das gelbe Schild weist auf die Baustelle hin.", tags: [verkehr, information]}
+  - {type: verb, lemma: "kündigen", praesens_3sg: "kündigt", praeteritum: "kündigte",
+     perfekt: "hat gekündigt", aux: haben, separable: false, level: B1, source: seed,
      definition: "Einen Vertrag oder eine Stelle offiziell beenden.",
      example: "Sie hat den Vertrag zum Ende des Monats gekündigt.", tags: [arbeit, amt]}
-  - {type: verb, lemma: sich gewöhnen, praesens_3sg: gewöhnt sich, praeteritum: gewöhnte sich,
-     perfekt: hat sich gewöhnt, aux: haben, separable: false, rection: "sich gewöhnen an + Akk.",
-     level: B1, source: seed,
-     definition: "Mit der Zeit etwas normal finden.",
-     example: "An das Wetter hier habe ich mich schnell gewöhnt.", tags: [alltag]}
-  - {type: verb, lemma: verlangen, praesens_3sg: verlangt, praeteritum: verlangte, perfekt: hat verlangt,
+  - {type: verb, lemma: "leiden", praesens_3sg: "leidet", praeteritum: "litt", perfekt: "hat gelitten",
+     aux: haben, separable: false, rection: "unter + Dativ", level: B1, source: seed,
+     definition: "Über längere Zeit Schmerzen oder Probleme haben.",
+     example: "Viele Kollegen leiden im Winter unter Kopfschmerzen.", tags: [krankheit, gesundheit]}
+  - {type: verb, lemma: "mieten", praesens_3sg: "mietet", praeteritum: "mietete", perfekt: "hat gemietet",
      aux: haben, separable: false, level: B1, source: seed,
+     definition: "Gegen regelmäßige Zahlung eine Wohnung oder ein Auto benutzen dürfen.",
+     example: "Wir mieten seit drei Jahren eine kleine Dachwohnung.", tags: [wohnen, vertrag]}
+  - {type: verb, lemma: "nachdenken", praesens_3sg: "denkt nach", praeteritum: "dachte nach",
+     perfekt: "hat nachgedacht", aux: haben, separable: true, rection: "nachdenken über + Akk.", level: B1,
+     source: seed, definition: "Lange und ruhig ein Thema im Kopf prüfen.",
+     example: "Über deinen Vorschlag habe ich lange nachgedacht.", tags: [entscheidung, meinung]}
+  - {type: verb, lemma: "organisieren", praesens_3sg: "organisiert", praeteritum: "organisierte",
+     perfekt: "hat organisiert", aux: haben, separable: false, level: B1, source: seed,
+     definition: "Alles genau planen, damit ein Termin gut abläuft.",
+     example: "Wer organisiert dieses Jahr das große Sommerfest?", tags: [planung, feier]}
+  - {type: verb, lemma: "schaffen", praesens_3sg: "schafft", praeteritum: "schaffte",
+     perfekt: "hat geschafft", aux: haben, separable: false, level: B1, source: seed,
+     definition: "Eine schwierige Aufgabe am Ende doch erfolgreich zu Ende bringen.",
+     example: "Trotz wenig Zeit schaffte er die Prüfung.", tags: [erfolg, lernen]}
+  - {type: verb, lemma: "scheitern", praesens_3sg: "scheitert", praeteritum: "scheiterte",
+     perfekt: "ist gescheitert", aux: sein, separable: false, rection: "scheitern an + Dat.", level: B1,
+     source: seed, definition: "Ein Ziel trotz großer Mühe am Ende nicht erreichen.",
+     example: "Das Projekt scheiterte am fehlenden Geld.", tags: [arbeit, misserfolg]}
+  - {type: verb, lemma: "schweigen", praesens_3sg: "schweigt", praeteritum: "schwieg",
+     perfekt: "hat geschwiegen", aux: haben, separable: false, level: B1, source: seed,
+     definition: "Nichts sagen und ganz ruhig bleiben.",
+     example: "Während der ganzen Diskussion schwieg er einfach.", tags: [umgang, konflikt]}
+  - {type: verb, lemma: "sich anmelden", praesens_3sg: "meldet sich an", praeteritum: "meldete sich an",
+     perfekt: "hat sich angemeldet", aux: haben, separable: true, rection: "sich anmelden bei + Dativ",
+     level: B1, source: seed, definition: "Sich bei einem Amt oder Kurs offiziell eintragen lassen.",
+     example: "Nach dem Einzug meldet man sich beim Bürgeramt an.", tags: [amt, wohnen]}
+  - {type: verb, lemma: "sich ausruhen", praesens_3sg: "ruht sich aus", praeteritum: "ruhte sich aus",
+     perfekt: "hat sich ausgeruht", aux: haben, separable: true, level: B1, source: seed,
+     definition: "Eine Pause machen und nichts Anstrengendes tun.",
+     example: "Nach dem Lauf ruhe ich mich kurz aus.", tags: [schlaf, sport]}
+  - {type: verb, lemma: "sich bemühen", praesens_3sg: "bemüht sich", praeteritum: "bemühte sich",
+     perfekt: "hat sich bemüht", aux: haben, separable: false, rection: "sich bemühen um + Akk.",
+     level: B1, source: seed, definition: "Viel Energie einsetzen, um ein schwieriges Ziel zu erreichen.",
+     example: "Er bemüht sich seit Monaten um eine Wohnung.", tags: [arbeit, wohnen]}
+  - {type: verb, lemma: "sich benehmen", praesens_3sg: "benimmt sich", praeteritum: "benahm sich",
+     perfekt: "hat sich benommen", aux: haben, separable: false, level: B1, source: seed,
+     definition: "Sich in einer bestimmten Art gegenüber anderen Leuten verhalten.",
+     example: "Auf der Party hat er sich wirklich unmöglich benommen.", tags: [umgang, charakter]}
+  - {type: verb, lemma: "sich beschweren", praesens_3sg: "beschwert sich", praeteritum: "beschwerte sich",
+     perfekt: "hat sich beschwert", aux: haben, separable: false,
+     rection: "sich beschweren über + Akk. / bei + Dat.", level: B1, source: seed,
+     definition: "Deutlich sagen, dass man mit etwas nicht zufrieden ist.",
+     example: "Er hat sich bei der Firma über die Verspätung beschwert.", tags: [diskussion]}
+  - {type: verb, lemma: "sich bewerben", praesens_3sg: "bewirbt sich", praeteritum: "bewarb sich",
+     perfekt: "hat sich beworben", aux: haben, separable: false,
+     rection: "sich bewerben um + Akk. / bei + Dat.", level: B1, source: seed,
+     definition: "Um eine Stelle bitten und dafür Unterlagen schicken.",
+     example: "Sie bewirbt sich bei einer Firma in Hamburg.", tags: [arbeit]}
+  - {type: verb, lemma: "sich durchsetzen", praesens_3sg: "setzt sich durch",
+     praeteritum: "setzte sich durch", perfekt: "hat sich durchgesetzt", aux: haben, separable: true,
+     rection: "sich durchsetzen gegen + Akk.", level: B1, source: seed,
+     definition: "Die eigene Meinung gegen Widerstand erfolgreich vertreten.",
+     example: "Gegen starke Konkurrenz setzte sich das kleine Team durch.", tags: [erfolg, konflikt]}
+  - {type: verb, lemma: "sich entwickeln", praesens_3sg: "entwickelt sich",
+     praeteritum: "entwickelte sich", perfekt: "hat sich entwickelt", aux: haben, separable: false,
+     rection: "sich entwickeln zu + Dat.", level: B1, source: seed,
+     definition: "Mit der Zeit langsam anders und meistens besser werden.",
+     example: "Aus der kleinen Idee entwickelte sich ein Unternehmen.", tags: [arbeit, wandel]}
+  - {type: verb, lemma: "sich erholen", praesens_3sg: "erholt sich", praeteritum: "erholte sich",
+     perfekt: "hat sich erholt", aux: haben, separable: false, rection: "von + Dativ", level: B1,
+     source: seed, definition: "Nach einer Krankheit oder Anstrengung wieder zu Kräften kommen.",
+     example: "Im Urlaub am Meer erhole ich mich am besten.", tags: [gesundheit, urlaub]}
+  - {type: verb, lemma: "sich erinnern", praesens_3sg: "erinnert sich", praeteritum: "erinnerte sich",
+     perfekt: "hat sich erinnert", aux: haben, separable: false, rection: "sich erinnern an + Akk.",
+     level: B1, source: seed, definition: "Etwas aus der Vergangenheit wieder im Kopf haben.",
+     example: "Ich erinnere mich gut an dieses Gespräch.", tags: [menschen]}
+  - {type: verb, lemma: "sich gewöhnen", praesens_3sg: "gewöhnt sich", praeteritum: "gewöhnte sich",
+     perfekt: "hat sich gewöhnt", aux: haben, separable: false, rection: "sich gewöhnen an + Akk.",
+     level: B1, source: seed, definition: "Mit der Zeit etwas normal finden.",
+     example: "An das Wetter hier habe ich mich schnell gewöhnt.", tags: [alltag]}
+  - {type: verb, lemma: "sich informieren", praesens_3sg: "informiert sich",
+     praeteritum: "informierte sich", perfekt: "hat sich informiert", aux: haben, separable: false,
+     rection: "sich informieren über + Akkusativ", level: B1, source: seed,
+     definition: "Fakten zu einem Thema suchen, lesen und dadurch mehr wissen.",
+     example: "Viele Jugendliche informieren sich nur noch online.", tags: [medien, wissen]}
+  - {type: verb, lemma: "sich konzentrieren", praesens_3sg: "konzentriert sich",
+     praeteritum: "konzentrierte sich", perfekt: "hat sich konzentriert", aux: haben, separable: false,
+     rection: "sich konzentrieren auf + Akk.", level: B1, source: seed,
+     definition: "Alle Gedanken auf eine einzige Sache richten.",
+     example: "Bei lautem Lärm kann ich mich schlecht konzentrieren.", tags: [aufmerksamkeit, lernen]}
+  - {type: verb, lemma: "sich kümmern", praesens_3sg: "kümmert sich", praeteritum: "kümmerte sich",
+     perfekt: "hat sich gekümmert", aux: haben, separable: false, rection: "sich kümmern um + Akk.",
+     level: B1, source: seed, definition: "Für jemanden oder etwas sorgen.",
+     example: "Am Wochenende kümmere ich mich um die Rechnungen.", tags: [alltag]}
+  - {type: verb, lemma: "sich streiten", praesens_3sg: "streitet sich", praeteritum: "stritt sich",
+     perfekt: "hat sich gestritten", aux: haben, separable: false, rection: "sich streiten mit + Dat.",
+     level: B1, source: seed, definition: "Laut und heftig verschiedener Meinung sein.",
+     example: "Die Geschwister streiten sich fast jeden Morgen.", tags: [konflikt, familie]}
+  - {type: verb, lemma: "sich verabreden", praesens_3sg: "verabredet sich",
+     praeteritum: "verabredete sich", perfekt: "hat sich verabredet", aux: haben, separable: false,
+     rection: "sich verabreden mit + Dat.", level: B1, source: seed,
+     definition: "Mit jemandem einen gemeinsamen Termin für ein Treffen ausmachen.",
+     example: "Wir haben uns für Samstag im Café verabredet.", tags: [freizeit, planung]}
+  - {type: verb, lemma: "sich verlassen", praesens_3sg: "verlässt sich", praeteritum: "verließ sich",
+     perfekt: "hat sich verlassen", aux: haben, separable: false, rection: "sich verlassen auf + Akk.",
+     level: B1, source: seed,
+     definition: "Sicher glauben, dass jemand wirklich hilft und zuverlässig bleibt.",
+     example: "Auf meine Schwester kann ich mich immer verlassen.", tags: [familie, vertrauen]}
+  - {type: verb, lemma: "sich verlieben", praesens_3sg: "verliebt sich", praeteritum: "verliebte sich",
+     perfekt: "hat sich verliebt", aux: haben, separable: false, rection: "sich verlieben in + Akk.",
+     level: B1, source: seed,
+     definition: "Plötzlich starke romantische Gefühle für einen Menschen bekommen.",
+     example: "Im Urlaub hat er sich in eine Kollegin verliebt.", tags: [beziehung, gefuehle]}
+  - {type: verb, lemma: "sich vorbereiten", praesens_3sg: "bereitet sich vor",
+     praeteritum: "bereitete sich vor", perfekt: "hat sich vorbereitet", aux: haben, separable: true,
+     rection: "sich vorbereiten auf + Akk.", level: B1, source: seed,
+     definition: "Vor einem wichtigen Termin alles Nötige planen und üben.",
+     example: "Auf das Gespräch bereitet sie sich seit Tagen vor.", tags: [bewerbung, lernen]}
+  - {type: verb, lemma: "sich weigern", praesens_3sg: "weigert sich", praeteritum: "weigerte sich",
+     perfekt: "hat sich geweigert", aux: haben, separable: false, level: B1, source: seed,
+     definition: "Klar sagen, dass man etwas auf keinen Fall tun will.",
+     example: "Der Zeuge weigerte sich, weitere Fragen zu beantworten.", tags: [konflikt, recht]}
+  - {type: verb, lemma: "sparen", praesens_3sg: "spart", praeteritum: "sparte", perfekt: "hat gespart",
+     aux: haben, separable: false, rection: "sparen für + Akkusativ", level: B1, source: seed,
+     definition: "Geld nicht ausgeben, sondern für später zurücklegen.",
+     example: "Jeden Monat spart sie hundert Euro für den Urlaub.", tags: [geld, bank]}
+  - {type: verb, lemma: "teilnehmen", praesens_3sg: "nimmt teil", praeteritum: "nahm teil",
+     perfekt: "hat teilgenommen", aux: haben, separable: true, rection: "teilnehmen an + Dat.", level: B1,
+     source: seed, definition: "Bei einer Veranstaltung dabei sein und mitmachen.",
+     example: "An dem Kurs nehmen zwölf Personen teil.", tags: [schule]}
+  - {type: verb, lemma: "umsteigen", praesens_3sg: "steigt um", praeteritum: "stieg um",
+     perfekt: "ist umgestiegen", aux: sein, separable: true, level: B1, source: seed,
+     definition: "Von einem Verkehrsmittel in ein anderes wechseln.",
+     example: "In Hannover steigen wir in den Regionalzug um.", tags: [mobilitaet, reisen]}
+  - {type: verb, lemma: "umziehen", praesens_3sg: "zieht um", praeteritum: "zog um",
+     perfekt: "ist umgezogen", aux: sein, separable: true, level: B1, source: seed,
+     definition: "Mit allen Sachen in eine andere Wohnung wechseln.",
+     example: "Nächsten Samstag ziehen wir nach Leipzig um.", tags: [wohnen]}
+  - {type: verb, lemma: "unterschreiben", praesens_3sg: "unterschreibt", praeteritum: "unterschrieb",
+     perfekt: "hat unterschrieben", aux: haben, separable: false, level: B1, source: seed,
+     definition: "Seinen Namen unter ein Papier setzen und es gültig machen.",
+     example: "Den Mietvertrag hat er ohne langes Zögern unterschrieben.", tags: [papiere, vertrag]}
+  - {type: verb, lemma: "verbessern", praesens_3sg: "verbessert", praeteritum: "verbesserte",
+     perfekt: "hat verbessert", aux: haben, separable: false, level: B1, source: seed,
+     definition: "Etwas so ändern, dass die Qualität danach höher ist.",
+     example: "Mit täglicher Übung verbesserte er seine Aussprache deutlich.", tags: [lernen, sprache]}
+  - {type: verb, lemma: "verbieten", praesens_3sg: "verbietet", praeteritum: "verbot",
+     perfekt: "hat verboten", aux: haben, separable: false, rection: "verbieten + Dat.", level: B1,
+     source: seed, definition: "Offiziell sagen, dass jemand etwas nicht tun darf.",
+     example: "In diesem Park verbietet die Stadt offenes Feuer.", tags: [regeln, stadt]}
+  - {type: verb, lemma: "verdienen", praesens_3sg: "verdient", praeteritum: "verdiente",
+     perfekt: "hat verdient", aux: haben, separable: false, level: B1, source: seed,
+     definition: "Für die eigene Arbeit regelmäßig Geld bekommen.",
+     example: "In diesem Beruf bekommt man am Anfang wenig.", tags: [geld, arbeit]}
+  - {type: verb, lemma: "vergleichen", praesens_3sg: "vergleicht", praeteritum: "verglich",
+     perfekt: "hat verglichen", aux: haben, separable: false, rection: "vergleichen mit + Dat.", level: B1,
+     source: seed, definition: "Zwei Dinge ansehen und Unterschiede oder Ähnlichkeiten suchen.",
+     example: "Vor dem Kauf vergleicht er die Preise im Internet.", tags: [konsum, entscheidung]}
+  - {type: verb, lemma: "verlangen", praesens_3sg: "verlangt", praeteritum: "verlangte",
+     perfekt: "hat verlangt", aux: haben, separable: false, level: B1, source: seed,
      definition: "Etwas fordern, weil man ein Recht darauf zu haben glaubt.",
      example: "Die Firma verlangt für die Reparatur zu viel Geld.", tags: [geld]}
-  # ------------------------------------------------------------- Adjektive
-  - {type: adjective, lemma: zuverlässig, level: B1, source: seed,
-     definition: "So, dass man sich auf die Person oder Sache verlassen kann.",
-     example: "Mein Kollege ist ruhig und sehr zuverlässig.", tags: [menschen]}
-  - {type: adjective, lemma: anstrengend, level: B1, source: seed,
+  - {type: verb, lemma: "vermeiden", praesens_3sg: "vermeidet", praeteritum: "vermied",
+     perfekt: "hat vermieden", aux: haben, separable: false, level: B1, source: seed,
+     definition: "So handeln, dass etwas Unangenehmes gar nicht erst passiert.",
+     example: "Um Stress zu vermeiden, stehe ich früher auf.", tags: [alltag, gesundheit]}
+  - {type: verb, lemma: "verschieben", praesens_3sg: "verschiebt", praeteritum: "verschob",
+     perfekt: "hat verschoben", aux: haben, separable: false, level: B1, source: seed,
+     definition: "Etwas auf einen späteren Zeitpunkt legen.",
+     example: "Können wir den Termin auf Freitag verschieben?", tags: [alltag]}
+  - {type: verb, lemma: "verursachen", praesens_3sg: "verursacht", praeteritum: "verursachte",
+     perfekt: "hat verursacht", aux: haben, separable: false, level: B1, source: seed,
+     definition: "Der Grund dafür sein, dass etwas Negatives passiert.",
+     example: "Starker Regen verursachte gestern große Probleme im Verkehr.", tags: [verkehr, wetter]}
+  - {type: verb, lemma: "verzeihen", praesens_3sg: "verzeiht", praeteritum: "verzieh",
+     perfekt: "hat verziehen", aux: haben, separable: false, rection: "verzeihen + Dat.", level: B1,
+     source: seed, definition: "Nach einem Fehler nicht mehr böse auf jemanden sein.",
+     example: "Ihrem Bruder hat sie den Streit längst verziehen.", tags: [konflikt, umgang]}
+  - {type: verb, lemma: "verzichten", praesens_3sg: "verzichtet", praeteritum: "verzichtete",
+     perfekt: "hat verzichtet", aux: haben, separable: false, rection: "verzichten auf + Akk.", level: B1,
+     source: seed, definition: "Etwas absichtlich nicht nehmen oder nicht tun.",
+     example: "Für die Umwelt verzichte ich oft auf das Auto.", tags: [umwelt]}
+  - {type: verb, lemma: "verändern", praesens_3sg: "verändert", praeteritum: "veränderte",
+     perfekt: "hat verändert", aux: haben, separable: false, level: B1, source: seed,
+     definition: "Etwas anders machen, als es vorher war.",
+     example: "Das Internet hat unser Leben stark verändert.", tags: [technik, alltag]}
+  - {type: verb, lemma: "vorschlagen", praesens_3sg: "schlägt vor", praeteritum: "schlug vor",
+     perfekt: "hat vorgeschlagen", aux: haben, separable: true, level: B1, source: seed,
+     definition: "Eine Idee nennen, über die andere entscheiden sollen.",
+     example: "Ich schlage vor, dass wir das Gespräch verschieben.", tags: [diskussion]}
+  - {type: verb, lemma: "wahrnehmen", praesens_3sg: "nimmt wahr", praeteritum: "nahm wahr",
+     perfekt: "hat wahrgenommen", aux: haben, separable: true, level: B1, source: seed,
+     definition: "Mit den Sinnen etwas erkennen, zum Beispiel Geräusche oder Gerüche.",
+     example: "Im Nebel nahm der Fahrer das Schild kaum wahr.", tags: [wahrnehmung, verkehr]}
+  - {type: verb, lemma: "wegwerfen", praesens_3sg: "wirft weg", praeteritum: "warf weg",
+     perfekt: "hat weggeworfen", aux: haben, separable: true, level: B1, source: seed,
+     definition: "Etwas in den Müll geben, weil man es nicht mehr braucht.",
+     example: "Bitte wirf die alten Batterien nicht einfach weg.", tags: [umwelt, muell]}
+  - {type: verb, lemma: "wehtun", praesens_3sg: "tut weh", praeteritum: "tat weh", perfekt: "hat wehgetan",
+     aux: haben, separable: true, rection: "Dativ", level: B1, source: seed,
+     definition: "Bei jemandem Schmerzen verursachen.",
+     example: "Mir tut seit dem Training das linke Knie weh.", tags: [koerper, gesundheit]}
+  - {type: verb, lemma: "widersprechen", praesens_3sg: "widerspricht", praeteritum: "widersprach",
+     perfekt: "hat widersprochen", aux: haben, separable: false, rection: "widersprechen + Dat.",
+     level: B1, source: seed, definition: "Deutlich sagen, dass man eine andere Meinung hat.",
+     example: "Selten widerspricht jemand dem Lehrer so höflich.", tags: [diskussion, schule]}
+  - {type: verb, lemma: "zugeben", praesens_3sg: "gibt zu", praeteritum: "gab zu",
+     perfekt: "hat zugegeben", aux: haben, separable: true, level: B1, source: seed,
+     definition: "Endlich offen sagen, dass man einen Fehler gemacht hat.",
+     example: "Nach langem Zögern gab sie ihren Irrtum zu.", tags: [meinung, fehler]}
+  - {type: verb, lemma: "zuhören", praesens_3sg: "hört zu", praeteritum: "hörte zu",
+     perfekt: "hat zugehört", aux: haben, separable: true, rection: "zuhören + Dat.", level: B1,
+     source: seed, definition: "Aufmerksam sein, wenn jemand etwas erzählt.",
+     example: "Die Schüler hörten dem Vortrag ganz ruhig zu.", tags: [schule, kommunikation]}
+  - {type: verb, lemma: "zunehmen", praesens_3sg: "nimmt zu", praeteritum: "nahm zu",
+     perfekt: "hat zugenommen", aux: haben, separable: true, level: B1, source: seed,
+     definition: "Mehr oder größer werden.", example: "Der Verkehr in der Stadt hat stark zugenommen.",
+     tags: [umwelt]}
+  - {type: verb, lemma: "zustimmen", praesens_3sg: "stimmt zu", praeteritum: "stimmte zu",
+     perfekt: "hat zugestimmt", aux: haben, separable: true, rection: "zustimmen + Dat.", level: B1,
+     source: seed, definition: "Sagen, dass man die gleiche Meinung wie jemand hat.",
+     example: "Alle Kollegen stimmten dem Vorschlag sofort zu.", tags: [meinung, arbeit]}
+  - {type: verb, lemma: "zwingen", praesens_3sg: "zwingt", praeteritum: "zwang", perfekt: "hat gezwungen",
+     aux: haben, separable: false, rection: "zwingen zu + Dat.", level: B1, source: seed,
+     definition: "Jemanden mit Druck zu einer Handlung bringen.",
+     example: "Der starke Regen zwang uns zu einer Pause.", tags: [regeln, wetter]}
+  - {type: verb, lemma: "übernehmen", praesens_3sg: "übernimmt", praeteritum: "übernahm",
+     perfekt: "hat übernommen", aux: haben, separable: false, level: B1, source: seed,
+     definition: "Eine Arbeit oder Verantwortung von jemandem bekommen und weiterführen.",
+     example: "Nach der Pause übernimmt Frau Weber die Leitung.", tags: [arbeit, team]}
+  - {type: verb, lemma: "übersehen", praesens_3sg: "übersieht", praeteritum: "übersah",
+     perfekt: "hat übersehen", aux: haben, separable: false, level: B1, source: seed,
+     definition: "Etwas aus Versehen nicht bemerken, obwohl es sichtbar ist.",
+     example: "Der Fahrer übersah das rote Licht an der Kreuzung.", tags: [verkehr, fehler]}
+  - {type: verb, lemma: "überweisen", praesens_3sg: "überweist", praeteritum: "überwies",
+     perfekt: "hat überwiesen", aux: haben, separable: false, level: B1, source: seed,
+     definition: "Geld von einem Konto auf ein anderes schicken.",
+     example: "Die Rechnung habe ich gestern überwiesen.", tags: [geld]}
+  - {type: verb, lemma: "überzeugen", praesens_3sg: "überzeugt", praeteritum: "überzeugte",
+     perfekt: "hat überzeugt", aux: haben, separable: false, rection: "überzeugen von + Dat.", level: B1,
+     source: seed, definition: "Jemanden mit guten Argumenten zu einer anderen Meinung bringen.",
+     example: "Sie überzeugte den Chef von ihrer neuen Idee.", tags: [meinung, arbeit]}
+
+  # ---------------------------------------------------------------- Adjektive
+  - {type: adjective, lemma: "abhängig", rection: "abhängig von + Dat.", level: B1, source: seed,
+     definition: "So, dass man jemanden oder etwas braucht und nicht frei entscheiden kann.",
+     example: "Viele Studenten sind finanziell von ihren Eltern abhängig.", tags: [situation, geld]}
+  - {type: adjective, lemma: "anstrengend", level: B1, source: seed,
      definition: "So, dass es viel Kraft oder Energie kostet.",
      example: "Der Tag im Büro war heute besonders anstrengend.", tags: [arbeit]}
-  - {type: adjective, lemma: günstig, level: B1, source: seed,
-     definition: "Nicht teuer; oder gut passend.",
-     example: "Wir haben eine günstige Wohnung in der Umgebung gefunden.", tags: [geld, wohnen]}
-  - {type: adjective, lemma: dringend, level: B1, source: seed,
-     definition: "So, dass es sofort gemacht werden muss.",
-     example: "Ich muss dich dringend wegen des Vertrags sprechen.", tags: [alltag]}
-  - {type: adjective, lemma: selbstständig, level: B1, source: seed,
-     definition: "Ohne Hilfe von anderen; oder mit eigener Firma arbeitend.",
-     example: "Seit zwei Jahren arbeitet sie selbstständig von zu Hause.", tags: [arbeit]}
-  - {type: adjective, lemma: erfolgreich, level: B1, source: seed,
-     definition: "So, dass man sein Ziel erreicht.",
-     example: "Seine Bewerbung war erfolgreich, er fängt im Mai an.", tags: [arbeit]}
-  - {type: adjective, lemma: verantwortlich, level: B1, source: seed, rection: "verantwortlich für + Akk.",
-     definition: "So, dass man für eine Sache sorgen und sie erklären muss.",
-     example: "Wer ist hier für die Rechnungen verantwortlich?", tags: [arbeit]}
-  - {type: adjective, lemma: deutlich, level: B1, source: seed,
+  - {type: adjective, lemma: "aufmerksam", level: B1, source: seed,
+     definition: "So, dass man genau zuhört und schnell bemerkt, was andere brauchen.",
+     example: "Im Unterricht hört sie immer aufmerksam zu.", tags: [menschen, lernen]}
+  - {type: adjective, lemma: "befristet", level: B1, source: seed,
+     definition: "Nur für eine bestimmte Zeit gültig, mit festem Enddatum.",
+     example: "Der Vertrag gilt zunächst nur für ein Jahr.", tags: [arbeit, zeit]}
+  - {type: adjective, lemma: "berufstätig", level: B1, source: seed,
+     definition: "So, dass eine Person regelmäßig gegen Bezahlung arbeitet.",
+     example: "Beide Eltern sind seit Jahren voll berufstätig.", tags: [arbeit]}
+  - {type: adjective, lemma: "deutlich", level: B1, source: seed,
      definition: "Gut zu erkennen oder gut zu verstehen.",
      example: "Bitte sprechen Sie etwas lauter und deutlicher.", tags: [sprache]}
-  - {type: adjective, lemma: ähnlich, level: B1, source: seed, rection: "ähnlich + Dat.",
-     definition: "Fast gleich, aber nicht ganz.",
-     example: "Dein Vorschlag ist meinem sehr ähnlich.", tags: [diskussion]}
-  - {type: adjective, lemma: neugierig, level: B1, source: seed, rection: "neugierig auf + Akk.",
+  - {type: adjective, lemma: "dringend", level: B1, source: seed,
+     definition: "So, dass es sofort gemacht werden muss.",
+     example: "Ich muss dich dringend wegen des Vertrags sprechen.", tags: [alltag]}
+  - {type: adjective, lemma: "ehrgeizig", level: B1, source: seed,
+     definition: "So, dass jemand unbedingt viel erreichen und vorankommen will.",
+     example: "Unsere neue Chefin gilt als sehr ehrgeizig.", tags: [charakter, beruf]}
+  - {type: adjective, lemma: "ehrlich", level: B1, source: seed,
+     definition: "So, dass man immer die Wahrheit sagt.",
+     example: "Sei bitte ehrlich und sag mir deine Meinung.", tags: [charakter, umgang]}
+  - {type: adjective, lemma: "einsam", level: B1, source: seed,
+     definition: "Allein und ohne Kontakt zu anderen Menschen.",
+     example: "Nach dem Umzug fühlte er sich oft einsam.", tags: [gefuehle]}
+  - {type: adjective, lemma: "erfolgreich", level: B1, source: seed,
+     definition: "So, dass man sein Ziel erreicht.",
+     example: "Seine Bewerbung war erfolgreich, er fängt im Mai an.", tags: [arbeit]}
+  - {type: adjective, lemma: "erschöpft", level: B1, source: seed,
+     definition: "Sehr müde nach großer Anstrengung.",
+     example: "Am Ende der Schicht war die Pflegerin völlig erschöpft.", tags: [gesundheit, arbeit]}
+  - {type: adjective, lemma: "geduldig", level: B1, source: seed,
+     definition: "So, dass man ruhig warten kann und nicht schnell ärgerlich wird.",
+     example: "Mein Vater erklärt alles ruhig und geduldig.", tags: [menschen, verhalten]}
+  - {type: adjective, lemma: "gesund", level: B1, source: seed,
+     definition: "So, dass der Körper gut funktioniert und keine Krankheit da ist.",
+     example: "Nach zwei Wochen Ruhe war mein Bruder wieder gesund.", tags: [gesundheit, koerper]}
+  - {type: adjective, lemma: "großzügig", level: B1, source: seed,
+     definition: "Bereit, anderen Menschen gern viel zu geben.",
+     example: "Beim Trinkgeld ist mein Onkel immer sehr großzügig.", tags: [charakter]}
+  - {type: adjective, lemma: "günstig", level: B1, source: seed,
+     definition: "Nicht teuer; oder gut passend.",
+     example: "Wir haben eine günstige Wohnung in der Umgebung gefunden.", tags: [geld, wohnen]}
+  - {type: adjective, lemma: "hilfsbereit", level: B1, source: seed,
+     definition: "Immer bereit, anderen Leuten bei Problemen zu helfen.",
+     example: "Die neue Kollegin zeigt sich jederzeit hilfsbereit.", tags: [charakter, umgang]}
+  - {type: adjective, lemma: "monatlich", level: B1, source: seed,
+     definition: "Immer wieder nach vier Wochen, also zwölfmal im Jahr.",
+     example: "Die Nebenkosten zahlen wir monatlich im Voraus.", tags: [geld, wohnen]}
+  - {type: adjective, lemma: "neugierig", rection: "neugierig auf + Akk.", level: B1, source: seed,
      definition: "So, dass man unbedingt etwas Neues wissen will.",
      example: "Ich bin neugierig auf das Ergebnis der Prüfung.", tags: [menschen]}
-  # -------------------------------------------------------------- Wendungen
-  - {type: phrase, lemma: Bescheid sagen, level: B1, source: seed,
+  - {type: adjective, lemma: "notwendig", level: B1, source: seed,
+     definition: "So, dass man es unbedingt braucht; ohne das geht es nicht.",
+     example: "Für diesen Kurs sind gute Grundkenntnisse notwendig.", tags: [bewertung, arbeit]}
+  - {type: adjective, lemma: "peinlich", level: B1, source: seed,
+     definition: "So, dass man sich vor anderen schämt und am liebsten verschwinden würde.",
+     example: "Sein Kommentar war allen im Raum peinlich.", tags: [gefuehle]}
+  - {type: adjective, lemma: "regelmäßig", level: B1, source: seed,
+     definition: "Immer wieder in gleichen Abständen.",
+     example: "Wer regelmäßig schwimmt, hat selten Probleme mit dem Rücken.", tags: [sport, alltag]}
+  - {type: adjective, lemma: "schriftlich", level: B1, source: seed,
+     definition: "Auf Papier festgehalten und nicht nur mündlich gesagt.",
+     example: "Bitte teilen Sie uns die Kündigung schriftlich mit.", tags: [papiere, amt]}
+  - {type: adjective, lemma: "schwierig", level: B1, source: seed,
+     definition: "So, dass man viel Kraft oder Können braucht; nicht leicht.",
+     example: "Diese Aufgabe finde ich ziemlich schwierig.", tags: [bewertung, lernen]}
+  - {type: adjective, lemma: "selbstständig", level: B1, source: seed,
+     definition: "Ohne Hilfe von anderen; oder mit eigener Firma arbeitend.",
+     example: "Seit zwei Jahren arbeitet sie selbstständig von zu Hause.", tags: [arbeit]}
+  - {type: adjective, lemma: "sinnvoll", level: B1, source: seed,
+     definition: "So, dass etwas nützlich ist und einen guten Zweck hat.",
+     example: "Es wäre sinnvoll, früher mit der Arbeit anzufangen.", tags: [bewertung, diskussion]}
+  - {type: adjective, lemma: "sparsam", level: B1, source: seed,
+     definition: "So, dass jemand wenig Geld oder Energie verbraucht.",
+     example: "Meine Großeltern leben seit jeher sehr sparsam.", tags: [geld, energie]}
+  - {type: adjective, lemma: "stolz", rection: "stolz auf + Akk.", level: B1, source: seed,
+     definition: "Voller Freude über eine eigene oder fremde Leistung.",
+     example: "Meine Eltern sind sehr stolz auf meinen Abschluss.", tags: [gefuehle, familie]}
+  - {type: adjective, lemma: "teuer", level: B1, source: seed,
+     definition: "So, dass etwas sehr viel Geld kostet.",
+     example: "In dieser Gegend sind die Wohnungen furchtbar teuer.", tags: [geld, wohnen]}
+  - {type: adjective, lemma: "umweltfreundlich", level: B1, source: seed,
+     definition: "So, dass die Natur möglichst wenig Schaden nimmt.",
+     example: "Mit dem Zug reist du besonders umweltfreundlich.", tags: [umwelt, natur]}
+  - {type: adjective, lemma: "ungewöhnlich", level: B1, source: seed,
+     definition: "So, dass etwas selten vorkommt und andere Leute überrascht.",
+     example: "Im August ist so kaltes Wetter ungewöhnlich.", tags: [bewertung]}
+  - {type: adjective, lemma: "verantwortlich", rection: "verantwortlich für + Akk.", level: B1,
+     source: seed, definition: "So, dass man für eine Sache sorgen und sie erklären muss.",
+     example: "Wer ist hier für die Rechnungen verantwortlich?", tags: [arbeit]}
+  - {type: adjective, lemma: "vorsichtig", level: B1, source: seed,
+     definition: "So, dass man gut aufpasst, damit nichts Schlimmes passiert.",
+     example: "Auf nassen Straßen fahren wir besonders vorsichtig.", tags: [verhalten, sicherheit]}
+  - {type: adjective, lemma: "wahrscheinlich", level: B1, source: seed,
+     definition: "So, dass etwas ziemlich sicher passieren wird oder wohl stimmt.",
+     example: "Es ist wahrscheinlich, dass der Zug Verspätung hat.", tags: [meinung]}
+  - {type: adjective, lemma: "zufrieden", rection: "zufrieden mit + Dat.", level: B1, source: seed,
+     definition: "So, dass einem etwas genügt und man nichts anderes möchte.",
+     example: "Mit meiner neuen Wohnung bin ich sehr zufrieden.", tags: [gefuehle]}
+  - {type: adjective, lemma: "zuverlässig", level: B1, source: seed,
+     definition: "So, dass man sich auf die Person oder Sache verlassen kann.",
+     example: "Mein Kollege ist ruhig und sehr zuverlässig.", tags: [menschen]}
+  - {type: adjective, lemma: "ähnlich", rection: "ähnlich + Dat.", level: B1, source: seed,
+     definition: "Fast gleich, aber nicht ganz.", example: "Dein Vorschlag ist meinem sehr ähnlich.",
+     tags: [diskussion]}
+  - {type: adjective, lemma: "öffentlich", level: B1, source: seed,
+     definition: "Für alle Leute zugänglich und nicht privat.",
+     example: "Öffentliche Busse fahren hier nur einmal pro Stunde.", tags: [stadt, gesellschaft]}
+  - {type: adjective, lemma: "überzeugt", rection: "überzeugt von + Dat.", level: B1, source: seed,
+     definition: "So, dass man ganz sicher ist, dass etwas richtig oder gut ist.",
+     example: "Von diesem Plan bin ich noch nicht überzeugt.", tags: [meinung, diskussion]}
+  - {type: adjective, lemma: "üblich", level: B1, source: seed,
+     definition: "So, wie man es normalerweise macht; ganz normal in einer Situation.",
+     example: "In Deutschland ist ein Trinkgeld von zehn Prozent üblich.", tags: [alltag, kultur]}
+
+  # ---------------------------------------------------------------- Adverbien und Konnektoren
+  - {type: adverb, lemma: "allerdings", level: B1, source: seed,
+     definition: "Leitet einen Einwand ein und schränkt die Aussage davor etwas ein.",
+     example: "Das Hotel war schön, allerdings ziemlich laut.", tags: [konnektor, diskussion]}
+  - {type: adverb, lemma: "außerdem", level: B1, source: seed,
+     definition: "Zusätzlich zu dem, was vorher schon gesagt wurde.",
+     example: "Die Wohnung ist klein und außerdem ziemlich teuer.", tags: [konnektor, argument]}
+  - {type: adverb, lemma: "deshalb", level: B1, source: seed,
+     definition: "Aus diesem Grund; als Folge von etwas.",
+     example: "Der Bus fiel aus; deshalb kam ich zu spät.", tags: [konnektor, argument]}
+  - {type: adverb, lemma: "jedenfalls", level: B1, source: seed,
+     definition: "Was auch immer sonst gilt: dieser eine Punkt bleibt sicher richtig.",
+     example: "Warum sie abgesagt hat, weiß ich nicht; ärgerlich ist es jedenfalls.",
+     tags: [konnektor, gespraech]}
+  - {type: adverb, lemma: "sonst", level: B1, source: seed,
+     definition: "Andernfalls; wenn man das nicht macht, passiert etwas Negatives.",
+     example: "Beeil dich, sonst verpassen wir den letzten Zug.", tags: [konnektor, alltag]}
+  - {type: adverb, lemma: "trotzdem", level: B1, source: seed,
+     definition: "Obwohl es einen Grund dagegen gibt; dennoch.",
+     example: "Es regnete stark; trotzdem gingen wir spazieren.", tags: [konnektor]}
+
+  # ---------------------------------------------------------------- Feste Wendungen
+  - {type: phrase, lemma: "auf jeden Fall", level: B1, source: seed,
+     definition: "Ganz sicher, ohne Zweifel und unter allen Umständen.",
+     example: "Wir sollten uns auf jeden Fall vorher anmelden.", tags: [diskussion, meinung]}
+  - {type: phrase, lemma: "Bescheid sagen", level: B1, source: seed,
      definition: "Jemandem eine Information geben, die er braucht.",
      example: "Sag mir bitte rechtzeitig Bescheid, wenn der Termin nicht klappt.", tags: [alltag]}
-  - {type: phrase, lemma: eine Entscheidung treffen, level: B1, source: seed,
+  - {type: phrase, lemma: "eine Entscheidung treffen", level: B1, source: seed,
      definition: "Sich nach dem Überlegen für etwas festlegen.",
      example: "Bis Freitag müssen wir eine Entscheidung treffen.", tags: [diskussion]}
-  - {type: phrase, lemma: Rücksicht nehmen, level: B1, source: seed, rection: "Rücksicht nehmen auf + Akk.",
-     definition: "Bei seinem Verhalten an die anderen denken.",
-     example: "Im Zug sollte man Rücksicht auf andere Reisende nehmen.", tags: [menschen]}
-  - {type: phrase, lemma: es kommt darauf an, level: B1, source: seed,
+  - {type: phrase, lemma: "eine Rolle spielen", level: B1, source: seed,
+     definition: "Wichtig sein für eine Sache oder Entscheidung.",
+     example: "Der Preis spielt bei dieser Entscheidung keine große Rolle.", tags: [diskussion]}
+  - {type: phrase, lemma: "es kommt darauf an", level: B1, source: seed,
      definition: "Die Antwort hängt von der Situation ab.",
      example: "Ob ich mitkomme, kommt darauf an, wie lange das Gespräch dauert.", tags: [diskussion]}
-  - {type: phrase, lemma: Wert legen auf, level: B1, source: seed, rection: "Wert legen auf + Akk.",
+  - {type: phrase, lemma: "im Voraus", level: B1, source: seed,
+     definition: "Schon vorher, bevor etwas beginnt oder bezahlt werden muss.",
+     example: "Vielen Dank im Voraus für Ihre Hilfe!", tags: [hoeflichkeit, alltag]}
+  - {type: phrase, lemma: "in Frage kommen", level: B1, source: seed,
+     definition: "Als Möglichkeit passen und deshalb ausgewählt werden können.",
+     example: "Ein Umzug ins Ausland kommt für mich nicht in Frage.", tags: [diskussion, entscheidung]}
+  - {type: phrase, lemma: "in Kontakt bleiben", level: B1, source: seed,
+     definition: "Sich weiterhin regelmäßig schreiben, anrufen oder treffen.",
+     example: "Nach dem Kurs möchten wir gern in Kontakt bleiben.", tags: [beziehung, gespraech]}
+  - {type: phrase, lemma: "Rücksicht nehmen", rection: "Rücksicht nehmen auf + Akk.", level: B1,
+     source: seed, definition: "Bei seinem Verhalten an die anderen denken.",
+     example: "Im Zug sollte man Rücksicht auf andere Reisende nehmen.", tags: [menschen]}
+  - {type: phrase, lemma: "Schluss machen", level: B1, source: seed,
+     definition: "Eine Arbeit beenden oder eine Beziehung beenden.",
+     example: "Für heute machen wir Schluss und gehen nach Hause.", tags: [arbeit, beziehung]}
+  - {type: phrase, lemma: "sich Mühe geben", level: B1, source: seed,
+     definition: "Sich anstrengen, damit eine Sache wirklich gut gelingt.",
+     example: "Er gibt sich große Mühe mit seiner Aussprache.", tags: [lernen, arbeit]}
+  - {type: phrase, lemma: "Wert legen auf", rection: "Wert legen auf + Akk.", level: B1, source: seed,
      definition: "Eine Sache besonders wichtig finden.",
      example: "Meine Chefin legt großen Wert auf Pünktlichkeit.", tags: [arbeit]}
-  # ------------------------------------------------------------- Grammatik
-  - {type: grammar, lemma: Konjunktiv II (Gegenwart), level: B1, source: seed, tags: [grammatik, modus],
-     definition: "würde + Infinitiv für Irreales und Wünsche; bei sein, haben, Modalverben die eigene Form: wäre, hätte, könnte, müsste.",
-     example: "Wenn ich mehr Zeit hätte, würde ich einen Sprachkurs machen."}
-  - {type: grammar, lemma: Konjunktiv II der Höflichkeit, level: B1, source: seed, tags: [grammatik, modus],
-     definition: "Bitten klingen höflicher mit könnte, würde, wäre, hätte statt Präsens.",
-     example: "Könnten Sie mir bitte sagen, wo ich den Antrag stellen muss?"}
-  - {type: grammar, lemma: Passiv Präsens und Präteritum, level: B1, source: seed, tags: [grammatik, passiv],
-     definition: "werden + Partizip II; wichtig ist die Handlung, nicht wer sie macht. Präteritum: wurde + Partizip II.",
-     example: "Der Antrag wird von der Behörde geprüft."}
-  - {type: grammar, lemma: Passiv mit Modalverb, level: B1, source: seed, tags: [grammatik, passiv],
-     definition: "Modalverb + Partizip II + werden am Satzende.",
-     example: "Die Rechnung muss bis Freitag überwiesen werden."}
-  - {type: grammar, lemma: Relativsätze mit Präposition, level: B1, source: seed, tags: [grammatik, satzbau],
-     definition: "Die Präposition steht vor dem Relativpronomen und bestimmt den Kasus.",
-     example: "Das ist die Kollegin, mit der ich das Projekt mache."}
-  - {type: grammar, lemma: Nebensätze mit weil, obwohl, damit, level: B1, source: seed, tags: [grammatik, satzbau],
-     definition: "Nach diesen Konjunktionen steht das konjugierte Verb am Satzende.",
-     example: "Ich nehme das Angebot, obwohl die Wohnung klein ist."}
-  - {type: grammar, lemma: damit oder um zu, level: B1, source: seed, tags: [grammatik, satzbau],
-     definition: "Gleiches Subjekt: um ... zu + Infinitiv. Verschiedene Subjekte: damit.",
-     example: "Ich rufe früh an, damit die Behörde den Termin noch findet."}
-  - {type: grammar, lemma: Wechselpräpositionen, level: B1, source: seed, tags: [grammatik, kasus],
-     definition: "in, an, auf, über, unter, vor, hinter, neben, zwischen: Wohin? mit Akkusativ, Wo? mit Dativ.",
-     example: "Ich lege den Zettel auf den Tisch; er liegt jetzt auf dem Tisch."}
-  - {type: grammar, lemma: Verben mit Präposition und da-Wörter, level: B1, source: seed, tags: [grammatik, kasus],
-     definition: "Sachen: worauf/darauf statt auf wen. Personen: auf wen / auf ihn.",
-     example: "Worauf wartest du? Auf das Ergebnis. Ich warte schon lange darauf."}
-  - {type: grammar, lemma: Adjektivdeklination, level: B1, source: seed, tags: [grammatik, kasus],
-     definition: "Nach dem bestimmten Artikel endet das Adjektiv auf -e oder -en, nach ein/kein zeigt es das Geschlecht: ein guter Vorschlag.",
-     example: "Der neue Vertrag und ein guter Vorschlag helfen uns beiden."}
-  - {type: grammar, lemma: n-Deklination, level: B1, source: seed, tags: [grammatik, kasus],
-     definition: "Manche maskulinen Nomen bekommen außer im Nominativ Singular ein -n: der Kollege, den Kollegen.",
-     example: "Ich habe den Kollegen nach seiner Meinung gefragt."}
-  - {type: grammar, lemma: Genitiv mit wegen, während, trotz, level: B1, source: seed, tags: [grammatik, kasus],
-     definition: "Diese Präpositionen stehen mit dem Genitiv: wegen des Termins, während der Arbeit.",
-     example: "Wegen der Verspätung des Zuges kam ich zu spät."}
-  - {type: grammar, lemma: Plusquamperfekt und nachdem, level: B1, source: seed, tags: [grammatik, zeiten],
-     definition: "hatte oder war + Partizip II für das, was noch früher passiert ist; typisch nach nachdem.",
-     example: "Nachdem ich den Antrag abgeschickt hatte, wartete ich vier Wochen."}
-  - {type: grammar, lemma: Indirekte Fragen mit ob, level: B1, source: seed, tags: [grammatik, satzbau],
-     definition: "Ja/Nein-Fragen werden mit ob eingeleitet, W-Fragen mit dem Fragewort; Verb am Ende.",
-     example: "Er hat gefragt, ob wir den Termin verschieben können."}
-  - {type: grammar, lemma: Zweiteilige Konnektoren, level: B1, source: seed, tags: [grammatik, satzbau],
-     definition: "entweder ... oder, nicht nur ... sondern auch, weder ... noch, sowohl ... als auch.",
-     example: "Die Wohnung ist nicht nur günstig, sondern auch ruhig."}
-  - {type: grammar, lemma: Futur I, level: B1, source: seed, tags: [grammatik, zeiten],
-     definition: "werden + Infinitiv für Absichten und Vermutungen über die Zukunft.",
-     example: "Ich werde mich nächste Woche um die Versicherung kümmern."}
-  - {type: grammar, lemma: Komparativ und Superlativ, level: B1, source: seed, tags: [grammatik, adjektive],
-     definition: "-er im Vergleich mit als, am -sten als Superlativ; oft mit Umlaut: groß, größer, am größten.",
-     example: "Dieses Angebot ist günstiger als das andere und am schnellsten verfügbar."}
+  - {type: phrase, lemma: "zur Verfügung stehen", level: B1, source: seed,
+     definition: "Da sein, damit andere es benutzen dürfen.",
+     example: "Im Hotel steht den Gästen ein Fahrrad zur Verfügung.", tags: [alltag, reisen]}

@@ -9,7 +9,7 @@ from pathlib import Path
 
 from .generator import ClaudeGenerator, GeneratorError, guess_type
 from .models import Card
-from .paths import DEFAULT_DECK, SEED_DECK
+from .paths import DEFAULT_DECK, SEED_DECKS
 from .scheduler import projection
 from .store import Store
 
@@ -98,10 +98,17 @@ def cmd_stats(args) -> int:
 
 def cmd_seed(args) -> int:
     store = Store(args.deck)
-    text = Path(args.file or SEED_DECK).read_text(encoding="utf-8")
-    result = store.import_cards(text, mode="merge")
-    print(f"{result['added']} Karten importiert, {result['skipped']} übersprungen "
-          f"(schon vorhanden). Deck: {result['total']} Karten.")
+    if args.file:
+        sources = [Path(args.file)]
+    else:
+        levels = ["a2", "b1"] if args.level == "both" else [args.level]
+        sources = [SEED_DECKS[lvl] for lvl in levels]
+    for path in sources:
+        text = Path(path).read_text(encoding="utf-8")
+        result = store.import_cards(text, mode="merge")
+        print(f"{path.name}: {result['added']} Karten importiert, "
+              f"{result['skipped']} übersprungen (schon vorhanden).")
+    print(f"Deck gesamt: {len(store.cards)} Karten.")
     return 0
 
 
@@ -147,7 +154,9 @@ def build_parser() -> argparse.ArgumentParser:
     stats = subs.add_parser("stats", help="Statistik und Prognose")
     stats.set_defaults(func=cmd_stats)
 
-    seed = subs.add_parser("seed", help="B1-Starterdeck importieren")
+    seed = subs.add_parser("seed", help="A2- oder B1-Starterdeck importieren")
+    seed.add_argument("--level", choices=["a2", "b1", "both"], default="b1",
+                      help="welches mitgelieferte Deck (Standard: b1)")
     seed.add_argument("--file", help="eigene YAML-Datei statt des mitgelieferten Decks")
     seed.set_defaults(func=cmd_seed)
 

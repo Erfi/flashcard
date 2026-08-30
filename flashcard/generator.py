@@ -48,7 +48,8 @@ CARD_SCHEMA = """{
   "separable": true/false,
   "rection": "Präposition und Kasus, falls relevant, z. B. \\"warten auf + Akk.\\", sonst \\"\\"",
   "definition": "kurze deutsche Erklärung (B1)",
-  "example": "Beispielsatz auf Deutsch",
+  "example": "Beispielsatz auf Deutsch (bei Wortschatzkarten)",
+  "examples": ["bei Grammatikkarten genau drei Beispielsätze", "...", "..."],
   "tags": ["ein bis drei thematische Schlagwörter auf Deutsch"],
   "level": "A2 | B1 | B2"
 }"""
@@ -169,9 +170,11 @@ class ClaudeGenerator:
             hint = f"\nDas Stichwort ist ein/e: {hint_type}."
         if hint_type == "grammar":
             hint += (
-                "\nBei einer Grammatikkarte ist \"lemma\" der Name des Themas, "
-                "\"definition\" die Regel in einfachen Worten (höchstens 30 Wörter) "
-                "und \"example\" ein Beispielsatz, der die Regel zeigt."
+                "\nBei einer Grammatikkarte ist \"lemma\" der Name des Themas und "
+                "\"definition\" die Regel in einfachen Worten (40 bis 70 Wörter): "
+                "Form, Gebrauch und die häufigste Fehlerquelle. "
+                "\"examples\" enthält genau drei kurze Beispielsätze, die verschiedene "
+                "Seiten der Regel zeigen; \"example\" bleibt leer."
             )
         prompt = (
             f"Erstelle eine Karteikarte für das Stichwort: {query!r}.{hint}\n\n"
@@ -181,6 +184,23 @@ class ClaudeGenerator:
         data = _extract_json(self._call(prompt))
         data.setdefault("lemma", query.strip())
         return _normalise(data)
+
+    def generate_examples(self, card_summary: Dict, known: List[str] | None = None,
+                          topics: List[str] | None = None, avoid: str = "",
+                          count: int = 3) -> List[str]:
+        """Fresh example sentences for a grammar card."""
+        avoid_line = f"\nDie alten Sätze waren: {avoid!r}. Schreibe deutlich andere." if avoid else ""
+        prompt = (
+            f"Schreibe genau {count} kurze deutsche Beispielsätze, die diese Grammatikregel "
+            f"zeigen:\n{json.dumps(card_summary, ensure_ascii=False)}{avoid_line}\n\n"
+            f"{_reuse_block(known or [], topics or [])}\n\n"
+            "Antworte nur mit JSON: {\"examples\": [\"...\", \"...\", \"...\"]}"
+        )
+        data = _extract_json(self._call(prompt, max_tokens=700))
+        out = [str(x).strip() for x in (data.get("examples") or []) if str(x).strip()]
+        if not out:
+            raise GeneratorError("Die API hat keine Beispielsätze geliefert.")
+        return out[:count]
 
     def generate_sentence(self, card_summary: Dict, known: List[str] | None = None,
                           topics: List[str] | None = None, avoid: str = "") -> str:
@@ -276,6 +296,11 @@ def _normalise(data: Dict) -> Dict:
     for key in ("plural", "praesens_3sg", "praeteritum", "perfekt", "rection",
                 "definition", "example"):
         out[key] = str(out.get(key) or "").strip()
+
+    examples = out.get("examples") or []
+    if isinstance(examples, str):
+        examples = [line.strip() for line in examples.splitlines()]
+    out["examples"] = [str(x).strip() for x in examples if str(x).strip()][:5]
 
     level = str(out.get("level") or "B1").strip().upper()
     out["level"] = level if level in ("A1", "A2", "B1", "B2", "C1") else "B1"

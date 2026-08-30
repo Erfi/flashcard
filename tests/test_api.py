@@ -17,6 +17,10 @@ class FakeGenerator:
     def generate_sentence(self, summary, known=None, topics=None, avoid=""):
         return "Die Katze sitzt auf dem Vertrag."
 
+    def generate_examples(self, summary, known=None, topics=None, avoid="", count=3):
+        return ["Der Antrag wird geprüft.", "Die Rechnung wurde bezahlt.",
+                "Das Formular ist ausgefüllt worden."]
+
 
 class BrokenGenerator(FakeGenerator):
     available = False
@@ -99,3 +103,25 @@ def test_missing_api_key_still_creates_an_editable_card(tmp_path, monkeypatch):
 
 def test_unknown_card_returns_404(client):
     assert client.patch("/api/cards/nope", json={"lemma": "x"}).status_code == 404
+
+
+def test_grammar_card_rerolls_all_three_examples(client):
+    created = client.post("/api/cards", json={
+        "type": "grammar", "lemma": "Passiv Präsens",
+        "definition": "werden plus Partizip II am Satzende.",
+        "examples": ["Alter Satz."],
+    }).json()["card"]
+    assert created["color_key"] == "grammar"
+    fresh = client.post(f"/api/cards/{created['id']}/sentence").json()["card"]
+    assert len(fresh["examples"]) == 3
+    assert fresh["examples"][0] == "Der Antrag wird geprüft."
+
+
+def test_editing_examples_by_hand_is_kept(client):
+    created = client.post("/api/cards", json={
+        "type": "grammar", "lemma": "Genitiv", "definition": "Besitz und Zugehörigkeit.",
+        "examples": ["Eins."],
+    }).json()["card"]
+    patched = client.patch(f"/api/cards/{created['id']}",
+                           json={"examples": ["Neu eins.", "Neu zwei."]}).json()["card"]
+    assert patched["examples"] == ["Neu eins.", "Neu zwei."]

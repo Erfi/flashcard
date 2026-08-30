@@ -14,12 +14,30 @@ cp .env.example .env          # then put your Anthropic API key in it
 
 The app runs at <http://127.0.0.1:8000>. The deck lives in `data/deck.yaml`.
 
-To start from the included B1 refresher deck (88 cards — 32 nouns, 24 verbs,
-10 adjectives, 5 set phrases, 17 grammar cards):
+To start from the included decks:
 
 ```bash
-./.venv/bin/python -m flashcard seed
+./.venv/bin/python -m flashcard seed --level b1     # 300 B1 cards
+./.venv/bin/python -m flashcard seed --level a2     # 300 A2 cards
+./.venv/bin/python -m flashcard seed --level both   # 570 unique cards
 ```
+
+| Deck | Cards | Nouns | Verbs | Adjectives | Adverbs | Phrases | Grammar |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `seed_a2.yaml` | 300 | 141 | 76 | 36 | 8 | 9 | 30 |
+| `seed_b1.yaml` | 300 | 119 | 87 | 40 | 6 | 13 | 35 |
+
+The 30 (A2) and 35 (B1) grammar cards together cover the grammar of both levels
+end to end — from Perfekt with haben/sein and Wechselpräpositionen up to
+Konjunktiv II der Vergangenheit, all four passive forms, Relativsätze with
+dessen/deren, and n-Deklination. Each carries a worked explanation (form, use
+and the usual mistake) plus three example sentences.
+
+Importing both is safe: the 30 words that appear in both decks are recognised
+as duplicates and skipped, so you end up with 570 unique cards.
+
+Every noun in both decks had its gender and plural checked against a
+Wiktionary-derived lexicon, and every verb's Perfekt against its auxiliary.
 
 Without an API key the app still runs: new cards are created empty and you fill
 them in by hand in the editor.
@@ -137,6 +155,7 @@ cards:
     plural: die Katzen
     definition: Ein kleines Haustier, das oft in Wohnungen lebt.
     example: Die Katze schläft auf dem Sofa.
+    # grammar cards use `examples:` with three sentences instead of `example:`
     tags: [tier]
     level: B1
     source: claude
@@ -167,7 +186,7 @@ python -m flashcard serve --port 8000 --open
 python -m flashcard add katze --type noun
 python -m flashcard check
 python -m flashcard stats
-python -m flashcard seed
+python -m flashcard seed --level both
 ```
 
 `--deck path/to/deck.yaml` works on every subcommand; `FLASHCARD_DECK` sets it
@@ -185,8 +204,9 @@ flashcard/
   commands.py    the command-bar grammar
   server.py      FastAPI endpoints
   web/           the browser UI (no build step, no dependencies)
-  seed_b1.yaml   the B1 refresher deck
-tests/           74 tests: scheduler maths, storage, commands, API, generator
+  seed_a2.yaml   the A2 deck (300 cards)
+  seed_b1.yaml   the B1 deck (300 cards)
+tests/           83 tests: scheduler maths, storage, commands, API, generator
 ```
 
 ```bash

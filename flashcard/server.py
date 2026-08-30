@@ -186,16 +186,26 @@ def create_app(deck_path: os.PathLike | str) -> FastAPI:
             "type": card.type, "lemma": card.lemma, "article": card.article,
             "definition": card.definition,
         }
+        is_grammar = card.type == "grammar"
         try:
-            sentence = gen().generate_sentence(
-                summary, s.known_lemmas(), s.grammar_topics(), avoid=card.example
-            )
+            if is_grammar:
+                replacement = gen().generate_examples(
+                    summary, s.known_lemmas(), s.grammar_topics(),
+                    avoid=" | ".join(card.examples or [card.example]),
+                )
+            else:
+                replacement = gen().generate_sentence(
+                    summary, s.known_lemmas(), s.grammar_topics(), avoid=card.example
+                )
         except GeneratorError as exc:
             raise HTTPException(502, str(exc)) from exc
         with LOCK:
             s.reload_if_changed()
             card = s.by_id(card_id)
-            card.example = sentence
+            if is_grammar:
+                card.examples = replacement
+            else:
+                card.example = replacement
             card.modified = utcnow()
             s.save()
             return {"card": card.to_api()}

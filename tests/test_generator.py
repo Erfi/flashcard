@@ -139,3 +139,20 @@ def test_other_http_errors_stay_readable(monkeypatch):
     monkeypatch.setattr(urllib.request, "urlopen", boom)
     with pytest.raises(GeneratorError, match="401"):
         ClaudeGenerator(api_key="bad").generate_card("Katze")
+
+
+def test_generate_examples_returns_three_sentences(monkeypatch):
+    def fake_call(self, prompt, max_tokens=700):
+        assert "drei" in prompt or "3" in prompt
+        return '{"examples": ["Satz eins.", "Satz zwei.", "Satz drei."]}'
+
+    monkeypatch.setattr(ClaudeGenerator, "_call", fake_call)
+    out = ClaudeGenerator(api_key="test").generate_examples({"lemma": "Passiv"})
+    assert out == ["Satz eins.", "Satz zwei.", "Satz drei."]
+
+
+def test_normalise_keeps_grammar_examples():
+    got = _normalise({"type": "grammatik", "lemma": "Passiv",
+                      "examples": ["Eins.", "  ", "Zwei."]})
+    assert got["type"] == "grammar"
+    assert got["examples"] == ["Eins.", "Zwei."]

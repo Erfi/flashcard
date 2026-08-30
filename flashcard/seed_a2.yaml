@@ -1,0 +1,1310 @@
+# A2-Deck — Grundwortschatz und Grammatik (Niveau A2).
+# Frei editierbar: Artikel, Plural, Formen und Sätze kannst du jederzeit ändern.
+# Import: python -m flashcard seed --level a2
+cards:
+
+  # ---------------------------------------------------------------- Grammatik
+  - type: grammar
+    lemma: "Adjektivendungen nach dem bestimmten Artikel"
+    level: A2
+    source: seed
+    tags: [grammatik, adjektive]
+    definition: >-
+      Nach der, die, das, diese, jede, alle gibt es nur zwei Endungen: -e und -en. -e steht im
+      Nominativ Singular aller Geschlechter und im Akkusativ feminin und neutrum. Überall sonst
+      steht -en, also im Akkusativ maskulin, im ganzen Dativ und im ganzen Plural.
+    examples:
+      - "Der neue Kollege arbeitet sehr genau."
+      - "Ich nehme den kleinen Tisch am Fenster."
+      - "Mit dem alten Fahrrad fährt sie zur Arbeit."
+  - type: grammar
+    lemma: "Adjektivendungen nach ein, kein und mein"
+    level: A2
+    source: seed
+    tags: [grammatik, adjektive]
+    definition: >-
+      Wo ein, kein oder ein Possessivartikel das Geschlecht nicht zeigt, muss das Adjektiv es
+      zeigen: ein guter Freund (maskulin), ein kleines Kind (neutrum), eine große Wohnung
+      (feminin). Im Akkusativ maskulin steht -en, im Dativ überall -en, im Plural nach kein/meine
+      ebenfalls -en.
+    examples:
+      - "Ein guter Freund hilft auch am Wochenende."
+      - "Wir suchen eine größere Wohnung mit Balkon."
+      - "Sie fährt mit einem alten Auto zur Arbeit."
+  - type: grammar
+    lemma: "Akkusativ oder Dativ"
+    level: A2
+    source: seed
+    tags: [grammatik, kasus]
+    definition: >-
+      Das Verb bestimmt den Kasus. Die meisten Verben haben ein Akkusativobjekt (Wen? Was?): den,
+      einen, meinen. Eine kleine Gruppe verlangt den Dativ (Wem?): helfen, danken, gehören,
+      gefallen, passen, antworten, gratulieren. Bei zwei Objekten steht die Person im Dativ und
+      die Sache im Akkusativ: Ich gebe dem Kind das Buch.
+    examples:
+      - "Der Nachbar hat mir bei den Möbeln geholfen."
+      - "Meine Schwester kauft einen neuen Schrank."
+      - "Wir schenken unseren Eltern eine Reise."
+  - type: grammar
+    lemma: "es gibt"
+    level: A2
+    source: seed
+    tags: [grammatik, satzbau]
+    definition: >-
+      es gibt sagt, dass etwas existiert oder vorhanden ist, und steht immer mit dem Akkusativ, im
+      Singular und im Plural gleich: es gibt einen Park, es gibt viele Geschäfte. Im Perfekt heißt
+      es es hat gegeben, im Präteritum es gab. Für eine bestimmte Lage benutzt man dagegen sein:
+      Der Park ist hinter dem Bahnhof.
+    examples:
+      - "In unserem Viertel gibt es einen schönen Park."
+      - "Gibt es hier in der Nähe eine Apotheke?"
+      - "Gestern gab es im Supermarkt keine frischen Brötchen."
+  - type: grammar
+    lemma: "Fragen mit W-Wort und Ja-Nein-Fragen"
+    level: A2
+    source: seed
+    tags: [grammatik, satzbau]
+    definition: >-
+      Bei der W-Frage steht das Fragewort auf Position 1 und das Verb auf Position 2: Wann kommst
+      du? Bei der Ja-Nein-Frage beginnt der Satz mit dem Verb: Kommst du mit? Auf eine verneinte
+      Frage antwortet man mit doch, wenn man widerspricht. Wichtige Fragewörter: wann, wo, wohin,
+      woher, warum, wie, wie lange, wie oft, welcher, was für ein.
+    examples:
+      - "Wohin fahrt ihr in den Ferien?"
+      - "Hast du den Termin schon abgesagt?"
+      - "Hast du keinen Hunger? Doch, sehr!"
+  - type: grammar
+    lemma: "Höfliche Bitten mit Konjunktiv II"
+    level: A2
+    source: seed
+    tags: [grammatik, modus]
+    definition: >-
+      Für höfliche Bitten und Wünsche benutzt man könnte, würde, hätte, wäre und möchte statt des
+      Präsens. Formen: ich könnte, du könntest, er könnte; ich hätte gern, ich wäre, ich würde
+      gern. Das macht Fragen im Amt, im Geschäft und am Telefon deutlich freundlicher.
+    examples:
+      - "Könnten Sie mir bitte den Weg zeigen?"
+      - "Ich hätte gern einen Termin am Montag."
+      - "Würdest du mir kurz mit dem Koffer helfen?"
+  - type: grammar
+    lemma: "Imperativ"
+    level: A2
+    source: seed
+    tags: [grammatik, satzbau]
+    definition: >-
+      Der Imperativ steht an Position 1. Bei du fällt das Pronomen weg und meist auch das -e
+      (komm!, geh!); Verben mit e/i-Wechsel behalten den Wechsel ohne Umlaut (nimm!, gib!). Bei
+      ihr ist die Form gleich wie im Präsens (kommt!). Bei Sie steht das Pronomen hinter dem Verb
+      (Kommen Sie!). bitte macht die Aufforderung höflicher.
+    examples:
+      - "Komm bitte pünktlich zum Termin!"
+      - "Nehmt eure Jacken mit, es wird kalt!"
+      - "Warten Sie bitte einen Moment."
+  - type: grammar
+    lemma: "Komparativ und Superlativ"
+    level: A2
+    source: seed
+    tags: [grammatik, adjektive]
+    definition: >-
+      Komparativ mit -er, Superlativ mit am -sten oder der/die/das -ste. Kurze Adjektive bekommen
+      oft einen Umlaut: alt, älter, am ältesten. Unregelmäßig sind gut/besser/am besten,
+      viel/mehr/am meisten, gern/lieber/am liebsten, hoch/höher, nah/näher. Vor einem Nomen
+      bekommt auch die Vergleichsform noch eine Adjektivendung.
+    examples:
+      - "Mein Bruder ist zwei Jahre älter als ich."
+      - "Im Sommer sind die Tage am längsten."
+      - "Das ist das beste Restaurant in der Stadt."
+  - type: grammar
+    lemma: "Konnektoren im Hauptsatz"
+    level: A2
+    source: seed
+    tags: [grammatik, satzbau]
+    definition: >-
+      deshalb, deswegen, darum (Folge), trotzdem (Gegensatz), dann (Reihenfolge) und sonst
+      (andernfalls) sind keine Nebensatz-Konjunktionen: sie stehen auf Position 1, danach folgt
+      sofort das konjugierte Verb und erst dann das Subjekt. Anders als bei und, aber, oder, denn,
+      sondern, die vor dem ganzen Satz stehen und nichts verändern.
+    examples:
+      - "Es hat stark geregnet, deshalb sind wir zu Hause geblieben."
+      - "Der Termin war wichtig, trotzdem kam er zu spät."
+      - "Beeil dich, sonst verpassen wir den Zug."
+  - type: grammar
+    lemma: "Modalverben"
+    level: A2
+    source: seed
+    tags: [grammatik, verben]
+    definition: >-
+      können (Fähigkeit), müssen (Notwendigkeit), wollen (Wille), dürfen (Erlaubnis), sollen
+      (Auftrag, Rat) und möchten (Wunsch). Das Modalverb steht an Position 2, der zweite Infinitiv
+      ohne zu am Satzende. Im Singular ändert sich der Vokal (ich kann, ich muss), und die 1. und
+      3. Person haben keine Endung.
+    examples:
+      - "Meine Tochter kann schon ziemlich gut schwimmen."
+      - "Am Wochenende müssen wir die Wohnung putzen."
+      - "Hier darf man leider nicht parken."
+  - type: grammar
+    lemma: "Nebensatz mit dass"
+    level: A2
+    source: seed
+    tags: [grammatik, satzbau]
+    definition: >-
+      dass macht aus einem Satz ein Objekt und steht nach Verben des Sagens, Denkens und Fühlens:
+      glauben, denken, hoffen, wissen, sagen, finden. Das Verb steht am Ende. Vor dass steht immer
+      ein Komma. Nach ich glaube und ich denke kann dass auch weggelassen werden; dann gilt die
+      normale Wortstellung.
+    examples:
+      - "Ich hoffe, dass das Wetter am Samstag besser wird."
+      - "Meine Chefin sagt, dass die Besprechung später anfängt."
+      - "Wir finden, dass die Wohnung zu teuer ist."
+  - type: grammar
+    lemma: "Nebensatz mit weil"
+    level: A2
+    source: seed
+    tags: [grammatik, satzbau]
+    definition: >-
+      weil leitet einen Nebensatz ein: das konjugierte Verb steht ganz am Ende. denn hat dieselbe
+      Bedeutung, ist aber eine Hauptsatz-Konjunktion und ändert die Wortstellung nicht. Steht der
+      weil-Satz vorn, folgt direkt das Verb des Hauptsatzes. Trennbare Verben bleiben im Nebensatz
+      zusammen.
+    examples:
+      - "Ich bleibe heute zu Hause, weil ich krank bin."
+      - "Weil der Zug Verspätung hatte, kam sie zu spät."
+      - "Er nimmt das Fahrrad, denn der Bus ist teuer."
+  - type: grammar
+    lemma: "Nebensatz mit wenn"
+    level: A2
+    source: seed
+    tags: [grammatik, satzbau]
+    definition: >-
+      wenn bedeutet zweierlei: eine Bedingung (wenn das Wetter gut ist) und eine wiederholte Zeit
+      in Gegenwart oder Zukunft (immer wenn). Für ein einmaliges Ereignis in der Vergangenheit
+      benutzt man als. Das Verb steht am Ende des wenn-Satzes; steht der Nebensatz vorn, beginnt
+      der Hauptsatz mit dem Verb, oft mit dann.
+    examples:
+      - "Wenn das Wetter schön ist, gehen wir schwimmen."
+      - "Ruf mich an, wenn du angekommen bist."
+      - "Als ich klein war, wohnten wir auf dem Land."
+  - type: grammar
+    lemma: "Negation mit nicht oder kein"
+    level: A2
+    source: seed
+    tags: [grammatik, satzbau]
+    definition: >-
+      kein verneint Nomen mit unbestimmtem Artikel oder ohne Artikel und wird wie ein dekliniert:
+      kein Auto, keine Zeit, keinen Hunger. Alles andere verneint nicht. nicht steht vor
+      Adjektiven, Ortsangaben und dem zweiten Verbteil, aber nach dem konjugierten Verb und nach
+      Zeitangaben. Am Satzende steht nicht, wenn der ganze Satz verneint wird.
+    examples:
+      - "Wir haben heute leider keine Zeit."
+      - "Der Film war überhaupt nicht interessant."
+      - "Am Wochenende arbeite ich normalerweise nicht."
+  - type: grammar
+    lemma: "Nicht trennbare Verben"
+    level: A2
+    source: seed
+    tags: [grammatik, verben]
+    definition: >-
+      Die Präfixe be-, emp-, ent-, er-, ge-, miss-, ver-, zer- sind nie trennbar und nie betont.
+      Diese Verben bilden das Partizip II ohne ge-: bezahlt, verstanden, erzählt, bekommen.
+      Achtung bei Paaren wie ÜBERsetzen (ans andere Ufer bringen, trennbar) und überSETZEN (in
+      eine andere Sprache, nicht trennbar).
+    examples:
+      - "Meine Kollegin hat die Rechnung schon bezahlt."
+      - "Hast du die Frage des Lehrers verstanden?"
+      - "Der Kellner empfiehlt heute die Suppe."
+  - type: grammar
+    lemma: "Ordinalzahlen und Datum"
+    level: A2
+    source: seed
+    tags: [grammatik, zeit]
+    definition: >-
+      Ordinalzahlen bildet man bis 19 mit -t (der vierte), ab 20 mit -st (der zwanzigste);
+      unregelmäßig sind erste, dritte, siebte, achte. Beim Datum sagt man der erste Mai
+      (Nominativ) und am ersten Mai (Dativ). Geschrieben steht ein Punkt nach der Zahl: am 1. Mai.
+    examples:
+      - "Heute ist der dritte September."
+      - "Am fünfzehnten Juni fängt mein Urlaub an."
+      - "Sie wohnt im siebten Stock."
+  - type: grammar
+    lemma: "Perfekt mit haben oder sein"
+    level: A2
+    source: seed
+    tags: [grammatik, zeiten]
+    definition: >-
+      Das Perfekt ist die normale Vergangenheit im Gespräch: haben oder sein an Position 2 und das
+      Partizip II am Satzende. Die meisten Verben nehmen haben. Sein nehmen Verben der Bewegung
+      von A nach B (gehen, fahren, kommen), der Zustandsänderung (aufstehen, einschlafen, wachsen)
+      sowie sein, bleiben und passieren. Regelmäßig: ge-...-t, unregelmäßig: ge-...-en.
+    examples:
+      - "Wir haben gestern Abend einen guten Film gesehen."
+      - "Meine Eltern sind im Sommer nach Italien gefahren."
+      - "Was ist auf dem Weg zur Schule passiert?"
+  - type: grammar
+    lemma: "Personalpronomen im Akkusativ und Dativ"
+    level: A2
+    source: seed
+    tags: [grammatik, kasus]
+    definition: >-
+      Akkusativ: mich, dich, ihn, sie, es, uns, euch, sie/Sie. Dativ: mir, dir, ihm, ihr, ihm,
+      uns, euch, ihnen/Ihnen. Das Pronomen richtet sich nach dem Genus des Nomens, nicht nach dem
+      Geschlecht der Sache. Stehen zwei Pronomen zusammen, kommt der Akkusativ zuerst: Ich gebe es
+      dir.
+    examples:
+      - "Der Schlüssel ist weg; ich finde ihn nicht."
+      - "Kannst du mir bitte kurz helfen?"
+      - "Das Buch ist toll; ich leihe es dir gern."
+  - type: grammar
+    lemma: "Possessivartikel"
+    level: A2
+    source: seed
+    tags: [grammatik, kasus]
+    definition: >-
+      mein, dein, sein, ihr, unser, euer, ihr/Ihr zeigen, wem etwas gehört. Sie bekommen dieselben
+      Endungen wie ein und kein: mein Bruder, meine Schwester, mein Kind, meine Eltern. Im
+      Akkusativ maskulin steht -en (meinen Bruder), im Dativ -em/-er/-en. Bei euer fällt vor der
+      Endung ein e weg: eure Wohnung.
+    examples:
+      - "Meine Schwester wohnt jetzt in einer anderen Stadt."
+      - "Hast du deinen Ausweis dabei?"
+      - "Wir fahren mit unserem Auto in den Urlaub."
+  - type: grammar
+    lemma: "Präpositionen mit Akkusativ"
+    level: A2
+    source: seed
+    tags: [grammatik, kasus]
+    definition: >-
+      durch, für, gegen, ohne, um stehen immer mit dem Akkusativ, egal ob Bewegung oder nicht.
+      Nach ohne steht das Nomen meistens ohne Artikel. um ... herum beschreibt eine Runde, gegen
+      kann Widerstand oder eine ungefähre Zeit bedeuten: gegen acht Uhr.
+    examples:
+      - "Dieses Geschenk ist für meinen besten Freund."
+      - "Ohne Ausweis kommen Sie nicht in das Gebäude."
+      - "Wir gehen jeden Abend durch den Park."
+  - type: grammar
+    lemma: "Präpositionen mit Dativ"
+    level: A2
+    source: seed
+    tags: [grammatik, kasus]
+    definition: >-
+      aus, bei, mit, nach, seit, von, zu, gegenüber stehen immer mit dem Dativ. Häufige
+      Verschmelzungen: zu dem = zum, zu der = zur, bei dem = beim, von dem = vom. nach benutzt man
+      bei Städten und Ländern ohne Artikel, zu bei Personen und Einrichtungen, in bei Ländern mit
+      Artikel.
+    examples:
+      - "Nach der Arbeit fahre ich zum Sportverein."
+      - "Seit einem Jahr wohnen wir bei meiner Tante."
+      - "Der Zug kommt gerade aus der Schweiz."
+  - type: grammar
+    lemma: "Präteritum von sein, haben und den Modalverben"
+    level: A2
+    source: seed
+    tags: [grammatik, zeiten]
+    definition: >-
+      Auch beim Sprechen benutzt man bei sein, haben und den Modalverben das Präteritum statt des
+      Perfekts: war, hatte, konnte, musste, wollte, durfte, sollte, mochte. Die Modalverben
+      verlieren im Präteritum den Umlaut. Die 1. und 3. Person Singular sind gleich und haben
+      keine Endung: ich war, er war.
+    examples:
+      - "Als Kind war ich oft bei meiner Großmutter."
+      - "Wir hatten letzte Woche leider keine Zeit."
+      - "Gestern musste sie länger im Büro bleiben."
+  - type: grammar
+    lemma: "Reflexive Verben"
+    level: A2
+    source: seed
+    tags: [grammatik, verben]
+    definition: >-
+      Bei reflexiven Verben zeigt das Pronomen zurück auf das Subjekt: sich freuen, sich
+      interessieren, sich beeilen. Normal steht es im Akkusativ (mich, dich, sich, uns, euch,
+      sich). Kommt ein zweites Objekt dazu, steht das Reflexivpronomen im Dativ: Ich wasche mir
+      die Hände. Das Pronomen steht meist direkt nach dem konjugierten Verb.
+    examples:
+      - "Meine Tochter freut sich schon auf die Ferien."
+      - "Beeilt euch, der Bus fährt gleich ab!"
+      - "Vor dem Essen wasche ich mir die Hände."
+  - type: grammar
+    lemma: "Satzklammer und Verb an Position 2"
+    level: A2
+    source: seed
+    tags: [grammatik, satzbau]
+    definition: >-
+      Im Aussagesatz steht das konjugierte Verb immer an zweiter Stelle. Position 1 ist nur ein
+      Element: das Subjekt, eine Zeitangabe, ein Ort. Wenn dort nicht das Subjekt steht, rutscht
+      das Subjekt direkt hinter das Verb. Ein zweiter Verbteil (Partizip, Infinitiv, Präfix) geht
+      ans Satzende. Verb 2 und Verb 2-Teil bilden zusammen die Satzklammer.
+    examples:
+      - "Am Montag fahre ich mit dem Bus zur Arbeit."
+      - "Meine Schwester hat gestern einen Kuchen gebacken."
+      - "Nach dem Essen räumt mein Bruder die Küche auf."
+  - type: grammar
+    lemma: "Trennbare Verben"
+    level: A2
+    source: seed
+    tags: [grammatik, verben]
+    definition: >-
+      Bei trennbaren Verben trägt das Präfix den Wortakzent: AUFstehen, EINkaufen, ANrufen. Im
+      Hauptsatz steht das Präfix am Satzende. Im Partizip II steht ge- zwischen Präfix und Stamm
+      (aufgestanden). Vor einem Infinitiv mit zu steht das zu ebenfalls in der Mitte: aufzustehen.
+      Im Nebensatz bleibt das Verb zusammen.
+    examples:
+      - "Morgens stehe ich meistens um sechs Uhr auf."
+      - "Meine Freundin hat mich gestern Abend angerufen."
+      - "Es ist schwer, im Winter früh aufzustehen."
+  - type: grammar
+    lemma: "Verben mit Dativ"
+    level: A2
+    source: seed
+    tags: [grammatik, kasus]
+    definition: >-
+      helfen, danken, gehören, gefallen, passen, stehen (kleiden), schmecken, antworten,
+      gratulieren, folgen und wehtun nehmen ein Dativobjekt, obwohl im Deutschen ein Akkusativ
+      logisch wirkt. Bei gefallen und schmecken ist die Sache das Subjekt und die Person steht im
+      Dativ: Mir gefällt das Bild.
+    examples:
+      - "Das Bild gefällt meiner Mutter sehr gut."
+      - "Dieser Mantel gehört meinem Bruder."
+      - "Wir danken Ihnen für die schnelle Antwort."
+  - type: grammar
+    lemma: "Vergleiche mit wie und als"
+    level: A2
+    source: seed
+    tags: [grammatik, adjektive]
+    definition: >-
+      Bei Gleichheit steht (genau)so + Adjektiv + wie, bei Ungleichheit der Komparativ + als. Mit
+      nicht so ... wie drückt man aus, dass etwas weniger ist. Häufiger Fehler: als nach so und
+      wie nach dem Komparativ.
+    examples:
+      - "Diese Wohnung ist genauso teuer wie die andere."
+      - "Heute ist es wärmer als gestern."
+      - "Der Film war nicht so gut wie das Buch."
+  - type: grammar
+    lemma: "Wechselpräpositionen"
+    level: A2
+    source: seed
+    tags: [grammatik, kasus]
+    definition: >-
+      in, an, auf, über, unter, vor, hinter, neben, zwischen stehen mit zwei Fällen. Die Frage
+      Wohin? (Bewegung zu einem Ziel) verlangt den Akkusativ, die Frage Wo? (Ort, keine Richtung)
+      den Dativ. Typische Paare sind stellen/stehen, legen/liegen, setzen/sitzen, hängen/hängen.
+    examples:
+      - "Stell die Flaschen bitte in den Kühlschrank."
+      - "Die Milch steht schon im Kühlschrank."
+      - "Zwischen den beiden Häusern steht ein alter Baum."
+  - type: grammar
+    lemma: "Zeitangaben mit am, im, um"
+    level: A2
+    source: seed
+    tags: [grammatik, zeit]
+    definition: >-
+      am steht bei Tagen und Tageszeiten (am Montag, am Abend, aber: in der Nacht), im bei Monaten
+      und Jahreszeiten (im Mai, im Winter), um bei der Uhrzeit (um acht Uhr). Ohne Präposition
+      stehen Jahreszahlen (2026 oder im Jahr 2026), heute, morgen, nächste Woche.
+    examples:
+      - "Am Freitag beginnt der Kurs um neun Uhr."
+      - "Im August fahren viele Familien in Urlaub."
+      - "Nächste Woche habe ich einen Termin beim Arzt."
+  - type: grammar
+    lemma: "Zukunft mit Präsens"
+    level: A2
+    source: seed
+    tags: [grammatik, zeiten]
+    definition: >-
+      Für die Zukunft benutzt man im Alltag meistens das Präsens zusammen mit einer Zeitangabe:
+      morgen, nächste Woche, in zwei Jahren. Das Futur mit werden + Infinitiv braucht man vor
+      allem für Vorhersagen, Versprechen und Vermutungen, oft mit wohl oder sicher.
+    examples:
+      - "Nächsten Monat ziehen wir in eine neue Wohnung."
+      - "Morgen früh rufe ich dich an."
+      - "Es wird morgen wahrscheinlich regnen."
+
+  # ---------------------------------------------------------------- Nomen
+  - {type: noun, article: der, lemma: "Arm", plural: "die Arme", level: A2, source: seed,
+     definition: "Der Körperteil zwischen Schulter und Hand.", example: "Sie trägt das Baby auf dem Arm.",
+     tags: [koerper]}
+  - {type: noun, article: der, lemma: "Arzt", plural: "die Ärzte", level: A2, source: seed,
+     definition: "Eine Person, die kranken Menschen hilft und Medikamente gibt.",
+     example: "Morgen gehe ich zum Arzt, weil ich Husten habe.", tags: [gesundheit]}
+  - {type: noun, article: der, lemma: "Bahnhof", plural: "die Bahnhöfe", level: A2, source: seed,
+     definition: "Ein Ort, wo Züge halten und Menschen ein- und aussteigen.",
+     example: "Am Bahnhof kaufe ich noch schnell eine Zeitung.", tags: [reise, verkehr]}
+  - {type: noun, article: der, lemma: "Balkon", plural: "die Balkone", level: A2, source: seed,
+     definition: "Ein kleiner Platz draußen vor dem Fenster einer Wohnung.",
+     example: "Auf dem Balkon stehen viele bunte Blumen.", tags: [haus]}
+  - {type: noun, article: der, lemma: "Berg", plural: "die Berge", level: A2, source: seed,
+     definition: "Eine sehr hohe Stelle in der Landschaft aus Stein und Erde.",
+     example: "Von diesem Berg hat man eine tolle Aussicht.", tags: [natur]}
+  - {type: noun, article: der, lemma: "Beruf", plural: "die Berufe", level: A2, source: seed,
+     definition: "Die Tätigkeit, mit der ein Mensch sein Geld verdient.",
+     example: "Mein Vater hat einen sehr interessanten Beruf.", tags: [arbeit]}
+  - {type: noun, article: der, lemma: "Briefkasten", plural: "die Briefkästen", level: A2, source: seed,
+     definition: "Ein kleiner Behälter an der Tür für ankommende Post.",
+     example: "Zweimal am Tag schaue ich in den Briefkasten.", tags: [post]}
+  - {type: noun, article: der, lemma: "Bruder", plural: "die Brüder", level: A2, source: seed,
+     definition: "Ein männliches Kind von denselben Eltern.",
+     example: "Mein Bruder wohnt seit zwei Jahren in einer anderen Stadt.", tags: [familie]}
+  - {type: noun, article: der, lemma: "Bus", plural: "die Busse", level: A2, source: seed,
+     definition: "Ein großes Fahrzeug für viele Fahrgäste in der Stadt.",
+     example: "Jeden Morgen nehme ich den Bus zur Arbeit.", tags: [verkehr]}
+  - {type: noun, article: der, lemma: "Chef", plural: "die Chefs", level: A2, source: seed,
+     definition: "Der Mann, der in einem Betrieb die Entscheidungen trifft.",
+     example: "Unser Chef ist heute leider nicht im Haus.", tags: [arbeit]}
+  - {type: noun, article: der, lemma: "Film", plural: "die Filme", level: A2, source: seed,
+     definition: "Eine Geschichte mit Bildern, die man im Kino sieht.",
+     example: "Gestern Abend haben wir einen spannenden Film gesehen.", tags: [freizeit]}
+  - {type: noun, article: der, lemma: "Flughafen", plural: "die Flughäfen", level: A2, source: seed,
+     definition: "Ein Ort, wo Flugzeuge starten und landen.",
+     example: "Der Flughafen liegt weit außerhalb der Stadt.", tags: [reise, verkehr]}
+  - {type: noun, article: der, lemma: "Freund", plural: "die Freunde", level: A2, source: seed,
+     definition: "Eine Person, die man mag und gut kennt.",
+     example: "Mein bester Freund ruft mich fast jeden Abend an.", tags: [mensch]}
+  - {type: noun, article: der, lemma: "Garten", plural: "die Gärten", level: A2, source: seed,
+     definition: "Ein Stück Land am Haus mit Gras und Blumen.",
+     example: "Im Sommer frühstücken wir gern im Garten.", tags: [haus]}
+  - {type: noun, article: der, lemma: "Grund", plural: "die Gründe", level: A2, source: seed,
+     definition: "Warum etwas passiert oder warum jemand etwas tut.",
+     example: "Aus welchem Grund hat sie den Termin abgesagt?", tags: [diskussion]}
+  - {type: noun, article: der, lemma: "Keller", plural: "die Keller", level: A2, source: seed,
+     definition: "Ein dunkler Raum unter dem Haus für alte Sachen.",
+     example: "Im Keller lagern wir Getränke und Werkzeug.", tags: [haus]}
+  - {type: noun, article: der, lemma: "Kellner", plural: "die Kellner", level: A2, source: seed,
+     definition: "Ein Mann, der im Restaurant Speisen und Getränke bringt.",
+     example: "Der Kellner empfiehlt uns heute die Suppe.", tags: [restaurant, beruf]}
+  - {type: noun, article: der, lemma: "Koffer", plural: "die Koffer", level: A2, source: seed,
+     definition: "Eine große Tasche für Kleidung, wenn man verreist.",
+     example: "Mein Koffer ist zu schwer für das Flugzeug.", tags: [reise]}
+  - {type: noun, article: der, lemma: "Kollege", plural: "die Kollegen", level: A2, source: seed,
+     definition: "Ein Mann, mit dem man in derselben Firma zusammenarbeitet.",
+     example: "Mein Kollege hilft mir oft bei schweren Aufgaben.", tags: [arbeit, buero]}
+  - {type: noun, article: der, lemma: "Kopf", plural: "die Köpfe", level: A2, source: seed,
+     definition: "Der oberste Teil vom Körper, mit Augen und Mund.",
+     example: "Nach dem Konzert tat mir der Kopf weh.", tags: [koerper]}
+  - {type: noun, article: der, lemma: "Kuchen", plural: "die Kuchen", level: A2, source: seed,
+     definition: "Etwas Süßes aus Mehl, Eiern und Zucker, meistens rund.",
+     example: "Meine Oma backt jeden Sonntag einen Kuchen.", tags: [essen]}
+  - {type: noun, article: der, lemma: "Kurs", plural: "die Kurse", level: A2, source: seed,
+     definition: "Unterricht über ein Thema, meistens über mehrere Wochen.",
+     example: "Abends besuche ich einen Kurs für Spanisch.", tags: [schule, lernen]}
+  - {type: noun, article: der, lemma: "Käse", plural: "die Käse", level: A2, source: seed,
+     definition: "Feste Speise aus Milch, oft gelb und etwas salzig.",
+     example: "Auf meinem Brot liegt ein Stück Käse.", tags: [essen]}
+  - {type: noun, article: der, lemma: "Lehrer", plural: "die Lehrer", level: A2, source: seed,
+     definition: "Ein Mann, der Kindern in der Schule etwas beibringt.",
+     example: "Unser Lehrer erklärt die Aufgaben immer sehr geduldig.", tags: [schule]}
+  - {type: noun, article: der, lemma: "Markt", plural: "die Märkte", level: A2, source: seed,
+     definition: "Ein Platz im Freien, wo man frische Waren kauft.",
+     example: "Samstags gehen wir früh auf den Markt.", tags: [einkauf]}
+  - {type: noun, article: der, lemma: "Monat", plural: "die Monate", level: A2, source: seed,
+     definition: "Ein Zeitraum von etwa dreißig Tagen, zum Beispiel April.",
+     example: "Im nächsten Monat fahren wir nach Italien.", tags: [zeit]}
+  - {type: noun, article: der, lemma: "Nachbar", plural: "die Nachbarn", level: A2, source: seed,
+     definition: "Eine Person, die nebenan oder im selben Haus wohnt.",
+     example: "Unser Nachbar hilft uns oft im Garten.", tags: [familie, alltag]}
+  - {type: noun, article: der, lemma: "Nachtisch", plural: "die Nachtische", level: A2, source: seed,
+     definition: "Etwas Süßes, das man nach dem Hauptgang isst.",
+     example: "Als Nachtisch nehmen wir beide ein kleines Eis.", tags: [essen, restaurant]}
+  - {type: noun, article: der, lemma: "Preis", plural: "die Preise", level: A2, source: seed,
+     definition: "Das Geld, das eine Ware im Laden kostet.",
+     example: "Der Preis für Butter ist wieder gestiegen.", tags: [einkauf, geld]}
+  - {type: noun, article: der, lemma: "Regen", plural: "", level: A2, source: seed,
+     definition: "Wasser, das aus den Wolken auf die Erde fällt.",
+     example: "Bei diesem Regen gehe ich nicht spazieren.", tags: [wetter, natur]}
+  - {type: noun, article: der, lemma: "Rücken", plural: "die Rücken", level: A2, source: seed,
+     definition: "Die hintere Seite vom Körper, unter dem Hals.",
+     example: "Nach der Gartenarbeit tut mir der Rücken weh.", tags: [koerper]}
+  - {type: noun, article: der, lemma: "Schnee", plural: "", level: A2, source: seed,
+     definition: "Etwas Weißes und Kaltes, das im Winter vom Himmel fällt.",
+     example: "Die Kinder spielen draußen im Schnee.", tags: [wetter, natur]}
+  - {type: noun, article: der, lemma: "Schrank", plural: "die Schränke", level: A2, source: seed,
+     definition: "Ein Möbelstück mit Türen für Kleidung oder Geschirr.",
+     example: "Häng deine Jacke bitte in den Schrank.", tags: [moebel]}
+  - {type: noun, article: der, lemma: "Schuh", plural: "die Schuhe", level: A2, source: seed,
+     definition: "Man trägt ihn am Fuß, wenn man nach draußen geht.",
+     example: "Der linke Schuh drückt mich ein bisschen.", tags: [kleidung]}
+  - {type: noun, article: der, lemma: "Schüler", plural: "die Schüler", level: A2, source: seed,
+     definition: "Ein Kind, das in die Schule geht und dort lernt.",
+     example: "Alle Schüler warten schon vor dem Klassenzimmer.", tags: [schule]}
+  - {type: noun, article: der, lemma: "See", plural: "die Seen", level: A2, source: seed,
+     definition: "Ein großes, stilles Wasser mitten in der Landschaft.",
+     example: "Am Sonntag schwimmen wir im See.", tags: [natur, freizeit]}
+  - {type: noun, article: der, lemma: "Sohn", plural: "die Söhne", level: A2, source: seed,
+     definition: "Das männliche Kind von seinen Eltern.",
+     example: "Ihr Sohn geht seit September in die Schule.", tags: [familie]}
+  - {type: noun, article: der, lemma: "Sommer", plural: "die Sommer", level: A2, source: seed,
+     definition: "Die warme Jahreszeit zwischen Frühling und Herbst.",
+     example: "Im Sommer schwimmen wir fast täglich im See.", tags: [zeit, jahreszeit]}
+  - {type: noun, article: der, lemma: "Tag", plural: "die Tage", level: A2, source: seed,
+     definition: "Vierundzwanzig Stunden von Mitternacht bis Mitternacht.",
+     example: "Der erste Tag im neuen Büro war anstrengend.", tags: [zeit]}
+  - {type: noun, article: der, lemma: "Teppich", plural: "die Teppiche", level: A2, source: seed,
+     definition: "Ein weicher Stoff, der auf dem Boden liegt.",
+     example: "Der Teppich im Wohnzimmer ist schon alt.", tags: [moebel]}
+  - {type: noun, article: der, lemma: "Termin", plural: "die Termine", level: A2, source: seed,
+     definition: "Eine feste Zeit für ein Treffen oder einen Besuch.",
+     example: "Am Dienstag habe ich einen Termin beim Zahnarzt.", tags: [zeit]}
+  - {type: noun, article: der, lemma: "Tisch", plural: "die Tische", level: A2, source: seed,
+     definition: "Ein Möbelstück mit Beinen, an dem man isst oder arbeitet.",
+     example: "Stell die Teller bitte auf den Tisch.", tags: [wohnen]}
+  - {type: noun, article: der, lemma: "Umzug", plural: "die Umzüge", level: A2, source: seed,
+     definition: "Der Wechsel in eine neue Wohnung mit allen Möbeln.",
+     example: "Nach dem Umzug waren wir alle sehr müde.", tags: [wohnen]}
+  - {type: noun, article: der, lemma: "Unterricht", plural: "", level: A2, source: seed,
+     definition: "Die Zeit, in der ein Lehrer den Kindern etwas erklärt.",
+     example: "Der Unterricht beginnt um Viertel vor acht.", tags: [schule]}
+  - {type: noun, article: der, lemma: "Urlaub", plural: "die Urlaube", level: A2, source: seed,
+     definition: "Freie Tage ohne Arbeit, oft an einem schönen Ort.",
+     example: "Diesen Sommer machen wir Urlaub in Österreich.", tags: [reise, freizeit]}
+  - {type: noun, article: der, lemma: "Vermieter", plural: "die Vermieter", level: A2, source: seed,
+     definition: "Die Person, der die Wohnung gehört und die sie anbietet.",
+     example: "Der Vermieter hat den Vertrag schon geschickt.", tags: [wohnen]}
+  - {type: noun, article: der, lemma: "Vogel", plural: "die Vögel", level: A2, source: seed,
+     definition: "Ein Tier mit Federn, das fliegen kann.",
+     example: "Ein kleiner Vogel sitzt auf unserem Balkon.", tags: [tier, natur]}
+  - {type: noun, article: der, lemma: "Wald", plural: "die Wälder", level: A2, source: seed,
+     definition: "Ein großes Gebiet mit sehr vielen Bäumen.",
+     example: "Nach dem Essen gehen wir im Wald spazieren.", tags: [natur]}
+  - {type: noun, article: der, lemma: "Winter", plural: "die Winter", level: A2, source: seed,
+     definition: "Die kalte Jahreszeit mit Schnee und wenig Licht.",
+     example: "Im Winter wird es schon um fünf Uhr dunkel.", tags: [zeit, jahreszeit]}
+  - {type: noun, article: der, lemma: "Zahn", plural: "die Zähne", level: A2, source: seed,
+     definition: "Etwas Hartes im Mund, womit man das Essen kaut.",
+     example: "Kinder sollen sich zweimal am Tag die Zähne putzen.", tags: [koerper, alltag]}
+  - {type: noun, article: der, lemma: "Zug", plural: "die Züge", level: A2, source: seed,
+     definition: "Ein langes Verkehrsmittel, das auf Schienen fährt.",
+     example: "Leider hat der Zug nach Hamburg zwanzig Minuten Verspätung.", tags: [verkehr, reise]}
+  - {type: noun, article: die, lemma: "Antwort", plural: "die Antworten", level: A2, source: seed,
+     definition: "Das, was man sagt, wenn jemand etwas wissen möchte.",
+     example: "Auf meine Mail habe ich noch keine Antwort bekommen.", tags: [sprache]}
+  - {type: noun, article: die, lemma: "Apotheke", plural: "die Apotheken", level: A2, source: seed,
+     definition: "Ein Geschäft, in dem man Medikamente kaufen kann.",
+     example: "Neben dem Bahnhof gibt es eine kleine Apotheke.", tags: [gesundheit]}
+  - {type: noun, article: die, lemma: "Arbeit", plural: "die Arbeiten", level: A2, source: seed,
+     definition: "Alles, was man im Betrieb oder im Haushalt tun muss.",
+     example: "Meine Arbeit beginnt jeden Morgen um acht Uhr.", tags: [arbeit]}
+  - {type: noun, article: die, lemma: "Bewerbung", plural: "die Bewerbungen", level: A2, source: seed,
+     definition: "Ein Brief, mit dem man um eine freie Stelle bittet.",
+     example: "Morgen schicke ich meine Bewerbung an die Firma.", tags: [arbeit]}
+  - {type: noun, article: die, lemma: "Bäckerei", plural: "die Bäckereien", level: A2, source: seed,
+     definition: "Ein Geschäft, in dem man Brot und Brötchen kauft.",
+     example: "Ich hole schnell frische Brötchen aus der Bäckerei.", tags: [stadt, einkaufen]}
+  - {type: noun, article: die, lemma: "Dusche", plural: "die Duschen", level: A2, source: seed,
+     definition: "Ein Platz im Bad, wo Wasser von oben kommt.",
+     example: "Nach dem Sport geht er sofort unter die Dusche.", tags: [alltag, koerper]}
+  - {type: noun, article: die, lemma: "E-Mail", plural: "die E-Mails", level: A2, source: seed,
+     definition: "Eine kurze Nachricht, die man über den Computer verschickt.",
+     example: "Bitte schreib mir eine E-Mail mit den Terminen.", tags: [kommunikation]}
+  - {type: noun, article: die, lemma: "Fahrkarte", plural: "die Fahrkarten", level: A2, source: seed,
+     definition: "Ein kleines Papier, das man für Bus oder Zug kauft.",
+     example: "Bitte zeigen Sie mir Ihre Fahrkarte.", tags: [reise, verkehr]}
+  - {type: noun, article: die, lemma: "Familie", plural: "die Familien", level: A2, source: seed,
+     definition: "Eltern und Kinder, die zusammen leben.",
+     example: "Am Sonntag besucht meine Familie immer die Großeltern.", tags: [familie]}
+  - {type: noun, article: die, lemma: "Firma", plural: "die Firmen", level: A2, source: seed,
+     definition: "Ein Betrieb, der Waren verkauft oder Dienste anbietet.",
+     example: "Seit drei Jahren arbeite ich bei dieser Firma.", tags: [arbeit]}
+  - {type: noun, article: die, lemma: "Flasche", plural: "die Flaschen", level: A2, source: seed,
+     definition: "Ein hohes Gefäß aus Glas oder Plastik für Getränke.",
+     example: "Stell die Flasche bitte in den Kühlschrank.", tags: [einkauf, essen]}
+  - {type: noun, article: die, lemma: "Frage", plural: "die Fragen", level: A2, source: seed,
+     definition: "Damit möchte man etwas wissen.", example: "Hast du noch eine Frage an den Lehrer?",
+     tags: [sprache]}
+  - {type: noun, article: die, lemma: "Großmutter", plural: "die Großmütter", level: A2, source: seed,
+     definition: "Die Mutter von der Mutter oder vom Vater.",
+     example: "Unsere Großmutter backt jeden Sonntag einen leckeren Kuchen.", tags: [familie]}
+  - {type: noun, article: die, lemma: "Größe", plural: "die Größen", level: A2, source: seed,
+     definition: "Die Zahl, die sagt, ob ein Kleidungsstück passt.",
+     example: "Haben Sie dieses Hemd auch in Größe 40?", tags: [kleidung, einkauf]}
+  - {type: noun, article: die, lemma: "Haltestelle", plural: "die Haltestellen", level: A2, source: seed,
+     definition: "Der Ort, wo Bus oder Straßenbahn stehen bleiben.",
+     example: "Bis zur Haltestelle sind es fünf Minuten.", tags: [stadt, verkehr]}
+  - {type: noun, article: die, lemma: "Hand", plural: "die Hände", level: A2, source: seed,
+     definition: "Der Teil vom Arm mit fünf Fingern.", example: "Vor dem Essen wäscht er sich die Hände.",
+     tags: [koerper]}
+  - {type: noun, article: die, lemma: "Hausaufgabe", plural: "die Hausaufgaben", level: A2, source: seed,
+     definition: "Eine Aufgabe, die Kinder für die Schule zu Hause machen.",
+     example: "Seine Hausaufgabe für Montag ist noch nicht fertig.", tags: [schule]}
+  - {type: noun, article: die, lemma: "Hose", plural: "die Hosen", level: A2, source: seed,
+     definition: "Kleidungsstück für die Beine, oft aus blauem Jeansstoff.",
+     example: "Diese Hose ist mir leider viel zu eng.", tags: [kleidung]}
+  - {type: noun, article: die, lemma: "Idee", plural: "die Ideen", level: A2, source: seed,
+     definition: "Ein guter Gedanke, wie man etwas machen kann.",
+     example: "Deine Idee mit dem Picknick gefällt mir.", tags: [alltag]}
+  - {type: noun, article: die, lemma: "Innenstadt", plural: "die Innenstädte", level: A2, source: seed,
+     definition: "Der mittlere Teil einer Stadt mit vielen Geschäften.",
+     example: "In der Innenstadt findet man kaum freie Parkplätze.", tags: [stadt]}
+  - {type: noun, article: die, lemma: "Kasse", plural: "die Kassen", level: A2, source: seed,
+     definition: "Der Platz im Laden, wo man sein Geld bezahlt.",
+     example: "An der Kasse warten heute viele Leute.", tags: [einkauf, geld]}
+  - {type: noun, article: die, lemma: "Krankheit", plural: "die Krankheiten", level: A2, source: seed,
+     definition: "Ein Zustand, in dem es dem Körper schlecht geht.",
+     example: "Nach seiner langen Krankheit arbeitet er wieder normal.", tags: [gesundheit]}
+  - {type: noun, article: die, lemma: "Kreuzung", plural: "die Kreuzungen", level: A2, source: seed,
+     definition: "Die Stelle, wo sich zwei Straßen treffen.",
+     example: "An der nächsten Kreuzung musst du links fahren.", tags: [stadt, weg]}
+  - {type: noun, article: die, lemma: "Küche", plural: "die Küchen", level: A2, source: seed,
+     definition: "Der Raum, in dem man kocht und das Essen macht.",
+     example: "In der Küche riecht es nach frischem Kaffee.", tags: [haus]}
+  - {type: noun, article: die, lemma: "Lampe", plural: "die Lampen", level: A2, source: seed,
+     definition: "Ein Gerät, das einen Raum am Abend hell macht.",
+     example: "Mach bitte die Lampe im Flur an.", tags: [moebel]}
+  - {type: noun, article: die, lemma: "Miete", plural: "die Mieten", level: A2, source: seed,
+     definition: "Das Geld, das man jeden Monat für eine Wohnung zahlt.",
+     example: "Die Miete ist dieses Jahr wieder gestiegen.", tags: [wohnen, geld]}
+  - {type: noun, article: die, lemma: "Milch", plural: "", level: A2, source: seed,
+     definition: "Weißes Getränk von der Kuh, gut für Kaffee und Müsli.",
+     example: "Ich trinke meinen Kaffee immer mit Milch.", tags: [essen]}
+  - {type: noun, article: die, lemma: "Nachricht", plural: "die Nachrichten", level: A2, source: seed,
+     definition: "Eine kurze Information, die man jemandem schickt.",
+     example: "Schick mir bitte eine Nachricht, wenn du da bist.", tags: [technik, sprache]}
+  - {type: noun, article: die, lemma: "Packung", plural: "die Packungen", level: A2, source: seed,
+     definition: "Papier oder Karton um eine Ware, die man kauft.",
+     example: "Wir brauchen noch eine Packung Nudeln.", tags: [einkauf]}
+  - {type: noun, article: die, lemma: "Pause", plural: "die Pausen", level: A2, source: seed,
+     definition: "Kurze Zeit zum Ausruhen zwischen zwei Stunden Arbeit.",
+     example: "In der Pause trinken wir zusammen einen Kaffee.", tags: [arbeit, zeit]}
+  - {type: noun, article: die, lemma: "Post", plural: "", level: A2, source: seed,
+     definition: "Ein Ort, wo man Briefe und Pakete abgibt.",
+     example: "Am Nachmittag bringe ich das Paket zur Post.", tags: [stadt]}
+  - {type: noun, article: die, lemma: "Prüfung", plural: "die Prüfungen", level: A2, source: seed,
+     definition: "Ein Test, bei dem man sein Wissen zeigen muss.",
+     example: "Nächste Woche schreiben wir eine wichtige Prüfung.", tags: [schule]}
+  - {type: noun, article: die, lemma: "Rechnung", plural: "die Rechnungen", level: A2, source: seed,
+     definition: "Ein Zettel, der zeigt, wie viel man zahlen muss.",
+     example: "Nach dem Essen bittet mein Vater um die Rechnung.", tags: [restaurant, geld]}
+  - {type: noun, article: die, lemma: "Reise", plural: "die Reisen", level: A2, source: seed,
+     definition: "Eine Fahrt in eine andere Stadt oder ein anderes Land.",
+     example: "Nach Spanien war es wirklich eine schöne Reise.", tags: [reise]}
+  - {type: noun, article: die, lemma: "Schule", plural: "die Schulen", level: A2, source: seed,
+     definition: "Ein Haus, in dem Kinder lesen, rechnen und schreiben lernen.",
+     example: "Meine Tochter geht seit September in die Schule.", tags: [schule]}
+  - {type: noun, article: die, lemma: "Schwester", plural: "die Schwestern", level: A2, source: seed,
+     definition: "Ein weibliches Kind von denselben Eltern.",
+     example: "Meine Schwester ist zwei Jahre älter als ich.", tags: [familie]}
+  - {type: noun, article: die, lemma: "Speisekarte", plural: "die Speisekarten", level: A2, source: seed,
+     definition: "Eine Liste im Restaurant mit allen Gerichten und Preisen.",
+     example: "Dürfen wir bitte die Speisekarte haben?", tags: [restaurant]}
+  - {type: noun, article: die, lemma: "Sprache", plural: "die Sprachen", level: A2, source: seed,
+     definition: "Damit sprechen und schreiben die Menschen eines Landes.",
+     example: "Sie spricht drei Sprachen fast ohne Fehler.", tags: [sprache]}
+  - {type: noun, article: die, lemma: "Stadt", plural: "die Städte", level: A2, source: seed,
+     definition: "Ein großer Ort mit vielen Häusern und Menschen.",
+     example: "Am Samstag fahren wir in die Stadt.", tags: [stadt]}
+  - {type: noun, article: die, lemma: "Straße", plural: "die Straßen", level: A2, source: seed,
+     definition: "Ein Weg in der Stadt, auf dem Autos fahren.",
+     example: "In unserer Straße ist es abends sehr ruhig.", tags: [stadt]}
+  - {type: noun, article: die, lemma: "Stunde", plural: "die Stunden", level: A2, source: seed,
+     definition: "Ein Zeitraum von sechzig Minuten.", example: "Wir warten schon eine Stunde auf den Bus.",
+     tags: [zeit]}
+  - {type: noun, article: die, lemma: "Tante", plural: "die Tanten", level: A2, source: seed,
+     definition: "Die Schwester von der Mutter oder vom Vater.",
+     example: "Meine Tante kommt morgen zu Besuch.", tags: [familie]}
+  - {type: noun, article: die, lemma: "Tochter", plural: "die Töchter", level: A2, source: seed,
+     definition: "Das weibliche Kind von seinen Eltern.",
+     example: "Unsere Tochter spielt gern mit den Kindern von nebenan.", tags: [familie]}
+  - {type: noun, article: die, lemma: "Treppe", plural: "die Treppen", level: A2, source: seed,
+     definition: "Damit geht man im Haus nach oben oder unten.",
+     example: "Die Kinder rennen laut die Treppe hinauf.", tags: [haus]}
+  - {type: noun, article: die, lemma: "Tür", plural: "die Türen", level: A2, source: seed,
+     definition: "Damit macht man einen Raum auf und zu.", example: "Die Tür zum Balkon steht offen.",
+     tags: [wohnen]}
+  - {type: noun, article: die, lemma: "Woche", plural: "die Wochen", level: A2, source: seed,
+     definition: "Ein Zeitraum von sieben Tagen, von Montag bis Sonntag.",
+     example: "Diese Woche habe ich wirklich sehr viel zu tun.", tags: [zeit]}
+  - {type: noun, article: die, lemma: "Wohnung", plural: "die Wohnungen", level: A2, source: seed,
+     definition: "Mehrere Räume in einem Haus, wo Menschen leben.",
+     example: "Unsere Wohnung liegt im dritten Stock.", tags: [haus, wohnen]}
+  - {type: noun, article: die, lemma: "Zeit", plural: "die Zeiten", level: A2, source: seed,
+     definition: "Was die Uhr misst; man hat davon viel oder wenig.",
+     example: "Am Nachmittag habe ich leider keine Zeit.", tags: [zeit]}
+  - {type: noun, article: das, lemma: "Abendessen", plural: "die Abendessen", level: A2, source: seed,
+     definition: "Die warme Mahlzeit am Abend, meistens mit der Familie.",
+     example: "Das Abendessen steht schon auf dem Tisch.", tags: [essen]}
+  - {type: noun, article: das, lemma: "Angebot", plural: "die Angebote", level: A2, source: seed,
+     definition: "Eine Ware, die im Laden gerade billiger ist.",
+     example: "Diese Woche sind Erdbeeren im Angebot.", tags: [einkauf, geld]}
+  - {type: noun, article: das, lemma: "Auge", plural: "die Augen", level: A2, source: seed,
+     definition: "Der Körperteil, mit dem man sehen kann.",
+     example: "Meine Freundin hat sehr schöne grüne Augen.", tags: [koerper]}
+  - {type: noun, article: das, lemma: "Auto", plural: "die Autos", level: A2, source: seed,
+     definition: "Ein Fahrzeug mit vier Rädern für die Straße.",
+     example: "Vor dem Haus steht unser altes Auto.", tags: [verkehr]}
+  - {type: noun, article: das, lemma: "Badezimmer", plural: "die Badezimmer", level: A2, source: seed,
+     definition: "Der Raum mit Dusche, Waschbecken und Toilette.",
+     example: "Unser Badezimmer ist leider ziemlich klein.", tags: [haus]}
+  - {type: noun, article: das, lemma: "Bein", plural: "die Beine", level: A2, source: seed,
+     definition: "Der Körperteil, mit dem man geht und steht.",
+     example: "Beim Fußball hat er sich das Bein verletzt.", tags: [koerper]}
+  - {type: noun, article: das, lemma: "Bett", plural: "die Betten", level: A2, source: seed,
+     definition: "Ein Möbelstück, in dem man nachts schläft.",
+     example: "Die Kinder gehen um acht Uhr ins Bett.", tags: [wohnen]}
+  - {type: noun, article: das, lemma: "Brot", plural: "die Brote", level: A2, source: seed,
+     definition: "Ein Nahrungsmittel aus Mehl, das der Bäcker backt.",
+     example: "Zum Frühstück isst sie gern frisches Brot.", tags: [essen]}
+  - {type: noun, article: das, lemma: "Brötchen", plural: "die Brötchen", level: A2, source: seed,
+     definition: "Kleines rundes Gebäck, das man morgens gern frisch isst.",
+     example: "Beim Bäcker kaufe ich sechs frische Brötchen.", tags: [essen, einkauf]}
+  - {type: noun, article: das, lemma: "Buch", plural: "die Bücher", level: A2, source: seed,
+     definition: "Viele bedruckte Seiten zwischen zwei Deckeln, die man liest.",
+     example: "Dieses Buch habe ich in zwei Tagen gelesen.", tags: [freizeit]}
+  - {type: noun, article: das, lemma: "Büro", plural: "die Büros", level: A2, source: seed,
+     definition: "Ein Raum, in dem Menschen am Schreibtisch und Computer arbeiten.",
+     example: "In unserem Büro stehen sechs Tische am Fenster.", tags: [arbeit, buero]}
+  - {type: noun, article: das, lemma: "Fahrrad", plural: "die Fahrräder", level: A2, source: seed,
+     definition: "Ein Verkehrsmittel mit zwei Rädern, das man selbst tritt.",
+     example: "Zur Schule fahre ich jeden Tag mit dem Fahrrad.", tags: [verkehr, sport]}
+  - {type: noun, article: das, lemma: "Fenster", plural: "die Fenster", level: A2, source: seed,
+     definition: "Eine Öffnung in der Wand aus Glas, durch die Licht kommt.",
+     example: "Mach bitte das Fenster zu, es zieht.", tags: [wohnen]}
+  - {type: noun, article: das, lemma: "Fieber", plural: "", level: A2, source: seed,
+     definition: "Eine zu hohe Temperatur im Körper, wenn man krank ist.",
+     example: "Das Kind hat hohes Fieber und bleibt im Bett.", tags: [gesundheit]}
+  - {type: noun, article: das, lemma: "Fleisch", plural: "", level: A2, source: seed,
+     definition: "Essen vom Tier, zum Beispiel vom Schwein oder Rind.",
+     example: "Meine Schwester isst kein Fleisch, nur Fisch.", tags: [essen]}
+  - {type: noun, article: das, lemma: "Frühstück", plural: "die Frühstücke", level: A2, source: seed,
+     definition: "Das erste Essen am Morgen, oft mit Brot und Kaffee.",
+     example: "Zum Frühstück esse ich meistens ein weiches Ei.", tags: [essen]}
+  - {type: noun, article: das, lemma: "Geld", plural: "", level: A2, source: seed,
+     definition: "Damit bezahlt man im Geschäft.", example: "Für das neue Fahrrad fehlt uns noch Geld.",
+     tags: [geld]}
+  - {type: noun, article: das, lemma: "Gemüse", plural: "", level: A2, source: seed,
+     definition: "Pflanzen zum Essen, zum Beispiel Karotten, Tomaten und Salat.",
+     example: "Frisches Gemüse bekommst du auf dem Markt.", tags: [essen, einkauf]}
+  - {type: noun, article: das, lemma: "Gepäck", plural: "", level: A2, source: seed,
+     definition: "Alle Taschen und Koffer, die man auf einer Fahrt mitnimmt.",
+     example: "Kannst du mir kurz mit dem Gepäck helfen?", tags: [reise]}
+  - {type: noun, article: das, lemma: "Gericht", plural: "die Gerichte", level: A2, source: seed,
+     definition: "Eine fertige Speise, die man im Lokal bestellen kann.",
+     example: "Dieses Gericht mit Reis mag ich besonders gern.", tags: [essen, restaurant]}
+  - {type: noun, article: das, lemma: "Gesicht", plural: "die Gesichter", level: A2, source: seed,
+     definition: "Die vordere Seite vom Kopf mit Nase, Mund und Augen.",
+     example: "Nach dem Aufstehen wäscht sie sich das Gesicht.", tags: [koerper]}
+  - {type: noun, article: das, lemma: "Getränk", plural: "die Getränke", level: A2, source: seed,
+     definition: "Etwas zum Trinken, zum Beispiel Wasser, Saft oder Tee.",
+     example: "Möchtest du noch ein kaltes Getränk?", tags: [essen, restaurant]}
+  - {type: noun, article: das, lemma: "Haar", plural: "die Haare", level: A2, source: seed,
+     definition: "Was auf dem Kopf wächst und lang werden kann.",
+     example: "Meine Schwester hat lange dunkle Haare.", tags: [koerper, aussehen]}
+  - {type: noun, article: das, lemma: "Handy", plural: "die Handys", level: A2, source: seed,
+     definition: "Ein kleines Telefon, das man immer dabeihat.",
+     example: "Mein Handy ist schon wieder leer.", tags: [technik]}
+  - {type: noun, article: das, lemma: "Haus", plural: "die Häuser", level: A2, source: seed,
+     definition: "Ein Gebäude, in dem Menschen wohnen.", example: "Das alte Haus hat einen großen Garten.",
+     tags: [wohnen]}
+  - {type: noun, article: das, lemma: "Hobby", plural: "die Hobbys", level: A2, source: seed,
+     definition: "Eine Sache, die man in der Freizeit gern macht.",
+     example: "Kochen ist mein liebstes Hobby.", tags: [freizeit]}
+  - {type: noun, article: das, lemma: "Hotel", plural: "die Hotels", level: A2, source: seed,
+     definition: "Ein Haus, in dem Gäste gegen Geld übernachten.",
+     example: "Wir haben ein günstiges Hotel im Zentrum gebucht.", tags: [reise, urlaub]}
+  - {type: noun, article: das, lemma: "Jahr", plural: "die Jahre", level: A2, source: seed,
+     definition: "Ein Zeitraum von zwölf Monaten.",
+     example: "Letztes Jahr habe ich zwei Fremdsprachen gelernt.", tags: [zeit]}
+  - {type: noun, article: das, lemma: "Kind", plural: "die Kinder", level: A2, source: seed,
+     definition: "Ein junger Mensch, der noch nicht erwachsen ist.",
+     example: "Das Kind spielt fröhlich im Garten.", tags: [familie, mensch]}
+  - {type: noun, article: das, lemma: "Kleid", plural: "die Kleider", level: A2, source: seed,
+     definition: "Frauen tragen es gern im Sommer oder bei einer Feier.",
+     example: "Zur Hochzeit trägt sie ein blaues Kleid.", tags: [kleidung]}
+  - {type: noun, article: das, lemma: "Konto", plural: "die Konten", level: A2, source: seed,
+     definition: "Bei der Bank hat man dort sein Geld.",
+     example: "Mein Gehalt kommt am Monatsende aufs Konto.", tags: [bank, geld]}
+  - {type: noun, article: das, lemma: "Land", plural: "die Länder", level: A2, source: seed,
+     definition: "Ein Staat mit eigener Regierung; auch das Gebiet außerhalb der Städte.",
+     example: "Meine Großeltern leben auf dem Land.", tags: [stadt, reisen]}
+  - {type: noun, article: das, lemma: "Obst", plural: "", level: A2, source: seed,
+     definition: "Süße Früchte wie Äpfel, Bananen oder Birnen.",
+     example: "Jeden Tag esse ich einen Teller Obst.", tags: [essen]}
+  - {type: noun, article: das, lemma: "Problem", plural: "die Probleme", level: A2, source: seed,
+     definition: "Eine schwierige Sache, für die man eine Lösung sucht.",
+     example: "Mit der Heizung gibt es seit gestern ein Problem.", tags: [alltag]}
+  - {type: noun, article: das, lemma: "Rathaus", plural: "die Rathäuser", level: A2, source: seed,
+     definition: "Das Gebäude, in dem die Verwaltung einer Stadt arbeitet.",
+     example: "Vor dem Rathaus ist jeden Samstag Markt.", tags: [stadt, gebaeude]}
+  - {type: noun, article: das, lemma: "Regal", plural: "die Regale", level: A2, source: seed,
+     definition: "Ein Möbelstück mit Brettern für Bücher oder Gläser.",
+     example: "Über dem Schreibtisch hängt ein langes Regal.", tags: [moebel]}
+  - {type: noun, article: das, lemma: "Telefon", plural: "die Telefone", level: A2, source: seed,
+     definition: "Ein Gerät, mit dem man andere Menschen anrufen kann.",
+     example: "Das Telefon im Büro klingelt schon wieder.", tags: [kommunikation]}
+  - {type: noun, article: das, lemma: "Wasser", plural: "", level: A2, source: seed,
+     definition: "Die klare Flüssigkeit, die man jeden Tag trinkt.",
+     example: "Bringen Sie uns bitte noch stilles Wasser.", tags: [essen]}
+  - {type: noun, article: das, lemma: "Wetter", plural: "", level: A2, source: seed,
+     definition: "Sonne, Regen oder Wind an einem bestimmten Tag.",
+     example: "Heute ist das Wetter endlich wieder besser.", tags: [natur]}
+  - {type: noun, article: das, lemma: "Wochenende", plural: "die Wochenenden", level: A2, source: seed,
+     definition: "Samstag und Sonntag, wenn die meisten Leute frei haben.",
+     example: "Am Wochenende schlafe ich gerne etwas länger.", tags: [zeit, freizeit]}
+  - {type: noun, article: das, lemma: "Wort", plural: "die Wörter", level: A2, source: seed,
+     definition: "Der kleinste Teil eines Satzes mit eigener Bedeutung.",
+     example: "Dieses Wort kenne ich noch nicht.", tags: [sprache]}
+  - {type: noun, article: das, lemma: "Zimmer", plural: "die Zimmer", level: A2, source: seed,
+     definition: "Ein Raum in einer Wohnung, zum Beispiel zum Schlafen.",
+     example: "Mein Zimmer ist klein, aber sehr hell.", tags: [haus]}
+
+  # ---------------------------------------------------------------- Verben
+  - {type: verb, lemma: "abbiegen", praesens_3sg: "biegt ab", praeteritum: "bog ab",
+     perfekt: "ist abgebogen", aux: sein, separable: true, rection: "abbiegen in + Akk.", level: A2,
+     source: seed, definition: "An einer Ecke die Richtung nach links oder rechts ändern.",
+     example: "Biegen Sie hinter der Kirche nach rechts ab.", tags: [weg, verkehr]}
+  - {type: verb, lemma: "abfahren", praesens_3sg: "fährt ab", praeteritum: "fuhr ab",
+     perfekt: "ist abgefahren", aux: sein, separable: true, level: A2, source: seed,
+     definition: "Einen Ort verlassen und die Fahrt beginnen.",
+     example: "Unser Bus fährt um sieben Uhr am Markt ab.", tags: [verkehr, reise]}
+  - {type: verb, lemma: "anfangen", praesens_3sg: "fängt an", praeteritum: "fing an",
+     perfekt: "hat angefangen", aux: haben, separable: true, rection: "anfangen mit + Dativ", level: A2,
+     source: seed, definition: "Mit einer Sache beginnen, zum Beispiel mit der Arbeit.",
+     example: "Der Kurs fängt am ersten Montag im Mai an.", tags: [zeit, schule]}
+  - {type: verb, lemma: "ankommen", praesens_3sg: "kommt an", praeteritum: "kam an",
+     perfekt: "ist angekommen", aux: sein, separable: true, rection: "ankommen in + Dat.", level: A2,
+     source: seed, definition: "Nach einer Reise endlich am Ziel sein.",
+     example: "Der Zug aus Berlin kommt um acht Uhr an.", tags: [reise, verkehr]}
+  - {type: verb, lemma: "anprobieren", praesens_3sg: "probiert an", praeteritum: "probierte an",
+     perfekt: "hat anprobiert", aux: haben, separable: true, level: A2, source: seed,
+     definition: "Kleidung kurz tragen, um zu sehen, ob sie passt.",
+     example: "Probier die schwarze Jacke doch einmal an!", tags: [kleidung, einkauf]}
+  - {type: verb, lemma: "anrufen", praesens_3sg: "ruft an", praeteritum: "rief an",
+     perfekt: "hat angerufen", aux: haben, separable: true, level: A2, source: seed,
+     definition: "Mit dem Telefon mit jemandem sprechen.",
+     example: "Ruf mich bitte heute Abend nach acht an.", tags: [kommunikation]}
+  - {type: verb, lemma: "antworten", praesens_3sg: "antwortet", praeteritum: "antwortete",
+     perfekt: "hat geantwortet", aux: haben, separable: false, rection: "antworten + Dat. / auf + Akk.",
+     level: A2, source: seed, definition: "Auf eine Frage etwas sagen oder schreiben.",
+     example: "Der Chef antwortet mir immer sehr schnell.", tags: [kommunikation, buero]}
+  - {type: verb, lemma: "anziehen", praesens_3sg: "zieht an", praeteritum: "zog an",
+     perfekt: "hat angezogen", aux: haben, separable: true, level: A2, source: seed,
+     definition: "Kleidung auf den Körper nehmen, bevor man rausgeht.",
+     example: "Zieh bitte deine warme Jacke an!", tags: [kleidung]}
+  - {type: verb, lemma: "arbeiten", praesens_3sg: "arbeitet", praeteritum: "arbeitete",
+     perfekt: "hat gearbeitet", aux: haben, separable: false, level: A2, source: seed,
+     definition: "Für Geld etwas tun, meistens in einem Betrieb.",
+     example: "Meine Schwester arbeitet in einem großen Krankenhaus.", tags: [arbeit]}
+  - {type: verb, lemma: "aufhören", praesens_3sg: "hört auf", praeteritum: "hörte auf",
+     perfekt: "hat aufgehört", aux: haben, separable: true, rection: "aufhören mit + Dat.", level: A2,
+     source: seed, definition: "Eine Tätigkeit nicht weitermachen und sie beenden.",
+     example: "Mein Nachbar hört endlich mit dem Rauchen auf.", tags: [zeit, gewohnheit]}
+  - {type: verb, lemma: "aufmachen", praesens_3sg: "macht auf", praeteritum: "machte auf",
+     perfekt: "hat aufgemacht", aux: haben, separable: true, level: A2, source: seed,
+     definition: "Eine Tür, ein Fenster oder eine Flasche öffnen.",
+     example: "Mach bitte das Fenster im Wohnzimmer auf.", tags: [haushalt, alltag]}
+  - {type: verb, lemma: "aufräumen", praesens_3sg: "räumt auf", praeteritum: "räumte auf",
+     perfekt: "hat aufgeräumt", aux: haben, separable: true, level: A2, source: seed,
+     definition: "Alle Sachen wieder an ihren richtigen Platz legen.",
+     example: "Räum bitte dein Zimmer vor dem Essen auf.", tags: [haushalt]}
+  - {type: verb, lemma: "aufstehen", praesens_3sg: "steht auf", praeteritum: "stand auf",
+     perfekt: "ist aufgestanden", aux: sein, separable: true, level: A2, source: seed,
+     definition: "Morgens aus dem Bett kommen und den Tag beginnen.",
+     example: "Am Sonntag stehen wir erst um zehn auf.", tags: [alltag]}
+  - {type: verb, lemma: "aufwachen", praesens_3sg: "wacht auf", praeteritum: "wachte auf",
+     perfekt: "ist aufgewacht", aux: sein, separable: true, level: A2, source: seed,
+     definition: "Nach dem Schlafen wieder die Augen öffnen.",
+     example: "Am Wochenende wache ich meistens sehr spät auf.", tags: [alltag]}
+  - {type: verb, lemma: "ausgehen", praesens_3sg: "geht aus", praeteritum: "ging aus",
+     perfekt: "ist ausgegangen", aux: sein, separable: true, level: A2, source: seed,
+     definition: "Abends das Haus verlassen, um Spaß zu haben.",
+     example: "Am Samstag gehen meine Freunde gern aus.", tags: [freizeit]}
+  - {type: verb, lemma: "aussteigen", praesens_3sg: "steigt aus", praeteritum: "stieg aus",
+     perfekt: "ist ausgestiegen", aux: sein, separable: true, level: A2, source: seed,
+     definition: "Ein Fahrzeug verlassen und wieder auf der Straße stehen.",
+     example: "An der nächsten Haltestelle steigen wir aus.", tags: [verkehr]}
+  - {type: verb, lemma: "beginnen", praesens_3sg: "beginnt", praeteritum: "begann",
+     perfekt: "hat begonnen", aux: haben, separable: false, rection: "beginnen mit + Dat.", level: A2,
+     source: seed, definition: "Der erste Teil von etwas Neuem sein oder es starten.",
+     example: "Der Deutschkurs beginnt nächste Woche im September.", tags: [zeit, lernen]}
+  - {type: verb, lemma: "bekommen", praesens_3sg: "bekommt", praeteritum: "bekam", perfekt: "hat bekommen",
+     aux: haben, separable: false, level: A2, source: seed,
+     definition: "Etwas von einer anderen Person erhalten.",
+     example: "Zum Geburtstag bekommt mein Sohn ein neues Fahrrad.", tags: [alltag, geschenke]}
+  - {type: verb, lemma: "bestellen", praesens_3sg: "bestellt", praeteritum: "bestellte",
+     perfekt: "hat bestellt", aux: haben, separable: false, level: A2, source: seed,
+     definition: "Im Lokal sagen, was man essen oder trinken möchte.",
+     example: "Wir bestellen zwei Pizzen und einen Salat.", tags: [restaurant]}
+  - {type: verb, lemma: "besuchen", praesens_3sg: "besucht", praeteritum: "besuchte",
+     perfekt: "hat besucht", aux: haben, separable: false, level: A2, source: seed,
+     definition: "Zu einer Person oder an einen Ort fahren und dort bleiben.",
+     example: "Im Sommer besuchen wir unsere Verwandten in Polen.", tags: [soziales, reise]}
+  - {type: verb, lemma: "bezahlen", praesens_3sg: "bezahlt", praeteritum: "bezahlte",
+     perfekt: "hat bezahlt", aux: haben, separable: false, rection: "bezahlen für + Akk.", level: A2,
+     source: seed, definition: "Für eine Ware oder eine Arbeit Geld geben.",
+     example: "An der Kasse bezahlt der Kunde mit Karte.", tags: [geld, einkauf]}
+  - {type: verb, lemma: "bringen", praesens_3sg: "bringt", praeteritum: "brachte", perfekt: "hat gebracht",
+     aux: haben, separable: false, rection: "bringen + Dat. + Akk.", level: A2, source: seed,
+     definition: "Etwas zu einem Ort oder zu einer Person tragen.",
+     example: "Der Postbote bringt uns jeden Tag die Post.", tags: [alltag]}
+  - {type: verb, lemma: "dauern", praesens_3sg: "dauert", praeteritum: "dauerte", perfekt: "hat gedauert",
+     aux: haben, separable: false, level: A2, source: seed,
+     definition: "Eine bestimmte Zeit lang gehen oder brauchen.",
+     example: "Die Prüfung dauert genau neunzig Minuten.", tags: [zeit]}
+  - {type: verb, lemma: "denken", praesens_3sg: "denkt", praeteritum: "dachte", perfekt: "hat gedacht",
+     aux: haben, separable: false, rection: "denken an + Akk. / über + Akk.", level: A2, source: seed,
+     definition: "Im Kopf Ideen bilden oder sich etwas vorstellen.",
+     example: "Im Urlaub denkt sie oft an ihre Arbeit.", tags: [gedanken]}
+  - {type: verb, lemma: "einkaufen", praesens_3sg: "kauft ein", praeteritum: "kaufte ein",
+     perfekt: "hat eingekauft", aux: haben, separable: true, level: A2, source: seed,
+     definition: "In Geschäften Lebensmittel und andere Dinge kaufen.",
+     example: "Freitags kaufen wir für das ganze Wochenende ein.", tags: [einkauf]}
+  - {type: verb, lemma: "einladen", praesens_3sg: "lädt ein", praeteritum: "lud ein",
+     perfekt: "hat eingeladen", aux: haben, separable: true, rection: "einladen zu + Dat.", level: A2,
+     source: seed, definition: "Jemanden bitten, zu einem Fest oder Essen zu kommen.",
+     example: "Zum Grillen lädt Tobias alle Nachbarn ein.", tags: [freizeit, feste]}
+  - {type: verb, lemma: "einrichten", praesens_3sg: "richtet ein", praeteritum: "richtete ein",
+     perfekt: "hat eingerichtet", aux: haben, separable: true, level: A2, source: seed,
+     definition: "Möbel in eine leere Wohnung stellen und sie schön machen.",
+     example: "Sie hat ihr neues Zimmer gemütlich eingerichtet.", tags: [wohnen, moebel]}
+  - {type: verb, lemma: "einschlafen", praesens_3sg: "schläft ein", praeteritum: "schlief ein",
+     perfekt: "ist eingeschlafen", aux: sein, separable: true, level: A2, source: seed,
+     definition: "Abends müde werden und langsam in den Schlaf fallen.",
+     example: "Das Baby schläft im Auto immer sehr schnell ein.", tags: [alltag, gesundheit]}
+  - {type: verb, lemma: "einsteigen", praesens_3sg: "steigt ein", praeteritum: "stieg ein",
+     perfekt: "ist eingestiegen", aux: sein, separable: true, level: A2, source: seed,
+     definition: "In ein Auto, einen Bus oder einen Zug hineingehen.",
+     example: "Bitte steigen Sie vorne beim Fahrer ein.", tags: [verkehr]}
+  - {type: verb, lemma: "erklären", praesens_3sg: "erklärt", praeteritum: "erklärte",
+     perfekt: "hat erklärt", aux: haben, separable: false, rection: "erklären + Dat.", level: A2,
+     source: seed, definition: "Einer Person etwas so sagen, dass sie es versteht.",
+     example: "Die Ärztin erklärt dem Patienten die neuen Tabletten.", tags: [lernen, kommunikation]}
+  - {type: verb, lemma: "erzählen", praesens_3sg: "erzählt", praeteritum: "erzählte",
+     perfekt: "hat erzählt", aux: haben, separable: false, rection: "erzählen von + Dat. / über + Akk.",
+     level: A2, source: seed,
+     definition: "Einer Person eine Geschichte oder Neuigkeiten mit Worten mitteilen.",
+     example: "Oma erzählt den Kindern jeden Abend ein Märchen.", tags: [kommunikation]}
+  - {type: verb, lemma: "fahren", praesens_3sg: "fährt", praeteritum: "fuhr", perfekt: "ist gefahren",
+     aux: sein, separable: false, level: A2, source: seed,
+     definition: "Mit dem Auto, dem Bus oder dem Zug von einem Ort zum anderen reisen.",
+     example: "Am Wochenende fährt meine Familie ans Meer.", tags: [reise, verkehr]}
+  - {type: verb, lemma: "fliegen", praesens_3sg: "fliegt", praeteritum: "flog", perfekt: "ist geflogen",
+     aux: sein, separable: false, level: A2, source: seed,
+     definition: "Mit dem Flugzeug durch die Luft reisen.",
+     example: "Nächsten Sommer fliegen wir nach Spanien.", tags: [reise]}
+  - {type: verb, lemma: "fragen", praesens_3sg: "fragt", praeteritum: "fragte", perfekt: "hat gefragt",
+     aux: haben, separable: false, rection: "fragen nach + Dat.", level: A2, source: seed,
+     definition: "Etwas wissen wollen und darum eine Person ansprechen.",
+     example: "Der Tourist fragt einen Polizisten nach dem Weg.", tags: [kommunikation]}
+  - {type: verb, lemma: "geben", praesens_3sg: "gibt", praeteritum: "gab", perfekt: "hat gegeben",
+     aux: haben, separable: false, rection: "geben + Dat. + Akk.", level: A2, source: seed,
+     definition: "Einer Person etwas in die Hand legen.", example: "Der Kellner gibt uns die Speisekarte.",
+     tags: [alltag]}
+  - {type: verb, lemma: "gehen", praesens_3sg: "geht", praeteritum: "ging", perfekt: "ist gegangen",
+     aux: sein, separable: false, level: A2, source: seed,
+     definition: "Sich zu Fuß von einem Ort zum anderen bewegen.",
+     example: "Die Kinder gehen jeden Morgen zusammen zur Schule.", tags: [alltag, bewegung]}
+  - {type: verb, lemma: "glauben", praesens_3sg: "glaubt", praeteritum: "glaubte", perfekt: "hat geglaubt",
+     aux: haben, separable: false, rection: "glauben an + Akk.", level: A2, source: seed,
+     definition: "Etwas für wahr halten, ohne es sicher zu wissen.",
+     example: "Mein Kollege glaubt jede Geschichte im Internet.", tags: [gedanken]}
+  - {type: verb, lemma: "heiraten", praesens_3sg: "heiratet", praeteritum: "heiratete",
+     perfekt: "hat geheiratet", aux: haben, separable: false, level: A2, source: seed,
+     definition: "Als Paar offiziell Mann und Frau werden.",
+     example: "Im Sommer heiratet meine beste Freundin.", tags: [familie]}
+  - {type: verb, lemma: "helfen", praesens_3sg: "hilft", praeteritum: "half", perfekt: "hat geholfen",
+     aux: haben, separable: false, rection: "helfen + Dat.", level: A2, source: seed,
+     definition: "Etwas für jemanden tun, damit es leichter wird.",
+     example: "Meine Nachbarin hilft mir jede Woche beim Einkaufen.", tags: [alltag, familie]}
+  - {type: verb, lemma: "kochen", praesens_3sg: "kocht", praeteritum: "kochte", perfekt: "hat gekocht",
+     aux: haben, separable: false, level: A2, source: seed,
+     definition: "Essen warm zubereiten, meistens auf dem Herd.",
+     example: "Heute Abend koche ich Nudeln mit Soße.", tags: [essen]}
+  - {type: verb, lemma: "kommen", praesens_3sg: "kommt", praeteritum: "kam", perfekt: "ist gekommen",
+     aux: sein, separable: false, level: A2, source: seed,
+     definition: "An einen Ort gelangen, wo jemand schon wartet.",
+     example: "Meine Freundin kommt heute Abend zu mir.", tags: [alltag, bewegung]}
+  - {type: verb, lemma: "laufen", praesens_3sg: "läuft", praeteritum: "lief", perfekt: "ist gelaufen",
+     aux: sein, separable: false, level: A2, source: seed,
+     definition: "Sich schnell zu Fuß bewegen, viel schneller als beim Spazieren.",
+     example: "Der Hund läuft schnell über die grüne Wiese.", tags: [sport, bewegung]}
+  - {type: verb, lemma: "leihen", praesens_3sg: "leiht", praeteritum: "lieh", perfekt: "hat geliehen",
+     aux: haben, separable: false, rection: "leihen + Dat. + Akk.", level: A2, source: seed,
+     definition: "Einer Person etwas für kurze Zeit geben.",
+     example: "Kannst du mir bitte deinen Regenschirm leihen?", tags: [alltag]}
+  - {type: verb, lemma: "lernen", praesens_3sg: "lernt", praeteritum: "lernte", perfekt: "hat gelernt",
+     aux: haben, separable: false, level: A2, source: seed,
+     definition: "Neues Wissen bekommen, zum Beispiel in der Schule.",
+     example: "Jeden Abend lernt er zwanzig neue Wörter.", tags: [schule, lernen]}
+  - {type: verb, lemma: "lesen", praesens_3sg: "liest", praeteritum: "las", perfekt: "hat gelesen",
+     aux: haben, separable: false, level: A2, source: seed,
+     definition: "Einen Text mit den Augen aufnehmen und verstehen.",
+     example: "Am Abend liest mein Vater gern die Zeitung.", tags: [freizeit, medien]}
+  - {type: verb, lemma: "mieten", praesens_3sg: "mietet", praeteritum: "mietete", perfekt: "hat gemietet",
+     aux: haben, separable: false, level: A2, source: seed,
+     definition: "Für Geld eine Wohnung oder ein Auto nutzen dürfen.",
+     example: "Für den Urlaub mieten wir ein kleines Ferienhaus.", tags: [wohnen]}
+  - {type: verb, lemma: "mitbringen", praesens_3sg: "bringt mit", praeteritum: "brachte mit",
+     perfekt: "hat mitgebracht", aux: haben, separable: true, rection: "mitbringen + Dat. + Akk.",
+     level: A2, source: seed, definition: "Etwas von unterwegs zu einer Person nach Hause tragen.",
+     example: "Zur Party bringt jeder Gast einen Salat mit.", tags: [freizeit, feste]}
+  - {type: verb, lemma: "nehmen", praesens_3sg: "nimmt", praeteritum: "nahm", perfekt: "hat genommen",
+     aux: haben, separable: false, level: A2, source: seed,
+     definition: "Etwas mit der Hand greifen und behalten.", example: "Am Morgen nimmt sie immer den Bus.",
+     tags: [alltag]}
+  - {type: verb, lemma: "packen", praesens_3sg: "packt", praeteritum: "packte", perfekt: "hat gepackt",
+     aux: haben, separable: false, level: A2, source: seed,
+     definition: "Kleidung und andere Sachen in eine Tasche legen.",
+     example: "Vor der Abfahrt packe ich immer sehr schnell.", tags: [reise]}
+  - {type: verb, lemma: "putzen", praesens_3sg: "putzt", praeteritum: "putzte", perfekt: "hat geputzt",
+     aux: haben, separable: false, level: A2, source: seed,
+     definition: "Etwas mit Wasser und Tuch wieder sauber machen.",
+     example: "Samstags putze ich das Bad und die Fenster.", tags: [haushalt]}
+  - {type: verb, lemma: "reisen", praesens_3sg: "reist", praeteritum: "reiste", perfekt: "ist gereist",
+     aux: sein, separable: false, level: A2, source: seed,
+     definition: "In andere Städte oder Länder fahren und dort etwas ansehen.",
+     example: "Im Sommer reisen wir mit dem Zug nach Italien.", tags: [reise]}
+  - {type: verb, lemma: "schenken", praesens_3sg: "schenkt", praeteritum: "schenkte",
+     perfekt: "hat geschenkt", aux: haben, separable: false, rection: "schenken + Dat. + Akk.", level: A2,
+     source: seed, definition: "Einer Person etwas geben, ohne Geld dafür zu nehmen.",
+     example: "Zu Weihnachten schenken wir unseren Eltern Bücher.", tags: [geschenke, feste]}
+  - {type: verb, lemma: "schmecken", praesens_3sg: "schmeckt", praeteritum: "schmeckte",
+     perfekt: "hat geschmeckt", aux: haben, separable: false, rection: "Dativ", level: A2, source: seed,
+     definition: "Einen guten oder schlechten Geschmack im Mund haben.",
+     example: "Die Suppe schmeckt mir heute wirklich gut.", tags: [essen]}
+  - {type: verb, lemma: "schreiben", praesens_3sg: "schreibt", praeteritum: "schrieb",
+     perfekt: "hat geschrieben", aux: haben, separable: false, rection: "schreiben an + Akk.", level: A2,
+     source: seed, definition: "Wörter mit einem Stift oder am Computer festhalten.",
+     example: "Meine Kollegin schreibt jeden Tag viele E-Mails.", tags: [kommunikation, buero]}
+  - {type: verb, lemma: "sich anziehen", praesens_3sg: "zieht sich an", praeteritum: "zog sich an",
+     perfekt: "hat sich angezogen", aux: haben, separable: true, level: A2, source: seed,
+     definition: "Kleidung an den Körper nehmen.", example: "Morgens zieht sich das Kind schon allein an.",
+     tags: [alltag]}
+  - {type: verb, lemma: "sich beeilen", praesens_3sg: "beeilt sich", praeteritum: "beeilte sich",
+     perfekt: "hat sich beeilt", aux: haben, separable: false, level: A2, source: seed,
+     definition: "Schnell machen, weil nur noch wenig Zeit bleibt.",
+     example: "Beeil dich, der Bus kommt gleich!", tags: [zeit, alltag]}
+  - {type: verb, lemma: "sich bewerben", praesens_3sg: "bewirbt sich", praeteritum: "bewarb sich",
+     perfekt: "hat sich beworben", aux: haben, separable: false, rection: "sich bewerben um + Akkusativ",
+     level: A2, source: seed, definition: "Einer Firma schreiben, weil man dort eine Stelle möchte.",
+     example: "Sie bewirbt sich um eine Stelle als Verkäuferin.", tags: [arbeit]}
+  - {type: verb, lemma: "sich erinnern", praesens_3sg: "erinnert sich", praeteritum: "erinnerte sich",
+     perfekt: "hat sich erinnert", aux: haben, separable: false, rection: "sich erinnern an + Akk.",
+     level: A2, source: seed, definition: "Etwas aus der Vergangenheit wieder im Kopf haben.",
+     example: "Erinnerst du dich noch an unseren alten Lehrer?", tags: [gedanken]}
+  - {type: verb, lemma: "sich freuen", praesens_3sg: "freut sich", praeteritum: "freute sich",
+     perfekt: "hat sich gefreut", aux: haben, separable: false,
+     rection: "sich freuen über + Akk. / auf + Akk.", level: A2, source: seed,
+     definition: "Ein schönes Gefühl haben, weil etwas Gutes passiert.",
+     example: "Meine Tochter freut sich sehr auf die Ferien.", tags: [gefuehle]}
+  - {type: verb, lemma: "sich fühlen", praesens_3sg: "fühlt sich", praeteritum: "fühlte sich",
+     perfekt: "hat sich gefühlt", aux: haben, separable: false, level: A2, source: seed,
+     definition: "In einem bestimmten körperlichen Zustand sein.",
+     example: "Heute fühle ich mich viel besser als gestern.", tags: [gesundheit]}
+  - {type: verb, lemma: "sich interessieren", praesens_3sg: "interessiert sich",
+     praeteritum: "interessierte sich", perfekt: "hat sich interessiert", aux: haben, separable: false,
+     rection: "sich interessieren für + Akk.", level: A2, source: seed,
+     definition: "Etwas spannend finden und mehr darüber wissen wollen.",
+     example: "Meine Nichte interessiert sich sehr für Tiere.", tags: [freizeit, gedanken]}
+  - {type: verb, lemma: "sich treffen", praesens_3sg: "trifft sich", praeteritum: "traf sich",
+     perfekt: "hat sich getroffen", aux: haben, separable: false, rection: "sich treffen mit + Dat.",
+     level: A2, source: seed, definition: "Zusammen an einen Ort kommen und Zeit miteinander verbringen.",
+     example: "Wir treffen uns um sechs vor dem Kino.", tags: [freizeit, soziales]}
+  - {type: verb, lemma: "sich waschen", praesens_3sg: "wäscht sich", praeteritum: "wusch sich",
+     perfekt: "hat sich gewaschen", aux: haben, separable: false, level: A2, source: seed,
+     definition: "Den Körper mit Wasser und Seife sauber machen.",
+     example: "Vor dem Frühstück wäscht sich mein Sohn immer gründlich.", tags: [alltag, koerper]}
+  - {type: verb, lemma: "sich ärgern", praesens_3sg: "ärgert sich", praeteritum: "ärgerte sich",
+     perfekt: "hat sich geärgert", aux: haben, separable: false, rection: "sich ärgern über + Akk.",
+     level: A2, source: seed, definition: "Böse und unzufrieden sein, weil etwas schlecht läuft.",
+     example: "Mein Vater ärgert sich über den lauten Verkehr.", tags: [gefuehle]}
+  - {type: verb, lemma: "sprechen", praesens_3sg: "spricht", praeteritum: "sprach",
+     perfekt: "hat gesprochen", aux: haben, separable: false, rection: "sprechen mit + Dat. / über + Akk.",
+     level: A2, source: seed, definition: "Mit Worten etwas sagen und sich mit anderen unterhalten.",
+     example: "Der Lehrer spricht sehr langsam und deutlich.", tags: [kommunikation]}
+  - {type: verb, lemma: "umsteigen", praesens_3sg: "steigt um", praeteritum: "stieg um",
+     perfekt: "ist umgestiegen", aux: sein, separable: true, rection: "umsteigen in + Akk.", level: A2,
+     source: seed, definition: "Von einem Zug oder Bus in einen anderen wechseln.",
+     example: "In Köln müsst ihr in die S-Bahn umsteigen.", tags: [verkehr, reise]}
+  - {type: verb, lemma: "umziehen", praesens_3sg: "zieht um", praeteritum: "zog um",
+     perfekt: "ist umgezogen", aux: sein, separable: true, level: A2, source: seed,
+     definition: "In eine andere Wohnung gehen und dort ab jetzt leben.",
+     example: "Im Herbst ziehen meine Eltern aufs Land um.", tags: [wohnen]}
+  - {type: verb, lemma: "verdienen", praesens_3sg: "verdient", praeteritum: "verdiente",
+     perfekt: "hat verdient", aux: haben, separable: false, level: A2, source: seed,
+     definition: "Geld für seine Arbeit bekommen.", example: "In diesem Beruf verdient man ziemlich gut.",
+     tags: [arbeit, geld]}
+  - {type: verb, lemma: "vergessen", praesens_3sg: "vergisst", praeteritum: "vergaß",
+     perfekt: "hat vergessen", aux: haben, separable: false, level: A2, source: seed,
+     definition: "Etwas nicht mehr im Kopf haben.",
+     example: "Mein Onkel vergisst jedes Jahr meinen Geburtstag.", tags: [gedanken]}
+  - {type: verb, lemma: "verstehen", praesens_3sg: "versteht", praeteritum: "verstand",
+     perfekt: "hat verstanden", aux: haben, separable: false, level: A2, source: seed,
+     definition: "Den Sinn von Wörtern oder einer Situation klar erkennen.",
+     example: "Meine Mutter versteht kein Wort Französisch.", tags: [lernen, kommunikation]}
+  - {type: verb, lemma: "warten", praesens_3sg: "wartet", praeteritum: "wartete", perfekt: "hat gewartet",
+     aux: haben, separable: false, rection: "auf + Akkusativ", level: A2, source: seed,
+     definition: "Bleiben, bis eine Person oder eine Sache endlich kommt.",
+     example: "Seit zehn Minuten warten wir auf die Bahn.", tags: [verkehr, alltag]}
+  - {type: verb, lemma: "waschen", praesens_3sg: "wäscht", praeteritum: "wusch", perfekt: "hat gewaschen",
+     aux: haben, separable: false, level: A2, source: seed,
+     definition: "Mit Wasser und Seife etwas sauber machen.",
+     example: "Meine Mitbewohnerin wäscht ihre Wäsche am Wochenende.", tags: [haushalt]}
+  - {type: verb, lemma: "wehtun", praesens_3sg: "tut weh", praeteritum: "tat weh", perfekt: "hat wehgetan",
+     aux: haben, separable: true, rection: "wehtun + Dat.", level: A2, source: seed,
+     definition: "Schmerzen machen.", example: "Nach dem langen Spaziergang tun mir die Füße weh.",
+     tags: [gesundheit, koerper]}
+  - {type: verb, lemma: "wissen", praesens_3sg: "weiß", praeteritum: "wusste", perfekt: "hat gewusst",
+     aux: haben, separable: false, level: A2, source: seed,
+     definition: "Eine Information sicher im Kopf haben.",
+     example: "Niemand weiß, wann der Zug endlich kommt.", tags: [gedanken]}
+  - {type: verb, lemma: "zumachen", praesens_3sg: "macht zu", praeteritum: "machte zu",
+     perfekt: "hat zugemacht", aux: haben, separable: true, level: A2, source: seed,
+     definition: "Eine Tür, ein Fenster oder ein Geschäft schließen.",
+     example: "Der Verkäufer macht den Laden um acht zu.", tags: [haushalt, alltag]}
+  - {type: verb, lemma: "überweisen", praesens_3sg: "überweist", praeteritum: "überwies",
+     perfekt: "hat überwiesen", aux: haben, separable: false, rection: "überweisen auf + Akk.", level: A2,
+     source: seed, definition: "Geld von einem Bankkonto zu einem anderen schicken.",
+     example: "Wir überweisen die Miete immer am dritten Tag.", tags: [bank, geld]}
+
+  # ---------------------------------------------------------------- Adjektive
+  - {type: adjective, lemma: "billig", level: A2, source: seed,
+     definition: "So, dass etwas wenig Geld kostet.",
+     example: "Diese Schuhe waren zum Glück ziemlich billig.", tags: [geld, einkaufen]}
+  - {type: adjective, lemma: "dunkel", level: A2, source: seed,
+     definition: "Mit wenig oder ganz ohne Licht.",
+     example: "Im Winter wird es hier schon um fünf Uhr dunkel.", tags: [wohnen, zeit]}
+  - {type: adjective, lemma: "einfach", level: A2, source: seed,
+     definition: "So, dass man fast keine Mühe braucht.",
+     example: "Das Rezept ist wirklich einfach und schmeckt trotzdem gut.", tags: [schule, alltag]}
+  - {type: adjective, lemma: "faul", level: A2, source: seed,
+     definition: "So, dass jemand nicht gern arbeitet.",
+     example: "Am Sonntag bin ich manchmal ziemlich faul.", tags: [menschen]}
+  - {type: adjective, lemma: "fleißig", level: A2, source: seed,
+     definition: "So, dass man viel und gern arbeitet oder lernt.",
+     example: "Unsere Schüler sind in diesem Jahr besonders fleißig.", tags: [schule, arbeit]}
+  - {type: adjective, lemma: "freundlich", level: A2, source: seed,
+     definition: "So, dass man nett zu anderen Menschen ist.",
+     example: "Unsere neue Nachbarin ist sehr freundlich zu allen.", tags: [charakter]}
+  - {type: adjective, lemma: "gemütlich", level: A2, source: seed,
+     definition: "So, dass man sich wohlfühlt und gern länger bleibt.",
+     example: "Im Wohnzimmer ist es abends besonders gemütlich.", tags: [wohnen]}
+  - {type: adjective, lemma: "gesund", level: A2, source: seed,
+     definition: "So, dass man keine Schmerzen hat und gut leben kann.",
+     example: "Nach einer Woche Ruhe war der Junge wieder gesund.", tags: [gesundheit]}
+  - {type: adjective, lemma: "glücklich", level: A2, source: seed,
+     definition: "So, dass man sich sehr freut.",
+     example: "Seit der Hochzeit wirkt mein Bruder richtig glücklich.", tags: [gefuehle]}
+  - {type: adjective, lemma: "groß", level: A2, source: seed,
+     definition: "So, dass etwas viel Platz hat oder viel Höhe.",
+     example: "Ihre Wohnung ist groß und hat vier Zimmer.", tags: [wohnen]}
+  - {type: adjective, lemma: "günstig", level: A2, source: seed,
+     definition: "Nicht teuer, mit einem niedrigen Preis.",
+     example: "Im Supermarkt ist das Obst gerade sehr günstig.", tags: [einkauf, geld]}
+  - {type: adjective, lemma: "hell", level: A2, source: seed, definition: "Mit viel Licht.",
+     example: "Unser neues Zimmer ist am Morgen angenehm hell.", tags: [wohnen]}
+  - {type: adjective, lemma: "kalt", level: A2, source: seed,
+     definition: "Mit sehr niedrigen Temperaturen, wie draußen im Winter.",
+     example: "Im Dezember ist es hier oft sehr kalt.", tags: [wetter]}
+  - {type: adjective, lemma: "klein", level: A2, source: seed,
+     definition: "So, dass etwas nur wenig Platz oder wenig Höhe hat.",
+     example: "Unsere Küche ist leider ziemlich klein.", tags: [wohnen]}
+  - {type: adjective, lemma: "krank", level: A2, source: seed,
+     definition: "So, dass der Körper nicht richtig funktioniert.",
+     example: "Meine Kollegin ist seit drei Tagen krank.", tags: [gesundheit]}
+  - {type: adjective, lemma: "laut", level: A2, source: seed,
+     definition: "So, dass man es sehr stark hört.",
+     example: "Die Musik im Bus war gestern furchtbar laut.", tags: [alltag]}
+  - {type: adjective, lemma: "lecker", level: A2, source: seed,
+     definition: "So, dass eine Speise sehr gut schmeckt.",
+     example: "Der Kuchen von deiner Mutter war wirklich lecker.", tags: [essen]}
+  - {type: adjective, lemma: "leise", level: A2, source: seed, definition: "So, dass man kaum etwas hört.",
+     example: "Sprich bitte leise, das Baby schläft schon.", tags: [alltag]}
+  - {type: adjective, lemma: "müde", level: A2, source: seed, definition: "So, dass man schlafen möchte.",
+     example: "Nach der Arbeit sind wir immer sehr müde.", tags: [koerper]}
+  - {type: adjective, lemma: "nass", level: A2, source: seed,
+     definition: "So, dass viel Wasser darauf oder darin ist.",
+     example: "Nach dem Regen waren meine Schuhe komplett nass.", tags: [wetter]}
+  - {type: adjective, lemma: "nervös", level: A2, source: seed,
+     definition: "Unruhig, weil man an etwas Schwieriges denkt.",
+     example: "Vor jeder Prüfung werde ich furchtbar nervös.", tags: [gefuehle]}
+  - {type: adjective, lemma: "pünktlich", level: A2, source: seed,
+     definition: "Genau zur richtigen Zeit und keine Minute später.",
+     example: "Bitte kommt morgen pünktlich zur Besprechung.", tags: [zeit, arbeit]}
+  - {type: adjective, lemma: "ruhig", level: A2, source: seed, definition: "So, dass es keinen Lärm gibt.",
+     example: "Unsere Straße ist nachts angenehm ruhig.", tags: [wohnen]}
+  - {type: adjective, lemma: "satt", level: A2, source: seed,
+     definition: "So, dass man nichts mehr essen möchte.",
+     example: "Nach der großen Portion sind wir alle satt.", tags: [essen]}
+  - {type: adjective, lemma: "sauber", level: A2, source: seed,
+     definition: "Ohne Schmutz, Staub oder Flecken.",
+     example: "Nach zwei Stunden war die ganze Küche sauber.", tags: [haushalt]}
+  - {type: adjective, lemma: "schlank", level: A2, source: seed,
+     definition: "So, dass ein Mensch dünn und sportlich aussieht.",
+     example: "Ihr Bruder ist groß und ziemlich schlank.", tags: [aussehen]}
+  - {type: adjective, lemma: "schwierig", level: A2, source: seed,
+     definition: "Nicht leicht zu verstehen oder zu machen.",
+     example: "Diese Aufgabe war für viele Teilnehmer zu schwierig.", tags: [schule, lernen]}
+  - {type: adjective, lemma: "sonnig", level: A2, source: seed,
+     definition: "Mit viel Licht vom Himmel und ohne Wolken.",
+     example: "Am Wochenende wird es warm und sonnig.", tags: [wetter]}
+  - {type: adjective, lemma: "sportlich", level: A2, source: seed,
+     definition: "So, dass man sich gern viel bewegt und trainiert.",
+     example: "Meine Schwester ist sehr sportlich und spielt Handball.", tags: [sport, freizeit]}
+  - {type: adjective, lemma: "stolz", rection: "stolz auf + Akk.", level: A2, source: seed,
+     definition: "So, dass man sich über einen eigenen Erfolg sehr freut.",
+     example: "Meine Eltern sind sehr stolz auf meinen Bruder.", tags: [gefuehle, familie]}
+  - {type: adjective, lemma: "teuer", level: A2, source: seed,
+     definition: "So, dass man viel Geld dafür bezahlen muss.",
+     example: "Im Zentrum sind die Wohnungen leider sehr teuer.", tags: [geld, einkaufen]}
+  - {type: adjective, lemma: "traurig", level: A2, source: seed, definition: "So, dass man weinen möchte.",
+     example: "Nach dem Film waren viele Zuschauer traurig.", tags: [gefuehle]}
+  - {type: adjective, lemma: "trocken", level: A2, source: seed, definition: "Ohne Wasser und ohne Regen.",
+     example: "Zum Glück bleibt das Wetter am Samstag trocken.", tags: [wetter]}
+  - {type: adjective, lemma: "warm", level: A2, source: seed,
+     definition: "Angenehm heiß, aber nicht zu stark.",
+     example: "Heute ist es endlich wieder warm genug für den Park.", tags: [wetter]}
+  - {type: adjective, lemma: "zufrieden", rection: "zufrieden mit + Dat.", level: A2, source: seed,
+     definition: "So, dass alles gut genug ist und man nichts anderes will.",
+     example: "Wir sind mit der neuen Wohnung sehr zufrieden.", tags: [gefuehle]}
+  - {type: adjective, lemma: "ähnlich", rection: "ähnlich + Dat.", level: A2, source: seed,
+     definition: "Fast gleich, aber nicht ganz.", example: "Dein Mantel sieht meinem ziemlich ähnlich.",
+     tags: [beschreibung]}
+
+  # ---------------------------------------------------------------- Adverbien und Konnektoren
+  - {type: adverb, lemma: "bald", level: A2, source: seed, definition: "In kurzer Zeit, nicht mehr lange.",
+     example: "Wir ziehen bald in eine größere Wohnung.", tags: [zeit]}
+  - {type: adverb, lemma: "endlich", level: A2, source: seed,
+     definition: "Nach langem Warten ist etwas jetzt passiert.",
+     example: "Der Bus kommt endlich um die Ecke.", tags: [zeit, gefuehle]}
+  - {type: adverb, lemma: "manchmal", level: A2, source: seed,
+     definition: "Nicht oft und nicht nie, sondern ab und zu.",
+     example: "Manchmal gehen wir am Sonntag ins Schwimmbad.", tags: [zeit]}
+  - {type: adverb, lemma: "meistens", level: A2, source: seed,
+     definition: "Fast immer, aber nicht jedes Mal.",
+     example: "Am Wochenende stehen wir meistens sehr spät auf.", tags: [zeit]}
+  - {type: adverb, lemma: "sofort", level: A2, source: seed,
+     definition: "Ohne zu warten, in diesem Moment.", example: "Komm bitte sofort nach Hause!",
+     tags: [zeit]}
+  - {type: adverb, lemma: "ungefähr", level: A2, source: seed,
+     definition: "Nicht ganz genau, aber fast so viel.",
+     example: "Bis zum Bahnhof sind es ungefähr zehn Minuten.", tags: [zeit, menge]}
+  - {type: adverb, lemma: "vielleicht", level: A2, source: seed,
+     definition: "Es ist möglich, aber noch nicht sicher.",
+     example: "Vielleicht besuchen wir im Sommer meine Tante.", tags: [alltag]}
+  - {type: adverb, lemma: "wieder", level: A2, source: seed,
+     definition: "Noch einmal, so wie schon früher.",
+     example: "Sie hat den Schlüssel schon wieder vergessen.", tags: [zeit]}
+
+  # ---------------------------------------------------------------- Feste Wendungen
+  - {type: phrase, lemma: "Angst haben vor", level: A2, source: seed,
+     definition: "Ein starkes ungutes Gefühl vor einer Gefahr haben.",
+     example: "Mein Bruder hat Angst vor großen Hunden.", tags: [gefuehle]}
+  - {type: phrase, lemma: "Bescheid sagen", level: A2, source: seed,
+     definition: "Jemandem eine wichtige Information geben.",
+     example: "Sag mir bitte Bescheid, wenn du ankommst.", tags: [alltag]}
+  - {type: phrase, lemma: "Bescheid wissen", level: A2, source: seed,
+     definition: "Über eine Sache gut informiert sein.",
+     example: "Frag den Kollegen, er weiß über den Termin Bescheid.", tags: [arbeit]}
+  - {type: phrase, lemma: "eine Frage stellen", level: A2, source: seed,
+     definition: "Etwas wissen wollen und deshalb jemanden ansprechen.",
+     example: "Darf ich Ihnen kurz eine Frage stellen?", tags: [schule, alltag]}
+  - {type: phrase, lemma: "Lust haben auf", level: A2, source: seed,
+     definition: "Etwas gerade gern machen oder gern essen wollen.",
+     example: "Hast du heute Abend Lust auf Kino?", tags: [freizeit]}
+  - {type: phrase, lemma: "recht haben", level: A2, source: seed,
+     definition: "Das Richtige sagen und keinen Fehler machen.",
+     example: "Du hattest recht, der Zug fährt schon um acht.", tags: [alltag]}
+  - {type: phrase, lemma: "sich Sorgen machen", level: A2, source: seed,
+     definition: "An etwas Schlimmes denken und deshalb unruhig sein.",
+     example: "Meine Mutter macht sich oft zu viele Sorgen.", tags: [gefuehle, familie]}
+  - {type: phrase, lemma: "Spaß machen", level: A2, source: seed,
+     definition: "So sein, dass man etwas gern tut und sich dabei freut.",
+     example: "Mein neues Hobby macht mir richtig Spaß.", tags: [freizeit, gefuehle]}
+  - {type: phrase, lemma: "zu Fuß gehen", level: A2, source: seed,
+     definition: "Ohne Auto, Bus oder Fahrrad unterwegs sein.",
+     example: "Zur Schule gehen die Kinder jeden Morgen zu Fuß.", tags: [verkehr]}

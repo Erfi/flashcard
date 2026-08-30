@@ -124,6 +124,9 @@ function cardBack(card) {
       forms.map(([k, v]) => el("span", {}, k ? k + ": " : "", el("b", {}, v)))) : null,
     card.definition ? el("div", { class: "definition" }, card.definition) : null,
     card.example ? el("div", { class: "example" }, card.example) : null,
+    (card.examples || []).length
+      ? el("div", { class: "examplelist" }, card.examples.map((x) => el("div", { class: "example" }, x)))
+      : null,
     card.tags?.length ? el("div", { class: "tagrow" }, card.tags.map((t) => el("span", { class: "tag" }, t))) : null,
   );
 }
@@ -161,7 +164,8 @@ function renderReview() {
       `${S.queue.length - S.index} in der Warteschlange · `,
       el("a", { href: "#", onclick: (e) => { e.preventDefault(); openEditor(card.id); } }, "bearbeiten"),
       " · ",
-      el("a", { href: "#", onclick: (e) => { e.preventDefault(); regenerate(card.id); } }, "neuer Satz")));
+      el("a", { href: "#", onclick: (e) => { e.preventDefault(); regenerate(card.id); } },
+        card.type === "grammar" ? "neue Beispiele" : "neuer Satz")));
   }
   view.append(stage);
 }
@@ -253,7 +257,7 @@ function renderBrowse() {
     grid.append(el("div", { class: "mini", style: colorVar(card.color_key), onclick: () => openEditor(card.id) },
       el("div", { class: "hw" },
         card.article ? el("span", { class: "art" }, card.article + " ") : null, card.lemma),
-      el("div", { class: "sub" }, card.definition || card.example || "—"),
+      el("div", { class: "sub" }, card.definition || card.example || (card.examples || [])[0] || "—"),
       el("div", { class: "meta" },
         el("span", { class: "dot" }), " ",
         el("span", {}, TYPE_LABEL[card.type] || card.type),
@@ -279,11 +283,18 @@ function closeEditor() {
   S.editing = null;
 }
 
+function autosize(area) {
+  const fit = () => { area.style.height = "auto"; area.style.height = area.scrollHeight + 4 + "px"; };
+  area.addEventListener("input", fit);
+  requestAnimationFrame(fit);
+  return area;
+}
+
 function field(label, key, opts = {}) {
   const value = S.editing[key] ?? "";
   const onInput = (e) => { S.editing[key] = e.target.value; };
   const input = opts.area
-    ? el("textarea", { oninput: onInput }, value)
+    ? autosize(el("textarea", { oninput: onInput }, value))
     : el("input", { value, oninput: onInput });
   return el("div", { class: "field" }, el("label", {}, label), input);
 }
@@ -302,9 +313,11 @@ function renderEditor() {
   const children = [
     el("h3", {}, card.headword || card.lemma),
     el("div", { class: "sub" }, `id: ${card.id} · Quelle: ${card.source || "manual"}`),
-    el("div", { class: "two" },
-      el("div", { class: "field" }, el("label", {}, "Typ"), typeSel),
-      el("div", { class: "field" }, el("label", {}, "Artikel"), artSel)),
+    card.type === "noun"
+      ? el("div", { class: "two" },
+          el("div", { class: "field" }, el("label", {}, "Typ"), typeSel),
+          el("div", { class: "field" }, el("label", {}, "Artikel"), artSel))
+      : el("div", { class: "field" }, el("label", {}, "Typ"), typeSel),
     field("Stichwort", "lemma"),
     card.type === "noun" ? field("Plural", "plural") : null,
     card.type === "verb" ? el("div", { class: "two" },
@@ -312,8 +325,16 @@ function renderEditor() {
     card.type === "verb" ? el("div", { class: "two" },
       field("Perfekt", "perfekt"), field("Hilfsverb", "aux")) : null,
     field("Rektion", "rection"),
-    field("Definition (Deutsch)", "definition", { area: true }),
-    field("Beispielsatz", "example", { area: true }),
+    field(card.type === "grammar" ? "Regel (Deutsch)" : "Definition (Deutsch)", "definition", { area: true }),
+    card.type === "grammar" ? null : field("Beispielsatz", "example", { area: true }),
+    el("div", { class: "field" },
+      el("label", {}, card.type === "grammar" ? "Beispielsätze (einer pro Zeile)"
+                                              : "Weitere Beispielsätze (einer pro Zeile)"),
+      autosize(el("textarea", {
+        oninput: (e) => {
+          S.editing.examples = e.target.value.split("\n").map((x) => x.trim()).filter(Boolean);
+        },
+      }, (card.examples || []).join("\n")))),
     field("Notizen", "notes", { area: true }),
     el("div", { class: "field" }, el("label", {}, "Tags (Komma-getrennt)"),
       el("input", {
@@ -325,7 +346,8 @@ function renderEditor() {
       `Wiederholungen: ${card.srs.reps} · Fehler: ${card.srs.lapses} · ${dueLabel(card)}`),
     el("div", { class: "panelactions" },
       el("button", { class: "primary", onclick: saveEditor }, "Speichern"),
-      el("button", { id: "regen", onclick: () => regenerate(card.id, true) }, "Neuer Satz"),
+      el("button", { id: "regen", onclick: () => regenerate(card.id, true) },
+        card.type === "grammar" ? "Neue Beispiele" : "Neuer Satz"),
       el("button", { onclick: () => resetCard(card.id) }, "Fortschritt zurücksetzen"),
       el("button", { class: "danger", onclick: () => deleteCard(card.id) }, "Löschen"),
       el("button", { onclick: closeEditor }, "Schließen")),
@@ -348,15 +370,21 @@ async function regenerate(cardId, inEditor = false) {
   if (button) { button.disabled = true; button.textContent = "…"; }
   try {
     const res = await api(`/api/cards/${encodeURIComponent(cardId)}/sentence`, { method: "POST" });
-    toast("Neuer Satz: " + res.card.example);
-    if (S.editing && S.editing.id === cardId) { S.editing.example = res.card.example; renderEditor(); }
+    const shown = res.card.example || (res.card.examples || []).join("  ·  ");
+    toast("Neu: " + shown);
+    if (S.editing && S.editing.id === cardId) {
+      S.editing.example = res.card.example;
+      S.editing.examples = res.card.examples || [];
+      renderEditor();
+    }
     const inQueue = S.queue.find((c) => c.id === cardId);
-    if (inQueue) inQueue.example = res.card.example;
+    if (inQueue) { inQueue.example = res.card.example; inQueue.examples = res.card.examples || []; }
     if (S.view === "review") renderReview();
     loadBrowse();
   } catch (err) {
     toast(err.message, true, 9000);
     if (button) { button.disabled = false; button.textContent = "Neuer Satz"; }
+    return;
   }
 }
 
