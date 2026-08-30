@@ -187,3 +187,43 @@ def test_production_still_respects_the_daily_limit():
     queue = build_queue(known, {**DEFAULT_SETTINGS, "daily_new_limit": 10}, NOW,
                         rng=random.Random(0))
     assert len(queue) == 10
+
+
+# ------------------------------------------------------------------ grammar
+
+def grammar_card(lemma: str = "Passiv") -> Card:
+    return Card.from_dict({"type": "grammar", "lemma": lemma,
+                           "definition": "werden plus Partizip II am Satzende.",
+                           "examples": ["Der Antrag wird geprüft."]})
+
+
+def test_grammar_cards_stay_out_of_the_queue_by_default():
+    queue = build_queue([grammar_card(), vocab()], DEFAULT_SETTINGS, NOW)
+    assert [c.lemma for c, _ in queue] == ["Katze"]
+
+
+def test_grammar_cards_join_the_queue_when_switched_on():
+    queue = build_queue([grammar_card(), vocab()],
+                        {**DEFAULT_SETTINGS, "grammar_enabled": True}, NOW)
+    assert {c.lemma for c, _ in queue} == {"Passiv", "Katze"}
+
+
+def test_hidden_grammar_does_not_use_up_the_daily_new_limit():
+    cards = [grammar_card(f"Regel{i}") for i in range(30)] + [vocab(lemma=f"Wort{i}") for i in range(10)]
+    queue = build_queue(cards, {**DEFAULT_SETTINGS, "daily_new_limit": 10}, NOW,
+                        rng=random.Random(0))
+    assert len(queue) == 10
+    assert all(c.type != "grammar" for c, _ in queue)
+
+
+def test_projection_separates_the_deck_from_the_rotation():
+    cards = [grammar_card(f"Regel{i}") for i in range(5)] + [vocab(lemma=f"Wort{i}") for i in range(7)]
+    info = projection(cards, DEFAULT_SETTINGS, NOW)
+    assert info["total"] == 12
+    assert info["in_rotation"] == 7
+    assert info["grammar_total"] == 5
+    assert info["grammar_enabled"] is False
+    assert info["unseen"] == 7        # hidden grammar is not a backlog
+
+    on = projection(cards, {**DEFAULT_SETTINGS, "grammar_enabled": True}, NOW)
+    assert on["in_rotation"] == 12 and on["unseen"] == 12

@@ -30,6 +30,7 @@ HELP = [
     ("set reverse on|off", "Produktionsrichtung (Bedeutung → Wort) an- oder abschalten"),
     ("set unlock 3", "ab welchem Intervall in Tagen die Produktionsrichtung startet"),
     ("set shuffle on|off", "gleich dringende Karten zufällig mischen"),
+    ("set grammar on|off", "Grammatikkarten mitlernen (Standard: aus)"),
     ("export", "Deck als YAML herunterladen"),
     ("help", "diese Liste"),
 ]
@@ -134,6 +135,13 @@ def _parse_set(rest: str) -> Dict:
         if value.lower() in ("off", "aus", "false", "nein", "0"):
             return {"action": "settings", "values": {"reverse_enabled": False}}
         return {"action": "error", "message": "`set reverse on` oder `set reverse off`"}
+
+    if key in ("grammar", "grammatik"):
+        if value.lower() in ("on", "an", "ein", "true", "ja", "1"):
+            return {"action": "settings", "values": {"grammar_enabled": True}}
+        if value.lower() in ("off", "aus", "false", "nein", "0"):
+            return {"action": "settings", "values": {"grammar_enabled": False}}
+        return {"action": "error", "message": "`set grammar on` oder `set grammar off`"}
 
     if key in ("shuffle", "mischen", "zufall"):
         if value.lower() in ("on", "an", "ein", "true", "ja", "1"):

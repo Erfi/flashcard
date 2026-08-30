@@ -82,7 +82,11 @@ def cmd_check(args) -> int:
 def cmd_stats(args) -> int:
     store = Store(args.deck)
     info = projection(store.cards, store.settings)
-    print(f"Karten gesamt: {info['total']}   neu: {info['unseen']}   gefestigt: {info['mature']}")
+    print(f"Karten gesamt: {info['total']}   im Lernstapel: {info['in_rotation']}   "
+          f"neu: {info['unseen']}   gefestigt: {info['mature']}")
+    if not info["grammar_enabled"] and info["grammar_total"]:
+        print(f"{info['grammar_total']} Grammatikkarten sind ausgeblendet "
+              f"(`set grammar on` nimmt sie in den Lernstapel).")
     if info["days_left"] is not None:
         print(f"Tage bis zum Zieldatum ({store.settings.get('target_date')}): {info['days_left']:.0f}")
         print(f"Intervall-Obergrenze zurzeit: {info['interval_cap_days']} Tage")

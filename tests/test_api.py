@@ -212,3 +212,31 @@ def test_search_without_a_query_keeps_the_due_order(client):
     client.post("/api/command", json={"text": "add katze"})
     hits = client.get("/api/cards").json()["cards"]
     assert len(hits) == 1
+
+
+def test_grammar_is_hidden_from_the_queue_until_switched_on(client):
+    client.post("/api/cards", json={
+        "type": "grammar", "lemma": "Passiv", "definition": "werden plus Partizip II.",
+        "examples": ["Der Antrag wird geprüft."]})
+    client.post("/api/command", json={"text": "add katze"})
+
+    queue = client.get("/api/queue").json()["cards"]
+    assert [c["lemma"] for c in queue] == ["Katze"]
+    state = client.get("/api/state").json()
+    assert state["settings"]["grammar_enabled"] is False
+    assert state["projection"]["grammar_total"] == 1
+    assert state["projection"]["in_rotation"] == 1
+
+    client.post("/api/command", json={"text": "set grammar on"})
+    assert len(client.get("/api/queue").json()["cards"]) == 2
+
+
+def test_hidden_grammar_cards_are_still_browsable_and_editable(client):
+    created = client.post("/api/cards", json={
+        "type": "grammar", "lemma": "Genitiv", "definition": "Besitz und Zugehörigkeit.",
+        "examples": ["Das Auto meines Bruders."]}).json()["card"]
+    assert [c["lemma"] for c in client.get("/api/cards").json()["cards"]] == ["Genitiv"]
+    assert client.get("/api/cards?q=Genitiv").json()["cards"]
+    patched = client.patch(f"/api/cards/{created['id']}",
+                           json={"definition": "Neu erklärt."}).json()["card"]
+    assert patched["definition"] == "Neu erklärt."

@@ -166,11 +166,17 @@ function renderReview() {
   const card = S.queue[S.index];
 
   if (!card) {
+    const proj = (S.state && S.state.projection) || {};
     view.append(el("div", { class: "empty" },
-      el("h2", {}, S.state && S.state.projection.total ? "Alles wiederholt 🎉" : "Noch keine Karten"),
-      el("p", {}, S.state && S.state.projection.total
+      el("h2", {}, proj.total ? "Alles wiederholt 🎉" : "Noch keine Karten"),
+      el("p", {}, proj.total
         ? (S.state.next_due ? `Die nächste Karte ist in ${S.state.next_due} fällig.` : "Nichts mehr fällig.")
         : "Leg die erste an: tippe oben z. B. add katze"),
+      proj.grammar_enabled === false && proj.grammar_total
+        ? el("p", { class: "keyhint" },
+            `${proj.grammar_total} Grammatikkarten sind ausgeblendet — `,
+            el("code", {}, "set grammar on"), " nimmt sie in den Lernstapel.")
+        : null,
       el("button", { class: "bigbtn", style: "max-width:260px;margin:14px auto 0", onclick: refreshQueue }, "Neu laden")));
     return;
   }
@@ -475,7 +481,9 @@ function renderStats() {
   const p = st.projection;
 
   view.append(el("div", { class: "cards2" },
-    stat(p.total, "Karten gesamt"),
+    stat(p.in_rotation === undefined ? p.total : p.in_rotation,
+         p.grammar_enabled === false && p.grammar_total
+           ? "Karten im Lernstapel" : "Karten gesamt"),
     stat(p.unseen, "noch nie gesehen"),
     stat(p.mature, "gefestigt (≥3 T.)"),
     stat(p.days_left === null || p.days_left === undefined ? "—" : Math.max(0, Math.round(p.days_left)), "Tage bis zum Ziel")));
@@ -503,6 +511,11 @@ function renderStats() {
       row("Intervall-Obergrenze jetzt", `${p.interval_cap_days} Tage`, ""),
       row("Neue Karten pro Tag", String(settings.daily_new_limit || "unbegrenzt"), "set new 40"),
       row("Reihenfolge", settings.shuffle === false ? "fest" : "gemischt", "set shuffle on"),
+      row("Grammatikkarten",
+          settings.grammar_enabled
+            ? `im Lernstapel (${p.grammar_total})`
+            : `nicht im Lernstapel (${p.grammar_total} zum Nachschlagen)`,
+          settings.grammar_enabled ? "set grammar off" : "set grammar on"),
       row("Produktion (Bedeutung → Wort)",
           settings.reverse_enabled === false ? "aus" : "an", "set reverse off"),
       row("Produktion startet ab", `${settings.reverse_unlock_interval_days} Tagen Intervall`,

@@ -86,6 +86,7 @@ its old sentence) and the error appears as a message in the app.
 | `set reverse off` | Turn the production direction (meaning → word) on or off |
 | `set unlock 3` | Interval in days at which production unlocks for a word |
 | `set shuffle off` | Study equally urgent cards in a fixed order instead of shuffled |
+| `set grammar on` | Put grammar cards into the study queue (off by default) |
 | `export` | Download the deck as YAML |
 | `help` | The whole list, in the app |
 
@@ -123,6 +124,23 @@ recognition card later lapses.
 In the queue, an unlocked production card outranks a word you have never seen:
 revisiting known material beats piling on new vocabulary, and without that rule
 a large backlog of new words would starve the production direction completely.
+
+## Grammar cards are reference, not drill
+
+Grammar cards stay **out of the study queue by default**. A rule with three
+worked examples is something you read and come back to, not something a
+two-second recall test does much for — and 65 of them in the rotation crowd out
+vocabulary, which is what spaced repetition is actually good at.
+
+They remain full members of the deck: searchable and editable in **Karten**,
+exported and imported with everything else, and `satz <thema>` still rerolls
+their examples. `set grammar on` puts them into the queue if you want to drill
+them anyway; `set grammar off` takes them back out, and any scheduling they had
+picked up is kept for when you switch them back on.
+
+While they are hidden they are not counted as a backlog: the statistics show
+how many cards are in the rotation, list the grammar cards separately, and the
+daily new-card limit is spent entirely on vocabulary.
 
 ## Order of the queue
 
@@ -258,7 +276,7 @@ flashcard/
   web/           the browser UI (no build step, no dependencies)
   seed_a2.yaml   the A2 deck (300 cards)
   seed_b1.yaml   the B1 deck (300 cards)
-tests/           125 tests: scheduler maths, storage, commands, API, generator
+tests/           133 tests: scheduler maths, storage, commands, API, generator
 ```
 
 ```bash

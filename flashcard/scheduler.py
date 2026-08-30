@@ -24,7 +24,7 @@ import math
 import random
 from typing import Dict, List, Optional, Tuple
 
-from .models import (AGAIN, EASY, FORWARD, GOOD, HARD, LEARNING, NEW,
+from .models import (AGAIN, EASY, FORWARD, GOOD, GRAMMAR, HARD, LEARNING, NEW,
                      RELEARNING, REVERSE, REVIEW, SRS, Card, utcnow)
 
 DAY = 24 * 60.0  # minutes in a day
@@ -46,6 +46,7 @@ DEFAULT_SETTINGS: Dict[str, object] = {
     "daily_new_limit": 40,             # 0 = unlimited
     "fuzz": True,                      # jitter long intervals so cards don't clump
     "shuffle": True,                   # randomise order among equally urgent cards
+    "grammar_enabled": False,          # grammar cards in the study queue (off by default)
     "reverse_enabled": True,           # also study meaning -> word
     "reverse_unlock_interval_days": 3.0,  # ... once recognition has matured this far
 }
@@ -287,6 +288,7 @@ def build_queue(cards: List[Card], settings: Dict, now: Optional[dt.datetime] = 
     rng = rng or random.Random()
     shuffle = bool(settings.get("shuffle", True))
     reverse_on = bool(settings.get("reverse_enabled", True))
+    grammar_on = bool(settings.get("grammar_enabled", False))
     unlock = float(settings.get("reverse_unlock_interval_days", 3.0))
 
     learning: List[Tuple[Card, str]] = []
@@ -295,6 +297,10 @@ def build_queue(cards: List[Card], settings: Dict, now: Optional[dt.datetime] = 
     new_forward: List[Tuple[Card, str]] = []
 
     for card in cards:
+        if card.type == GRAMMAR and not grammar_on:
+            # a rule with worked examples reads better than it drills; keep those
+            # cards in the deck for reference and out of the review queue
+            continue
         for direction in (FORWARD, REVERSE):
             if direction == REVERSE and not (reverse_on and reverse_unlocked(card, unlock)):
                 continue
@@ -338,9 +344,13 @@ def projection(cards: List[Card], settings: Dict, now: Optional[dt.datetime] = N
     unlock = float(settings.get("reverse_unlock_interval_days", 3.0))
     reverse_on = bool(settings.get("reverse_enabled", True))
 
+    grammar_on = bool(settings.get("grammar_enabled", False))
+    grammar_total = sum(1 for c in cards if c.type == GRAMMAR)
+    studied = [c for c in cards if grammar_on or c.type != GRAMMAR]
+
     total = len(cards)
-    mature = sum(1 for c in cards if c.srs.state == REVIEW and c.srs.interval_days >= 3)
-    unseen = sum(1 for c in cards if c.srs.state == NEW)
+    mature = sum(1 for c in studied if c.srs.state == REVIEW and c.srs.interval_days >= 3)
+    unseen = sum(1 for c in studied if c.srs.state == NEW)
     reverse_possible = sum(1 for c in cards if c.supports_reverse) if reverse_on else 0
     reverse_open = sum(1 for c in cards if reverse_on and reverse_unlocked(c, unlock))
     reverse_started = sum(1 for c in cards if c.srs_reverse.reps)
@@ -351,6 +361,9 @@ def projection(cards: List[Card], settings: Dict, now: Optional[dt.datetime] = N
     return {
         "days_left": left,
         "total": total,
+        "in_rotation": len(studied),
+        "grammar_total": grammar_total,
+        "grammar_enabled": grammar_on,
         "unseen": unseen,
         "mature": mature,
         "interval_cap_days": round(sched.interval_cap(now), 2),
