@@ -190,3 +190,25 @@ def test_state_reports_the_production_backlog(client):
     state = client.get("/api/state").json()
     assert state["counts"]["reverse"] == 1
     assert state["projection"]["reverse_open"] == 1
+
+
+def test_search_puts_the_word_itself_first(client):
+    client.post("/api/cards", json={
+        "type": "grammar", "lemma": "Wechselpräpositionen",
+        "definition": "Wohin mit Akkusativ, wo mit Dativ.",
+        "examples": ["Die Katze springt auf den Tisch."]})
+    client.post("/api/cards", json={
+        "type": "noun", "article": "die", "lemma": "Katze", "plural": "die Katzen",
+        "definition": "Ein kleines Haustier.", "example": "Die Katze schläft."})
+    client.post("/api/cards", json={
+        "type": "noun", "article": "das", "lemma": "Katzenfutter", "plural": "",
+        "definition": "Essen für ein bestimmtes Haustier.", "example": "Das Futter ist alle."})
+    hits = client.get("/api/cards?q=katze").json()["cards"]
+    assert [c["lemma"] for c in hits][:2] == ["Katze", "Katzenfutter"]
+    assert "Wechselpräpositionen" in [c["lemma"] for c in hits]
+
+
+def test_search_without_a_query_keeps_the_due_order(client):
+    client.post("/api/command", json={"text": "add katze"})
+    hits = client.get("/api/cards").json()["cards"]
+    assert len(hits) == 1

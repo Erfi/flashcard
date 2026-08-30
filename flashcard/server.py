@@ -109,6 +109,20 @@ def create_app(deck_path: os.PathLike | str) -> FastAPI:
             cards.sort(key=lambda c: c.created or utcnow(), reverse=True)
         else:
             cards.sort(key=lambda c: (c.srs.due or utcnow()))
+        if q:
+            # the word you searched for belongs above cards that merely mention
+            # it in a definition or an example sentence
+            needle = q.strip().lower()
+            def rank(card: Card) -> int:
+                lemma = card.lemma.lower()
+                if lemma == needle:
+                    return 0
+                if lemma.startswith(needle):
+                    return 1
+                if needle in lemma:
+                    return 2
+                return 3
+            cards.sort(key=rank)
         return {"cards": [c.to_api() for c in cards], "total": len(s.cards)}
 
     def item_payload(card: Card, direction: str, scheduler: Scheduler,

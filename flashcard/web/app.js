@@ -246,7 +246,15 @@ async function loadBrowse() {
   const params = new URLSearchParams({ q: S.browse.q, type: S.browse.type, sort: S.browse.sort });
   const res = await api("/api/cards?" + params.toString());
   S.browse.cards = res.cards;
-  if (S.view === "browse") renderBrowse();
+  // Repaint only the results. Rebuilding the whole view would replace the
+  // search field mid-keystroke and the browser would drop focus with it.
+  if (S.view === "browse") renderGrid();
+}
+
+let searchTimer = null;
+function scheduleSearch() {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(loadBrowse, 300);
 }
 
 function dueLabel(card) {
@@ -264,8 +272,8 @@ function renderBrowse() {
   view.textContent = "";
 
   const search = el("input", {
-    placeholder: "suchen …", value: S.browse.q,
-    oninput: (e) => { S.browse.q = e.target.value; debounce(loadBrowse, 220)(); },
+    id: "browsesearch", placeholder: "suchen …", value: S.browse.q, autocomplete: "off",
+    oninput: (e) => { S.browse.q = e.target.value; scheduleSearch(); },
   });
   const typeSel = el("select", { onchange: (e) => { S.browse.type = e.target.value; loadBrowse(); } },
     el("option", { value: "" }, "alle Typen"),
@@ -278,13 +286,24 @@ function renderBrowse() {
   view.append(el("div", { class: "toolrow" }, search, typeSel, sortSel,
     el("button", { class: "bigbtn", style: "width:auto;padding:8px 14px", onclick: exportDeck }, "Export"),
     el("button", { class: "bigbtn", style: "width:auto;padding:8px 14px", onclick: importDeck }, "Import")));
+  view.append(el("div", { class: "grid", id: "cardgrid" }));
+  renderGrid();
+}
+
+/* Only the result tiles. The toolbar above them is never touched here, so the
+   search field keeps focus and the caret position while results update. */
+function renderGrid() {
+  const grid = $("#cardgrid");
+  if (!grid) { renderBrowse(); return; }
+  grid.textContent = "";
 
   if (!S.browse.cards.length) {
-    view.append(el("div", { class: "empty" }, el("p", {}, "Keine Karten gefunden.")));
+    grid.className = "";
+    grid.append(el("div", { class: "empty" }, el("p", {}, "Keine Karten gefunden.")));
     return;
   }
 
-  const grid = el("div", { class: "grid" });
+  grid.className = "grid";
   S.browse.cards.forEach((card) => {
     grid.append(el("div", { class: "mini", style: colorVar(card.color_key), onclick: () => openEditor(card.id) },
       el("div", { class: "hw" },
@@ -298,7 +317,6 @@ function renderBrowse() {
         card.srs.reps ? el("span", {}, `${card.srs.reps}×`) : null,
         card.srs_reverse && card.srs_reverse.reps ? el("span", { title: "Produktion läuft" }, "⇄") : null)));
   });
-  view.append(grid);
 }
 
 /* ---------------------------------------------------------------- editor */
@@ -572,6 +590,7 @@ async function handleCommandResult(res) {
       exportDeck(); break;
     case "find":
       S.browse.cards = res.cards; S.browse.q = res.query; setView("browse");
+      if ($("#browsesearch")) $("#browsesearch").value = res.query;
       toast(`${res.cards.length} Treffer für „${res.query}“`); break;
     case "edit":
       S.editing = res.card; renderEditor(); $("#drawer").hidden = false; break;
@@ -610,11 +629,6 @@ function setView(view) {
   if (view === "review") renderReview();
   if (view === "browse") renderBrowse();
   if (view === "stats") renderStats();
-}
-
-function debounce(fn, ms) {
-  clearTimeout(debounce._t);
-  return (...args) => { clearTimeout(debounce._t); debounce._t = setTimeout(() => fn(...args), ms); };
 }
 
 /* ------------------------------------------------------------- listeners */
