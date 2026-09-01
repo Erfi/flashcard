@@ -420,6 +420,7 @@ function renderEditor() {
 async function saveEditor() {
   const card = S.editing;
   try {
+    if (!card.lemma || !card.lemma.trim()) { toast("Ein Stichwort wird gebraucht.", true); return; }
     await api("/api/cards/" + encodeURIComponent(card.id), { method: "PATCH", body: card });
     toast("Gespeichert.");
     closeEditor();
@@ -610,6 +611,9 @@ async function handleCommandResult(res) {
     case "added":
       toast(cardSummary(res.card, "angelegt"));
       if (res.warning) toast(res.warning, true, 9000);
+      if ((res.similar || []).length) {
+        toast("Ähnlich im Deck: " + res.similar.map((c) => c.headword).join(", "), false, 9000);
+      }
       await Promise.all([loadBrowse(), refreshQueue(), loadAllCards()]);
       S.editing = res.card; renderEditor(); $("#drawer").hidden = false;
       break;

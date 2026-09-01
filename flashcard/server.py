@@ -174,13 +174,22 @@ def create_app(deck_path: os.PathLike | str) -> FastAPI:
             card = Card.from_dict({**payload, "source": payload.get("source") or "manual"})
             if not card.lemma:
                 raise HTTPException(400, "Ein Stichwort (lemma) wird gebraucht")
+            existing = s.find_duplicate(card.lemma)
+            if existing and not payload.get("allow_duplicate"):
+                raise HTTPException(409, f"{existing.headword} gibt es schon "
+                                         f"(id {existing.id})")
             s.add(card)
-            return {"card": card.to_api()}
+            return {"card": card.to_api(), "similar": [c.to_api() for c in s.similar(card.lemma, card.id)]}
 
     @app.patch("/api/cards/{card_id}")
     def patch_card(card_id: str, payload: Dict) -> Dict:
         with LOCK:
             s = fresh()
+            if payload.get("lemma"):
+                clash = s.find_duplicate(payload["lemma"], ignore_id=card_id)
+                if clash:
+                    raise HTTPException(409, f"{clash.headword} gibt es schon "
+                                             f"(id {clash.id})")
             try:
                 card = s.update(card_id, payload)
             except DeckError as exc:
@@ -299,11 +308,18 @@ def create_app(deck_path: os.PathLike | str) -> FastAPI:
         return JSONResponse({"action": "error", "message": "Unbekannte Aktion",
                              "state": state_payload()})
 
+    def _duplicate(existing: Card, typed: str = "") -> Dict:
+        note = f" (du hast {typed!r} eingegeben)" if typed and \
+            typed.strip().lower() != existing.lemma.lower() else ""
+        return {"action": "duplicate", "card": existing.to_api(),
+                "message": f"{existing.headword} gibt es schon{note}.",
+                "state": state_payload()}
+
     def _add_card(s: Store, generator: ClaudeGenerator, query: str, hint: str) -> Dict:
-        existing = s.by_lemma(query)
+        # first pass: the word as typed, allowing for article and capitalisation
+        existing = s.find_duplicate(query)
         if existing:
-            return {"action": "duplicate", "card": existing.to_api(),
-                    "message": f"{existing.headword} gibt es schon.", "state": state_payload()}
+            return _duplicate(existing)
 
         warning = ""
         try:
@@ -317,11 +333,23 @@ def create_app(deck_path: os.PathLike | str) -> FastAPI:
         with LOCK:
             s.reload_if_changed()
             card = Card.from_dict(data)
+            # second pass: an inflected input ("läuft", "gelaufen", "die Katze")
+            # only reveals its lemma after generation, so check again here
+            existing = s.find_duplicate(card.lemma)
+            if existing:
+                return _duplicate(existing, query)
+            similar = s.similar(card.lemma)
             s.add(card)
         return {"action": "added", "card": card.to_api(), "warning": warning,
+                "similar": [c.to_api() for c in similar],
                 "message": f"{card.headword} angelegt", "state": state_payload()}
 
     # --------------------------------------------------------- import/export
+
+    @app.get("/api/duplicates")
+    def duplicates() -> Dict:
+        s = fresh()
+        return find_duplicates(s)
 
     @app.get("/api/export")
     def export_deck() -> PlainTextResponse:
@@ -350,6 +378,28 @@ def create_app(deck_path: os.PathLike | str) -> FastAPI:
             return state_payload()
 
     return app
+
+
+def find_duplicates(store: Store) -> Dict:
+    """Group cards that are the same word, and pairs that merely look alike."""
+    from .store import SIMILAR_THRESHOLD, normalise_lemma, similarity
+
+    groups: Dict[str, List[Card]] = {}
+    for card in store.cards:
+        groups.setdefault(normalise_lemma(card.lemma), []).append(card)
+    exact = [[c.to_api() for c in group] for group in groups.values() if len(group) > 1]
+
+    keys = sorted(groups)
+    near = []
+    for i, a in enumerate(keys):
+        for b in keys[i + 1:]:
+            score = similarity(a, b)
+            if score >= SIMILAR_THRESHOLD:
+                near.append({"score": round(score, 2),
+                             "cards": [groups[a][0].to_api(), groups[b][0].to_api()]})
+    near.sort(key=lambda pair: -pair["score"])
+    return {"exact": exact, "near": near,
+            "total": len(store.cards), "unique": len(groups)}
 
 
 def _next_due_label(store: Store, now: dt.datetime) -> Optional[str]:

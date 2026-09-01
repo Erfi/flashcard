@@ -242,10 +242,19 @@ class Card:
         article = str(raw.get("article") or "").strip().lower()
         if article not in ARTICLES:
             article = ""
+
+        lemma = str(raw.get("lemma") or "").strip()
+        # "die Katze" typed into the lemma field is an article plus a noun, not a
+        # noun called "die Katze" — otherwise the headword reads "die die Katze"
+        head, _, rest = lemma.partition(" ")
+        if ctype == NOUN and head.lower() in ARTICLES and rest.strip():
+            article = article or head.lower()
+            lemma = rest.strip()
+
         return cls(
-            id=str(raw.get("id") or slugify(str(raw.get("lemma", "karte")))),
+            id=str(raw.get("id") or slugify(lemma or "karte")),   # the cleaned lemma
             type=ctype,
-            lemma=str(raw.get("lemma") or "").strip(),
+            lemma=lemma,
             article=article,
             plural=str(raw.get("plural") or "").strip(),
             praesens_3sg=str(raw.get("praesens_3sg") or "").strip(),

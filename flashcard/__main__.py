@@ -100,6 +100,29 @@ def cmd_stats(args) -> int:
     return 0
 
 
+def cmd_duplicates(args) -> int:
+    """Report cards that are the same word, and pairs that only look alike."""
+    from .server import find_duplicates
+
+    store = Store(args.deck)
+    report = find_duplicates(store)
+    if report["exact"]:
+        print(f"Doppelte Karten ({len(report['exact'])} Gruppen):")
+        for group in report["exact"]:
+            print("  " + " | ".join(
+                f"{c['headword']} [{c['id']}, {c['srs']['reps']}×, {c['source']}]" for c in group))
+    else:
+        print("Keine doppelten Karten.")
+    if report["near"] and not args.exact_only:
+        print(f"\nÄhnliche Karten ({len(report['near'])}) — meistens verschiedene Wörter, "
+              f"nur zur Ansicht:")
+        for pair in report["near"]:
+            a, b = pair["cards"]
+            print(f"  {pair['score']:.2f}  {a['headword']:28} ~ {b['headword']}")
+    print(f"\n{report['total']} Karten, {report['unique']} verschiedene Stichwörter.")
+    return 1 if report["exact"] else 0
+
+
 def cmd_seed(args) -> int:
     store = Store(args.deck)
     if args.file:
@@ -163,6 +186,11 @@ def build_parser() -> argparse.ArgumentParser:
                       help="welches mitgelieferte Deck (Standard: b1)")
     seed.add_argument("--file", help="eigene YAML-Datei statt des mitgelieferten Decks")
     seed.set_defaults(func=cmd_seed)
+
+    dupes = subs.add_parser("duplicates", help="Deck auf doppelte Karten prüfen")
+    dupes.add_argument("--exact-only", action="store_true",
+                       help="nur echte Dubletten, keine ähnlichen Wörter")
+    dupes.set_defaults(func=cmd_duplicates)
 
     export = subs.add_parser("export", help="Deck ausgeben")
     export.add_argument("--out")

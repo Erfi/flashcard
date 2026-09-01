@@ -46,6 +46,7 @@ them in by hand in the editor.
 
 ```bash
 ./.venv/bin/python -m flashcard check
+python -m flashcard duplicates
 ```
 
 This sends one tiny request and reports what came back. The common cases:
@@ -124,6 +125,32 @@ recognition card later lapses.
 In the queue, an unlocked production card outranks a word you have never seen:
 revisiting known material beats piling on new vocabulary, and without that rule
 a large backlog of new words would starve the production direction completely.
+
+## Duplicates
+
+`add` checks twice. First against what you typed, ignoring case and a leading
+article, so `add die Katze` finds the existing **Katze**. Then again after
+Claude has normalised the word, which is the only point at which an inflected
+input reveals its lemma — so `add gelaufen` or `add läuft` finds **laufen**
+instead of filing a second copy. The generated card is discarded and the
+existing one opens.
+
+Renaming a card onto another one is refused, and so is creating one through the
+API with a lemma that already exists (`allow_duplicate: true` overrides it).
+
+Words that merely *look* alike are reported, never blocked — `erinnern` and
+`die Erinnerung` are two cards worth having, as are `arbeiten` and `die Arbeit`.
+Adding one when the other exists shows "Ähnlich im Deck: …" and carries on.
+
+To audit a deck:
+
+```bash
+python -m flashcard duplicates              # exact duplicates plus lookalikes
+python -m flashcard duplicates --exact-only
+```
+
+It exits non-zero when it finds real duplicates, so it works in a pre-commit
+hook. `GET /api/duplicates` returns the same report as JSON.
 
 ## Grammar cards are reference, not drill
 
@@ -276,7 +303,7 @@ flashcard/
   web/           the browser UI (no build step, no dependencies)
   seed_a2.yaml   the A2 deck (300 cards)
   seed_b1.yaml   the B1 deck (300 cards)
-tests/           133 tests: scheduler maths, storage, commands, API, generator
+tests/           158 tests: scheduler maths, storage, commands, API, generator
 ```
 
 ```bash

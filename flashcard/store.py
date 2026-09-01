@@ -13,6 +13,7 @@ Design notes
 from __future__ import annotations
 
 import datetime as dt
+import difflib
 import os
 import shutil
 import tempfile
@@ -21,7 +22,7 @@ from typing import Dict, Iterable, List, Optional
 
 import yaml
 
-from .models import Card, slugify, utcnow
+from .models import ARTICLES, Card, slugify, utcnow
 from .scheduler import DEFAULT_SETTINGS
 
 DECK_VERSION = 1
@@ -127,6 +128,40 @@ class Store:
         needle = lemma.strip().lower()
         return next((c for c in self.cards if c.lemma.strip().lower() == needle), None)
 
+    def find_duplicate(self, lemma: str, ignore_id: str = "") -> Optional[Card]:
+        """The card that IS this word, allowing for how it was typed.
+
+        "die Katze", "Katze" and "katze" are the same card; the generator also
+        normalises inflected input, so this is checked again after generation.
+        """
+        needle = normalise_lemma(lemma)
+        if not needle:
+            return None
+        return next((c for c in self.cards
+                     if c.id != ignore_id and normalise_lemma(c.lemma) == needle), None)
+
+    def similar(self, lemma: str, ignore_id: str = "", limit: int = 4) -> List[Card]:
+        """Cards that might be the same word — offered as a hint, never enforced.
+
+        `sich vorstellen` and `vorstellen` are different verbs, `Vertrag` and
+        `vertragen` unrelated, so these are shown rather than blocked.
+        """
+        needle = normalise_lemma(lemma)
+        if not needle:
+            return []
+        scored = []
+        for card in self.cards:
+            if card.id == ignore_id:
+                continue
+            other = normalise_lemma(card.lemma)
+            if not other or other == needle:
+                continue
+            score = similarity(needle, other)
+            if score >= SIMILAR_THRESHOLD:
+                scored.append((score, card))
+        scored.sort(key=lambda pair: -pair[0])
+        return [card for _, card in scored[:limit]]
+
     def resolve(self, key: str) -> Optional[Card]:
         return self.by_id(key) or self.by_lemma(key)
 
@@ -228,7 +263,7 @@ class Store:
             if not card.lemma:
                 skipped += 1
                 continue
-            if mode != "replace" and self.by_lemma(card.lemma):
+            if mode != "replace" and self.find_duplicate(card.lemma):
                 skipped += 1
                 continue
             card.id = self.unique_id(card.lemma)
@@ -267,6 +302,44 @@ class Store:
 
     def grammar_topics(self, limit: int = 40) -> List[str]:
         return [c.lemma for c in self.cards if c.type == "grammar"][:limit]
+
+
+SIMILAR_THRESHOLD = 0.9
+
+
+def normalise_lemma(lemma: str) -> str:
+    """Compare-ready form: no article, no case, umlauts folded."""
+    text = (lemma or "").strip().lower()
+    for article in ARTICLES:
+        if text.startswith(article + " "):
+            text = text[len(article) + 1:]
+            break
+    return slugify(text)
+
+
+def _stem(text: str) -> str:
+    """Crude stem, enough to see that reflexive and plain forms belong together."""
+    text = text[5:] if text.startswith("sich-") else text
+    for ending in ("ungen", "enden", "eren", "ung", "en", "er", "es", "em", "st", "e", "n", "s"):
+        if text.endswith(ending) and len(text) - len(ending) >= 4:
+            return text[: -len(ending)]
+    return text
+
+
+def similarity(a: str, b: str) -> float:
+    """1.0 for the same word, high for forms of one word, low for unrelated ones."""
+    if a == b:
+        return 1.0
+    stem_a, stem_b = _stem(a), _stem(b)
+    if stem_a == stem_b and len(stem_a) >= 4:
+        return 0.95
+    # A shared prefix of real length is a hint (erinnern / Erinnerung). Beyond
+    # that, string similarity alone is misleading — schenken and schmecken score
+    # 0.82 and are unrelated — so unrelated words must be nearly identical
+    # before we say anything.
+    if len(stem_a) >= 5 and (b.startswith(stem_a) or a.startswith(stem_b)):
+        return 0.9
+    return difflib.SequenceMatcher(None, a, b).ratio()
 
 
 def _clean_settings(settings: Dict) -> Dict:
