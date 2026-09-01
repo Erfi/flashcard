@@ -126,6 +126,32 @@ In the queue, an unlocked production card outranks a word you have never seen:
 revisiting known material beats piling on new vocabulary, and without that rule
 a large backlog of new words would starve the production direction completely.
 
+## Progress charts
+
+The Statistik tab plots five things. Two come from the deck itself and work on
+the first run; three read `data/reviews.csv`, an append-only log with one row
+per answer that the app writes as you study. The log keeps history out of
+`deck.yaml` (which stays small and hand-editable) and opens in any spreadsheet.
+
+| Chart | Question it answers |
+| --- | --- |
+| Gefestigte Karten | Am I getting anywhere? Cards past a 3-day interval, per day, recognition vs production |
+| Wiederholungen pro Tag | How much did I actually do? Answers per day; the tooltip breaks them down by grade |
+| Behalten | Is it sticking? 7-day rolling share of already-learned cards graded Gut or better |
+| Fällig in den nächsten 14 Tagen | What's coming? Already-scheduled reviews, overdue cards folded into today |
+| Intervall-Verteilung | How mature is the deck right now? Cards per interval band |
+
+**Behalten is the one to watch.** Below ~80% you are introducing new cards
+faster than you are keeping the old ones — lower `set new`. Above ~95% the
+intervals are shorter than they need to be and you are spending time you could
+give to new material.
+
+The history charts start the day logging begins, and the "Gefestigte Karten"
+curve is reconstructed by rewinding today's true numbers through the log, so it
+always ends on the figure the deck actually shows. Days before that are flat
+rather than invented. Every chart has a **Tabelle** toggle with the same numbers
+in text, and the time range (14 / 30 / 60 days) applies to all of them at once.
+
 ## Duplicates
 
 `add` checks twice. First against what you typed, ignoring case and a leading
@@ -265,7 +291,8 @@ cards:
 ```
 
 Edit it while the app is running — the server notices the changed mtime and
-reloads. Every write is atomic and keeps the previous version as
+reloads. `data/reviews.csv` sits beside it and holds the review history; delete
+it and you lose the charts' history, nothing else. Every write is atomic and keeps the previous version as
 `data/deck.yaml.bak`.
 
 Import and export from the **Karten** tab, or:
@@ -298,12 +325,15 @@ flashcard/
   scheduler.py   deadline-aware SM-2, queue building, projections
   generator.py   Anthropic API calls, JSON extraction, normalisation
   cloze.py       blanks the word out of the example for the production direction
+  history.py     the review log and the series the charts draw
   commands.py    the command-bar grammar
   server.py      FastAPI endpoints
   web/           the browser UI (no build step, no dependencies)
+                 charts.js is a small SVG chart kit; the palette is validated
+                 for colour-vision deficiency in both light and dark themes
   seed_a2.yaml   the A2 deck (300 cards)
   seed_b1.yaml   the B1 deck (300 cards)
-tests/           158 tests: scheduler maths, storage, commands, API, generator
+tests/           182 tests: scheduler maths, storage, commands, API, generator
 ```
 
 ```bash

@@ -13,7 +13,7 @@ from fastapi.responses import FileResponse, JSONResponse, PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
-from . import cloze, commands
+from . import cloze, commands, history
 from .generator import ClaudeGenerator, GeneratorError, guess_type
 from .models import FORWARD, REVERSE, Card, utcnow
 from .scheduler import Scheduler, build_queue, humanise, projection
@@ -44,6 +44,7 @@ class SettingsIn(BaseModel):
 
 def create_app(deck_path: os.PathLike | str) -> FastAPI:
     store = Store(deck_path)
+    log = history.ReviewLog(store.path.parent / "reviews.csv")
     app = FastAPI(title="Deutsch B1 Karteikarten", docs_url=None, redoc_url=None)
     app.state.store = store
 
@@ -158,11 +159,17 @@ def create_app(deck_path: os.PathLike | str) -> FastAPI:
             if not card:
                 raise HTTPException(404, f"Karte {payload.id!r} nicht gefunden")
             direction = REVERSE if payload.direction == REVERSE else FORWARD
-            was_new = card.srs_for(direction).state == "new"
+            srs = card.srs_for(direction)
+            state_before, interval_before = srs.state, srs.interval_days
+            was_new = state_before == "new"
             sched().answer(card, payload.grade, direction=direction)
             if was_new:
                 s.note_introduced()
             s.save()
+            try:
+                log.append(card, direction, payload.grade, state_before, interval_before)
+            except OSError:
+                pass          # a full disk must not cost you the review itself
             return {"card": card.to_api(), "state": state_payload()}
 
     # ------------------------------------------------------------------ cards
@@ -345,6 +352,28 @@ def create_app(deck_path: os.PathLike | str) -> FastAPI:
                 "message": f"{card.headword} angelegt", "state": state_payload()}
 
     # --------------------------------------------------------- import/export
+
+    @app.get("/api/history")
+    def get_history(days: int = 30, forecast_days: int = 14) -> Dict:
+        s = fresh()
+        days = max(7, min(int(days), 120))
+        forecast_days = max(7, min(int(forecast_days), 60))
+        now = utcnow()
+        today = now.astimezone().date()
+        since = today - dt.timedelta(days=days - 1)
+        rows = log.rows(since=since)
+        daily = history.activity(rows, days, today, (s.stats or {}).get("introduced"))
+        return {
+            "days": days,
+            "activity": daily,
+            "retention": history.retention(daily),
+            "learned": history.learned_curve(rows, s.cards, days, today),
+            "forecast": history.forecast(s.cards, s.settings, forecast_days, now),
+            "intervals": history.intervals(s.cards, s.settings),
+            "summary": history.summary(rows, daily),
+            "target_date": s.settings.get("target_date"),
+            "log_path": str(log.path),
+        }
 
     @app.get("/api/duplicates")
     def duplicates() -> Dict:

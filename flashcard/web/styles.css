@@ -1,4 +1,7 @@
 :root {
+  /* without this, browsers keep rendering native form controls in their light
+     theme (and their own text colour) even when the page is dark */
+  color-scheme: light dark;
   --bg: #f6f6f4;
   --surface: #ffffff;
   --surface-2: #f0efec;
@@ -18,6 +21,20 @@
   --phrase: #b45309;
   --grammar: #475569;
   --other: #6b7280;
+
+  /* chart palette — validated with the dataviz palette validator against this
+     app's own surfaces (#ffffff light, #1e1e23 dark); do not eyeball changes */
+  --viz-1: #2a78d6;          /* categorical slot 1 — Erkennen */
+  --viz-2: #eb6834;          /* categorical slot 2 — Produktion */
+  --viz-ord-1: #86b6ef;      /* one-hue ordinal ramp, light end clears 2:1 */
+  --viz-ord-2: #3987e5;
+  --viz-ord-3: #1c5cab;
+  --viz-ord-4: #0d366b;
+  --viz-muted: #a9a89f;      /* neu / im Lernen — not an interval, so not on the ramp */
+  --viz-grid: #e1e0d9;
+  --viz-axis: #c3c2b7;
+  --viz-band: #f0efec;
+  --viz-band-edge: #d8d7ce;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -32,6 +49,11 @@
     --der: #60a5fa; --die: #f472b6; --das: #34d399; --verb: #fbbf24;
     --adjective: #a78bfa; --adverb: #22d3ee; --phrase: #fb923c;
     --grammar: #94a3b8; --other: #9ca3af;
+
+    --viz-1: #3987e5; --viz-2: #d95926;
+    --viz-ord-1: #256abf; --viz-ord-2: #3987e5; --viz-ord-3: #6da7ec; --viz-ord-4: #b7d3f6;
+    --viz-muted: #6b6b63; --viz-grid: #3a3a42; --viz-axis: #44444d; --viz-band: #2b2b33;
+    --viz-band-edge: #40404a;
   }
 }
 
@@ -43,7 +65,16 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 button, input, textarea, select { font: inherit; color: inherit; }
-button { cursor: pointer; }
+button {
+  cursor: pointer;
+  /* reset the native widget: otherwise the platform decides the face and the
+     text colour, which is how a button ends up with invisible text */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: transparent;
+  color: inherit;
+}
 a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
 
 /* ---------------------------------------------------------------- layout */
@@ -59,7 +90,8 @@ header.top { display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
   border: 0; background: transparent; color: var(--muted);
   padding: 6px 14px; border-radius: 7px; font-size: 14px; font-weight: 500;
 }
-.tabs button.active { background: var(--surface); color: var(--text); box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+.tabs button.active { background-color: var(--surface, #ffffff); color: var(--text, #1c1b19);
+  box-shadow: 0 1px 2px rgba(0,0,0,.08); }
 
 /* ------------------------------------------------------------ command bar */
 .cmdbar { position: relative; margin-bottom: 10px; }
@@ -119,7 +151,8 @@ header.top { display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
 
 .answers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; width: 100%; }
 .answers button {
-  border: 1px solid var(--border); background: var(--surface); border-radius: 11px;
+  border: 1px solid var(--border, #e0dfda); background-color: var(--surface, #ffffff);
+  color: var(--text, #1c1b19); border-radius: 11px;
   padding: 11px 6px; display: flex; flex-direction: column; gap: 2px; align-items: center;
   box-shadow: var(--shadow); transition: transform .06s ease;
 }
@@ -132,8 +165,9 @@ header.top { display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
 .answers .g3 .lab { color: var(--der); }
 
 .bigbtn {
-  width: 100%; padding: 13px; border-radius: 11px; border: 1px solid var(--border);
-  background: var(--surface); box-shadow: var(--shadow); font-weight: 550;
+  width: 100%; padding: 13px; border-radius: 11px; border: 1px solid var(--border, #e0dfda);
+  background-color: var(--surface, #ffffff); color: var(--text, #1c1b19);
+  box-shadow: var(--shadow); font-weight: 550;
 }
 .keyhint { color: var(--muted); font-size: 12.5px; }
 .empty { text-align: center; color: var(--muted); padding: 60px 20px; }
@@ -179,7 +213,9 @@ header.top { display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
 .field textarea { min-height: 62px; resize: vertical; }
 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .panelactions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
-.panelactions button { padding: 9px 14px; border-radius: 9px; border: 1px solid var(--border); background: var(--surface); }
+.panelactions button { padding: 9px 14px; border-radius: 9px;
+  border: 1px solid var(--border, #e0dfda); background-color: var(--surface, #ffffff);
+  color: var(--text, #1c1b19); }
 .panelactions .primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 550; }
 .panelactions .danger { color: var(--die); }
 .srsbox { background: var(--surface-2); border-radius: 10px; padding: 10px 12px; font-size: 13px; color: var(--muted); margin-top: 14px; }
@@ -206,3 +242,40 @@ header.top { display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
   .headword { font-size: 27px; }
   .answers { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ---------------------------------------------------------------- charts */
+.chartcard { padding-bottom: 12px; }
+.charthead { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
+.charthead h4 { margin: 0; }
+.chartsub { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+.charttoggle {
+  margin-left: auto; border: 1px solid var(--border, #e0dfda);
+  background-color: var(--surface, #ffffff); color: var(--muted, #6f6d67);
+  border-radius: 8px; padding: 4px 10px; font-size: 12.5px;
+}
+.charttoggle:hover { color: var(--text); }
+.chartlegend { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 6px; }
+.legenditem { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--muted); }
+.swatch { width: 10px; height: 10px; border-radius: 3px; display: inline-block; flex: none; }
+.chartbody { position: relative; }
+.chartbody svg { display: block; overflow: visible; }
+.chartbody text.axis { fill: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+.chartbody text.endlabel { fill: var(--text); font-size: 11.5px; font-weight: 600; }
+.charttip {
+  position: absolute; pointer-events: none; z-index: 5; min-width: 120px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 9px;
+  box-shadow: var(--shadow); padding: 8px 10px; font-size: 12.5px;
+}
+.tiptitle { font-weight: 600; margin-bottom: 4px; }
+.tiprow { display: flex; align-items: center; gap: 6px; color: var(--muted); }
+.tiprow b { margin-left: auto; color: var(--text); font-variant-numeric: tabular-nums; }
+.charttable { max-height: 320px; overflow: auto; }
+.datatable th { text-align: left; color: var(--muted); font-weight: 500; font-size: 12.5px;
+                border-bottom: 1px solid var(--border); padding-bottom: 4px; }
+.datatable td { font-variant-numeric: tabular-nums; padding: 3px 10px 3px 0; }
+.rangerow { align-items: center; gap: 6px; margin-bottom: 14px; }
+.rangebtn {
+  border: 1px solid var(--border, #e0dfda); background-color: var(--surface, #ffffff);
+  color: var(--muted, #6f6d67); border-radius: 999px; padding: 5px 12px; font-size: 12.5px;
+}
+.rangebtn.active { color: var(--text); border-color: var(--accent); }

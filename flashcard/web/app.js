@@ -1,3 +1,6 @@
+import { categoryChart, chartCard, columnChart, dataTable, dayLabel, lineChart }
+  from "/static/charts.js";
+
 /* German B1 flashcards — browser UI.
    Plain ES modules-free JS: one file, no build step, no dependencies. */
 
@@ -10,6 +13,8 @@ const S = {
   editing: null,
   browse: { q: "", type: "", sort: "due", cards: [] },
   allCards: [],
+  history: null,
+  historyDays: 30,
   help: null,
 };
 
@@ -474,6 +479,10 @@ async function loadAllCards() {
   S.allCards = (await api("/api/cards")).cards;
 }
 
+async function loadHistory() {
+  S.history = await api(`/api/history?days=${S.historyDays}&forecast_days=14`);
+}
+
 function renderStats() {
   const view = $("#view");
   view.textContent = "";
@@ -487,7 +496,10 @@ function renderStats() {
            ? "Karten im Lernstapel" : "Karten gesamt"),
     stat(p.unseen, "noch nie gesehen"),
     stat(p.mature, "gefestigt (≥3 T.)"),
-    stat(p.days_left === null || p.days_left === undefined ? "—" : Math.max(0, Math.round(p.days_left)), "Tage bis zum Ziel")));
+    stat(p.days_left === null || p.days_left === undefined ? "—" : Math.max(0, Math.round(p.days_left)), "Tage bis zum Ziel"),
+    S.history ? stat(S.history.summary.reviews_today, "Antworten heute") : null,
+    S.history ? stat(S.history.summary.retention_week === null ? "—"
+                     : S.history.summary.retention_week + " %", "Behalten (7 Tage)") : null));
 
   const byColor = {};
   (S.allCards || S.browse.cards).forEach((c) => { byColor[c.color_key] = (byColor[c.color_key] || 0) + 1; });
@@ -530,6 +542,8 @@ function renderStats() {
       + "Jede Vokabel wird in zwei Richtungen geplant; die Produktionsrichtung kommt erst dazu, "
       + "wenn du das Wort sicher wiedererkennst.")));
 
+  renderCharts(view);
+
   view.append(el("div", { class: "section" }, el("h4", {}, "Deck-Datei"),
     el("div", { class: "note" }, st.deck_path),
     el("div", { class: "panelactions" },
@@ -541,6 +555,129 @@ function renderStats() {
     S.help.forEach(([cmd, desc]) => table.append(el("tr", {}, el("td", {}, el("code", {}, cmd)), el("td", {}, desc))));
     view.append(el("div", { class: "section" }, el("h4", {}, "Befehle"), table));
   }
+}
+
+
+/* ---------------------------------------------------------------- charts */
+const VIZ = {
+  forward: "var(--viz-1)",
+  reverse: "var(--viz-2)",
+  single: "var(--viz-1)",
+  ordinal: ["var(--viz-muted)", "var(--viz-muted)",
+            "var(--viz-ord-1)", "var(--viz-ord-2)", "var(--viz-ord-3)", "var(--viz-ord-4)"],
+};
+
+function rangeRow() {
+  return el("div", { class: "toolrow rangerow" },
+    el("span", { class: "keyhint" }, "Zeitraum"),
+    [14, 30, 60].map((n) => el("button", {
+      class: "rangebtn" + (S.historyDays === n ? " active" : ""),
+      onclick: async () => { S.historyDays = n; await loadHistory(); renderStats(); },
+    }, `${n} Tage`)));
+}
+
+function renderCharts(view) {
+  const h = S.history;
+  if (!h) return;
+  view.append(rangeRow());
+
+  const dates = h.activity.map((d) => d.date);
+  const since = h.summary.logging_since;
+  const sinceNote = since
+    ? `Aufzeichnung seit ${dayLabel(since)} — davor liegen keine Daten vor.`
+    : "Noch keine Wiederholungen aufgezeichnet; die Kurven füllen sich ab der ersten Lernsitzung.";
+
+  // 1 — what you actually know, over time
+  const learned = chartCard({
+    title: "Gefestigte Karten",
+    subtitle: "Karten mit einem Intervall von mindestens 3 Tagen",
+    legend: [{ label: "Erkennen", color: VIZ.forward }, { label: "Produktion", color: VIZ.reverse }],
+    note: sinceNote,
+    table: () => dataTable(["Tag", "Erkennen", "Produktion"],
+      h.learned.map((p) => [dayLabel(p.date), p.forward, p.reverse])),
+  });
+  view.append(learned.card);
+  lineChart(learned.body, {
+    labels: h.learned.map((p) => p.date),
+    ariaLabel: "Gefestigte Karten pro Tag",
+    series: [
+      { label: "Erkennen", color: VIZ.forward, points: h.learned.map((p) => p.forward) },
+      { label: "Produktion", color: VIZ.reverse, points: h.learned.map((p) => p.reverse) },
+    ],
+  });
+
+  // 2 — effort
+  const activity = chartCard({
+    title: "Wiederholungen pro Tag",
+    subtitle: "alle Antworten, neue Karten eingeschlossen",
+    table: () => dataTable(["Tag", "Antworten", "davon neu", "Nochmal", "Schwer", "Gut", "Leicht"],
+      h.activity.map((d) => [dayLabel(d.date), d.reviews, d.new, d.again, d.hard, d.good, d.easy])),
+  });
+  view.append(activity.card);
+  columnChart(activity.body, {
+    labels: dates,
+    ariaLabel: "Wiederholungen pro Tag",
+    stacks: h.activity.map((d) => [d.reviews]),
+    colors: [VIZ.single],
+    tipRows: (i) => {
+      const d = h.activity[i];
+      return [["Antworten", d.reviews], ["davon neu", d.new], ["Nochmal", d.again],
+              ["Schwer", d.hard], ["Gut", d.good], ["Leicht", d.easy]];
+    },
+  });
+
+  // 3 — is it sticking?
+  const ret = chartCard({
+    title: "Behalten",
+    subtitle: "7-Tage-Schnitt: Anteil „Gut“ oder besser bei bereits gelernten Karten",
+    note: "Das graue Band markiert 80–95 %. Darunter kommen zu viele neue Karten dazu, "
+        + "darüber sind die Intervalle zu kurz.",
+    table: () => dataTable(["Tag", "Behalten", "bewertete Karten"],
+      h.retention.map((p) => [dayLabel(p.date), p.value === null ? "—" : p.value + " %", p.graded])),
+  });
+  view.append(ret.card);
+  lineChart(ret.body, {
+    labels: h.retention.map((p) => p.date),
+    ariaLabel: "Behaltensquote",
+    yMax: 100, band: [80, 95], yFormat: (v) => Math.round(v) + " %",
+    series: [{ label: "Behalten", color: VIZ.single, points: h.retention.map((p) => p.value) }],
+  });
+
+  // 4 — what is coming
+  const targetIndex = h.target_date ? h.forecast.findIndex((d) => d.date === h.target_date) : -1;
+  const fc = chartCard({
+    title: "Fällig in den nächsten 14 Tagen",
+    subtitle: "bereits geplante Wiederholungen; überfällige Karten stehen auf heute",
+    legend: [{ label: "Erkennen", color: VIZ.forward }, { label: "Produktion", color: VIZ.reverse }],
+    note: "Neue Karten sind nicht enthalten — die kommen erst dazu, wenn du sie anfängst.",
+    table: () => dataTable(["Tag", "Erkennen", "Produktion", "gesamt"],
+      h.forecast.map((d) => [dayLabel(d.date), d.forward, d.reverse, d.forward + d.reverse])),
+  });
+  view.append(fc.card);
+  columnChart(fc.body, {
+    labels: h.forecast.map((d) => d.date),
+    ariaLabel: "Fällige Karten in den nächsten Tagen",
+    stacks: h.forecast.map((d) => [d.forward, d.reverse]),
+    colors: [VIZ.forward, VIZ.reverse],
+    markIndex: targetIndex, markLabel: "Zieldatum",
+    tipRows: (i) => [["Erkennen", h.forecast[i].forward, VIZ.forward],
+                     ["Produktion", h.forecast[i].reverse, VIZ.reverse],
+                     ["gesamt", h.forecast[i].forward + h.forecast[i].reverse]],
+  });
+
+  // 5 — deck maturity right now
+  const iv = chartCard({
+    title: "Intervall-Verteilung",
+    subtitle: "beide Richtungen, Stand jetzt",
+    table: () => dataTable(["Intervall", "Karten"], h.intervals.map((b) => [b.label, b.count])),
+  });
+  view.append(iv.card);
+  categoryChart(iv.body, {
+    labels: h.intervals.map((b) => b.label),
+    values: h.intervals.map((b) => b.count),
+    colors: VIZ.ordinal,
+    ariaLabel: "Karten je Intervallbereich",
+  });
 }
 
 const stat = (n, label) => el("div", { class: "stat" }, el("div", { class: "n" }, String(n)), el("div", { class: "l" }, label));
@@ -593,13 +730,13 @@ async function handleCommandResult(res) {
     case "error":
       toast(res.message, true); break;
     case "help":
-      S.help = res.entries; await loadAllCards(); setView("stats"); break;
+      S.help = res.entries; await Promise.all([loadAllCards(), loadHistory()]); setView("stats"); break;
     case "review":
       await refreshQueue(); setView("review"); break;
     case "browse":
       await loadBrowse(); setView("browse"); break;
     case "stats":
-      await Promise.all([loadBrowse(), loadAllCards()]); setView("stats"); break;
+      await Promise.all([loadBrowse(), loadAllCards(), loadHistory()]); setView("stats"); break;
     case "export":
       exportDeck(); break;
     case "find":
@@ -656,7 +793,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.querySelectorAll("#tabs button").forEach((b) => {
     b.addEventListener("click", async () => {
       if (b.dataset.view === "browse") await loadBrowse();
-      if (b.dataset.view === "stats") await Promise.all([loadBrowse(), loadAllCards()]);
+      if (b.dataset.view === "stats") await Promise.all([loadBrowse(), loadAllCards(), loadHistory()]);
       if (b.dataset.view === "review") await refreshQueue();
       setView(b.dataset.view);
     });

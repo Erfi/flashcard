@@ -240,3 +240,43 @@ def test_hidden_grammar_cards_are_still_browsable_and_editable(client):
     patched = client.patch(f"/api/cards/{created['id']}",
                            json={"definition": "Neu erklärt."}).json()["card"]
     assert patched["definition"] == "Neu erklärt."
+
+
+def test_answering_writes_a_review_log(client, tmp_path):
+    card = client.post("/api/command", json={"text": "add katze"}).json()["card"]
+    client.post("/api/answer", json={"id": card["id"], "grade": 2})
+    log = tmp_path / "reviews.csv"
+    assert log.exists()
+    lines = log.read_text(encoding="utf-8").strip().splitlines()
+    assert lines[0].startswith("ts,card,direction,grade")
+    assert lines[1].split(",")[1:5] == ["katze", "forward", "2", "new"]
+
+
+def test_history_endpoint_shape(client):
+    card = client.post("/api/command", json={"text": "add katze"}).json()["card"]
+    for _ in range(3):
+        client.post("/api/answer", json={"id": card["id"], "grade": 3})
+    data = client.get("/api/history?days=14&forecast_days=7").json()
+    assert len(data["activity"]) == 14
+    assert len(data["retention"]) == 14
+    assert len(data["learned"]) == 14
+    assert len(data["forecast"]) == 7
+    assert len(data["intervals"]) == 6
+    assert data["activity"][-1]["reviews"] == 3
+    assert data["summary"]["reviews_today"] == 3
+    assert data["summary"]["logged_total"] == 3
+    assert data["learned"][-1]["forward"] == 1        # easy x3 puts it past 3 days
+
+
+def test_history_works_on_an_untouched_deck(client):
+    client.post("/api/command", json={"text": "add katze"})
+    data = client.get("/api/history").json()
+    assert data["summary"]["logged_total"] == 0
+    assert all(point["value"] is None for point in data["retention"])
+    assert data["intervals"][0]["count"] == 1          # one new card
+    assert data["summary"]["logging_since"] is None
+
+
+def test_history_day_window_is_clamped(client):
+    assert len(client.get("/api/history?days=1").json()["activity"]) == 7
+    assert len(client.get("/api/history?days=9000").json()["activity"]) == 120
