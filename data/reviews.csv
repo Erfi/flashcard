@@ -1,9 +1,0 @@
-ts,card,direction,grade,state_before,state_after,interval_before,interval_after,ease_after,lapses_after
-2026-09-01T18:14:43+00:00,vergessen,forward,2,learning,review,0.0,1.0,2.5,0
-2026-09-01T18:14:54+00:00,trotzdem,forward,2,learning,review,0.0,1.0,2.5,0
-2026-09-01T18:16:02+00:00,gelingen,forward,2,learning,review,0.0,1.0,2.5,0
-2026-09-01T18:16:08+00:00,sich-informieren,forward,2,learning,review,0.0,1.0,2.5,0
-2026-09-01T18:16:17+00:00,zugeben,forward,2,learning,review,0.0,1.0,2.5,0
-2026-09-01T18:16:22+00:00,fenster,forward,1,learning,learning,0.0,0.0,2.5,0
-2026-09-01T18:16:30+00:00,sich-beschweren,forward,2,learning,review,0.0,1.0,2.5,0
-2026-09-01T18:16:40+00:00,vorschlagen,forward,2,learning,review,0.0,1.0,2.5,0

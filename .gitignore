@@ -4,4 +4,6 @@ __pycache__/
 .env
 data/deck.yaml
 data/deck.yaml.bak
+data/reviews.csv
 .pytest_cache/
+TELC_B1/
