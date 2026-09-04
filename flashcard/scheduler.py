@@ -29,6 +29,11 @@ from .models import (AGAIN, EASY, FORWARD, GOOD, GRAMMAR, HARD, LEARNING, NEW,
 
 DAY = 24 * 60.0  # minutes in a day
 
+# What counts as "learned": an interval of three days. Near a deadline the cap
+# can be shorter than that, which would make the mark unreachable — see
+# effective_threshold below.
+MATURE_INTERVAL_DAYS = 3.0
+
 DEFAULT_SETTINGS: Dict[str, object] = {
     "target_date": None,               # "2026-09-18" or None
     "reviews_before_target": 3.0,      # aim for ~this many more reps before the date
@@ -245,6 +250,22 @@ def is_due(card: Card, now: Optional[dt.datetime] = None,
     return srs.due <= now
 
 
+def effective_threshold(nominal: float, settings: Dict,
+                        now: Optional[dt.datetime] = None) -> float:
+    """Clamp an interval threshold to what the schedule can actually reach.
+
+    Both "this card is learned" and "production unlocks now" are expressed as
+    an interval in days. As a deadline approaches, the interval cap shrinks
+    below those marks, so nothing can ever reach them: the learned count would
+    stall and then bleed away as capped cards fall back under the line, and no
+    new production card would ever unlock. Reading the threshold as "as widely
+    spaced as this schedule allows" keeps both meaningful.
+    """
+    cap = Scheduler(settings).interval_cap(now or utcnow())
+    floor = float(settings.get("min_interval_days", 0.25) or 0.25)
+    return max(floor, min(float(nominal), cap))
+
+
 def reverse_unlocked(card: Card, unlock_interval_days: float = 3.0) -> bool:
     """Is the production direction ready to be studied?
 
@@ -289,7 +310,8 @@ def build_queue(cards: List[Card], settings: Dict, now: Optional[dt.datetime] = 
     shuffle = bool(settings.get("shuffle", True))
     reverse_on = bool(settings.get("reverse_enabled", True))
     grammar_on = bool(settings.get("grammar_enabled", False))
-    unlock = float(settings.get("reverse_unlock_interval_days", 3.0))
+    unlock = effective_threshold(settings.get("reverse_unlock_interval_days", 3.0),
+                                 settings, now)
 
     learning: List[Tuple[Card, str]] = []
     review: List[Tuple[Card, str]] = []
@@ -341,7 +363,9 @@ def projection(cards: List[Card], settings: Dict, now: Optional[dt.datetime] = N
     now = now or utcnow()
     sched = Scheduler(settings)
     left = sched.days_left(now)
-    unlock = float(settings.get("reverse_unlock_interval_days", 3.0))
+    unlock = effective_threshold(settings.get("reverse_unlock_interval_days", 3.0),
+                                 settings, now)
+    maturity = effective_threshold(MATURE_INTERVAL_DAYS, settings, now)
     reverse_on = bool(settings.get("reverse_enabled", True))
 
     grammar_on = bool(settings.get("grammar_enabled", False))
@@ -349,7 +373,8 @@ def projection(cards: List[Card], settings: Dict, now: Optional[dt.datetime] = N
     studied = [c for c in cards if grammar_on or c.type != GRAMMAR]
 
     total = len(cards)
-    mature = sum(1 for c in studied if c.srs.state == REVIEW and c.srs.interval_days >= 3)
+    mature = sum(1 for c in studied
+                 if c.srs.state == REVIEW and c.srs.interval_days >= maturity)
     unseen = sum(1 for c in studied if c.srs.state == NEW)
     reverse_possible = sum(1 for c in cards if c.supports_reverse) if reverse_on else 0
     reverse_open = sum(1 for c in cards if reverse_on and reverse_unlocked(c, unlock))
@@ -367,6 +392,8 @@ def projection(cards: List[Card], settings: Dict, now: Optional[dt.datetime] = N
         "unseen": unseen,
         "mature": mature,
         "interval_cap_days": round(sched.interval_cap(now), 2),
+        "maturity_days": round(maturity, 2),
+        "unlock_days": round(unlock, 2),
         "new_per_day_needed": per_day,
         "reverse_possible": reverse_possible,
         "reverse_open": reverse_open,

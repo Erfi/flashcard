@@ -141,6 +141,17 @@ per answer that the app writes as you study. The log keeps history out of
 | Fällig in den nächsten 14 Tagen | What's coming? Already-scheduled reviews, overdue cards folded into today |
 | Intervall-Verteilung | How mature is the deck right now? Cards per interval band |
 
+**The maturity mark moves with the deadline.** "Learned" nominally means an
+interval of at least 3 days — but the deadline cap can be shorter than that
+(`days_left ÷ 3`), and then no card could ever reach the mark: the count would
+stall, and already-counted cards would drop out as soon as a review re-clamped
+them. So the threshold is `min(3 days, current cap)` — "as widely spaced as
+this schedule allows" — and the historical curve applies the threshold that was
+in force on each day. The same clamp applies to the interval at which the
+production direction unlocks, for the same reason. Both marks return to 3 days
+once the target date passes. The charts name the threshold they used, and the
+table view lists it per day.
+
 **Behalten is the one to watch.** Below ~80% you are introducing new cards
 faster than you are keeping the old ones — lower `set new`. Above ~95% the
 intervals are shorter than they need to be and you are spending time you could
@@ -333,7 +344,7 @@ flashcard/
                  for colour-vision deficiency in both light and dark themes
   seed_a2.yaml   the A2 deck (300 cards)
   seed_b1.yaml   the B1 deck (300 cards)
-tests/           182 tests: scheduler maths, storage, commands, API, generator
+tests/           189 tests: scheduler maths, storage, commands, API, generator
 ```
 
 ```bash

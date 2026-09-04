@@ -140,7 +140,8 @@ def test_learned_curve_keeps_the_directions_apart():
     both.srs_reverse = SRS(state="review", interval_days=5, reps=3)
     rows = [row(0, direction=REVERSE, before=1.0, after=5.0)]
     series = history.learned_curve(rows, [both], 2, TODAY)
-    assert series[-1] == {"date": "2026-09-10", "forward": 1, "reverse": 1}
+    assert {k: series[-1][k] for k in ("date", "forward", "reverse")} == \
+        {"date": "2026-09-10", "forward": 1, "reverse": 1}
     assert series[0]["reverse"] == 0 and series[0]["forward"] == 1
 
 
@@ -215,3 +216,54 @@ def test_summary_headlines():
     assert got["reviews_today"] == 2 and got["reviews_week"] == 3
     assert got["retention_week"] == pytest.approx(66.7)
     assert got["logged_total"] == 3 and got["logged_days"] == 2
+
+
+# ------------------------------------------------- the threshold near a deadline
+
+def target_settings(days_ahead: int) -> dict:
+    """A deadline that many days after TODAY, with the default 3-review split."""
+    return {"target_date": (TODAY + dt.timedelta(days=days_ahead)).isoformat(),
+            "reviews_before_target": 3.0, "min_interval_days": 0.25}
+
+
+def test_threshold_follows_the_cap_when_the_deadline_closes_in():
+    from flashcard.scheduler import MATURE_INTERVAL_DAYS, effective_threshold
+    far = dt.datetime.combine(TODAY, dt.time(12), tzinfo=dt.timezone.utc)
+    assert effective_threshold(MATURE_INTERVAL_DAYS, target_settings(30), far) == 3.0
+    assert effective_threshold(MATURE_INTERVAL_DAYS, target_settings(9), far) == 3.0
+    assert effective_threshold(MATURE_INTERVAL_DAYS, target_settings(6), far) == 2.0
+    assert effective_threshold(MATURE_INTERVAL_DAYS, target_settings(0), far) == 3.0   # cap lifts
+
+
+def test_a_capped_card_still_counts_as_learned():
+    """The bug this fixes: a 2.7-day card under a 2.7-day cap is as learned as
+    the schedule permits, and must not silently drop out of the count."""
+    c = card("Katze")
+    c.srs = SRS(state="review", interval_days=2.7)
+    tight = history.learned_curve([], [c], 2, TODAY, target_settings(8))
+    assert tight[-1]["forward"] == 1
+    assert tight[-1]["threshold"] < 3.0
+    loose = history.learned_curve([], [c], 2, TODAY, {"target_date": None})
+    assert loose[-1]["forward"] == 0        # with no deadline, 3 days is the mark
+
+
+def test_curve_replays_the_state_from_before_the_first_logged_review():
+    c = card("Katze")
+    c.srs = SRS(state="review", interval_days=10)
+    rows = [row(-1, before=1.0, after=10.0)]     # crossed yesterday
+    series = history.learned_curve(rows, [c], 4, TODAY, {"target_date": None})
+    assert [p["forward"] for p in series] == [0, 0, 1, 1]
+
+
+def test_curve_ends_on_the_deck_even_if_the_log_disagrees():
+    c = card("Katze")
+    c.srs = SRS(state="review", interval_days=9)          # deck says learned
+    rows = [row(0, before=9.0, after=0.5, grade=0)]       # log says it lapsed
+    series = history.learned_curve(rows, [c], 2, TODAY, {"target_date": None})
+    assert series[-1]["forward"] == 1
+
+
+def test_learning_cards_never_count_however_long_the_interval():
+    c = card("Katze")
+    c.srs = SRS(state="relearning", interval_days=20)
+    assert history.learned_curve([], [c], 2, TODAY, {})[-1]["forward"] == 0

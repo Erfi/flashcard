@@ -495,7 +495,7 @@ function renderStats() {
          p.grammar_enabled === false && p.grammar_total
            ? "Karten im Lernstapel" : "Karten gesamt"),
     stat(p.unseen, "noch nie gesehen"),
-    stat(p.mature, "gefestigt (≥3 T.)"),
+    stat(p.mature, `gefestigt (≥ ${p.maturity_days ?? 3} T.)`),
     stat(p.days_left === null || p.days_left === undefined ? "—" : Math.max(0, Math.round(p.days_left)), "Tage bis zum Ziel"),
     S.history ? stat(S.history.summary.reviews_today, "Antworten heute") : null,
     S.history ? stat(S.history.summary.retention_week === null ? "—"
@@ -531,7 +531,11 @@ function renderStats() {
           settings.grammar_enabled ? "set grammar off" : "set grammar on"),
       row("Produktion (Bedeutung → Wort)",
           settings.reverse_enabled === false ? "aus" : "an", "set reverse off"),
-      row("Produktion startet ab", `${settings.reverse_unlock_interval_days} Tagen Intervall`,
+      row("Produktion startet ab",
+          p.unlock_days !== undefined && p.unlock_days < settings.reverse_unlock_interval_days
+            ? `${p.unlock_days} Tagen Intervall (statt ${settings.reverse_unlock_interval_days}, `
+              + "durch die Obergrenze begrenzt)"
+            : `${settings.reverse_unlock_interval_days} Tagen Intervall`,
           "set unlock 3"),
       row("Produktionskarten", `${p.reverse_open} von ${p.reverse_possible} freigeschaltet, `
           + `${p.reverse_started} begonnen`, ""),
@@ -590,11 +594,14 @@ function renderCharts(view) {
   // 1 — what you actually know, over time
   const learned = chartCard({
     title: "Gefestigte Karten",
-    subtitle: "Karten mit einem Intervall von mindestens 3 Tagen",
+    subtitle: `Karten mit einem Intervall von mindestens ${h.maturity_days ?? 3} Tagen`,
     legend: [{ label: "Erkennen", color: VIZ.forward }, { label: "Produktion", color: VIZ.reverse }],
-    note: sinceNote,
-    table: () => dataTable(["Tag", "Erkennen", "Produktion"],
-      h.learned.map((p) => [dayLabel(p.date), p.forward, p.reverse])),
+    note: sinceNote + (h.target_date
+      ? " Die Schwelle folgt der Intervall-Obergrenze, damit sie erreichbar bleibt, "
+        + "wenn das Zieldatum näher rückt."
+      : ""),
+    table: () => dataTable(["Tag", "Erkennen", "Produktion", "Schwelle"],
+      h.learned.map((p) => [dayLabel(p.date), p.forward, p.reverse, `${p.threshold} T.`])),
   });
   view.append(learned.card);
   lineChart(learned.body, {

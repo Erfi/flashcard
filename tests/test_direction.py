@@ -227,3 +227,26 @@ def test_projection_separates_the_deck_from_the_rotation():
 
     on = projection(cards, {**DEFAULT_SETTINGS, "grammar_enabled": True}, NOW)
     assert on["in_rotation"] == 12 and on["unseen"] == 12
+
+
+def test_production_still_unlocks_when_the_cap_is_below_the_nominal_mark():
+    """Near the deadline nothing can hold a 3-day interval, so a fixed unlock
+    mark would stop production unlocking altogether."""
+    card = vocab()
+    card.srs = SRS(state="review", interval_days=2.5, ease=2.5,
+                   due=NOW + dt.timedelta(days=2), reps=4)
+    tight = {**DEFAULT_SETTINGS, "target_date": (NOW + dt.timedelta(days=6)).date().isoformat()}
+    items = build_queue([card], tight, NOW)
+    assert REVERSE in {d for _, d in items}
+
+    loose = {**DEFAULT_SETTINGS, "target_date": None}
+    assert all(d == FORWARD for _, d in build_queue([card], loose, NOW))
+
+
+def test_projection_reports_the_marks_it_used():
+    card = mature(vocab(), interval=4)
+    tight = {**DEFAULT_SETTINGS, "target_date": (NOW + dt.timedelta(days=6)).date().isoformat()}
+    info = projection([card], tight, NOW)
+    assert info["maturity_days"] == 2.0 and info["unlock_days"] == 2.0
+    wide = projection([card], {**DEFAULT_SETTINGS, "target_date": None}, NOW)
+    assert wide["maturity_days"] == 3.0

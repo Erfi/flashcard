@@ -21,11 +21,12 @@ from typing import Dict, Iterable, List, Optional, Sequence
 
 from .models import (FORWARD, GOOD, GRAMMAR, NEW, REVERSE, REVIEW, Card,
                      parse_ts, utcnow)
+from .scheduler import MATURE_INTERVAL_DAYS, effective_threshold
 
 FIELDS = ["ts", "card", "direction", "grade", "state_before", "state_after",
           "interval_before", "interval_after", "ease_after", "lapses_after"]
 
-MATURE_DAYS = 3.0          # the same threshold the "gefestigt" stat uses
+MATURE_DAYS = MATURE_INTERVAL_DAYS    # nominal; clamped per day by the cap
 GRADE_NAMES = {0: "again", 1: "hard", 2: "good", 3: "easy"}
 
 
@@ -139,42 +140,60 @@ def retention(daily: Sequence[Dict], window: int = 7) -> List[Dict]:
 
 
 def learned_curve(rows: Sequence[Dict], cards: Sequence[Card], days: int,
-                  today: dt.date, threshold: float = MATURE_DAYS) -> List[Dict]:
-    """Cards past the maturity threshold, per day and per direction.
+                  today: dt.date, settings: Optional[Dict] = None) -> List[Dict]:
+    """Cards that count as learned on each day, per direction.
 
-    Reconstructed by walking the log backwards from today's true counts, so the
-    line ends on the number the deck actually shows. Before the log starts it is
-    flat — that is the honest shape, not a claim that nothing happened.
+    Every card's state is replayed from the log — the last entry on or before a
+    given day, falling back to the state it was in before its first logged
+    review — and then measured against the threshold *that applied on that day*.
+    The threshold moves: near a deadline the interval cap can sit below three
+    days, and a fixed mark would make the whole curve drift downwards for no
+    reason other than the cap tightening.
+
+    Today's point is taken from the deck rather than the log, so the line always
+    ends on the number the rest of the app shows.
     """
+    settings = settings or {}
     window = _days(today, days)
-    counts = {FORWARD: 0, REVERSE: 0}
+    midday = dt.time(12, 0)
+    thresholds = [
+        effective_threshold(
+            MATURE_DAYS, settings,
+            dt.datetime.combine(day, midday).astimezone(dt.timezone.utc))
+        for day in window
+    ]
+
+    by_key: Dict[tuple, List[Dict]] = {}
+    for row in rows:
+        by_key.setdefault((row["card"], row["direction"]), []).append(row)
+    for entries in by_key.values():
+        entries.sort(key=lambda r: r["ts"])
+
+    counts = {FORWARD: [0] * len(window), REVERSE: [0] * len(window)}
     for card in cards:
         for direction in (FORWARD, REVERSE):
             srs = card.srs_for(direction)
-            if srs.state == REVIEW and srs.interval_days >= threshold:
-                counts[direction] += 1
+            entries = by_key.get((card.id, direction))
+            if entries:
+                state, interval = entries[0]["state_before"], entries[0]["interval_before"]
+            else:
+                # never reviewed inside the window, so it looked like this all along
+                state, interval = srs.state, srs.interval_days
+            pointer = 0
+            for i, day in enumerate(window):
+                while entries and pointer < len(entries) and entries[pointer]["day"] <= day:
+                    state = entries[pointer]["state_after"]
+                    interval = entries[pointer]["interval_after"]
+                    pointer += 1
+                if i == len(window) - 1:          # today: the deck is the truth
+                    state, interval = srs.state, srs.interval_days
+                if state == REVIEW and interval >= thresholds[i]:
+                    counts[direction][i] += 1
 
-    # net crossings per day, so we can rewind
-    delta = {day: {FORWARD: 0, REVERSE: 0} for day in window}
-    for row in rows:
-        if row["day"] not in delta:
-            continue
-        crossed_up = row["interval_before"] < threshold <= row["interval_after"]
-        crossed_down = row["interval_after"] < threshold <= row["interval_before"]
-        if crossed_up:
-            delta[row["day"]][row["direction"]] += 1
-        elif crossed_down:
-            delta[row["day"]][row["direction"]] -= 1
-
-    series: List[Dict] = []
-    running = dict(counts)
-    for day in reversed(window):
-        series.append({"date": day.isoformat(),
-                       "forward": running[FORWARD], "reverse": running[REVERSE]})
-        running[FORWARD] -= delta[day][FORWARD]
-        running[REVERSE] -= delta[day][REVERSE]
-    series.reverse()
-    return series
+    return [{"date": day.isoformat(),
+             "forward": counts[FORWARD][i], "reverse": counts[REVERSE][i],
+             "threshold": round(thresholds[i], 2)}
+            for i, day in enumerate(window)]
 
 
 def forecast(cards: Sequence[Card], settings: Dict, days: int,

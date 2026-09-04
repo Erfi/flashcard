@@ -16,6 +16,7 @@ from pydantic import BaseModel
 from . import cloze, commands, history
 from .generator import ClaudeGenerator, GeneratorError, guess_type
 from .models import FORWARD, REVERSE, Card, utcnow
+from . import scheduler as scheduler_module
 from .scheduler import Scheduler, build_queue, humanise, projection
 from .store import DeckError, Store
 
@@ -367,10 +368,13 @@ def create_app(deck_path: os.PathLike | str) -> FastAPI:
             "days": days,
             "activity": daily,
             "retention": history.retention(daily),
-            "learned": history.learned_curve(rows, s.cards, days, today),
+            "learned": history.learned_curve(rows, s.cards, days, today, s.settings),
             "forecast": history.forecast(s.cards, s.settings, forecast_days, now),
             "intervals": history.intervals(s.cards, s.settings),
             "summary": history.summary(rows, daily),
+            "maturity_days": round(
+                scheduler_module.effective_threshold(
+                    scheduler_module.MATURE_INTERVAL_DAYS, s.settings, now), 2),
             "target_date": s.settings.get("target_date"),
             "log_path": str(log.path),
         }
