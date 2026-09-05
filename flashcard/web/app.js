@@ -15,6 +15,7 @@ const S = {
   allCards: [],
   history: null,
   historyDays: 30,
+  answering: false,
   help: null,
 };
 
@@ -26,7 +27,9 @@ const COLOR_KEYS = ["der", "die", "das", "verb", "adjective", "adverb", "phrase"
 const GRADES = [
   { g: 0, lab: "Nochmal", key: "1" },
   { g: 1, lab: "Schwer", key: "2" },
-  { g: 2, lab: "Gut", key: "3" },
+  // the spacebar reveals a card and then grades it Gut — say so on the button,
+  // otherwise it is an invisible binding that quietly moves cards along
+  { g: 2, lab: "Gut", key: "3 · Leertaste" },
   { g: 3, lab: "Leicht", key: "4" },
 ];
 
@@ -190,7 +193,9 @@ function renderReview() {
   stage.append(S.revealed ? cardBack(card) : cardFront(card));
 
   if (!S.revealed) {
-    stage.append(el("button", { class: "bigbtn", onclick: reveal }, "Aufdecken  ·  Leertaste"));
+    stage.append(el("button", { class: "bigbtn", onclick: reveal },
+      "Aufdecken  ·  Leertaste",
+      el("span", { class: "btnnote" }, "danach bewertet die Leertaste mit „Gut“")));
   } else {
     const row = el("div", { class: "answers" });
     GRADES.forEach(({ g, lab, key }) => {
@@ -211,30 +216,38 @@ function renderReview() {
 }
 
 function reveal() {
-  if (!S.queue[S.index]) return;
+  if (!S.queue[S.index] || S.answering) return;
   S.revealed = true;
   renderReview();
 }
 
 async function answer(grade) {
   const card = S.queue[S.index];
-  if (!card || !S.revealed) return;
+  // `answering` guards the round trip. Without it a second keypress — or the
+  // spacebar, which grades once a card is revealed — acts on state that has not
+  // been updated yet and posts a second grade for the same card.
+  if (!card || !S.revealed || S.answering) return;
+  S.answering = true;
+  S.revealed = false;              // immediately, so Space cannot re-grade
   try {
     const res = await api("/api/answer", {
       method: "POST",
       body: { id: card.id, grade, direction: card.direction || "forward" },
     });
     S.state = res.state;
-    // A card graded "again" or still in learning comes back this session:
-    // drop it here and refetch the queue so ordering stays honest.
-    S.queue.splice(S.index, 1);   // this pair is done for now
-    S.revealed = false;
+    // this pair is done for now; a card graded "again" comes back via a top-up
+    const at = S.queue.indexOf(card);
+    if (at >= 0) S.queue.splice(at, 1);
     if (S.index >= S.queue.length) S.index = 0;
     renderStatus();
     renderReview();
-    if (S.queue.length <= 1) refreshQueue();
+    if (S.queue.length <= 5) topUpQueue();
   } catch (err) {
+    S.revealed = true;             // nothing was recorded, so let them answer again
     toast(err.message, true);
+    renderReview();
+  } finally {
+    S.answering = false;
   }
 }
 
@@ -245,6 +258,31 @@ async function refreshQueue() {
   S.revealed = false;
   await refreshState();
   if (S.view === "review") renderReview();
+}
+
+/* Extend the queue in the background while you are still working through it.
+   The old code refetched once the queue was nearly empty and replaced it
+   wholesale — including the card already on screen, which the server had
+   reshuffled into a different position. That is what made a card appear and
+   then get swapped for another one. Here the visible card is never touched:
+   only cards we do not already hold are appended. */
+async function topUpQueue() {
+  if (S.toppingUp) return;
+  S.toppingUp = true;
+  try {
+    const res = await api("/api/queue");
+    const key = (c) => `${c.id}:${c.direction || "forward"}`;
+    const held = new Set(S.queue.map(key));
+    const extra = res.cards.filter((c) => !held.has(key(c)));
+    const wasEmpty = !S.queue[S.index];
+    S.queue.push(...extra);
+    await refreshState();
+    if (S.view === "review" && wasEmpty && S.queue[S.index]) renderReview();
+  } catch (err) {
+    // a failed top-up is not worth interrupting a session for
+  } finally {
+    S.toppingUp = false;
+  }
 }
 
 async function refreshState() {
@@ -813,6 +851,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!typing && e.key === "/") { e.preventDefault(); $("#cmd").focus(); return; }
     if (typing || !$("#drawer").hidden) return;
     if (S.view !== "review") return;
+    if (e.repeat) return;            // holding a key down is still one answer
     if (e.key === " " || e.key === "Enter") { e.preventDefault(); S.revealed ? answer(2) : reveal(); }
     else if (["1", "2", "3", "4"].includes(e.key) && S.revealed) answer(Number(e.key) - 1);
     else if (e.key === "e" && S.queue[S.index]) openEditor(S.queue[S.index].id);

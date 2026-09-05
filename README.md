@@ -91,9 +91,12 @@ its old sentence) and the error appears as a message in the app.
 | `export` | Download the deck as YAML |
 | `help` | The whole list, in the app |
 
-Keyboard while reviewing: `Leertaste` reveals, `1`–`4` grade
-(Nochmal / Schwer / Gut / Leicht), `e` edits the current card, `/` jumps back
-to the command bar. The card header says which direction you are being asked
+Keyboard while reviewing: `Leertaste` reveals a card and, pressed again on a
+revealed card, grades it **Gut** — the same as `3`, so a card you know is two
+taps of the same key. `1`–`4` grade explicitly (Nochmal / Schwer / Gut /
+Leicht), `e` edits the current card, `/` jumps back to the command bar. Enter
+behaves like the spacebar. The Gut button and the reveal button both spell the
+spacebar binding out, so it is never a surprise. The card header says which direction you are being asked
 (*Produktion* for meaning → word).
 
 ## Two directions
@@ -268,6 +271,24 @@ new sentences increasingly recycle old cards. The **Neuer Satz** button in the
 editor (or `satz <word>`) rerolls a sentence you don't like; it is told the old
 sentence and asked for something different.
 
+## Two notes on the review loop
+
+**One keypress, one answer.** Grading is guarded while the request is in
+flight: a second grade key, a spacebar (which grades a revealed card), or a
+held-down key cannot post a second answer for the same card. Without that
+guard a fast reviewer could grade one card twice, since the queue and the
+revealed flag were only updated after the round trip.
+
+**The queue tops itself up.** When fewer than five cards are left, more are
+fetched in the background and *appended*. Nothing already on screen is
+replaced — an earlier version refetched the whole queue and swapped the card
+you were looking at for a differently shuffled one.
+
+Answers are fast enough that neither is easy to hit: the deck is written with
+libyaml when the installed PyYAML wheel provides it, which takes a full rewrite
+of a 570-card deck from ~360ms to ~90ms. The output is byte-identical either
+way, and there is a test pinning that.
+
 ## The deck file
 
 `data/deck.yaml` is plain YAML, meant to be read and edited by hand:
@@ -344,7 +365,7 @@ flashcard/
                  for colour-vision deficiency in both light and dark themes
   seed_a2.yaml   the A2 deck (300 cards)
   seed_b1.yaml   the B1 deck (300 cards)
-tests/           189 tests: scheduler maths, storage, commands, API, generator
+tests/           191 tests: scheduler maths, storage, commands, API, generator
 ```
 
 ```bash

@@ -23,6 +23,20 @@ from .store import DeckError, Store
 WEB_DIR = Path(__file__).parent / "web"
 LOCK = threading.RLock()
 
+# The UI is plain files on disk, so an edit should appear on an ordinary reload.
+# Without an explicit Cache-Control browsers fall back to heuristic freshness
+# and may serve one asset from cache while revalidating another — which is how
+# you end up running new JavaScript against a stale stylesheet. "no-cache" means
+# "ask me first", not "do not store": the ETag still answers 304 in a millisecond.
+NO_CACHE = {"cache-control": "no-cache"}
+
+
+class _RevalidatingStatic(StaticFiles):
+    def file_response(self, *args, **kwargs):
+        response = super().file_response(*args, **kwargs)
+        response.headers.update(NO_CACHE)
+        return response
+
 
 class CommandIn(BaseModel):
     text: str
@@ -64,9 +78,9 @@ def create_app(deck_path: os.PathLike | str) -> FastAPI:
 
     @app.get("/")
     def index() -> FileResponse:
-        return FileResponse(WEB_DIR / "index.html")
+        return FileResponse(WEB_DIR / "index.html", headers=NO_CACHE)
 
-    app.mount("/static", StaticFiles(directory=str(WEB_DIR)), name="static")
+    app.mount("/static", _RevalidatingStatic(directory=str(WEB_DIR)), name="static")
 
     # ------------------------------------------------------------------ state
 

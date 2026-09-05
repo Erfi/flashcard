@@ -280,3 +280,11 @@ def test_history_works_on_an_untouched_deck(client):
 def test_history_day_window_is_clamped(client):
     assert len(client.get("/api/history?days=1").json()["activity"]) == 7
     assert len(client.get("/api/history?days=9000").json()["activity"]) == 120
+
+
+def test_ui_assets_are_always_revalidated(client):
+    """A stale stylesheet against fresh JavaScript is a whole class of bug."""
+    for path in ("/", "/static/app.js", "/static/styles.css", "/static/charts.js"):
+        res = client.get(path)
+        assert res.status_code == 200, path
+        assert res.headers.get("cache-control") == "no-cache", path

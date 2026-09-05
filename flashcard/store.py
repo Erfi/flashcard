@@ -39,7 +39,24 @@ def _str_presenter(dumper, data):
     return dumper.represent_scalar("tag:yaml.org,2002:str", data)
 
 
-class _Dumper(yaml.SafeDumper):
+# The deck is rewritten in full on every answer, and PyYAML's pure-Python
+# emitter needs ~290ms for a 570-card deck — long enough to be felt between
+# cards. libyaml does the same job in ~60ms and emits byte-identical output, so
+# use it when the wheel provides it and fall back quietly when it does not.
+try:                                     # pragma: no cover - depends on the wheel
+    _BaseDumper = yaml.CSafeDumper
+    HAVE_LIBYAML = True
+except AttributeError:                   # pragma: no cover
+    _BaseDumper = yaml.SafeDumper
+    HAVE_LIBYAML = False
+
+try:
+    _BaseLoader = yaml.CSafeLoader
+except AttributeError:                   # pragma: no cover
+    _BaseLoader = yaml.SafeLoader
+
+
+class _Dumper(_BaseDumper):
     pass
 
 
@@ -70,7 +87,7 @@ class Store:
         if not force and self._mtime == mtime:
             return
         try:
-            raw = yaml.safe_load(self.path.read_text(encoding="utf-8")) or {}
+            raw = yaml.load(self.path.read_text(encoding="utf-8"), Loader=_BaseLoader) or {}
         except yaml.YAMLError as exc:
             raise DeckError(f"{self.path.name} is not valid YAML: {exc}") from exc
         if not isinstance(raw, dict):

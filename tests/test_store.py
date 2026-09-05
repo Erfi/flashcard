@@ -167,3 +167,38 @@ def test_introduced_counter(store):
     store.note_introduced()
     store.note_introduced()
     assert store.introduced_today() == 2
+
+
+def test_saving_is_byte_identical_whichever_yaml_emitter_is_available(store, tmp_path):
+    """libyaml is an optimisation, never a format change."""
+    import yaml as _yaml
+    from flashcard import store as store_module
+
+    for lemma in ("Katze", "laufen", "Bescheid sagen"):
+        store.add(Card.from_dict({"lemma": lemma, "type": "noun", "article": "die",
+                                  "definition": "Eine Erklärung mit Umlauten: ä ö ü ß.",
+                                  "example": "Ein Beispielsatz.", "notes": "zwei\nZeilen"}))
+    fast = store.path.read_text(encoding="utf-8")
+
+    class PurePython(_yaml.SafeDumper):
+        pass
+    PurePython.add_representer(str, store_module._str_presenter)
+
+    original = store_module._Dumper
+    try:
+        store_module._Dumper = PurePython
+        store.save()
+        slow = store.path.read_text(encoding="utf-8")
+    finally:
+        store_module._Dumper = original
+    assert fast == slow
+
+
+def test_deck_survives_a_reload_after_a_fast_save(store):
+    card = store.add(Card.from_dict({
+        "lemma": "Größe", "type": "noun", "article": "die", "plural": "die Größen",
+        "definition": "Wie groß etwas ist.", "example": "Welche Größe brauchst du?",
+        "notes": "mehrzeilig\nmit Umbruch", "tags": ["kleidung"]}))
+    got = Store(store.path).by_lemma("Größe")
+    assert got.plural == "die Größen" and got.notes == "mehrzeilig\nmit Umbruch"
+    assert got.tags == ["kleidung"]
