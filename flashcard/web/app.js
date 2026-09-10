@@ -533,7 +533,7 @@ function renderStats() {
          p.grammar_enabled === false && p.grammar_total
            ? "Karten im Lernstapel" : "Karten gesamt"),
     stat(p.unseen, "noch nie gesehen"),
-    stat(p.mature, `gefestigt (≥ ${p.maturity_days ?? 3} T.)`),
+    stat(p.mature, `gefestigt (${p.maturity_successes ?? 3}× richtig)`),
     stat(p.days_left === null || p.days_left === undefined ? "—" : Math.max(0, Math.round(p.days_left)), "Tage bis zum Ziel"),
     S.history ? stat(S.history.summary.reviews_today, "Antworten heute") : null,
     S.history ? stat(S.history.summary.retention_week === null ? "—"
@@ -632,14 +632,12 @@ function renderCharts(view) {
   // 1 — what you actually know, over time
   const learned = chartCard({
     title: "Gefestigte Karten",
-    subtitle: `Karten mit einem Intervall von mindestens ${h.maturity_days ?? 3} Tagen`,
+    subtitle: `Karten, die du mindestens ${h.maturity_successes ?? 3}-mal richtig erinnert hast`,
     legend: [{ label: "Erkennen", color: VIZ.forward }, { label: "Produktion", color: VIZ.reverse }],
-    note: sinceNote + (h.target_date
-      ? " Die Schwelle folgt der Intervall-Obergrenze, damit sie erreichbar bleibt, "
-        + "wenn das Zieldatum näher rückt."
-      : ""),
-    table: () => dataTable(["Tag", "Erkennen", "Produktion", "Schwelle"],
-      h.learned.map((p) => [dayLabel(p.date), p.forward, p.reverse, `${p.threshold} T.`])),
+    note: sinceNote + " Gezählt werden richtige Erinnerungen, nicht die Intervall-Länge — "
+      + "sonst würde die Kurve springen, sobald die Obergrenze enger wird.",
+    table: () => dataTable(["Tag", "Erkennen", "Produktion"],
+      h.learned.map((p) => [dayLabel(p.date), p.forward, p.reverse])),
   });
   view.append(learned.card);
   lineChart(learned.body, {

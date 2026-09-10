@@ -247,6 +247,7 @@ def test_projection_reports_the_marks_it_used():
     card = mature(vocab(), interval=4)
     tight = {**DEFAULT_SETTINGS, "target_date": (NOW + dt.timedelta(days=6)).date().isoformat()}
     info = projection([card], tight, NOW)
-    assert info["maturity_days"] == 2.0 and info["unlock_days"] == 2.0
+    assert info["unlock_days"] == 2.0          # the unlock mark still follows the cap
+    assert info["maturity_successes"] == 3     # ... but "learned" does not
     wide = projection([card], {**DEFAULT_SETTINGS, "target_date": None}, NOW)
-    assert wide["maturity_days"] == 3.0
+    assert wide["unlock_days"] == 3.0 and wide["maturity_successes"] == 3

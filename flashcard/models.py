@@ -90,6 +90,7 @@ class SRS:
     interval_days: float = 0.0         # current review interval
     due: Optional[dt.datetime] = None  # None = never scheduled (brand new)
     reps: int = 0
+    successes: int = 0        # answers of Gut or better — what "learned" counts
     lapses: int = 0
     last_review: Optional[dt.datetime] = None
     last_grade: Optional[int] = None
@@ -102,6 +103,7 @@ class SRS:
             "interval_days": round(self.interval_days, 3),
             "due": fmt_ts(self.due),
             "reps": self.reps,
+            "successes": self.successes,
             "lapses": self.lapses,
             "last_review": fmt_ts(self.last_review),
             "last_grade": self.last_grade,
@@ -120,6 +122,7 @@ class SRS:
             interval_days=float(raw.get("interval_days") or 0.0),
             due=parse_ts(raw.get("due")),
             reps=int(raw.get("reps") or 0),
+            successes=int(raw.get("successes") or 0),
             lapses=int(raw.get("lapses") or 0),
             last_review=parse_ts(raw.get("last_review")),
             last_grade=raw.get("last_grade"),

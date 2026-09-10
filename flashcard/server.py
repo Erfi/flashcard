@@ -60,6 +60,13 @@ class SettingsIn(BaseModel):
 def create_app(deck_path: os.PathLike | str) -> FastAPI:
     store = Store(deck_path)
     log = history.ReviewLog(store.path.parent / "reviews.csv")
+
+    # a deck whose `successes` counters predate the current meaning of the field
+    # is recomputed once from the log; the marker keeps it to once
+    if store.stats.get("successes_backfill") != history.BACKFILL_VERSION:
+        history.backfill_successes(store.cards, log.rows(), force=True)
+        store.stats["successes_backfill"] = history.BACKFILL_VERSION
+        store.save()
     app = FastAPI(title="Deutsch B1 Karteikarten", docs_url=None, redoc_url=None)
     app.state.store = store
 
@@ -386,9 +393,7 @@ def create_app(deck_path: os.PathLike | str) -> FastAPI:
             "forecast": history.forecast(s.cards, s.settings, forecast_days, now),
             "intervals": history.intervals(s.cards, s.settings),
             "summary": history.summary(rows, daily),
-            "maturity_days": round(
-                scheduler_module.effective_threshold(
-                    scheduler_module.MATURE_INTERVAL_DAYS, s.settings, now), 2),
+            "maturity_successes": scheduler_module.MATURE_SUCCESSES,
             "target_date": s.settings.get("target_date"),
             "log_path": str(log.path),
         }

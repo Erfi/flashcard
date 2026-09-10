@@ -25,6 +25,7 @@ def at(day_offset: int, hour: int = 9) -> dt.datetime:
 
 def row(day_offset, *, direction=FORWARD, grade=2, state_before="review",
         before=4.0, after=10.0):
+    """One logged answer. grade 2 (Gut) counts as a success by default."""
     return {"ts": at(day_offset).isoformat(), "day": (TODAY + dt.timedelta(days=day_offset)),
             "card": "katze", "direction": direction, "grade": grade,
             "state_before": state_before, "state_after": "review",
@@ -108,41 +109,139 @@ def test_retention_rolls_over_seven_days():
 
 # -------------------------------------------------------------------- curves
 
-def test_learned_curve_ends_at_the_deck_truth():
-    mature = card("Katze")
-    mature.srs = SRS(state="review", interval_days=10)
-    young = card("Hund")
-    young.srs = SRS(state="review", interval_days=1)
-    series = history.learned_curve([], [mature, young], 5, TODAY)
+def learned(card_list, rows, days=4, settings=None):
+    return history.learned_curve(rows, card_list, days, TODAY, settings or {})
+
+
+def mature_card(lemma="Katze", successes=3, state="review", interval=4.0, reps=None):
+    c = card(lemma)
+    c.srs = SRS(state=state, interval_days=interval, successes=successes,
+                reps=reps if reps is not None else successes)
+    return c
+
+
+def test_three_correct_recalls_make_a_card_learned():
+    assert learned([mature_card(successes=3)], [])[-1]["forward"] == 1
+    assert learned([mature_card(successes=2)], [])[-1]["forward"] == 0
+
+
+def test_a_card_still_in_learning_never_counts():
+    assert learned([mature_card(successes=9, state="learning")], [])[-1]["forward"] == 0
+    assert learned([mature_card(successes=9, state="relearning")], [])[-1]["forward"] == 0
+
+
+def test_interval_length_no_longer_decides():
+    """The point of the change: a short interval under a tight cap is still
+    a learned card, and a long interval without recalls is not."""
+    short = mature_card(successes=4, interval=0.5)
+    long_but_untested = mature_card("Hund", successes=1, interval=40)
+    series = learned([short, long_but_untested], [])
     assert series[-1]["forward"] == 1
-    assert all(point["forward"] == 1 for point in series)    # flat without a log
 
 
-def test_learned_curve_rewinds_a_crossing():
-    mature = card("Katze")
-    mature.srs = SRS(state="review", interval_days=10)
-    rows = [row(0, before=1.0, after=10.0)]        # crossed the 3-day line today
-    series = history.learned_curve(rows, [mature], 3, TODAY)
-    assert [p["forward"] for p in series] == [0, 0, 1]
+def test_the_curve_does_not_move_when_the_deadline_closes_in():
+    """This is the bug that prompted the change: with a fixed card set, the
+    count must be identical whatever the interval cap happens to be."""
+    cards = [mature_card(f"W{i}", successes=3, interval=2.5) for i in range(20)]
+    far = learned(cards, [], settings={"target_date": "2027-01-01"})
+    near = learned(cards, [], settings={"target_date": (TODAY + dt.timedelta(days=4)).isoformat()})
+    none = learned(cards, [], settings={"target_date": None})
+    assert far[-1]["forward"] == near[-1]["forward"] == none[-1]["forward"] == 20
 
 
-def test_learned_curve_rewinds_a_lapse():
-    lapsed = card("Katze")
-    lapsed.srs = SRS(state="relearning", interval_days=1.0)
-    rows = [row(0, before=8.0, after=1.0)]         # fell back below the line today
-    series = history.learned_curve(rows, [lapsed], 3, TODAY)
-    assert [p["forward"] for p in series] == [1, 1, 0]
+def test_curve_counts_recalls_as_they_are_logged():
+    c = mature_card(successes=3)
+    rows = [row(-2), row(-1), row(0)]          # the three that made it learned
+    series = learned([c], rows, days=4)
+    assert [p["forward"] for p in series] == [0, 0, 0, 1]
+
+
+def test_a_failed_answer_does_not_count_towards_the_three():
+    c = mature_card(successes=2, reps=3)
+    rows = [row(-2), row(-1, grade=0), row(0)]
+    assert learned([c], rows, days=4)[-1]["forward"] == 0
+
+
+def test_hard_counts_as_a_recall():
+    """Schwer is a pass in SM-2 — the card stays in review — so a word you
+    always get right but always find hard must be able to count as learned."""
+    c = mature_card(successes=3, reps=3)
+    rows = [row(-2, grade=1), row(-1, grade=1), row(0, grade=1)]
+    assert learned([c], rows, days=4)[-1]["forward"] == 1
+
+
+def test_forgetting_a_card_sends_the_run_back_to_zero():
+    c = card("Katze")
+    c.srs = SRS(state="review", interval_days=2, successes=1, reps=5)
+    rows = [row(-4), row(-3), row(-2),            # learned by day -2
+            row(-1, grade=0),                     # forgotten
+            row(0)]                               # one recall since
+    series = learned([c], rows, days=5)
+    assert [p["forward"] for p in series] == [0, 0, 1, 0, 0]
+
+
+def test_curve_keeps_history_earned_before_the_window():
+    c = mature_card(successes=5)
+    rows = [row(0)]                            # only one recall inside the window
+    series = learned([c], rows, days=3)
+    assert [p["forward"] for p in series] == [1, 1, 1]   # already learned beforehand
+
+
+def test_curve_ends_on_the_deck_even_if_the_log_disagrees():
+    c = mature_card(successes=4)
+    rows = [row(0, grade=0, state_before="review")]      # log says it lapsed today
+    assert learned([c], rows, days=2)[-1]["forward"] == 1
 
 
 def test_learned_curve_keeps_the_directions_apart():
     both = card("Katze")
-    both.srs = SRS(state="review", interval_days=10)
-    both.srs_reverse = SRS(state="review", interval_days=5, reps=3)
-    rows = [row(0, direction=REVERSE, before=1.0, after=5.0)]
-    series = history.learned_curve(rows, [both], 2, TODAY)
-    assert {k: series[-1][k] for k in ("date", "forward", "reverse")} == \
-        {"date": "2026-09-10", "forward": 1, "reverse": 1}
+    both.srs = SRS(state="review", interval_days=10, successes=4, reps=4)
+    both.srs_reverse = SRS(state="review", interval_days=5, successes=3, reps=3)
+    rows = [row(0, direction=REVERSE)]
+    series = learned([both], rows, days=2)
+    assert series[-1] == {"date": "2026-09-10", "forward": 1, "reverse": 1}
     assert series[0]["reverse"] == 0 and series[0]["forward"] == 1
+
+
+# ------------------------------------------------------------------ backfill
+
+def test_backfill_counts_the_run_since_the_last_failure():
+    c = card("Katze")
+    c.srs = SRS(state="review", reps=4, successes=0, lapses=1)
+    rows = [row(-3), row(-2), row(-1, grade=0), row(0)]   # failed, then one recall
+    assert history.backfill_successes([c], rows) == 1
+    assert c.srs.successes == 1
+
+
+def test_backfill_counts_hard_as_a_recall():
+    c = card("Katze")
+    c.srs = SRS(state="review", reps=3, successes=0)
+    rows = [row(-2, grade=1), row(-1, grade=1), row(0, grade=2)]
+    history.backfill_successes([c], rows)
+    assert c.srs.successes == 3
+
+
+def test_backfill_adds_answers_that_predate_the_log():
+    c = card("Katze")
+    c.srs = SRS(state="review", reps=6, successes=0, lapses=0)   # 6 answers, 2 logged
+    rows = [row(-1), row(0)]
+    history.backfill_successes([c], rows)
+    assert c.srs.successes == 6
+
+
+def test_backfill_leaves_a_counted_card_alone_unless_forced():
+    c = card("Katze")
+    c.srs = SRS(state="review", reps=9, successes=7)
+    assert history.backfill_successes([c], []) == 0
+    assert c.srs.successes == 7
+    assert history.backfill_successes([c], [], force=True) == 1
+    assert c.srs.successes == 9        # recomputed: 9 answers, none logged as failures
+
+
+def test_backfill_ignores_cards_that_were_never_reviewed():
+    c = card("Katze")
+    assert history.backfill_successes([c], []) == 0
+    assert c.srs.successes == 0
 
 
 # ------------------------------------------------------------------ forecast
@@ -218,52 +317,18 @@ def test_summary_headlines():
     assert got["logged_total"] == 3 and got["logged_days"] == 2
 
 
-# ------------------------------------------------- the threshold near a deadline
-
-def target_settings(days_ahead: int) -> dict:
-    """A deadline that many days after TODAY, with the default 3-review split."""
-    return {"target_date": (TODAY + dt.timedelta(days=days_ahead)).isoformat(),
-            "reviews_before_target": 3.0, "min_interval_days": 0.25}
 
 
-def test_threshold_follows_the_cap_when_the_deadline_closes_in():
-    from flashcard.scheduler import MATURE_INTERVAL_DAYS, effective_threshold
-    far = dt.datetime.combine(TODAY, dt.time(12), tzinfo=dt.timezone.utc)
-    assert effective_threshold(MATURE_INTERVAL_DAYS, target_settings(30), far) == 3.0
-    assert effective_threshold(MATURE_INTERVAL_DAYS, target_settings(9), far) == 3.0
-    assert effective_threshold(MATURE_INTERVAL_DAYS, target_settings(6), far) == 2.0
-    assert effective_threshold(MATURE_INTERVAL_DAYS, target_settings(0), far) == 3.0   # cap lifts
-
-
-def test_a_capped_card_still_counts_as_learned():
-    """The bug this fixes: a 2.7-day card under a 2.7-day cap is as learned as
-    the schedule permits, and must not silently drop out of the count."""
+def test_a_card_whose_whole_history_is_in_the_window_starts_at_zero():
     c = card("Katze")
-    c.srs = SRS(state="review", interval_days=2.7)
-    tight = history.learned_curve([], [c], 2, TODAY, target_settings(8))
-    assert tight[-1]["forward"] == 1
-    assert tight[-1]["threshold"] < 3.0
-    loose = history.learned_curve([], [c], 2, TODAY, {"target_date": None})
-    assert loose[-1]["forward"] == 0        # with no deadline, 3 days is the mark
+    c.srs = SRS(state="review", successes=3, reps=3)
+    rows = [row(-2), row(-1), row(0)]
+    assert [p["forward"] for p in learned([c], rows, days=4)] == [0, 0, 0, 1]
 
 
-def test_curve_replays_the_state_from_before_the_first_logged_review():
+def test_a_card_learned_before_the_window_shows_as_learned_before_it_lapsed():
     c = card("Katze")
-    c.srs = SRS(state="review", interval_days=10)
-    rows = [row(-1, before=1.0, after=10.0)]     # crossed yesterday
-    series = history.learned_curve(rows, [c], 4, TODAY, {"target_date": None})
-    assert [p["forward"] for p in series] == [0, 0, 1, 1]
-
-
-def test_curve_ends_on_the_deck_even_if_the_log_disagrees():
-    c = card("Katze")
-    c.srs = SRS(state="review", interval_days=9)          # deck says learned
-    rows = [row(0, before=9.0, after=0.5, grade=0)]       # log says it lapsed
-    series = history.learned_curve(rows, [c], 2, TODAY, {"target_date": None})
-    assert series[-1]["forward"] == 1
-
-
-def test_learning_cards_never_count_however_long_the_interval():
-    c = card("Katze")
-    c.srs = SRS(state="relearning", interval_days=20)
-    assert history.learned_curve([], [c], 2, TODAY, {})[-1]["forward"] == 0
+    c.srs = SRS(state="relearning", successes=0, reps=40)     # a long history
+    rows = [row(0, grade=0)]                                  # today it failed
+    series = learned([c], rows, days=3)
+    assert [p["forward"] for p in series] == [1, 1, 0]

@@ -144,16 +144,31 @@ per answer that the app writes as you study. The log keeps history out of
 | Fällig in den nächsten 14 Tagen | What's coming? Already-scheduled reviews, overdue cards folded into today |
 | Intervall-Verteilung | How mature is the deck right now? Cards per interval band |
 
-**The maturity mark moves with the deadline.** "Learned" nominally means an
-interval of at least 3 days — but the deadline cap can be shorter than that
-(`days_left ÷ 3`), and then no card could ever reach the mark: the count would
-stall, and already-counted cards would drop out as soon as a review re-clamped
-them. So the threshold is `min(3 days, current cap)` — "as widely spaced as
-this schedule allows" — and the historical curve applies the threshold that was
-in force on each day. The same clamp applies to the interval at which the
-production direction unlocks, for the same reason. Both marks return to 3 days
-once the target date passes. The charts name the threshold they used, and the
-table view lists it per day.
+**"Learned" counts recalls, not interval length.** A card is learned once it
+is in review state and you have recalled it three times *in a row*. Anything
+but *Nochmal* is a recall — **Schwer counts**, because it is a pass in SM-2:
+the card stays in review and its interval still grows, so a word you always get
+right but always find hard must be able to count. *Nochmal* is the only real
+failure, and it sets the run back to zero, so a card you forget has to prove
+itself again. This
+used to be defined as an interval of at least 3 days, which does not survive a
+deadline: the cap (`days_left ÷ 3`) compresses intervals as the target date
+approaches, so the mark moved with the schedule rather than with the learner —
+137 cards parked at 2.5 days were swept in overnight when the cap stepped from
+2.67 to 2.33, and everything would have collapsed again the moment the cap
+lifted. Successful recalls are immune to that: the same deck gives the same
+number whatever the target date is, and there is a test asserting exactly that.
+
+The interval at which the *production direction unlocks* is still a length, so
+it still clamps to `min(3 days, current cap)` — otherwise nothing would unlock
+in the final week.
+
+Cards reviewed before the counter existed get a one-time backfill on the next
+start, recorded as `stats.successes_backfill` in the deck so it runs once: the
+review log is authoritative where it reaches — the run since the last logged
+failure — and answers predating the log are estimated from `reps` and `lapses`.
+That estimate is slightly generous and washes out as those cards come round
+again.
 
 **Behalten is the one to watch.** Below ~80% you are introducing new cards
 faster than you are keeping the old ones — lower `set new`. Above ~95% the

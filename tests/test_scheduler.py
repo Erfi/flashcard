@@ -149,10 +149,19 @@ def test_preview_labels_are_readable():
 
 
 def test_projection_reports_the_horizon():
-    cards = [make(id="a"), make(id="b", srs=SRS(state="review", interval_days=5, due=NOW))]
+    learned = make(id="b", srs=SRS(state="review", interval_days=5, successes=3, due=NOW))
+    cards = [make(id="a"), learned]
     info = projection(cards, {"target_date": "2026-09-18", "reviews_before_target": 3.0}, NOW)
     assert info["total"] == 2 and info["unseen"] == 1 and info["mature"] == 1
     assert info["days_left"] == 20
+
+
+def test_a_long_interval_alone_is_not_a_learned_card():
+    """Learned means recalled, not scheduled far out — an Easy on the very first
+    sighting produces a long interval and one success."""
+    fresh = make(id="a", srs=SRS(state="review", interval_days=40, successes=1))
+    info = projection([fresh], {"target_date": None}, NOW)
+    assert info["mature"] == 0
 
 
 @pytest.mark.parametrize("seconds,expected", [

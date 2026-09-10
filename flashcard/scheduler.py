@@ -29,9 +29,18 @@ from .models import (AGAIN, EASY, FORWARD, GOOD, GRAMMAR, HARD, LEARNING, NEW,
 
 DAY = 24 * 60.0  # minutes in a day
 
-# What counts as "learned": an interval of three days. Near a deadline the cap
-# can be shorter than that, which would make the mark unreachable — see
-# effective_threshold below.
+# What counts as "learned": three recalls in a row of the same card, in review
+# state. Interval length cannot carry that meaning here — the deadline cap
+# actively compresses intervals, so a length-based mark moves with the schedule
+# rather than with the learner (it swept 137 cards in overnight on 2026-09-10).
+#
+# "Recall" means anything but Nochmal: Schwer is a pass in SM-2 — the card stays
+# in review and its interval still grows — so a word you always get right but
+# always find hard must be able to count. Nochmal is the only real failure, and
+# it sets the run back to zero: a card you forget has to prove itself again.
+MATURE_SUCCESSES = 3
+
+# still used for the interval at which the production direction unlocks
 MATURE_INTERVAL_DAYS = 3.0
 
 DEFAULT_SETTINGS: Dict[str, object] = {
@@ -136,6 +145,10 @@ class Scheduler:
             self._answer_review(srs, grade, now)
 
         srs.reps += 1
+        if grade >= HARD:
+            srs.successes += 1
+        else:
+            srs.successes = 0        # forgotten: the run starts over
         srs.last_review = now
         srs.last_grade = grade
         card.modified = now
@@ -365,7 +378,6 @@ def projection(cards: List[Card], settings: Dict, now: Optional[dt.datetime] = N
     left = sched.days_left(now)
     unlock = effective_threshold(settings.get("reverse_unlock_interval_days", 3.0),
                                  settings, now)
-    maturity = effective_threshold(MATURE_INTERVAL_DAYS, settings, now)
     reverse_on = bool(settings.get("reverse_enabled", True))
 
     grammar_on = bool(settings.get("grammar_enabled", False))
@@ -374,7 +386,7 @@ def projection(cards: List[Card], settings: Dict, now: Optional[dt.datetime] = N
 
     total = len(cards)
     mature = sum(1 for c in studied
-                 if c.srs.state == REVIEW and c.srs.interval_days >= maturity)
+                 if c.srs.state == REVIEW and c.srs.successes >= MATURE_SUCCESSES)
     unseen = sum(1 for c in studied if c.srs.state == NEW)
     reverse_possible = sum(1 for c in cards if c.supports_reverse) if reverse_on else 0
     reverse_open = sum(1 for c in cards if reverse_on and reverse_unlocked(c, unlock))
@@ -392,7 +404,7 @@ def projection(cards: List[Card], settings: Dict, now: Optional[dt.datetime] = N
         "unseen": unseen,
         "mature": mature,
         "interval_cap_days": round(sched.interval_cap(now), 2),
-        "maturity_days": round(maturity, 2),
+        "maturity_successes": MATURE_SUCCESSES,
         "unlock_days": round(unlock, 2),
         "new_per_day_needed": per_day,
         "reverse_possible": reverse_possible,
