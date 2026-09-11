@@ -108,7 +108,7 @@ def activity(rows: Sequence[Dict], days: int, today: dt.date,
     """Per day: how much was reviewed, how it was graded, how much was new."""
     window = _days(today, days)
     blank = {"reviews": 0, "again": 0, "hard": 0, "good": 0, "easy": 0,
-             "new": 0, "graded": 0, "correct": 0}
+             "new": 0, "new_forward": 0, "new_reverse": 0, "graded": 0, "correct": 0}
     table = {day: dict(blank) for day in window}
     for row in rows:
         bucket = table.get(row["day"])
@@ -118,6 +118,8 @@ def activity(rows: Sequence[Dict], days: int, today: dt.date,
         bucket[GRADE_NAMES.get(row["grade"], "good")] += 1
         if row["state_before"] == NEW:
             bucket["new"] += 1
+            # which side of the daily allowance this one came out of
+            bucket["new_reverse" if row["direction"] == REVERSE else "new_forward"] += 1
         elif row["state_before"] == REVIEW:
             # retention is about cards you had learned, not ones still in steps
             bucket["graded"] += 1

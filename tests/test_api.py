@@ -192,6 +192,29 @@ def test_state_reports_the_production_backlog(client):
     assert state["projection"]["reverse_open"] == 1
 
 
+def test_counts_report_the_production_share_of_each_bucket(client):
+    """The status bar needs the split per bucket, not one lump sum: "reverse"
+    is a slice through fällig/im Lernen/neu, so shown beside them it reads as a
+    fourth bucket and appears to double the queue."""
+    card = client.post("/api/command", json={"text": "add katze"}).json()["card"]
+    _mature(client, card["id"])
+    state = client.get("/api/state").json()
+    counts, buckets = state["counts"], ("due", "learning", "new")
+    assert sum(counts[b] for b in buckets) == state["queue_size"]
+    # every production card sits inside one of the three buckets, never beside them
+    assert sum(counts[b + "_reverse"] for b in buckets) == counts["reverse"]
+    assert all(counts[b + "_reverse"] <= counts[b] for b in buckets)
+
+
+def test_projection_reports_both_directions(client):
+    card = client.post("/api/command", json={"text": "add katze"}).json()["card"]
+    _mature(client, card["id"])
+    p = client.get("/api/state").json()["projection"]
+    # recognition is mature, production has not been started at all
+    assert p["mature_reverse"] == 0
+    assert p["unseen_reverse"] == p["reverse_possible"] - p["reverse_started"]
+
+
 def test_search_puts_the_word_itself_first(client):
     client.post("/api/cards", json={
         "type": "grammar", "lemma": "Wechselpräpositionen",

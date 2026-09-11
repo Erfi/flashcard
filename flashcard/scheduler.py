@@ -474,16 +474,25 @@ def projection(cards: List[Card], settings: Dict, now: Optional[dt.datetime] = N
     studied = [c for c in cards if grammar_on or c.type != GRAMMAR]
 
     total = len(cards)
+    # Every count below is per direction, because that is what you answer. The
+    # bare names stay on recognition for backwards compatibility; the UI reads
+    # both halves and labels them.
     mature = sum(1 for c in studied
                  if c.srs.state == REVIEW and c.srs.successes >= MATURE_SUCCESSES)
+    mature_reverse = sum(1 for c in studied
+                         if c.srs_reverse.state == REVIEW
+                         and c.srs_reverse.successes >= MATURE_SUCCESSES)
     unseen = sum(1 for c in studied if c.srs.state == NEW)
     reverse_possible = sum(1 for c in cards if c.supports_reverse) if reverse_on else 0
     reverse_open = sum(1 for c in cards if reverse_on and reverse_unlocked(c, unlock))
     reverse_started = sum(1 for c in cards if c.srs_reverse.reps)
 
+    # "start everything" means both directions: a word whose production side
+    # has never come up is not started, however well you recognise it.
+    to_start = unseen + (max(0, reverse_possible - reverse_started) if reverse_on else 0)
     per_day = None
-    if left and left > 0 and unseen:
-        per_day = math.ceil(unseen / left)
+    if left and left > 0 and to_start:
+        per_day = math.ceil(to_start / left)
     return {
         "days_left": left,
         "total": total,
@@ -491,7 +500,9 @@ def projection(cards: List[Card], settings: Dict, now: Optional[dt.datetime] = N
         "grammar_total": grammar_total,
         "grammar_enabled": grammar_on,
         "unseen": unseen,
+        "unseen_reverse": max(0, reverse_possible - reverse_started),
         "mature": mature,
+        "mature_reverse": mature_reverse,
         "interval_cap_days": round(sched.interval_cap(now), 2),
         "maturity_successes": MATURE_SUCCESSES,
         "unlock_days": round(unlock, 2),

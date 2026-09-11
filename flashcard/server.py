@@ -96,17 +96,23 @@ def create_app(deck_path: os.PathLike | str) -> FastAPI:
         s = fresh()
         now = utcnow()
         queue = build_queue(s.cards, s.settings, now, s.introduced_today(now))
-        counts = {"due": 0, "learning": 0, "new": 0, "reverse": 0}
+        # Each bucket is reported twice: the total, and the production share of
+        # it. "reverse" is a slice through all three buckets, not a fourth one —
+        # shown as a sibling it reads as additive and double-counts the queue.
+        counts = {"due": 0, "learning": 0, "new": 0, "reverse": 0,
+                  "due_reverse": 0, "learning_reverse": 0, "new_reverse": 0}
         for card, direction in queue:
             srs = card.srs_for(direction)
+            if srs.state == "new":
+                bucket = "new"
+            elif srs.state in ("learning", "relearning"):
+                bucket = "learning"
+            else:
+                bucket = "due"
+            counts[bucket] += 1
             if direction == REVERSE:
                 counts["reverse"] += 1
-            if srs.state == "new":
-                counts["new"] += 1
-            elif srs.state in ("learning", "relearning"):
-                counts["learning"] += 1
-            else:
-                counts["due"] += 1
+                counts[bucket + "_reverse"] += 1
         return {
             "settings": s.settings,
             "counts": counts,

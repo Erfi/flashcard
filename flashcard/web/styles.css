@@ -120,6 +120,23 @@ header.top { display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
 }
 .pill b { color: var(--text); font-weight: 600; }
 
+/* direction key — blue = Erkennen, orange = Produktion, the same two slots the
+   charts use. The dot never carries the meaning on its own: a pill spelling
+   both names out sits at the end of the row, and every split has a title. */
+.dot {
+  display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--viz-muted); margin-right: 5px; position: relative; top: -1px;
+}
+.dot.fwd { background: var(--viz-1); }
+.dot.rev { background: var(--viz-2); }
+.split {
+  margin-left: 9px; padding-left: 9px; border-left: 1px solid var(--border);
+  font-variant-numeric: tabular-nums;
+}
+.split .dot + .dot { margin-left: 10px; }
+.pill.legend { color: var(--muted); }
+.pill.legend .dot + .dot { margin-left: 10px; }
+
 /* ---------------------------------------------------------------- review */
 .stage { display: flex; flex-direction: column; align-items: center; gap: 18px; }
 .flashcard {
@@ -226,6 +243,13 @@ header.top { display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
 .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
 .stat .n { font-size: 26px; font-weight: 620; letter-spacing: -.02em; }
 .stat .l { font-size: 12.5px; color: var(--muted); }
+/* the figure is the mark here, so it may wear the series colour; at 26px/620
+   both slots clear 3:1 on this app's surfaces in both themes */
+.stat .n.pair .fwd { color: var(--viz-1); }
+.stat .n.pair .rev { color: var(--viz-2); }
+.stat .n.pair .sep { color: var(--muted); font-weight: 400; margin: 0 7px; }
+.stat .dirkey { margin-top: 7px; font-size: 11px; color: var(--muted); }
+.stat .dirkey .dot + .dot { margin-left: 11px; }
 .bars { display: flex; flex-direction: column; gap: 7px; }
 .bar { display: grid; grid-template-columns: 110px 1fr 42px; gap: 10px; align-items: center; font-size: 13px; }
 .bar .track { display: block; height: 9px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }

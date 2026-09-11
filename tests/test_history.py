@@ -87,6 +87,19 @@ def test_new_cards_come_from_the_log_and_the_backfill():
     assert daily[0]["new"] == 12        # backfilled for a day before logging
 
 
+def test_new_cards_are_split_by_direction():
+    """One daily allowance feeds both directions, so a day can look busy while
+    one of them got nothing — which is exactly what happened on 10 September."""
+    rows = [row(0, state_before="new", before=0, after=1, direction=REVERSE)
+            for _ in range(5)]
+    rows.append(row(0, state_before="new", before=0, after=1))
+    daily = history.activity(rows, 2, TODAY)
+    assert daily[-1]["new"] == 6
+    assert daily[-1]["new_forward"] == 1
+    assert daily[-1]["new_reverse"] == 5
+    assert daily[-1]["new_forward"] + daily[-1]["new_reverse"] == daily[-1]["new"]
+
+
 def test_retention_only_counts_cards_that_had_been_learned():
     rows = [row(0, grade=0, state_before="review"),      # a real lapse
             row(0, grade=2, state_before="review"),

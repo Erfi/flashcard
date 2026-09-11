@@ -75,18 +75,43 @@ function toast(message, isError = false, ms = 4200) {
 }
 
 /* ---------------------------------------------------------------- status */
+
+/* Two units live in this UI and they are easy to confuse: a *Karte* is a word
+   in the deck, an *Abfrage* is one direction of it. Everything the queue counts
+   is an Abfrage. Blue is always recognition, orange always production — the
+   same two colours the charts use — so the split reads without being read.
+   The dots never carry the meaning alone: a key sits beside them. */
+const dirDot = (which) => el("i", { class: "dot " + which, "aria-hidden": "true" });
+
+function dirSplit(total, reverse) {
+  const rev = reverse || 0;
+  const forward = Math.max(0, total - rev);
+  return el("span", { class: "split", title: `${forward} Erkennen · ${rev} Produktion` },
+    dirDot("fwd"), String(forward), dirDot("rev"), String(rev));
+}
+
+const dirKey = () => el("span", { class: "pill legend" },
+  dirDot("fwd"), "Erkennen", dirDot("rev"), "Produktion");
+
+const productionOn = () => S.state?.settings?.reverse_enabled !== false;
+
 function renderStatus() {
   const bar = $("#status");
   bar.textContent = "";
   const st = S.state;
   if (!st) return;
   const c = st.counts;
+  // Production used to be a fourth pill beside fällig/im Lernen/neu. It is a
+  // slice through all three, so the bar appeared to add up to twice the queue.
+  const split = productionOn();
   const pills = [
-    ["fällig", c.due], ["im Lernen", c.learning], ["neu", c.new],
-  ].map(([label, n]) => el("span", { class: "pill" }, el("b", {}, String(n)), " " + label));
-  if (c.reverse) {
-    pills.push(el("span", { class: "pill" }, el("b", {}, String(c.reverse)), " Produktion"));
-  }
+    ["Abfragen fällig", c.due, c.due_reverse],
+    ["im Lernen", c.learning, c.learning_reverse],
+    ["neu", c.new, c.new_reverse],
+  ].map(([label, n, rev]) => el("span", { class: "pill" },
+    el("b", {}, String(n)), " " + label,
+    split && n ? dirSplit(n, rev) : null));
+  if (split && (c.due || c.learning || c.new)) pills.push(dirKey());
 
   const p = st.projection;
   if (p.days_left !== null && p.days_left !== undefined) {
@@ -531,9 +556,9 @@ function renderStats() {
   view.append(el("div", { class: "cards2" },
     stat(p.in_rotation === undefined ? p.total : p.in_rotation,
          p.grammar_enabled === false && p.grammar_total
-           ? "Karten im Lernstapel" : "Karten gesamt"),
-    stat(p.unseen, "noch nie gesehen"),
-    stat(p.mature, `gefestigt (${p.maturity_successes ?? 3}× richtig)`),
+           ? "Wörter im Lernstapel" : "Wörter gesamt"),
+    dirStat(p.unseen, p.unseen_reverse, "noch nie abgefragt"),
+    dirStat(p.mature, p.mature_reverse, `gefestigt (${p.maturity_successes ?? 3}× richtig)`),
     stat(p.days_left === null || p.days_left === undefined ? "—" : Math.max(0, Math.round(p.days_left)), "Tage bis zum Ziel"),
     S.history ? stat(S.history.summary.reviews_today, "Antworten heute") : null,
     S.history ? stat(S.history.summary.retention_week === null ? "—"
@@ -551,7 +576,7 @@ function renderStats() {
       el("span", { class: "track" }, el("span", { class: "fill", style: `width:${(byColor[k] / max) * 100}%` })),
       el("span", {}, String(byColor[k]))));
   });
-  view.append(el("div", { class: "section" }, el("h4", {}, "Verteilung"), bars,
+  view.append(el("div", { class: "section" }, el("h4", {}, "Verteilung (Wörter)"), bars,
     el("div", { class: "note" }, "Farben: der = blau, die = rosa, das = grün, Verben = orange, Adjektive = violett, Grammatik = grau.")));
 
   const settings = st.settings || {};
@@ -560,7 +585,7 @@ function renderStats() {
       row("Zieldatum", settings.target_date || "nicht gesetzt", "set target 2026-09-18"),
       row("Wiederholungen bis dahin", String(settings.reviews_before_target), "set reviews 3"),
       row("Intervall-Obergrenze jetzt", `${p.interval_cap_days} Tage`, ""),
-      row("Neue Karten pro Tag", String(settings.daily_new_limit || "unbegrenzt"), "set new 40"),
+      row("Neue Abfragen pro Tag", newPerDayLabel(settings), "set new 40"),
       row("Reihenfolge", settings.shuffle === false ? "fest" : "gemischt", "set shuffle on"),
       row("Grammatikkarten",
           settings.grammar_enabled
@@ -575,14 +600,18 @@ function renderStats() {
               + "durch die Obergrenze begrenzt)"
             : `${settings.reverse_unlock_interval_days} Tagen Intervall`,
           "set unlock 3"),
-      row("Produktionskarten", `${p.reverse_open} von ${p.reverse_possible} freigeschaltet, `
+      row("Produktion freigeschaltet", `${p.reverse_open} von ${p.reverse_possible} Wörtern, `
           + `${p.reverse_started} begonnen`, ""),
-      p.new_per_day_needed ? row("Nötig, um alles anzufangen", `${p.new_per_day_needed} neue Karten/Tag`, "") : null),
+      p.new_per_day_needed
+        ? row("Nötig, um alles anzufangen", `${p.new_per_day_needed} neue Abfragen/Tag`, "")
+        : null),
     el("div", { class: "note" },
       "Die Obergrenze ergibt sich aus (Tage bis zum Ziel ÷ gewünschte Wiederholungen). "
       + "Dadurch wird keine Karte über das Zieldatum hinaus geschoben. "
-      + "Jede Vokabel wird in zwei Richtungen geplant; die Produktionsrichtung kommt erst dazu, "
-      + "wenn du das Wort sicher wiedererkennst.")));
+      + "Eine Karte ist ein Wort im Stapel, eine Abfrage eine Richtung davon: "
+      + "Erkennen (Wort → Bedeutung) und Produktion (Bedeutung → Wort). "
+      + "Das Tageskontingent gilt für neue Abfragen, nicht für neue Wörter — "
+      + "beide Richtungen teilen es sich abwechselnd.")));
 
   renderCharts(view);
 
@@ -631,8 +660,8 @@ function renderCharts(view) {
 
   // 1 — what you actually know, over time
   const learned = chartCard({
-    title: "Gefestigte Karten",
-    subtitle: `Karten, die du mindestens ${h.maturity_successes ?? 3}-mal richtig erinnert hast`,
+    title: "Gefestigte Abfragen",
+    subtitle: `Abfragen, die du mindestens ${h.maturity_successes ?? 3}-mal richtig erinnert hast`,
     legend: [{ label: "Erkennen", color: VIZ.forward }, { label: "Produktion", color: VIZ.reverse }],
     note: sinceNote + " Gezählt werden richtige Erinnerungen, nicht die Intervall-Länge — "
       + "sonst würde die Kurve springen, sobald die Obergrenze enger wird.",
@@ -642,7 +671,7 @@ function renderCharts(view) {
   view.append(learned.card);
   lineChart(learned.body, {
     labels: h.learned.map((p) => p.date),
-    ariaLabel: "Gefestigte Karten pro Tag",
+    ariaLabel: "Gefestigte Abfragen pro Tag",
     series: [
       { label: "Erkennen", color: VIZ.forward, points: h.learned.map((p) => p.forward) },
       { label: "Produktion", color: VIZ.reverse, points: h.learned.map((p) => p.reverse) },
@@ -652,9 +681,11 @@ function renderCharts(view) {
   // 2 — effort
   const activity = chartCard({
     title: "Wiederholungen pro Tag",
-    subtitle: "alle Antworten, neue Karten eingeschlossen",
-    table: () => dataTable(["Tag", "Antworten", "davon neu", "Nochmal", "Schwer", "Gut", "Leicht"],
-      h.activity.map((d) => [dayLabel(d.date), d.reviews, d.new, d.again, d.hard, d.good, d.easy])),
+    subtitle: "alle Antworten, beide Richtungen, neue Abfragen eingeschlossen",
+    table: () => dataTable(["Tag", "Antworten", "neu Erkennen", "neu Produktion",
+                            "Nochmal", "Schwer", "Gut", "Leicht"],
+      h.activity.map((d) => [dayLabel(d.date), d.reviews, d.new_forward, d.new_reverse,
+                             d.again, d.hard, d.good, d.easy])),
   });
   view.append(activity.card);
   columnChart(activity.body, {
@@ -664,15 +695,17 @@ function renderCharts(view) {
     colors: [VIZ.single],
     tipRows: (i) => {
       const d = h.activity[i];
-      return [["Antworten", d.reviews], ["davon neu", d.new], ["Nochmal", d.again],
-              ["Schwer", d.hard], ["Gut", d.good], ["Leicht", d.easy]];
+      return [["Antworten", d.reviews],
+              ["neu Erkennen", d.new_forward, VIZ.forward],
+              ["neu Produktion", d.new_reverse, VIZ.reverse],
+              ["Nochmal", d.again], ["Schwer", d.hard], ["Gut", d.good], ["Leicht", d.easy]];
     },
   });
 
   // 3 — is it sticking?
   const ret = chartCard({
     title: "Behalten",
-    subtitle: "7-Tage-Schnitt: Anteil „Gut“ oder besser bei bereits gelernten Karten",
+    subtitle: "7-Tage-Schnitt: Anteil „Gut“ oder besser bei bereits gelernten Abfragen, beide Richtungen",
     note: "Das graue Band markiert 80–95 %. Darunter kommen zu viele neue Karten dazu, "
         + "darüber sind die Intervalle zu kurz.",
     table: () => dataTable(["Tag", "Behalten", "bewertete Karten"],
@@ -692,7 +725,7 @@ function renderCharts(view) {
     title: "Fällig in den nächsten 14 Tagen",
     subtitle: "bereits geplante Wiederholungen; überfällige Karten stehen auf heute",
     legend: [{ label: "Erkennen", color: VIZ.forward }, { label: "Produktion", color: VIZ.reverse }],
-    note: "Neue Karten sind nicht enthalten — die kommen erst dazu, wenn du sie anfängst.",
+    note: "Neue Abfragen sind nicht enthalten — die kommen erst dazu, wenn du sie anfängst.",
     table: () => dataTable(["Tag", "Erkennen", "Produktion", "gesamt"],
       h.forecast.map((d) => [dayLabel(d.date), d.forward, d.reverse, d.forward + d.reverse])),
   });
@@ -711,20 +744,46 @@ function renderCharts(view) {
   // 5 — deck maturity right now
   const iv = chartCard({
     title: "Intervall-Verteilung",
-    subtitle: "beide Richtungen, Stand jetzt",
-    table: () => dataTable(["Intervall", "Karten"], h.intervals.map((b) => [b.label, b.count])),
+    subtitle: "beide Richtungen zusammen, Stand jetzt",
+    table: () => dataTable(["Intervall", "Abfragen"], h.intervals.map((b) => [b.label, b.count])),
   });
   view.append(iv.card);
   categoryChart(iv.body, {
     labels: h.intervals.map((b) => b.label),
     values: h.intervals.map((b) => b.count),
     colors: VIZ.ordinal,
-    ariaLabel: "Karten je Intervallbereich",
+    ariaLabel: "Abfragen je Intervallbereich",
   });
 }
 
 const stat = (n, label) => el("div", { class: "stat" }, el("div", { class: "n" }, String(n)), el("div", { class: "l" }, label));
+
+/* A tile whose number is per direction shows both halves in the chart colours,
+   with the key underneath. Before this the tile showed the recognition figure
+   under a name the chart below it used for both — 472 in the tile, 472 and 344
+   in the chart, same word. */
+const statSplit = (fwd, rev, label) => el("div", { class: "stat" },
+  el("div", { class: "n pair" },
+    el("span", { class: "fwd" }, String(fwd)),
+    el("span", { class: "sep" }, "·"),
+    el("span", { class: "rev" }, String(rev))),
+  el("div", { class: "l" }, label),
+  el("div", { class: "dirkey" }, dirDot("fwd"), "Erkennen", dirDot("rev"), "Produktion"));
+
+const dirStat = (fwd, rev, label) =>
+  (productionOn() ? statSplit(fwd, rev || 0, label) : stat(fwd, label));
 const row = (a, b, c) => el("tr", {}, el("td", {}, a), el("td", {}, b, c ? el("span", {}, "  ", el("code", {}, c)) : null));
+
+/* The daily allowance is spent on both directions out of one pot, so show how
+   today's actually went. A run of "0 Erkennen" is the failure mode, and until
+   now nothing on screen would have shown it. */
+function newPerDayLabel(settings) {
+  const limit = settings.daily_new_limit || "unbegrenzt";
+  const days = S.history?.activity;
+  const today = days && days[days.length - 1];
+  if (!today || !productionOn()) return String(limit);
+  return `${limit} — heute ${today.new_forward} Erkennen · ${today.new_reverse} Produktion`;
+}
 
 /* ------------------------------------------------------- import / export */
 function exportDeck() { window.location.href = "/api/export"; }
