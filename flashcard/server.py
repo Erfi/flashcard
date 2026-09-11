@@ -17,7 +17,8 @@ from . import cloze, commands, history
 from .generator import ClaudeGenerator, GeneratorError, guess_type
 from .models import FORWARD, REVERSE, Card, utcnow
 from . import scheduler as scheduler_module
-from .scheduler import Scheduler, build_queue, humanise, projection
+from .scheduler import (Scheduler, build_queue, humanise, next_due,
+                        projection)
 from .store import DeckError, Store
 
 WEB_DIR = Path(__file__).parent / "web"
@@ -455,9 +456,8 @@ def find_duplicates(store: Store) -> Dict:
 
 
 def _next_due_label(store: Store, now: dt.datetime) -> Optional[str]:
-    future: List[dt.datetime] = [
-        c.srs.due for c in store.cards if c.srs.due and c.srs.due > now
-    ]
-    if not future:
+    """How long the queue stays empty. Shown only when nothing is due now."""
+    upcoming = next_due(store.cards, store.settings, now, store.introduced_today(now))
+    if upcoming is None:
         return None
-    return humanise((min(future) - now).total_seconds())
+    return humanise((upcoming - now).total_seconds())

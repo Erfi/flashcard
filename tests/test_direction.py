@@ -189,6 +189,43 @@ def test_production_still_respects_the_daily_limit():
     assert len(queue) == 10
 
 
+def test_a_production_backlog_does_not_starve_new_vocabulary():
+    """The mirror of the test above — and the failure that one did not catch.
+    On 2026-09-10 and -11 an unlocked-production backlog took the whole daily
+    allowance and recognition was introduced exactly zero new cards."""
+    known = [mature(vocab(lemma=f"Wort{i:03d}")) for i in range(200)]
+    unseen = [vocab(lemma=f"Neu{i:03d}") for i in range(66)]
+    queue = build_queue([*known, *unseen], {**DEFAULT_SETTINGS, "daily_new_limit": 80},
+                        NOW, rng=random.Random(0))
+    assert len(queue) == 80
+    assert sum(1 for _, d in queue if d == FORWARD) == 40
+    assert sum(1 for _, d in queue if d == REVERSE) == 40
+
+
+def test_a_short_pool_is_served_in_full_rather_than_crowded_out():
+    """Alternating is not a 50/50 split: the smaller pool gets everything it
+    has, and the larger one takes the rest of the budget."""
+    known = [mature(vocab(lemma=f"Wort{i:03d}")) for i in range(200)]
+    unseen = [vocab(lemma=f"Neu{i}") for i in range(10)]
+    queue = build_queue([*known, *unseen], {**DEFAULT_SETTINGS, "daily_new_limit": 80},
+                        NOW, rng=random.Random(0))
+    assert len(queue) == 80
+    assert sum(1 for _, d in queue if d == FORWARD) == 10
+    assert sum(1 for _, d in queue if d == REVERSE) == 70
+
+
+def test_neither_direction_can_starve_the_other():
+    """The property the concatenation lacked in both of its orderings: with
+    cards on both sides, both sides get some, at every budget."""
+    known = [mature(vocab(lemma=f"Wort{i:03d}")) for i in range(120)]
+    unseen = [vocab(lemma=f"Neu{i:03d}") for i in range(120)]
+    for limit in (2, 10, 40, 80, 150):
+        queue = build_queue([*known, *unseen], {**DEFAULT_SETTINGS, "daily_new_limit": limit},
+                            NOW, rng=random.Random(limit))
+        assert sum(1 for _, d in queue if d == FORWARD) > 0, limit
+        assert sum(1 for _, d in queue if d == REVERSE) > 0, limit
+
+
 # ------------------------------------------------------------------ grammar
 
 def grammar_card(lemma: str = "Passiv") -> Card:

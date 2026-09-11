@@ -4,7 +4,7 @@ import pytest
 
 from flashcard.models import AGAIN, EASY, GOOD, HARD, Card, SRS
 from flashcard.scheduler import (DEFAULT_SETTINGS, Scheduler, build_queue,
-                                 humanise, projection)
+                                 humanise, next_due, projection)
 
 NOW = dt.datetime(2026, 8, 29, 9, 0, tzinfo=dt.timezone.utc)
 
@@ -170,3 +170,95 @@ def test_a_long_interval_alone_is_not_a_learned_card():
 ])
 def test_humanise(seconds, expected):
     assert humanise(seconds) == expected
+
+
+# --------------------------------------------------------------- next_due
+#
+# The "nächste Karte in X" label. Its whole job is to be true, so these tests
+# are about eligibility agreeing with build_queue rather than about arithmetic.
+
+QUIET = {"target_date": None, "daily_new_limit": 0}
+
+
+def scheduled(hours: float, direction: str = "forward", **kw) -> Card:
+    """A card whose given direction is in review and due `hours` from NOW."""
+    card = make(definition="Ein Tier.", **kw)
+    due = NOW + dt.timedelta(hours=hours)
+    srs = SRS(state="review", interval_days=5.0, reps=4, successes=3, due=due)
+    if direction == "reverse":
+        # reverse only unlocks once recognition has matured, so give it both
+        card.srs = SRS(state="review", interval_days=5.0, reps=4, successes=3,
+                       due=NOW + dt.timedelta(days=5))
+        card.srs_reverse = srs
+    else:
+        card.srs = srs
+    return card
+
+
+def test_next_due_sees_the_production_direction():
+    """The bug this function exists to prevent: reading card.srs alone reports
+    the recognition card in five hours and misses the production card in one."""
+    cards = [scheduled(5, id="a"), scheduled(1, "reverse", id="b")]
+    assert next_due(cards, QUIET, NOW) == NOW + dt.timedelta(hours=1)
+
+
+def test_next_due_ignores_production_when_it_is_switched_off():
+    cards = [scheduled(5, id="a"), scheduled(1, "reverse", id="b")]
+    settings = dict(QUIET, reverse_enabled=False)
+    assert next_due(cards, settings, NOW) == NOW + dt.timedelta(hours=5)
+
+
+def test_next_due_ignores_a_locked_production_direction():
+    """Production stays locked until recognition matures, so a locked direction
+    is not waiting on the allowance either and must not pull the label forward
+    to midnight. Once recognition has matured, the same card does."""
+    settings = dict(QUIET, daily_new_limit=40)
+    far = NOW + dt.timedelta(hours=30)
+
+    locked = make(id="b", definition="Ein Tier.",
+                  srs=SRS(state="learning", interval_days=0.0, reps=1, due=far))
+    assert next_due([locked], settings, NOW, introduced_today=40) == far
+
+    unlocked = make(id="c", definition="Ein Tier.",
+                    srs=SRS(state="review", interval_days=5.0, reps=4,
+                            successes=3, due=far))
+    waiting = next_due([unlocked], settings, NOW, introduced_today=40)
+    assert waiting is not None and waiting < far
+
+
+def test_next_due_ignores_grammar_cards_while_they_are_off():
+    grammar = scheduled(1, id="g", type="grammar")
+    vocab = scheduled(5, id="a")
+    assert next_due([grammar, vocab], QUIET, NOW) == NOW + dt.timedelta(hours=5)
+    on = dict(QUIET, grammar_enabled=True)
+    assert next_due([grammar, vocab], on, NOW) == NOW + dt.timedelta(hours=1)
+
+
+def test_next_due_counts_midnight_when_new_cards_are_held_back():
+    """New cards have no due date, so only the allowance resetting brings them
+    into the queue — and that happens at the local day boundary."""
+    cards = [scheduled(30, id="a"), make(id="fresh", lemma="Hund")]
+    settings = dict(QUIET, daily_new_limit=40)
+    at_limit = next_due(cards, settings, NOW, introduced_today=40)
+    assert at_limit is not None
+    assert at_limit.astimezone().time() == dt.time.min
+    assert at_limit < NOW + dt.timedelta(hours=30)
+
+
+def test_next_due_ignores_midnight_when_the_allowance_is_not_spent():
+    """With allowance left the new card is already in the queue, so the label
+    is not shown at all and midnight is irrelevant."""
+    cards = [scheduled(30, id="a"), make(id="fresh", lemma="Hund")]
+    settings = dict(QUIET, daily_new_limit=40)
+    assert next_due(cards, settings, NOW, introduced_today=0) == NOW + dt.timedelta(hours=30)
+
+
+def test_next_due_is_none_when_the_deck_is_exhausted():
+    assert next_due([], QUIET, NOW) is None
+
+
+def test_next_due_skips_cards_that_are_already_due():
+    """Past-due cards are in the queue now; the label answers the empty case."""
+    overdue = scheduled(-3, id="a")
+    later = scheduled(4, id="b")
+    assert next_due([overdue, later], QUIET, NOW) == NOW + dt.timedelta(hours=4)

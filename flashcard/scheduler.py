@@ -22,6 +22,7 @@ from __future__ import annotations
 import datetime as dt
 import math
 import random
+from itertools import zip_longest
 from typing import Dict, List, Optional, Tuple
 
 from .models import (AGAIN, EASY, FORWARD, GOOD, GRAMMAR, HARD, LEARNING, NEW,
@@ -294,6 +295,31 @@ def reverse_unlocked(card: Card, unlock_interval_days: float = 3.0) -> bool:
     return card.srs.state == REVIEW and card.srs.interval_days >= unlock_interval_days
 
 
+def _interleave(first: List, second: List) -> List:
+    """Alternate between two ordered lists; whichever runs longer trails at the end.
+
+    New material comes from two pools — production directions that have just
+    unlocked, and words never seen at all — that share one daily allowance,
+    and the allowance is applied by truncating the combined list. So whichever
+    pool is placed first can swallow the whole budget and leave the other at
+    exactly zero, with nothing in the UI to say so.
+
+    Both orderings have been tried on this deck and both did it. Vocabulary
+    first starved production in early September; production first then gave
+    recognition 0 new cards on 10 and 11 September while production took 85
+    and 82. Alternating cannot starve either side: each pool gets at least
+    half the budget for as long as it still has cards to offer, and a short
+    pool is served in full rather than crowded out.
+    """
+    out: List = []
+    for a, b in zip_longest(first, second):
+        if a is not None:
+            out.append(a)
+        if b is not None:
+            out.append(b)
+    return out
+
+
 def _shuffled(items: List, key, rng: random.Random) -> List:
     """Shuffle inside each group of equal priority, keep the groups in order."""
     groups: Dict = {}
@@ -358,17 +384,80 @@ def build_queue(cards: List[Card], settings: Dict, now: Optional[dt.datetime] = 
         new_reverse.sort(key=lambda it: (it[0].created or now))
         new_forward.sort(key=lambda it: (it[0].created or now))
 
-    # A freshly unlocked production card is a second pass over a word you
-    # already know, so it outranks a word you have never seen. Without this,
-    # a large backlog of new vocabulary starves the production direction
-    # entirely once the daily limit bites.
-    new = new_reverse + new_forward
+    # Production leads each pair — a second pass over a word you already know
+    # is worth more than a word you have never seen — but only by one card at
+    # a time, so neither pool can consume the whole daily allowance.
+    new = _interleave(new_reverse, new_forward)
 
     limit = int(settings.get("daily_new_limit", 0) or 0)
     if limit:
         new = new[: max(0, limit - introduced_today)]
 
     return learning + review + new
+
+
+def _next_local_midnight(now: dt.datetime) -> dt.datetime:
+    """Start of the next local day, in UTC.
+
+    The daily allowance for new material is counted per local calendar day
+    (see Store.introduced_today), so that is the moment it refills. Building
+    the boundary as a naive datetime and letting astimezone() resolve it keeps
+    the offset right across a DST change.
+    """
+    local_date = now.astimezone().date()
+    boundary = dt.datetime.combine(local_date + dt.timedelta(days=1), dt.time.min)
+    return boundary.astimezone(dt.timezone.utc)
+
+
+def next_due(cards: List[Card], settings: Dict, now: Optional[dt.datetime] = None,
+             introduced_today: int = 0) -> Optional[dt.datetime]:
+    """When the study queue next stops being empty — or None if it never does.
+
+    This has to mirror build_queue's eligibility exactly, or it lies. A card
+    direction the queue would never show must not set the clock, and one it
+    would show must not be missed: reading only card.srs answered for the
+    recognition direction alone and ignored production entirely, which on a
+    real deck meant promising three quiet hours with 72 production cards due
+    inside them.
+
+    Two different things can fill an empty queue, so the answer is whichever
+    comes first: a scheduled review coming due, and — when the daily limit is
+    what is holding new material back — the allowance refilling at midnight.
+    New cards carry no due date at all, so no amount of looking at `due` finds
+    that second one.
+    """
+    now = now or utcnow()
+    reverse_on = bool(settings.get("reverse_enabled", True))
+    grammar_on = bool(settings.get("grammar_enabled", False))
+    unlock = effective_threshold(settings.get("reverse_unlock_interval_days", 3.0),
+                                 settings, now)
+    limit = int(settings.get("daily_new_limit", 0) or 0)
+    allowance_left = max(0, limit - introduced_today) if limit else None
+
+    soonest: Optional[dt.datetime] = None
+    new_held_back = False
+
+    for card in cards:
+        if card.type == GRAMMAR and not grammar_on:
+            continue
+        for direction in (FORWARD, REVERSE):
+            if direction == REVERSE and not (reverse_on and reverse_unlocked(card, unlock)):
+                continue
+            srs = card.srs_for(direction)
+            if srs.state == NEW or srs.due is None:
+                # Waiting on the allowance rather than on a clock. (If there
+                # were allowance left this card would already be in the queue,
+                # so the queue is not empty and the label is not shown.)
+                if allowance_left == 0:
+                    new_held_back = True
+            elif srs.due > now and (soonest is None or srs.due < soonest):
+                soonest = srs.due
+
+    if new_held_back:
+        midnight = _next_local_midnight(now)
+        if soonest is None or midnight < soonest:
+            soonest = midnight
+    return soonest
 
 
 def projection(cards: List[Card], settings: Dict, now: Optional[dt.datetime] = None) -> Dict:
